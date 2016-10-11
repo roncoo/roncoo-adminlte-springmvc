@@ -2,7 +2,7 @@
 .project
 .classpath
 .project
-.settings
+.settings/
 .mvn
 .project
 .springBeans
