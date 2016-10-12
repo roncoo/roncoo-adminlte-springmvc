@@ -76,12 +76,12 @@
 	<!-- 配置MyBatis模板 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.roncoo.community.common.entity.mybatis" />
+		<property name="typeAliasesPackage" value="com.roncoo.adminlte.bean.entity" />
 		<property name="mapperLocations" value="classpath:/mybatis/*.xml" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.roncoo.community.common.dao.impl.mybatis" />
-		<property name="annotationClass" value="com.roncoo.community.common.util.base.MyBatis" />
+		<property name="basePackage" value="com.roncoo.adminlte.service.impl.dao.impl.mybatis" />
+		<property name="annotationClass" value="com.roncoo.adminlte.util.base.MyBatis" />
 	</bean>
 
 	<!-- 配置事务管理器 -->
