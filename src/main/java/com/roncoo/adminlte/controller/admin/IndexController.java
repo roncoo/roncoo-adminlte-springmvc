@@ -13,41 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.roncoo.adminlte.util;
+package com.roncoo.adminlte.controller.admin;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.roncoo.adminlte.util.base.BaseController;
 
 /**
- * 常量工具类
+ * 登录功能
  * 
  * @author wujing
  */
-public final class Constants {
+@Controller
+@RequestMapping(value = "/admin")
+public class IndexController extends BaseController {
 
-	private Constants() {
+	/**
+	 * 进入首页
+	 */
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public void getIndex() {
 	}
 
 	/**
-	 * 状态说明
-	 * 
-	 * @author wujing
+	 * 进入首页
 	 */
-	public interface Status {
-		public final static String ZERO = "0";
-		public final static String ONE = "1";
-		public final static String TWO = "2";
-		public final static String THREE = "3";
-	}
-
-	/**
-	 * 数字说明
-	 * 
-	 * @author wujing
-	 * @version 1.0
-	 */
-	public interface Num {
-		public final static int ZERO = 0;
-		public final static int ONE = 1;
-		public final static int FIVE = 5;
-		public final static int TEN = 10;
+	@RequestMapping(value = "/index", method = RequestMethod.POST)
+	public String postIndex() {
+		return "redirect:/admin/index";
 	}
 
 }
