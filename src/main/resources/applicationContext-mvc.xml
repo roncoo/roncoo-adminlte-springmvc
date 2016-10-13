@@ -40,17 +40,22 @@
                 <prop key="number_format">#.##</prop>  
             </props>  
         </property>  
+        <property name="freemarkerVariables">
+			<map>
+				<entry key="ctx" value="/roncoo-adminlte-springmvc"></entry>
+			</map>
+		</property>
     </bean>  
     
     <!-- FreeMarker视图解析器  -->  
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />  
-        <property name="suffix" value=".ftl" />  
-        <property name="contentType" value="text/html;charset=UTF-8" />  
-        <property name="exposeRequestAttributes" value="true" />  
-        <property name="exposeSessionAttributes" value="true" />  
-        <property name="exposeSpringMacroHelpers" value="true" />  
-    </bean> 
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+	</bean> 
     
 	<!-- JSP视图解析器，将ModelAndView及字符串解析为具体的页面 -->
 	<!-- 
