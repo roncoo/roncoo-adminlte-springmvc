@@ -26,7 +26,7 @@ roncoo-adminlte-springmvc/
 * 核心框架：Spring Framework
 * 视图框架：Spring MVC
 * 模板引擎：Freemark
-* 持久层框架：Spring data JPA
+* 持久层框架：Mybatis
 * 数据库连接池：Alibaba Druid
 
 
