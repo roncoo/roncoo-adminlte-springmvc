@@ -11,10 +11,10 @@
 ```
 roncoo-adminlte-springmvc/
 ├── src/ 源码
-│ 	├── main/ 主代码
-│	│	├── java/
-│	│	├── resources/
-│	│	├── webapp/
+│   ├── main/ 主代码
+│   │   ├── java/
+│   │   ├── resources/
+│   │   ├── webapp/
 │   └── test/ 测试代码
 ├── support/ 
 │   └── document/ 文档
