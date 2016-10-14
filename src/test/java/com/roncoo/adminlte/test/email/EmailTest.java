@@ -22,7 +22,7 @@ public class EmailTest {
 	public void testSend(){
 		RcEmailInfo info = new RcEmailInfo();
 		info.setFromUser("8888");
-		info.setToUser("624654406@qq.com");
+		info.setToUser("1291693839@qq.com");
 		info.setSubject("测试");
 		info.setTitle("测试");
 		info.setStatusId("1");
