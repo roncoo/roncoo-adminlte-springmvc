@@ -47,9 +47,8 @@
 			<props>
 				<!-- 验证身份 -->
 				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.ssl.enable">true</prop> 
+				<prop key="mail.smtp.ssl.enable">false</prop> 
 				<prop key="mail.smtp.socketFactory.class">javax.NET.ssl.SSLSocketFactory</prop>
-				<prop key="mail.smtp.socketFactory.por">465</prop>
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
