@@ -459,11 +459,35 @@
 							</span>
 						</a>
 					</li>
-					<li>
-						<a href="/include/mailbox/mailbox.html">
-							<i class="fa fa-envelope"></i> <span>邮箱</span> <span class="pull-right-container"> <small class="label pull-right bg-yellow">12</small> <small class="label pull-right bg-green">16</small> <small class="label pull-right bg-red">5</small>
+					<li  class="treeview">
+						<a href="#">
+							<i class="fa fa-envelope"></i> <span>邮箱</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i>
 							</span>
 						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="${ctx}/admin/email/list">
+							<i class="fa fa-inbox"></i> <span>收件箱</span> <span class="pull-right-container"> <small class="label pull-right bg-yellow">12</small>
+							</span>
+						</a>
+							</li>
+							<li>
+								<a href="${ctx}/admin/email/add">
+									<i class="fa fa-envelope-o"></i> 发送
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-file-text-o"></i> 草稿
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-trash-o"></i>垃圾箱
+								</a>
+							</li>
+						</ul>
+						
 					</li>
 					<li class="treeview">
 						<a href="#">

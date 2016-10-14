@@ -15,11 +15,50 @@
  */
 package com.roncoo.adminlte.service.impl.dao.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
 import com.roncoo.adminlte.service.impl.dao.RcEmailInfoDao;
+import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailInfoMapper;
 
 /**
  * @author wujing
  */
+@Repository
 public class RcEmailInfoDaoImpl implements RcEmailInfoDao {
+	
+	@Autowired
+	private RcEmailInfoMapper mapper;
+	
+	@Override
+	public int countTotal(RcEmailInfoExample example) {
+		return mapper.countByExample(example);
+	}
+	
+	/**
+	 * 查询邮件
+	 */
+	@Override
+	public List<RcEmailInfo> queryForPage(RcEmailInfoExample example) {
+		List<RcEmailInfo> result = mapper.selectByExample(example);
+		return result;
+	}
+	
+	/**
+	 * 添加邮件信息
+	 */
+	@Override
+	public int insertSelective(RcEmailInfo info) {
+		return mapper.insert(info);
+	}
+
+	
+	
+
+
 
 }

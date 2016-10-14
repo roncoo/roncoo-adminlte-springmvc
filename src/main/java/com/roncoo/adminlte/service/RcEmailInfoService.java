@@ -15,9 +15,28 @@
  */
 package com.roncoo.adminlte.service;
 
+import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
+import com.roncoo.adminlte.util.base.Page;
+
 /**
  * @author wujing
  */
 public interface RcEmailInfoService {
-
+	
+	/**
+	 * 
+	 * 功能：分页查询
+	 * @param page
+	 * @param premise
+	 * @return Page<RcEmailInfo>
+	 */
+	Page<RcEmailInfo> queryForPage(Page<RcEmailInfo> page,RcEmailInfoExample premise);
+	
+	/**
+	 * 
+	 * 功能：保存邮件信息
+	 * @param info void
+	 */
+	void insertSelective(RcEmailInfo info);
 }
