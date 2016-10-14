@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
-	<!-- 文件输出格式 -->
-	<property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
-
+	<property resource="conf.properties" />
+	
 	<logger name="com.roncoo" level="debug" />
 
 	<!-- 控制台设置 -->
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>${PATTERN}</pattern>
+			<pattern>${log.pattern}</pattern>
 		</encoder>
 	</appender>
 
@@ -19,13 +17,13 @@
 		<file>${log.path}</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- 文件名称 -->
-			<fileNamePattern>${log.path}/{log.lever}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>${log.path}${log.lever}.%d{yyyy-MM-dd}.log</fileNamePattern>
 			<!-- 文件最大保存历史数量 -->
 			<MaxHistory>${log.maxHistory}</MaxHistory>
 		</rollingPolicy>
 
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>${PATTERN}</pattern>
+			<pattern>${log.pattern}</pattern>
 		</layout>
 	</appender>
 

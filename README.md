@@ -14,9 +14,10 @@ roncoo-adminlte-springmvc/
 │   ├── main/ 主代码
 │   │   ├── java/
 │   │   ├── resources/
-│   │   ├── webapp/
+│   │   └── webapp/
 │   └── test/ 测试代码
 ├── support/ 
+│   ├── archetype/ 原型
 │   └── document/ 文档
 └── pom.xml maven配置文件
 
