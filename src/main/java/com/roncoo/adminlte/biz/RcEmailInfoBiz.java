@@ -15,6 +15,8 @@
  */
 package com.roncoo.adminlte.biz;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -71,7 +73,13 @@ public class RcEmailInfoBiz {
 
 	@Transactional
 	public void insertSelective(RcEmailInfo info) {
+		Date date = new Date();
+		info.setCreateTime(date);
+		info.setUpdateTime(date);
+		info.setStatusId("1");
+		
 		rcEmailInfoService.insertSelective(info);
+		
 		
 		mailMessage.setSubject(info.getSubject());
 		mailMessage.setText(info.getContent());
