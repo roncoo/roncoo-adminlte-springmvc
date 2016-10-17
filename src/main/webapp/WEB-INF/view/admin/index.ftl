@@ -478,7 +478,7 @@
 							</li>
 							<li>
 								<a href="${ctx}/admin/email/addUser">
-									<i class="fa fa-circle-o"></i> 添加联系人
+									<i class="fa fa-circle-o"></i> 添加发件人
 								</a>
 							</li>
 							<li>
@@ -489,59 +489,13 @@
 						</ul>
 						
 					</li>
-					<li class="treeview">
-						<a href="#">
-							<i class="fa fa-folder"></i> <span>实例</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i>
+					<li>
+						<a href="${ctx}/admin/datadictionary/list">
+							<i class="fa fa-folder"></i> <span>数据字典管理</span> </i>
 							</span>
 						</a>
-						<ul class="treeview-menu">
-							<li>
-								<a href="/include/examples/invoice.html">
-									<i class="fa fa-circle-o"></i> Invoice
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/profile.html">
-									<i class="fa fa-circle-o"></i> Profile
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/login.html">
-									<i class="fa fa-circle-o"></i> Login
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/register.html">
-									<i class="fa fa-circle-o"></i> Register
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/lockscreen.html">
-									<i class="fa fa-circle-o"></i> Lockscreen
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/404.html">
-									<i class="fa fa-circle-o"></i> 404 Error
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/500.html">
-									<i class="fa fa-circle-o"></i> 500 Error
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/blank.html">
-									<i class="fa fa-circle-o"></i> Blank Page
-								</a>
-							</li>
-							<li>
-								<a href="/include/examples/pace.html">
-									<i class="fa fa-circle-o"></i> Pace Page
-								</a>
-							</li>
-						</ul>
 					</li>
+					
 					<li class="treeview">
 						<a href="javascript:void(0);">
 							<i class="fa fa-share"></i> <span>多级菜单</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i>

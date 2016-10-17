@@ -43,17 +43,6 @@
 		<property name="from" value="${email.user}" />
 	</bean>
 	
-	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-			<!--线程池维护线程的最少数量   -->
-            <property name="corePoolSize" value="3" />
-			<!--线程池维护线程所允许的空闲时间   -->
-            <property name="keepAliveSeconds" value="200" />
-			<!--线程池维护线程的最大数量   -->
-            <property name="maxPoolSize" value="5" />
-			<!-- 线程池所使用的缓冲队列   -->
-            <property name="queueCapacity" value="25" />
-      </bean>
-      
-      <bean id="mail" class="com.roncoo.adminlte.util.base.Mail"/> 
+	<bean id="mail" class="com.roncoo.adminlte.util.base.Mail"/> 
 
 </beans>
