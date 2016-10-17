@@ -1,81 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <title>龙果开源-后台管理系统</title>
-  
-  <base href="${ctx}/static/roncoo-adminlte/">
-  
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+	<title>龙果开源-后台管理系统</title>
+	
+	<base href="${ctx}/static/roncoo-adminlte/">
+  	<link rel="stylesheet" href="dist/css/login2.css">
+  	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
 </head>
 <body>
-<div class="login-box">
-  <div class="login-logo">
-    <a href="../../index2.html"><b>Roncoo</b> AdminLTE</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
-
-    <form action="${ctx}/login" method="post">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div>
-    <!-- /.social-auth-links -->
-
-    <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
-
+	<div class="cont">
+	  <div class="demo">
+	    <div class="login">
+	      <div class="login__check">
+	      	<img src="dist/img/logo.png" alt="">
+	      </div>
+	      <form action="" class="login__form">
+	        <div class="login__row">
+	          <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
+	            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+	          </svg>
+	          <input type="text" class="login__input name" placeholder="Username"/>
+	        </div>
+	        <div class="login__row">
+	          <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
+	            <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+	          </svg>
+	          <input type="password" class="login__input pass" placeholder="Password"/>
+	        </div>
+	        <button class="login__submit">登 录</button>
+	        <p class="login__signup">还没有账号? &nbsp;<a href="#" target="_blank">立刻注册</a></p>
+	      </form>
+	    </div>
+	    <div class="app">
+	      <div class="app__bot">
+	        <div class="app__title">
+	        欢迎注册龙果管理系统
+	        </div>
+	        <form class="app__meetings reg__form">
+	          <div class="app__meeting">
+	          		<div class="glyphicon glyphicon-user"></div>
+	          		<div class="reg__enter">
+		          		<input type="text" class="name" placeholder="用户名"/>
+	          		</div>
+	          </div>
+	          <div class="app__meeting">
+	          		<div class="glyphicon glyphicon-envelope "></div>
+	          		<div class="reg__enter">
+		          		<input type="email" class="name" placeholder="邮箱地址"/>
+	          		</div>
+	          </div>
+	          <div class="app__meeting">
+	          		<div class="glyphicon glyphicon-lock "></div>
+	          		<div class="reg__enter">
+		          		<input type="password" class="name" placeholder="密码"/>
+	          		</div>
+	          </div>
+	          <div class="app__meeting">
+	          		<div class="glyphicon glyphicon-log-in"></div>
+	          		<div class="reg__enter">
+		          		<input type="text" class="name" placeholder="确认密码"/>
+	          		</div>
+	          </div>
+	          <div class="text-center">
+	          	<button class="login__submit">注册</button>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="app__logout">
+	        <svg class="app__logout-icon svg-icon" viewBox="0 0 20 20">
+	          <path d="M6,3 a8,8 0 1,0 8,0 M10,0 10,12"/>
+	        </svg>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<script src="dist/js/pages/login2.js"></script>
+	<!-- jQuery 2.2.3 -->
+	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	
+	<script>
+	$(document).ready(function () {
+	    var animating = false, submitPhase1 = 1100, submitPhase2 = 400, logoutPhase1 = 800, $login = $('.login'), $app = $('.app');
+	    function ripple(elem, e) {
+	        $('.ripple').remove();
+	        var elTop = elem.offset().top, elLeft = elem.offset().left, x = e.pageX - elLeft, y = e.pageY - elTop;
+	        var $ripple = $('<div class=\'ripple\'></div>');
+	        $ripple.css({
+	            top: y,
+	            left: x
+	        });
+	        elem.append($ripple);
+	    }
+	    ;
+	    $('.login__form,.reg__form').on('submit', function (e) {
+	        if (animating)
+	            return false;
+	        animating = true;
+	        var that = $(".login__submit");
+	        ripple($(that), e);
+	        $(that).addClass('processing');
+	        setTimeout(function () {
+	        	animating = false;
+	            that.removeClass('processing');
+                alert("登录成功")
+	        }, submitPhase1);
+	        return false;
+	    });
+	    $(".login__signup a").on('click', function (e) {
+	        var that = $(".login__submit");
+            that.addClass('processing success');
+            setTimeout(function () {
+                $app.show();
+                $app.css('top');
+                $app.addClass('active');
+            }, submitPhase2 - 70);
+            setTimeout(function () {
+                $login.hide();
+                $login.addClass('inactive');
+                animating = false;
+                that.removeClass('success processing');
+            }, submitPhase2);
+            return false;
+	    });
+	    $(document).on('click', '.app__logout', function (e) {
+	        if (animating)
+	            return;
+	        $('.ripple').remove();
+	        animating = true;
+	        var that = $(".login__submit");
+            that.addClass('processing success');
+	        setTimeout(function () {
+	            $app.removeClass('active');
+	            $login.show();
+	            $login.css('top');
+	            $login.removeClass('inactive');
+	        }, submitPhase2 - 70);
+	        setTimeout(function () {
+	            $app.hide();
+	            animating = false;
+                that.removeClass('success processing');
+	        }, submitPhase2);
+	    });
+	});
+	</script>
 </body>
 </html>
