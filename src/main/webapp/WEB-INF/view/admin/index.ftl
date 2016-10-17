@@ -477,7 +477,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a href="${ctx}/admin/email/addUser">
 									<i class="fa fa-circle-o"></i> 添加联系人
 								</a>
 							</li>
