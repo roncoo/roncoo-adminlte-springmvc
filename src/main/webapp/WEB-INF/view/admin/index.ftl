@@ -478,7 +478,7 @@
 							</li>
 							<li>
 								<a href="#">
-									<i class="fa fa-file-text-o"></i> 草稿
+									<i class="fa fa-circle-o"></i> 添加联系人
 								</a>
 							</li>
 							<li>
