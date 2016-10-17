@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- email发送 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- 服务器 -->
+		<property name="host" value="${email.host}" />
+		<!-- 端口号 -->
+		<property name="port" value="${email.port}" />
+		<property name="protocol" value="smtp"/>
+		<!-- 用户名 -->
+		<property name="username" value="${email.user}" />
+		<!-- 密码 -->
+		<property name="password" value="${email.pass}" />
+		<!-- SMTP服务器验证 -->
+		<property name="javaMailProperties">
+			<props>
+				<!-- 验证身份 -->
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.ssl.enable">false</prop> 
+				<prop key="mail.smtp.socketFactory.class">javax.NET.ssl.SSLSocketFactory</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<!-- 发件人email -->
+		<property name="from" value="${email.user}" />
+	</bean>
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+			<!--线程池维护线程的最少数量   -->
+            <property name="corePoolSize" value="3" />
+			<!--线程池维护线程所允许的空闲时间   -->
+            <property name="keepAliveSeconds" value="200" />
+			<!--线程池维护线程的最大数量   -->
+            <property name="maxPoolSize" value="5" />
+			<!-- 线程池所使用的缓冲队列   -->
+            <property name="queueCapacity" value="25" />
+      </bean>
+      
+      <bean id="mail" class="com.roncoo.adminlte.util.base.Mail"/> 
+
+</beans>

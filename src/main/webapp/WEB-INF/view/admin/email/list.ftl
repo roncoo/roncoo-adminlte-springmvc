@@ -60,10 +60,15 @@
 							<tr>
 								<td><input type="checkbox"></td>
 								<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-								<td class="mailbox-name"><a href="read-mail.html">#{info.id}</a></td>
-								<td class="mailbox-subject">#{info.toUser}</td>
-								<td class="mailbox-attachment">#{info.statusId}</td>
-								<td class="mailbox-date">#{info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+								<td class="mailbox-name"><a href="read-mail.html">${info_index+1}</a></td>
+								<td class="mailbox-subject">${info.toUser}</td>
+								<td class="mailbox-subject">${info.subject}</td>
+								<td class="mailbox-attachment">
+								<#if info.statusId =="0">警告</#if>
+								<#if info.statusId =="1">可用</#if>
+								
+								</td>
+								<td class="mailbox-date">${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 							</tr>
 							</#list>
 
@@ -98,12 +103,34 @@
 					<div class="pull-right">
 						#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
 						<div class="btn-group">
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-chevron-left"></i>
-							</button>
+							<#if (page.pageCurrent > 1)>
+								<a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent-1}">
+								<button type="button" class="btn btn-default btn-sm">
+									<i class="fa fa-chevron-left"></i>
+								</button>
+								</a>
+							</#if>
+							<#if (page.pageCurrent <=1)>
+								<a>
+								<button type="button" class="btn btn-default btn-sm">
+									<i class="fa fa-chevron-left"></i>
+								</button>
+								</a>
+							</#if>
+							<#if (page.pageCurrent <page.totalPage)>
+							<a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent+1}">
 							<button type="button" class="btn btn-default btn-sm">
 								<i class="fa fa-chevron-right"></i>
 							</button>
+							</a>
+							</#if>
+							<#if (page.pageCurrent >=page.totalPage)>
+								<a >
+								<button type="button" class="btn btn-default btn-sm">
+									<i class="fa fa-chevron-right"></i>
+								</button>
+								</a>
+							</#if>
 						</div>
 						<!-- /.btn-group -->
 					</div>

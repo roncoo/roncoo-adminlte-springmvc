@@ -31,35 +31,10 @@
 	<!-- 引入配置文件 -->
 	<context:property-placeholder location="classpath:/conf.properties"
 		ignore-resource-not-found="true" />
-
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<!-- 服务器 -->
-		<property name="host" value="${email.host}" />
-		<!-- 端口号 -->
-		<property name="port" value="${email.port}" />
-		<property name="protocol" value="smtp"/>
-		<!-- 用户名 -->
-		<property name="username" value="${email.user}" />
-		<!-- 密码 -->
-		<property name="password" value="${email.pass}" />
-		<!-- SMTP服务器验证 -->
-		<property name="javaMailProperties">
-			<props>
-				<!-- 验证身份 -->
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.ssl.enable">false</prop> 
-				<prop key="mail.smtp.socketFactory.class">javax.NET.ssl.SSLSocketFactory</prop>
-				<prop key="mail.debug">true</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
-		<!-- 发件人email -->
-		<property name="from" value="${email.user}" />
-
-	</bean>
-
+ 
+        
+	<import resource="classpath:/applicationContext-mail.xml" />
+	
 	<import resource="classpath:/applicationContext-jdbc.xml" />
 
 </beans>

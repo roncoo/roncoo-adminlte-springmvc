@@ -15,9 +15,12 @@
  */
 package com.roncoo.adminlte.biz;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample.Criteria;
 import com.roncoo.adminlte.service.RcEmailInfoService;
+import com.roncoo.adminlte.util.base.Mail;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
@@ -37,10 +41,10 @@ public class RcEmailInfoBiz {
 	private RcEmailInfoService rcEmailInfoService;
 	
 	@Autowired
-	private MailSender mailSender;
+	private Mail mail;
 	
-	@Autowired
-	private SimpleMailMessage mailMessage;
+	 @Autowired
+	 private ThreadPoolTaskExecutor  taskExecutor;
 
 	/**
 	 * 
@@ -71,12 +75,15 @@ public class RcEmailInfoBiz {
 
 	@Transactional
 	public void insertSelective(RcEmailInfo info) {
+		Date date = new Date();
+		info.setCreateTime(date);
+		info.setUpdateTime(date);
+		info.setStatusId("1");
+		
 		rcEmailInfoService.insertSelective(info);
 		
-		mailMessage.setSubject(info.getSubject());
-		mailMessage.setText(info.getContent());
-		mailMessage.setTo(info.getToUser());
-		mailSender.send(mailMessage);
+		mail.setMail(info);
+		taskExecutor.execute(mail);
 	}
 
 

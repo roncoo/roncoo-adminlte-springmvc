@@ -28,7 +28,7 @@ public class EmailController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void list(HttpSession session,Page<RcEmailInfo> page,ModelMap modelMap){
 		
-		String fromUser = "88888888888888";
+		String fromUser = "88888888";
 		
 		page = rcEmailInfoBiz.queryForPage(page, fromUser);
 		modelMap.put("page", page);
@@ -42,8 +42,9 @@ public class EmailController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(RcEmailInfo info){
-		String fromUser = "88888888888888";
+		String fromUser = "88888888";
 		info.setFromUser(fromUser);
-		return "redirect:/admin/email/list ";
+		rcEmailInfoBiz.insertSelective(info);
+		return "redirect:/admin/email/list";
 	}
 }
