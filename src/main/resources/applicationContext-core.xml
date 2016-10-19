@@ -29,8 +29,8 @@
 	<context:property-placeholder location="classpath:/conf.properties" ignore-resource-not-found="true" />
 
 	<!-- 引入模块 -->
-	<import resource="classpath:/applicationContext-mail.xml" />
-	<import resource="classpath:/applicationContext-freemarker.xml" />
-	<import resource="classpath:/applicationContext-threadPool.xml" />
 	<import resource="classpath:/applicationContext-jdbc.xml" />
+	<import resource="classpath:/applicationContext-mail.xml" />
+	<import resource="classpath:/applicationContext-template.xml" />
+	<import resource="classpath:/applicationContext-thread.xml" />
 </beans>

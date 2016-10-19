@@ -12,7 +12,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
  * 作者： LYQ
  * 时间：2016年10月18日
  */
-public interface RcEmailAccountInfoDao {
+public interface EmailAccountInfoDao {
 	
 	int countByExample(RcEmailAccountInfoExample example);
 

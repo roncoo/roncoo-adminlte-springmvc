@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
-import com.roncoo.adminlte.service.impl.dao.RcDataDictionaryListDao;
+import com.roncoo.adminlte.service.impl.dao.DataDictionaryListDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcDataDictionaryListMapper;
 
 /**
@@ -17,7 +17,7 @@ import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcDataDictionaryListMap
  * 时间：2016年10月18日
  */
 @Repository
-public class RcDataDictionaryListDaoImpl implements RcDataDictionaryListDao {
+public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 
 	@Autowired
 	private RcDataDictionaryListMapper mapper;

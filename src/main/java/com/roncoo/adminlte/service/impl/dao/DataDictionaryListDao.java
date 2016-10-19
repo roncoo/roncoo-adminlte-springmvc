@@ -11,7 +11,7 @@ import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
  * 
  * 作用功能：数据字典操作明细接口类 作者： LYQ 时间：2016年10月17日
  */
-public interface RcDataDictionaryListDao {
+public interface DataDictionaryListDao {
 
 	/**
 	 * 

@@ -40,4 +40,9 @@
 		<property name="exposeSessionAttributes" value="true" />
 		<property name="exposeSpringMacroHelpers" value="true" />
 	</bean> 
+	
+	<!-- JSP视图解析器，将ModelAndView及字符串解析为具体的页面 -->
+	<!-- 
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
+ 	-->
 </beans>

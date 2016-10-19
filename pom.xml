@@ -23,7 +23,7 @@
 
 	<dependencies>
 
-		<!-- upload -->
+		<!-- file upload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>

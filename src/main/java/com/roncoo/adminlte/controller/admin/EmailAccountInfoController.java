@@ -23,41 +23,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.roncoo.adminlte.bean.entity.RcDataDictionary;
-import com.roncoo.adminlte.biz.DataDictionaryBiz;
+import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
+import com.roncoo.adminlte.biz.EmailAccountInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
-import com.roncoo.adminlte.util.base.Page;
 
 /**
- * 数据字典
  * 
- * @author LYQ
+ * @author wujing
  */
 @Controller
-@RequestMapping(value = "/admin/dataDictionary", method = RequestMethod.POST)
-public class DataDictionaryController extends BaseController {
+@RequestMapping(value = "/admin/emailAccountInfo", method = RequestMethod.POST)
+public class EmailAccountInfoController extends BaseController {
 
 	@Autowired
-	private DataDictionaryBiz biz;
+	private EmailAccountInfoBiz biz;
 
-	/**
-	 * 查看数据字典列表
-	 */
-	@RequestMapping(value = LIST, method = RequestMethod.GET)
+	@RequestMapping(value = LIST)
 	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
-		Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
-		modelMap.put("page", page);
+
 	}
 
-	/**
-	 * 
-	 * 往数据字典中插入记录
-	 * 
-	 * @param dictionary
-	 * @return String
-	 */
 	@RequestMapping(value = SAVE)
-	public void save(@ModelAttribute RcDataDictionary rcDataDictionary) {
-		biz.save(rcDataDictionary);
+	public void insert(@ModelAttribute RcEmailAccountInfo rcEmailAccountInfo) {
 	}
 }

@@ -13,30 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.roncoo.adminlte.service;
+package com.roncoo.adminlte.biz;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
-import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
+import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
  * @author wujing
  */
-public interface RcEmailInfoService {
-	
+@Component
+public class EmailInfoBiz {
+
+	@Autowired
+	private EmailInfoService emailInfoService;
+
 	/**
-	 * 
-	 * 功能：分页查询
-	 * @param page
-	 * @param premise
-	 * @return Page<RcEmailInfo>
+	 * 分页查询
 	 */
-	Page<RcEmailInfo> queryForPage(Page<RcEmailInfo> page,RcEmailInfoExample premise);
-	
-	/**
-	 * 
-	 * 功能：保存邮件信息
-	 * @param info void
-	 */
-	void insertSelective(RcEmailInfo info);
+	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize) {
+		return emailInfoService.listForPage(pageCurrent, pageSize);
+	}
+
+	public void sendMail(RcEmailInfo rcEmailInfo) {
+		emailInfoService.sendMail(rcEmailInfo);
+	}
+
 }

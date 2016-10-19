@@ -12,7 +12,7 @@ import com.roncoo.adminlte.util.base.Page;
  * 作者： LYQ
  * 时间：2016年10月18日
  */
-public interface RcDataDictionaryListService {
+public interface DataDictionaryListService {
 	
 	/**
 	 * 

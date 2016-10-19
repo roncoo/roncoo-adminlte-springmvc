@@ -15,37 +15,27 @@
  */
 package com.roncoo.adminlte.service.impl.dao;
 
-import java.util.List;
-
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
-import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
+import com.roncoo.adminlte.util.base.Page;
 
 /**
  * @author wujing
  */
-public interface RcEmailInfoDao {
-	
+public interface EmailInfoDao {
+
 	/**
 	 * 
-	 * 功能：统计email记录
-	 * @param example
+	 * 添加记录
+	 * 
+	 * @param rcEmailInfo
 	 * @return int
 	 */
-	int countTotal(RcEmailInfoExample example);
-	
+	int insert(RcEmailInfo rcEmailInfo);
+
 	/**
-	 * 
-	 * 功能：查询邮件
-	 * @param example
-	 * @return List<RcEmailInfo>
+	 * @param pageCurrent
+	 * @param pageSize
+	 * @return
 	 */
-	List<RcEmailInfo> queryForPage(RcEmailInfoExample example);
-	
-	/**
-	 * 
-	 * 功能：添加邮件信息
-	 * @param info
-	 * @return int
-	 */
-	int insertSelective(RcEmailInfo info);
+	Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize);
 }

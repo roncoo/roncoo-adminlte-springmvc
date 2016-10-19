@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
-import com.roncoo.adminlte.service.RcDataDictionaryListService;
-import com.roncoo.adminlte.service.impl.dao.RcDataDictionaryListDao;
+import com.roncoo.adminlte.service.DataDictionaryListService;
+import com.roncoo.adminlte.service.impl.dao.DataDictionaryListDao;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
@@ -19,10 +19,10 @@ import com.roncoo.adminlte.util.base.Page;
  * 时间：2016年10月18日
  */
 @Service
-public class RcDataDictionaryListServiceImpl implements RcDataDictionaryListService {
+public class DataDictionaryListServiceImpl implements DataDictionaryListService {
 
 	@Autowired
-	private RcDataDictionaryListDao dao;
+	private DataDictionaryListDao dao;
 
 	@Override
 	public Page<RcDataDictionaryList> queryForPage(Page<RcDataDictionaryList> page,

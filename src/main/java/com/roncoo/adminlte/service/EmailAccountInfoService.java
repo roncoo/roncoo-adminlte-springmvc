@@ -10,7 +10,7 @@ import com.roncoo.adminlte.util.base.Page;
  * 作者： LYQ
  * 时间：2016年10月18日
  */
-public interface RcEmailAccountInfoService {
+public interface EmailAccountInfoService {
 	
 	Page<RcEmailAccountInfo> queryForpage(Page<RcEmailAccountInfo> page,RcEmailAccountInfoExample example);
 	

@@ -16,34 +16,22 @@
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- email发送 -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean id="javaMailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<!-- 服务器 -->
 		<property name="host" value="${email.host}" />
 		<!-- 端口号 -->
 		<property name="port" value="${email.port}" />
-		<property name="protocol" value="smtp"/>
 		<!-- 用户名 -->
-		<property name="username" value="${email.user}" />
+		<property name="username" value="${email.username}" />
 		<!-- 密码 -->
-		<property name="password" value="${email.pass}" />
+		<property name="password" value="${email.password}" />
 		<!-- SMTP服务器验证 -->
 		<property name="javaMailProperties">
 			<props>
-				<!-- 验证身份 -->
 				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.ssl.enable">false</prop> 
-				<prop key="mail.smtp.socketFactory.class">javax.NET.ssl.SSLSocketFactory</prop>
-				<prop key="mail.debug">true</prop>
+				<prop key="mail.debug">${email.debug}</prop>
 			</props>
 		</property>
 	</bean>
-
-	<bean id="simpleMailMessage" class="org.springframework.mail.SimpleMailMessage">
-		<!-- 发件人email -->
-		<property name="from" value="${email.user}" />
-	</bean>
 	
-	<bean id="mail" class="com.roncoo.adminlte.util.base.Mail"/> 
-	
-
 </beans>

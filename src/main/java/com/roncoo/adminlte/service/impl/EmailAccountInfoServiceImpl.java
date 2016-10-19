@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
-import com.roncoo.adminlte.service.RcEmailAccountInfoService;
-import com.roncoo.adminlte.service.impl.dao.RcEmailAccountInfoDao;
+import com.roncoo.adminlte.service.EmailAccountInfoService;
+import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
@@ -18,10 +18,10 @@ import com.roncoo.adminlte.util.base.Page;
  * 时间：2016年10月18日
  */
 @Service
-public class RcEmailAccountInfoServiceImpl implements RcEmailAccountInfoService {
+public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 
 	@Autowired
-	private RcEmailAccountInfoDao dao;
+	private EmailAccountInfoDao dao;
 	
 	@Override
 	public Page<RcEmailAccountInfo> queryForpage(Page<RcEmailAccountInfo> page, RcEmailAccountInfoExample example) {

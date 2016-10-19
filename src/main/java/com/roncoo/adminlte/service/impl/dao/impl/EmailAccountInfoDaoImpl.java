@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
-import com.roncoo.adminlte.service.impl.dao.RcEmailAccountInfoDao;
+import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailAccountInfoMapper;
 
 /**
@@ -17,7 +17,7 @@ import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailAccountInfoMappe
  * 时间：2016年10月18日
  */
 @Repository
-public class RcEmailAccountInfoDaoImpl implements RcEmailAccountInfoDao {
+public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	
 	@Autowired
 	private RcEmailAccountInfoMapper mapper;

@@ -15,56 +15,48 @@
  */
 package com.roncoo.adminlte.service.impl.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
-import com.roncoo.adminlte.service.impl.dao.RcEmailInfoDao;
+import com.roncoo.adminlte.service.impl.dao.EmailInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailInfoMapper;
+import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.SqlUtil;
 
 /**
  * @author wujing
  */
 @Repository
-public class RcEmailInfoDaoImpl implements RcEmailInfoDao {
-	
+public class EmailInfoDaoImpl implements EmailInfoDao {
+
 	@Autowired
 	private RcEmailInfoMapper mapper;
-	
+
 	@Override
-	public int countTotal(RcEmailInfoExample example) {
-		return mapper.countByExample(example);
-	}
-	
-	/**
-	 * 查询邮件
-	 */
-	@Override
-	public List<RcEmailInfo> queryForPage(RcEmailInfoExample example) {
-		List<RcEmailInfo> result = mapper.selectByExample(example);
-		return result;
-	}
-	
-	public RcDataDictionary selectByPrimaryKey(Long id){
-		return null;
-		
-	}
-	
-	/**
-	 * 添加邮件信息
-	 */
-	@Override
-	public int insertSelective(RcEmailInfo info) {
-		return mapper.insert(info);
+	public int insert(RcEmailInfo rcEmailInfo) {
+		rcEmailInfo.setStatusId("1");
+		rcEmailInfo.setCreateTime(new Date());
+		rcEmailInfo.setUpdateTime(new Date());
+		return mapper.insert(rcEmailInfo);
 	}
 
-	
-	
-
-
+	@Override
+	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize) {
+		RcEmailInfoExample example = new RcEmailInfoExample();
+		example.setOrderByClause(" id desc ");
+		int count = mapper.countByExample(example);
+		pageCurrent = SqlUtil.checkPageCurrent(count, pageSize, pageCurrent);
+		pageSize = SqlUtil.checkPageSize(pageSize);
+		int totalPage = SqlUtil.countTotalPage(count, pageSize);
+		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
+		example.setPageSize(pageSize);
+		List<RcEmailInfo> list = mapper.selectByExample(example);
+		return new Page<RcEmailInfo>(count, totalPage, pageCurrent, pageSize, list);
+	}
 
 }
