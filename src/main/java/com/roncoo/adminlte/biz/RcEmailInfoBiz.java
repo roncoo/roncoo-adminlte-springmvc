@@ -88,7 +88,7 @@ public class RcEmailInfoBiz {
 		taskExecutor.execute(mail);
 	}
 
-	public void testT(RcEmailInfo info){
+	public void sendMail(RcEmailInfo info){
 		Date date = new Date();
 		info.setCreateTime(date);
 		info.setUpdateTime(date);

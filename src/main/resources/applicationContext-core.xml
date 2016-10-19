@@ -30,6 +30,7 @@
 
 	<!-- 引入模块 -->
 	<import resource="classpath:/applicationContext-mail.xml" />
+	<import resource="classpath:/applicationContext-freemarker.xml" />
 	<import resource="classpath:/applicationContext-threadPool.xml" />
 	<import resource="classpath:/applicationContext-jdbc.xml" />
 </beans>

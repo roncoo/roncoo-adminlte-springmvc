@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.biz.RcEmailInfoBiz;
@@ -16,6 +17,7 @@ public class EmailTemplateTest {
 	@Autowired
 	private RcEmailInfoBiz biz;
 	
+	
 	@Test
 	public void testTemplate(){
 		RcEmailInfo info = new RcEmailInfo();
@@ -25,6 +27,8 @@ public class EmailTemplateTest {
 		info.setTitle("我测试一下测试1");
 		info.setStatusId("1");
 		info.setContent("我看看可不可以用");
-		biz.testT(info);
+		biz.sendMail(info);
 	}
+	
+
 }

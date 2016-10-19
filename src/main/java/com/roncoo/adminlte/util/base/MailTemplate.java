@@ -19,7 +19,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-
+@Component
 public class MailTemplate implements Runnable {
 	
 	private static final String ENCODING = "utf-8"; 
@@ -43,7 +43,7 @@ public class MailTemplate implements Runnable {
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true, ENCODING);
 			helper.setFrom(info.getFromUser());
 			helper.setTo(info.getToUser());
-			helper.setSubject(MimeUtility.encodeText("estore注册成功提示邮件", ENCODING, "B"));
+			helper.setSubject(MimeUtility.encodeText(info.getSubject(), ENCODING, "B"));
 			helper.setText(setContent(info), true); // true表示text的内容为html
 
 		} catch (Exception e) {
@@ -54,8 +54,8 @@ public class MailTemplate implements Runnable {
 	private String setContent(RcEmailInfo info) {
 		String htmlText = null;
 		try {
-System.out.println(freeMarkerConfigurer);
-			Template template = freeMarkerConfigurer.getConfiguration().getTemplate("/WEB-INF/view/template/template.ftl");
+			System.out.println(freeMarkerConfigurer);
+			Template template = freeMarkerConfigurer.getConfiguration().getTemplate("template.ftl");
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("content", info.getContent());
 
