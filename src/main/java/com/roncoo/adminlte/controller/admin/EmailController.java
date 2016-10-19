@@ -47,4 +47,5 @@ public class EmailController {
 		rcEmailInfoBiz.insertSelective(info);
 		return "redirect:/admin/email/list";
 	}
+	
 }

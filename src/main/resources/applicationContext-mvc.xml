@@ -28,7 +28,7 @@
 	<mvc:resources location="/favicon.ico" mapping="/favicon.ico" />
 
 	<!-- freemarker的配置 -->  
-    <bean id="freemarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
         <property name="templateLoaderPath" value="/WEB-INF/view/" />  
         <property name="defaultEncoding" value="UTF-8" />  
         <property name="freemarkerSettings">  

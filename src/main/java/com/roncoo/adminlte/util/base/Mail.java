@@ -27,7 +27,7 @@ public class Mail implements Runnable {
 	}
 	
 	public void setMail(RcEmailInfo info){
-		
+	
 		mailMessage.setSubject(info.getSubject());
 		mailMessage.setText(info.getContent());
 		mailMessage.setTo(info.getToUser());

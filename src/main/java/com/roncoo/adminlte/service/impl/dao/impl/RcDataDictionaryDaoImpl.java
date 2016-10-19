@@ -10,30 +10,41 @@ import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample;
 import com.roncoo.adminlte.service.impl.dao.RcDataDictionaryDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcDataDictionaryMapper;
 
+/**
+ * 
+ * 作用功能：数据字典接口实现类
+ * 作者： LYQ
+ * 时间：2016年10月18日
+ */
 @Repository
 public class RcDataDictionaryDaoImpl implements RcDataDictionaryDao {
 	
 	@Autowired
-	private RcDataDictionaryMapper rcDataDictionaryMapper;
+	private RcDataDictionaryMapper mapper;
 
 	@Override
 	public int countByExample(RcDataDictionaryExample example) {
-		return rcDataDictionaryMapper.countByExample(example);
+		return mapper.countByExample(example);
 	}
 
 	@Override
 	public int deleteByPrimaryKey(Long id) {
-		return rcDataDictionaryMapper.deleteByPrimaryKey(id);
+		return mapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
 	public int insertSelective(RcDataDictionary record) {
-		return rcDataDictionaryMapper.insertSelective(record);
+		return mapper.insertSelective(record);
 	}
 
 	@Override
 	public List<RcDataDictionary> selectByExample(RcDataDictionaryExample example) {
-		return rcDataDictionaryMapper.selectByExample(example);
+		return mapper.selectByExample(example);
+	}
+
+	@Override
+	public RcDataDictionary selectByPrimaryKey(Long id) {
+		return mapper.selectByPrimaryKey(id);
 	}
 
 }

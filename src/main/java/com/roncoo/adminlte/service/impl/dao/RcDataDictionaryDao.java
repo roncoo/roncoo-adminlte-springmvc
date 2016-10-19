@@ -5,6 +5,12 @@ import java.util.List;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample;
 
+/**
+ * 
+ * 作用功能：数据字典数据库操作接口类
+ * 作者： LYQ
+ * 时间：2016年10月17日
+ */
 public interface RcDataDictionaryDao {
 
 	/**
@@ -38,4 +44,12 @@ public interface RcDataDictionaryDao {
 	 * @return List<RcDataDictionary>
 	 */
 	List<RcDataDictionary> selectByExample(RcDataDictionaryExample example);
+	
+	/**
+	 * 
+	 * 功能：根据id查询记录
+	 * @param id
+	 * @return RcDataDictionary
+	 */
+	RcDataDictionary selectByPrimaryKey(Long id);
 }

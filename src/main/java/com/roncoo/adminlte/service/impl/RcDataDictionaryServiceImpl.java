@@ -13,30 +13,40 @@ import com.roncoo.adminlte.service.RcDataDictionaryService;
 import com.roncoo.adminlte.service.impl.dao.RcDataDictionaryDao;
 import com.roncoo.adminlte.util.base.Page;
 
+/**
+ * 
+ * 作用功能：数据字典接口实现类
+ * 作者： LYQ
+ * 时间：2016年10月18日
+ */
 @Service
 public class RcDataDictionaryServiceImpl implements RcDataDictionaryService {
 
 	@Autowired
-	private RcDataDictionaryDao rcDataDictionaryDao;
+	private RcDataDictionaryDao dao;
 
 	@Transactional
 	@Override
 	public Page<RcDataDictionary> queryForPage(Page<RcDataDictionary> page, RcDataDictionaryExample example) {
-		int countTotal = rcDataDictionaryDao.countByExample(example);
+		int totalCount = dao.countByExample(example);
 		int totalPage = 1;
-		if (countTotal != 0) {
-			totalPage = countTotal / page.getPageSize();
+		if (totalCount != 0) {
+			totalPage = totalCount / page.getPageSize();
 
-			if (countTotal % page.getPageSize() != 0) {
+			if (totalCount % page.getPageSize() != 0) {
 				totalPage++;
 			}
 		}
-		page.setTotalCount(countTotal);
+		page.setTotalCount(totalCount);
 		page.setTotalPage(totalPage);
 
-		List<RcDataDictionary> result = rcDataDictionaryDao.selectByExample(example);
+		List<RcDataDictionary> result = dao.selectByExample(example);
 		page.setList(result);
 		return page;
+	}
+
+	public RcDataDictionary selectByPrimaryKey(Long id) {
+		return dao.selectByPrimaryKey(id);
 	}
 
 	@Transactional
@@ -45,9 +55,9 @@ public class RcDataDictionaryServiceImpl implements RcDataDictionaryService {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andFieldCodeEqualTo(dictionary.getFieldCode());
-		List<RcDataDictionary> result = rcDataDictionaryDao.selectByExample(example);
+		List<RcDataDictionary> result = dao.selectByExample(example);
 		if (result.isEmpty()) {
-			rcDataDictionaryDao.insertSelective(dictionary);
+			dao.insertSelective(dictionary);
 		}
 	}
 

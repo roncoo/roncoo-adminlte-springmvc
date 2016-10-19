@@ -19,7 +19,7 @@ import com.roncoo.adminlte.util.base.Page;
 @Component
 public class RcDataDictionaryBiz {
 	
-	private String SORT = "sort";
+	private String ORDER = "sort";
 	
 	@Autowired
 	private RcDataDictionaryService dataDictionaryService;
@@ -41,7 +41,7 @@ public class RcDataDictionaryBiz {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
 		example.setLimitStart((page.getPageCurrent()-1)*page.getPageSize());
 		example.setPageSize(page.getPageSize());
-		example.setOrderByClause(SORT);
+		example.setOrderByClause(ORDER);
 		
 		page = dataDictionaryService.queryForPage(page, example);
 		

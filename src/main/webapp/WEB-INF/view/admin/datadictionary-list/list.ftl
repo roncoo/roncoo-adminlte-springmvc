@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">数据字典表</h3>
+				<h3 class="box-title">数据字典明细表</h3>
 				<div class="box-tools pull-right">
 
 
@@ -19,7 +19,8 @@
 					<thead>
 						<tr>
 							<th>序号</th>
-							<th>字段名</th>
+							<th>关键词</th>
+							<th>默认值</th>
 							<th>排序</th>
 							<th>备注</th>
 							<th>创建时间</th>
@@ -28,17 +29,18 @@
 					</thead>
 					<tbody>
 
-						<#list page.list as data>
+						<#list page.list as dataList>
 						<tr>
-							<td>${data_index+1}</td>
-							<td>${data.fieldName}</td>
-							<td>${data.sort}</td>
-							<td>${data.remark}</td>
-							<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+							<td>${dataList_index+1}</td>
+							<td>${dataList.fieldKey}</td>
+							<td>${dataList.fieldValue}</td>
+							<td>${dataList.sort}</td>
+							<td>${dataList.remark}</td>
+							<td>${dataList.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 							<td>
-								<a href="${ctx}/admin/datadictionary-list/${data.id}/list">
+								<a href="${ctx}/admin/datadictionary-list/${dataList.id}/delete">
 								<button type="button" class="btn-xs btn-primary">
-									 查看
+									 删除
 								</button>
 								</a>
 							</td>
@@ -56,7 +58,8 @@
 <!-- 拟态框 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<form action="${ctx}/admin/datadictionary/insert" method="post">
+		<form action="${ctx}/admin/datadictionary-list/insert" method="post">
+			<input type="hidden" name="dictionaryId" value="#{dictionaryId}">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
@@ -66,12 +69,12 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">字段名</label> <input type="text" class="form-control" name="fieldName"
-							id="fieldName" placeholder="输入字段名...">
+						<label for="exampleInputEmail1">关键词</label> <input type="text" class="form-control" name="fieldKey"
+							id="fieldKey" placeholder="输入key...">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">CODE</label> <input type="text" class="form-control" name="fieldCode"
-							id="fieldCode" placeholder="输入code值...">
+						<label for="exampleInputPassword1">默认值</label> <input type="text" class="form-control" name="fieldValue"
+							id="fieldValue" placeholder="输入value值...">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">排序</label> <input type="text" class="form-control" name="sort" id="sort"

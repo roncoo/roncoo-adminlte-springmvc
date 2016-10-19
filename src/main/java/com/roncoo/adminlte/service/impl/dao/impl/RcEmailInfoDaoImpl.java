@@ -20,6 +20,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
 import com.roncoo.adminlte.service.impl.dao.RcEmailInfoDao;
@@ -46,6 +47,11 @@ public class RcEmailInfoDaoImpl implements RcEmailInfoDao {
 	public List<RcEmailInfo> queryForPage(RcEmailInfoExample example) {
 		List<RcEmailInfo> result = mapper.selectByExample(example);
 		return result;
+	}
+	
+	public RcDataDictionary selectByPrimaryKey(Long id){
+		return null;
+		
 	}
 	
 	/**

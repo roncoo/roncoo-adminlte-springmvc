@@ -18,8 +18,6 @@ package com.roncoo.adminlte.biz;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +27,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample.Criteria;
 import com.roncoo.adminlte.service.RcEmailInfoService;
 import com.roncoo.adminlte.util.base.Mail;
+import com.roncoo.adminlte.util.base.MailTemplate;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
@@ -45,6 +44,9 @@ public class RcEmailInfoBiz {
 	
 	 @Autowired
 	 private ThreadPoolTaskExecutor  taskExecutor;
+	 
+	 @Autowired
+	 private MailTemplate mailTemplate;
 
 	/**
 	 * 
@@ -86,5 +88,14 @@ public class RcEmailInfoBiz {
 		taskExecutor.execute(mail);
 	}
 
+	public void testT(RcEmailInfo info){
+		Date date = new Date();
+		info.setCreateTime(date);
+		info.setUpdateTime(date);
+		info.setStatusId("1");
+		
+		mailTemplate.setMail(info);
+		taskExecutor.execute(mailTemplate);
+	}
 
 }

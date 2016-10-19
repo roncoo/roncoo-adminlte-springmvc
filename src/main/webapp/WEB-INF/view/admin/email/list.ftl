@@ -36,7 +36,7 @@
 					</div>
 					<!-- /.btn-group -->
 					<button type="button" class="btn btn-default btn-sm">
-						<i class="fa fa-refresh"></i>
+						<i class=" fa fa-refresh"></i>
 					</button>
 					<div class="pull-right">
 						#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}

@@ -44,5 +44,7 @@
 	</bean>
 	
 	<bean id="mail" class="com.roncoo.adminlte.util.base.Mail"/> 
+	
+	<bean id="mailTemplate" class="com.roncoo.adminlte.util.base.MailTemplate"/>
 
 </beans>

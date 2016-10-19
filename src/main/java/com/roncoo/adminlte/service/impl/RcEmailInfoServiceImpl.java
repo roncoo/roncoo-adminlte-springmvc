@@ -40,15 +40,15 @@ public class RcEmailInfoServiceImpl implements RcEmailInfoService {
 	 */
 	@Override
 	public Page<RcEmailInfo> queryForPage(Page<RcEmailInfo> page, RcEmailInfoExample premise) {
-		int countTotal = dao.countTotal(premise);
+		int totalCount = dao.countTotal(premise);
 		List<RcEmailInfo> resultList = dao.queryForPage(premise);
 		
-		page.setTotalCount(countTotal);
+		page.setTotalCount(totalCount);
 		int totalPage = 1;
-		if (countTotal != 0) {
-			totalPage = countTotal / premise.getPageSize();
+		if (totalCount != 0) {
+			totalPage = totalCount / premise.getPageSize();
 			
-			if (countTotal % premise.getPageSize() != 0) {
+			if (totalCount % premise.getPageSize() != 0) {
 				totalPage++;
 			}
 		}
