@@ -26,7 +26,7 @@
 	<!-- 允许对静态资源文件的访问 -->
 	<mvc:resources location="/static/" mapping="/static/**" />
 	<mvc:resources location="/favicon.ico" mapping="/favicon.ico" />
-    
+	
 	<!--配置拦截器, 多个拦截器,顺序执行 -->  
 	<!-- 
 	<mvc:interceptors>
