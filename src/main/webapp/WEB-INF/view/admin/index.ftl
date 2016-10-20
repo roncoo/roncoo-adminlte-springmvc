@@ -1,7 +1,7 @@
 <#include "/macro/base.ftl" /> 
 <@header/> 
 
-<@menu/>
+<@menu activeId="email"/>
 
 <div class="content-wrapper">
 	<!-- Main content -->

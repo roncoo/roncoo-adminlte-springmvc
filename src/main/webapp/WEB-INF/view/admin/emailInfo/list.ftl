@@ -1,4 +1,6 @@
-<#include "/macro/base.ftl" /> <@header/> <@menu/>
+<#include "/macro/base.ftl" /> 
+<@header/> 
+<@menu activeId="email"/>
 
 <div class="content-wrapper">
 	<!-- Main content -->

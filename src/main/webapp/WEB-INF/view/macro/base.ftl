@@ -1,4 +1,4 @@
-<#macro menu>
+<#macro menu activeId>
 <!-- Left side column. contains the logo and sidebar -->
 	<aside class="main-sidebar">
 		<!-- sidebar: style can be found in sidebar.less -->
@@ -7,7 +7,7 @@
 			<ul class="sidebar-menu">
 				<li class="header">主导航</li>
 				
-				<li class="treeview">
+				<li class="<#if activeId=='email'>active</#if>">
 					<a href="javascript:void(0);">
 						<i class="fa fa-envelope"></i> 
 						<span>邮箱</span> 
@@ -34,7 +34,7 @@
 					</ul>
 				</li>
 				
-				<li>
+				<li class="<#if activeId=='dictionary'>active</#if>">
 					<a href="${ctx}/admin/dataDictionary/list">
 						<i class="fa fa-folder"></i> <span>数据字典管理</span> </i>
 					</a>
