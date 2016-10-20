@@ -34,7 +34,7 @@ import com.roncoo.adminlte.util.base.Page;
  * @author LYQ
  */
 @Controller
-@RequestMapping(value = "/admin/email", method = RequestMethod.POST)
+@RequestMapping(value = "/admin/emailInfo", method = RequestMethod.POST)
 public class EmailInfoController extends BaseController {
 
 	@Autowired
