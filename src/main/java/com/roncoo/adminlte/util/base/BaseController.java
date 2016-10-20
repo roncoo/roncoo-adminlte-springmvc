@@ -36,8 +36,6 @@ public class BaseController {
 	public static final String SAVE = "save";
 	public static final String EDIT = "edit";
 	public static final String UPDATE = "update";
-	public static final String INSERT = "insert";
 	public static final String DELETE = "delete";
-	public static final String SELETE = "selete";
 
 }
