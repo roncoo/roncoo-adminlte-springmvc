@@ -1,4 +1,8 @@
-<script type="text/javascript" src="bootstrap/bootstrap.js"></script>
+<#include "/macro/base.ftl" /> 
+<@header/> 
+
+<@menu/>
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="box box-primary">
@@ -12,9 +16,6 @@
 				</div>
 			</div>
 			<div class="box-body">
-
-
-
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -50,8 +51,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 <!-- 拟态框 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -90,3 +89,5 @@
 		</form>
 	</div>
 </div>
+
+<@footer/>
