@@ -15,6 +15,8 @@
  */
 package com.roncoo.adminlte.util.base;
 
+import java.text.MessageFormat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,5 +39,13 @@ public class BaseController {
 	public static final String EDIT = "edit";
 	public static final String UPDATE = "update";
 	public static final String DELETE = "delete";
+
+	public static String redirect(String format, Object... arguments) {
+		return new StringBuffer("redirect:").append(MessageFormat.format(format, arguments)).toString();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(redirect("/admin/emailAccountInfo/list?id={0}&my={1}", 1, "22"));
+	}
 
 }
