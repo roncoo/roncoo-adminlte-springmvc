@@ -34,7 +34,7 @@ import com.roncoo.adminlte.util.base.Page;
  */
 @Controller
 @RequestMapping(value = "/admin/dataDictionaryList", method = RequestMethod.POST)
-public class DatadictionaryListController extends BaseController {
+public class DataDictionaryListController extends BaseController {
 
 	@Autowired
 	private DataDictionaryListBiz biz;

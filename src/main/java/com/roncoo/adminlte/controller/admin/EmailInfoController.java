@@ -35,7 +35,7 @@ import com.roncoo.adminlte.util.base.Page;
  */
 @Controller
 @RequestMapping(value = "/admin/email", method = RequestMethod.POST)
-public class EmailController extends BaseController {
+public class EmailInfoController extends BaseController {
 
 	@Autowired
 	private EmailInfoBiz biz;
