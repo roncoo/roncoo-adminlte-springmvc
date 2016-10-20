@@ -18,7 +18,6 @@ package com.roncoo.adminlte.controller.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +28,8 @@ import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
- * 
- * @author wujing
+ * 数据字典明细Controller
+ * @author LYQ
  */
 @Controller
 @RequestMapping(value = "/admin/dataDictionaryList", method = RequestMethod.POST)
@@ -39,19 +38,27 @@ public class DataDictionaryListController extends BaseController {
 	@Autowired
 	private DataDictionaryListBiz biz;
 
-	@RequestMapping(value = LIST)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, @RequestParam(value = "id", defaultValue = "1") Long id, ModelMap modelMap) {
+	
+	@RequestMapping(value = LIST, method = RequestMethod.GET)
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
+			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
+			@RequestParam(value = "id", defaultValue = "1") Long id, ModelMap modelMap) {
 		Page<RcDataDictionaryList> page = biz.listForPage(pageCurrent, pageSize, id);
+		modelMap.put("id", id);
 		modelMap.put("page", page);
 
 	}
 
 	@RequestMapping(value = SAVE)
-	public void save(RcDataDictionaryList rcDataDictionaryList, Long id) {
+	public String save(RcDataDictionaryList dList, @RequestParam(name = "dId") Long dId) {
+		biz.save(dList, dId);
+		return "redirect:/admin/dataDictionaryList/list?id="+dId;
 	}
 
-	@RequestMapping(value = DELETE)
-	public void delete(@PathVariable Long id) {
+	@RequestMapping(value = DELETE, method = RequestMethod.GET)
+	public String delete(@RequestParam(value="id") Long id,  @RequestParam(value="dId") Long dId) {
+		biz.deleteById(id);	
+		return "redirect:/admin/dataDictionaryList/list?id="+dId;
 
 	}
 }

@@ -1,30 +1,69 @@
 package com.roncoo.adminlte.service.impl.dao;
 
-import java.util.List;
-
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
-
+import com.roncoo.adminlte.util.base.Page;
 
 /**
+ * 邮件账号数据交换功能
  * 
- * 作用功能：发件账号的数据库接口类
- * 作者： LYQ
- * 时间：2016年10月18日
+ * @author LYQ
  */
 public interface EmailAccountInfoDao {
-	
-	int countByExample(RcEmailAccountInfoExample example);
 
-    int deleteByExample(RcEmailAccountInfoExample example);
+	/**
+	 * 统计
+	 * 
+	 * @param example
+	 * @return
+	 */
+	int count(RcEmailAccountInfoExample example);
 
-    int deleteByPrimaryKey(Long id);
+	/**
+	 * 删除
+	 * 
+	 * @param example
+	 * @return
+	 */
+	void delete(RcEmailAccountInfoExample example);
 
-    int insertSelective(RcEmailAccountInfo record);
+	/**
+	 * 根据id删除
+	 * 
+	 * @param id
+	 * @return
+	 */
+	void deleteById(Long id);
 
-    List<RcEmailAccountInfo> selectByExample(RcEmailAccountInfoExample example);
+	/**
+	 * 添加
+	 * 
+	 * @param info
+	 * @return
+	 */
+	void save(RcEmailAccountInfo info);
 
-    RcEmailAccountInfo selectByPrimaryKey(Long id);
+	/**
+	 * 分页查询
+	 * 
+	 * @param example
+	 * @return
+	 */
+	Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize);
 
-    int updateByPrimaryKeySelective(RcEmailAccountInfo record);
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	RcEmailAccountInfo queryById(Long id);
+
+	/**
+	 * 更新
+	 * 
+	 * @param info
+	 * @return
+	 */
+	void update(RcEmailAccountInfo info);
 }

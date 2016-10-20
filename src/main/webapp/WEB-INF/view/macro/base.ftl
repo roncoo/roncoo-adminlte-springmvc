@@ -15,25 +15,20 @@
 					</a>
 					<ul class="treeview-menu">
 						<li>
-							<a href="${ctx}/admin/email/list">
+							<a href="${ctx}/admin/emailInfo/list">
 								<i class="fa fa-inbox"></i> 
 								<span>收件箱</span> 
 								<span class="pull-right-container"><small class="label pull-right bg-yellow">12</small></span>
 							</a>
 						</li>
 						<li>
-							<a href="${ctx}/admin/email/add">
+							<a href="${ctx}/admin/emailInfo/add">
 								<i class="fa fa-envelope-o"></i> 发送
 							</a>
 						</li>
 						<li>
-							<a href="${ctx}/admin/email/account/list">
-								<i class="fa fa-circle-o"></i> 账号列表
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fa fa-trash-o"></i>垃圾箱
+							<a href="${ctx}/admin/emailAccountInfo/list">
+								<i class="fa fa-circle-o"></i> 账号信息
 							</a>
 						</li>
 					</ul>

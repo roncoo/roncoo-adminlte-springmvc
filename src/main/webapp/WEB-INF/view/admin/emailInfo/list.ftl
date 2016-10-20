@@ -1,148 +1,141 @@
+<#include "/macro/base.ftl" /> <@header/> <@menu/>
 
-<!-- iCheck -->
-<link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
-<div class="row">
+<div class="content-wrapper">
+	<!-- Main content -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">收件箱</h3>
 
-	<div class="col-md-12">
-		<div class="box box-primary">
-			<div class="box-header with-border">
-				<h3 class="box-title">收件箱</h3>
-
-				<div class="box-tools pull-right">
-					<div class="has-feedback">
-						<input type="text" class="form-control input-sm" placeholder="搜索邮件......"> <span
-							class="glyphicon glyphicon-search form-control-feedback"></span>
+					<div class="box-tools pull-right">
+						<div class="has-feedback">
+							<input type="text" class="form-control input-sm" placeholder="搜索邮件......"> <span
+								class="glyphicon glyphicon-search form-control-feedback"></span>
+						</div>
 					</div>
+					<!-- /.box-tools -->
 				</div>
-				<!-- /.box-tools -->
-			</div>
-			<!-- /.box-header -->
-			<div class="box-body no-padding">
-				<div class="mailbox-controls">
-					<!-- Check all button -->
-					<button type="button" class="btn btn-default btn-sm checkbox-toggle">
-						<i class="fa fa-square-o"></i>
-					</button>
-					<div class="btn-group">
-						<button type="button" class="btn btn-default btn-sm">
-							<i class="fa fa-trash-o"></i>
+				<!-- /.box-header -->
+				<div class="box-body no-padding">
+					<div class="mailbox-controls">
+						<!-- Check all button -->
+						<button type="button" class="btn btn-default btn-sm checkbox-toggle">
+							<i class="fa fa-square-o"></i>
 						</button>
-						<button type="button" class="btn btn-default btn-sm">
-							<i class="fa fa-reply"></i>
-						</button>
-						<button type="button" class="btn btn-default btn-sm">
-							<i class="fa fa-share"></i>
-						</button>
-					</div>
-					<!-- /.btn-group -->
-					<button type="button" class="btn btn-default btn-sm">
-						<i class=" fa fa-refresh"></i>
-					</button>
-					<div class="pull-right">
-						#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
 						<div class="btn-group">
 							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-chevron-left"></i>
+								<i class="fa fa-trash-o"></i>
 							</button>
 							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-chevron-right"></i>
+								<i class="fa fa-reply"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-sm">
+								<i class="fa fa-share"></i>
 							</button>
 						</div>
 						<!-- /.btn-group -->
-					</div>
-					<!-- /.pull-right -->
-				</div>
-				<div class="table-responsive mailbox-messages" style="min-height: 350px;">
-					<table class="table table-hover table-striped">
-						<tbody>
-						
-							<#list page.list as info>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-								<td class="mailbox-name"><a href="read-mail.html">${info_index+1}</a></td>
-								<td class="mailbox-subject">${info.toUser}</td>
-								<td class="mailbox-subject">${info.subject}</td>
-								<td class="mailbox-attachment">
-								<#if info.statusId =="0">警告</#if>
-								<#if info.statusId =="1">可用</#if>
-								
-								</td>
-								<td class="mailbox-date">${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-							</tr>
-							</#list>
-
-						</tbody>
-					</table>
-					<!-- /.table -->
-				</div>
-				<!-- /.mail-box-messages -->
-			</div>
-			<!-- /.box-body -->
-			<div class="box-footer no-padding">
-				<div class="mailbox-controls">
-					<!-- Check all button -->
-					<button type="button" class="btn btn-default btn-sm checkbox-toggle">
-						<i class="fa fa-square-o"></i>
-					</button>
-					<div class="btn-group">
 						<button type="button" class="btn btn-default btn-sm">
-							<i class="fa fa-trash-o"></i>
+							<i class=" fa fa-refresh"></i>
 						</button>
-						<button type="button" class="btn btn-default btn-sm">
-							<i class="fa fa-reply"></i>
-						</button>
-						<button type="button" class="btn btn-default btn-sm">
-							<i class="fa fa-share"></i>
-						</button>
-					</div>
-					<!-- /.btn-group -->
-					<button type="button" class="btn btn-default btn-sm">
-						<i class="fa fa-refresh"></i>
-					</button>
-					<div class="pull-right">
-						#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
-						<div class="btn-group">
-							<#if (page.pageCurrent > 1)>
-								<a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent-1}">
+						<div class="pull-right">
+							#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
+							<div class="btn-group">
 								<button type="button" class="btn btn-default btn-sm">
 									<i class="fa fa-chevron-left"></i>
 								</button>
-								</a>
-							</#if>
-							<#if (page.pageCurrent <=1)>
-								<a>
-								<button type="button" class="btn btn-default btn-sm">
-									<i class="fa fa-chevron-left"></i>
-								</button>
-								</a>
-							</#if>
-							<#if (page.pageCurrent <page.totalPage)>
-							<a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent+1}">
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-chevron-right"></i>
-							</button>
-							</a>
-							</#if>
-							<#if (page.pageCurrent >=page.totalPage)>
-								<a >
 								<button type="button" class="btn btn-default btn-sm">
 									<i class="fa fa-chevron-right"></i>
 								</button>
-								</a>
-							</#if>
+							</div>
+							<!-- /.btn-group -->
+						</div>
+						<!-- /.pull-right -->
+					</div>
+					<div class="table-responsive mailbox-messages" style="min-height: 350px;">
+						<table class="table table-hover table-striped">
+							<tbody>
+
+								<#list page.list as info>
+								<tr>
+									<td><input type="checkbox"></td>
+									<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
+									<td class="mailbox-name"><a href="read-mail.html">${info_index+1}</a></td>
+									<td class="mailbox-subject">${info.toUser}</td>
+									<td class="mailbox-subject">${info.subject}</td>
+									<td class="mailbox-attachment"><#if info.statusId =="0">警告</#if> <#if info.statusId =="1">可用</#if></td>
+									<td class="mailbox-date">${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+								</tr>
+								</#list>
+
+							</tbody>
+						</table>
+						<!-- /.table -->
+					</div>
+					<!-- /.mail-box-messages -->
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer no-padding">
+					<div class="mailbox-controls">
+						<!-- Check all button -->
+						<button type="button" class="btn btn-default btn-sm checkbox-toggle">
+							<i class="fa fa-square-o"></i>
+						</button>
+						<div class="btn-group">
+							<button type="button" class="btn btn-default btn-sm">
+								<i class="fa fa-trash-o"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-sm">
+								<i class="fa fa-reply"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-sm">
+								<i class="fa fa-share"></i>
+							</button>
 						</div>
 						<!-- /.btn-group -->
+						<button type="button" class="btn btn-default btn-sm">
+							<i class="fa fa-refresh"></i>
+						</button>
+						<div class="pull-right">
+							#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
+							<div class="btn-group">
+								<#if (page.pageCurrent > 1)> <a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent-1}">
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fa fa-chevron-left"></i>
+									</button>
+								</a> </#if> <#if (page.pageCurrent <=1)> <a>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fa fa-chevron-left"></i>
+									</button>
+								</a> </#if> <#if (page.pageCurrent
+								<page.totalPage)> <a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent+1}">
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fa fa-chevron-right"></i>
+									</button>
+								</a> </#if> <#if (page.pageCurrent >=page.totalPage)> <a>
+									<button type="button" class="btn btn-default btn-sm">
+										<i class="fa fa-chevron-right"></i>
+									</button>
+								</a> </#if> 
+							</div>
+							<!-- /.btn-group -->
+						</div>
+						<!-- /.pull-right -->
 					</div>
-					<!-- /.pull-right -->
 				</div>
 			</div>
+			<!-- /. box -->
 		</div>
-		<!-- /. box -->
+		<!-- /.col -->
 	</div>
-	<!-- /.col -->
+	<!-- /.row -->
+	<!-- /.content -->
 </div>
-<!-- /.row -->
+
+<@footer/>
+
+<!-- iCheck -->
+<link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
 <!-- Page Script -->

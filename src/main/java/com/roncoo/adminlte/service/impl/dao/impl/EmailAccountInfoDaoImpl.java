@@ -1,5 +1,6 @@
 package com.roncoo.adminlte.service.impl.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,52 +10,58 @@ import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
 import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailAccountInfoMapper;
+import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.SqlUtil;
 
-/**
- * 
- * 作用功能：发件账号的数据库接口实现类
- * 作者： LYQ
- * 时间：2016年10月18日
- */
 @Repository
 public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
-	
+
 	@Autowired
 	private RcEmailAccountInfoMapper mapper;
 
 	@Override
-	public int countByExample(RcEmailAccountInfoExample example) {
+	public int count(RcEmailAccountInfoExample example) {
 		return mapper.countByExample(example);
 	}
 
 	@Override
-	public int deleteByExample(RcEmailAccountInfoExample example) {
-		return mapper.deleteByExample(example);
+	public void delete(RcEmailAccountInfoExample example) {
+		mapper.deleteByExample(example);
 	}
 
 	@Override
-	public int deleteByPrimaryKey(Long id) {
-		return mapper.deleteByPrimaryKey(id);
-	}
-	
-	@Override
-	public int insertSelective(RcEmailAccountInfo record) {
-		return mapper.insertSelective(record);
+	public void deleteById(Long id) {
+		mapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public List<RcEmailAccountInfo> selectByExample(RcEmailAccountInfoExample example) {
-		return mapper.selectByExample(example);
+	public void save(RcEmailAccountInfo info) {
+		Date date = new Date();
+		info.setCreateTime(date);
+		info.setUpdateTime(date);
+		mapper.insertSelective(info);
 	}
 
 	@Override
-	public RcEmailAccountInfo selectByPrimaryKey(Long id) {
+	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize) {
+		RcEmailAccountInfoExample example = new RcEmailAccountInfoExample();
+		example.setOrderByClause("id desc");
+		int totalCount = mapper.countByExample(example);
+		pageSize = SqlUtil.checkPageSize(pageSize);
+		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
+		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
+		List<RcEmailAccountInfo> list = mapper.selectByExample(example);
+		Page<RcEmailAccountInfo> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
+		return page;
+	}
+
+	@Override
+	public RcEmailAccountInfo queryById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(RcEmailAccountInfo record) {
-		return mapper.updateByPrimaryKeySelective(record);
+	public void update(RcEmailAccountInfo info) {
+		mapper.updateByPrimaryKeySelective(info);
 	}
-
 }

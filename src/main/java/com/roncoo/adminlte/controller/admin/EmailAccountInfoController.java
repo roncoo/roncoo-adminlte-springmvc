@@ -15,6 +15,8 @@
  */
 package com.roncoo.adminlte.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,27 +25,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
+import com.roncoo.adminlte.biz.DataDictionaryListBiz;
 import com.roncoo.adminlte.biz.EmailAccountInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
+import com.roncoo.adminlte.util.base.Page;
 
 /**
+ * 邮件账号controller
  * 
- * @author wujing
+ * @author LYQ
  */
 @Controller
 @RequestMapping(value = "/admin/emailAccountInfo", method = RequestMethod.POST)
 public class EmailAccountInfoController extends BaseController {
 
+	private static final String FIELDCODE = "host_code";
+
 	@Autowired
 	private EmailAccountInfoBiz biz;
 
-	@RequestMapping(value = LIST)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+	@Autowired
+	private DataDictionaryListBiz dBiz;
 
+	@RequestMapping(value = LIST, method = RequestMethod.GET)
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
+			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+		List<RcDataDictionaryList> select = dBiz.listForFieldCode(FIELDCODE);
+		Page<RcEmailAccountInfo> page = biz.listForPage(pageCurrent, pageSize);
+
+		modelMap.put("selectList", select);
+		modelMap.put("page", page);
 	}
 
 	@RequestMapping(value = SAVE)
-	public void insert(@ModelAttribute RcEmailAccountInfo rcEmailAccountInfo) {
+	public String insert(@ModelAttribute RcEmailAccountInfo info) {
+		biz.save(info);
+		return "redirect:/admin/emailAccountInfo/list";
+	}
+
+	@RequestMapping(value = DELETE, method = RequestMethod.GET)
+	public String delete(@RequestParam Long id) {
+		biz.deleteById(id);
+		return "redirect:/admin/emailAccountInfo/list";
 	}
 }

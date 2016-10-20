@@ -44,7 +44,8 @@ public class DataDictionaryController extends BaseController {
 	 * 查看数据字典列表
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
+			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
 		Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
 		modelMap.put("page", page);
 	}
@@ -57,7 +58,14 @@ public class DataDictionaryController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping(value = SAVE)
-	public void save(@ModelAttribute RcDataDictionary rcDataDictionary) {
+	public String save(@ModelAttribute RcDataDictionary rcDataDictionary) {
 		biz.save(rcDataDictionary);
+		return "redirect:/admin/dataDictionary/list";
+	}
+
+	@RequestMapping(value = DELETE, method = RequestMethod.GET)
+	public String delete(@RequestParam Long id) {
+		biz.deleteById(id);
+		return "redirect:/admin/dataDictionary/list";
 	}
 }

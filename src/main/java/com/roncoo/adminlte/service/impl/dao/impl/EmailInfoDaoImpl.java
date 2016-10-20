@@ -50,8 +50,8 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 		RcEmailInfoExample example = new RcEmailInfoExample();
 		example.setOrderByClause(" id desc ");
 		int count = mapper.countByExample(example);
-		pageCurrent = SqlUtil.checkPageCurrent(count, pageSize, pageCurrent);
 		pageSize = SqlUtil.checkPageSize(pageSize);
+		pageCurrent = SqlUtil.checkPageCurrent(count, pageSize, pageCurrent);
 		int totalPage = SqlUtil.countTotalPage(count, pageSize);
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);

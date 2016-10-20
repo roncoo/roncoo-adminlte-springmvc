@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
+import com.roncoo.adminlte.util.base.Page;
 
 /**
  * 
@@ -16,6 +17,7 @@ public interface DataDictionaryListDao {
 	/**
 	 * 
 	 * 功能：统计
+	 * 
 	 * @param example
 	 * @return int
 	 */
@@ -24,51 +26,66 @@ public interface DataDictionaryListDao {
 	/**
 	 * 
 	 * 功能：根据条件删除
+	 * 
 	 * @param example
 	 * @return int
 	 */
-	int deleteByExample(RcDataDictionaryListExample example);
+	int delete(RcDataDictionaryList dList);
 
 	/**
 	 * 
 	 * 功能：根据id删除
+	 * 
+	 * 
 	 * @param id
 	 * @return int
 	 */
-	int deleteByPrimaryKey(Long id);
+	int deleteById(Long id);
 
 	/**
 	 * 
 	 * 功能：添加
+	 * 
 	 * @param record
 	 * @return int
 	 */
-	int insertSelective(RcDataDictionaryList record);
+	int save(RcDataDictionaryList dList);
 
+	
 	/**
-	 * 
-	 * 功能：根据条件查询
-	 * @param example
-	 * @return List<RcDataDictionaryList>
+	 * 分页查询
+	 * @param dList
+	 * @param pageCurrent
+	 * @param pageSize
+	 * @return
 	 */
-	List<RcDataDictionaryList> selectByExample(RcDataDictionaryListExample example);
+	Page<RcDataDictionaryList> listForPage(RcDataDictionaryList dList, int pageCurrent, int pageSize);
 
 	/**
 	 * 
 	 * 功能：根据id查询
+	 * 
 	 * @param id
 	 * @return RcDataDictionaryList
 	 */
-	RcDataDictionaryList selectByPrimaryKey(Long id);
+	RcDataDictionaryList selectById(Long id);
 
 	/**
 	 * 
 	 * 功能：更新
+	 * 
 	 * @param record
 	 * @param example
 	 * @return int
 	 */
-	int updateByExampleSelective(@Param("record") RcDataDictionaryList record,
+	int update(@Param("record") RcDataDictionaryList record,
 			@Param("example") RcDataDictionaryListExample example);
+	
+	/**
+	 * 根据fieldCode查询
+	 * @param fieldCode
+	 * @return
+	 */
+	List<RcDataDictionaryList> listForFieldCode(String fieldCode);
 
 }

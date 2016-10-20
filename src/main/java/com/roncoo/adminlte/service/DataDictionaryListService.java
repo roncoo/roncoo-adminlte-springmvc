@@ -7,59 +7,63 @@ import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
+ * 数据字典明细服务功能
  * 
- * 作用功能：数据字典明细服务接口类
- * 作者： LYQ
- * 时间：2016年10月18日
+ * @author LYQ
  */
 public interface DataDictionaryListService {
-	
+
 	/**
+	 * 分页查询
 	 * 
-	 * 功能：分页查询
-	 * @param page
-	 * @param example
-	 * @return Page<RcDataDictionaryList>
+	 * @param fieldCode
+	 * @param pageCurrent
+	 * @param pageSize
+	 * @return
 	 */
-	Page<RcDataDictionaryList> queryForPage(Page<RcDataDictionaryList> page,RcDataDictionaryListExample example);
-	
+	Page<RcDataDictionaryList> listForPage(RcDataDictionaryList dList, int pageCurrent, int pageSize);
+
 	/**
+	 * 根据id查询
 	 * 
-	 * 功能：根据fieldCode查询
-	 * @param example
-	 * @return List<RcDataDictionaryList>
-	 */
-	List<RcDataDictionaryList> queryByFieldCode(RcDataDictionaryListExample example);
-	
-	/**
-	 * 
-	 * 功能：根据Id查询
-	 * @param Id
-	 * @return RcDataDictionaryList
+	 * @param id
+	 * @return
 	 */
 	RcDataDictionaryList queryById(Long id);
-	
+
 	/**
+	 * 添加记录
 	 * 
-	 * 功能：添加记录
-	 * @param dictionaryList
-	 * @return void
+	 * @param dList
 	 */
-	void insert(RcDataDictionaryList dictionaryList);
-	
+	void save(RcDataDictionaryList dList);
+
 	/**
+	 * 更新
 	 * 
-	 * 功能：根据条件更新
-	 * @param dictionaryList
+	 * @param dList
 	 * @param example
-	 * @return void
 	 */
-	void updateByExampleSelective(RcDataDictionaryList dictionaryList,RcDataDictionaryListExample example);
-	
+	void update(RcDataDictionaryList dList, RcDataDictionaryListExample example);
+
 	/**
+	 * 根据id删除
 	 * 
-	 * 功能：根据id删除
-	 * @param id void
+	 * @param id
 	 */
 	void deleteById(Long id);
+
+	/**
+	 * 删除
+	 * 
+	 * @param dList
+	 */
+	void delete(RcDataDictionaryList dList);
+	
+	/**
+	 * 根据fieldCode查询
+	 * @param fieldCode
+	 * @return
+	 */
+	List<RcDataDictionaryList> listForFieldCode(String fieldCode);
 }

@@ -1,57 +1,68 @@
-<script type="text/javascript" src="bootstrap/bootstrap.js"></script>
-<div class="row">
-	<div class="col-md-12">
-		<div class="box box-primary">
-			<div class="box-header with-border">
-				<h3 class="box-title">账号列表</h3>
-				<div class="box-tools pull-right">
+<#include "/macro/base.ftl" /> <@header/> <@menu/>
+
+<div class="content-wrapper">
+	<!-- Main content -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">账号列表</h3>
+					<div class="box-tools pull-right">
 
 
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">添加</button>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">添加</button>
+					</div>
 				</div>
-			</div>
-			<div class="box-body">
+				<div class="box-body">
 
 
 
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th>序号</th>
-							<th>账号</th>
-							<th>host</th>
-							<th>状态</th>
-							<th>备注</th>
-							<th>创建时间</th>
-							<th>操作</th>
-						</tr>
-					</thead>
-					<tbody>
-						<#list page.list as info>
-						<tr>
-							<td>${info_index+1}</td>
-							<td>${info.fromUser}</td>
-							<td>${info.host}</td>
-							<td><#if info.statusId =="1">可用</#if></td>
-							<td>${info.remark}</td>
-							<td>${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-							<td>操作</td>
-						</tr>
-						</#list>
-					</tbody>
-				</table>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>账号</th>
+								<th>host</th>
+								<th>备注</th>
+								<th>创建时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#list page.list as info>
+							<tr>
+								<td>${info_index+1}</td>
+								<td>${info.fromUser}</td>
+								<td>${info.host}</td>
+								<td>${info.remark}</td>
+								<td>${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+								<td>
+									<a href="${ctx}/admin/emailAccountInfo/delete?id=${info.id}">
+										<button type="button" class="btn btn-danger btn-xs">删除</button>
+									</a>
+								</td>
+							</tr>
+							</#list>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
+
+	<!-- /.content -->
 </div>
 
+<@footer/>
 
+
+<script type="text/javascript" src="bootstrap/bootstrap.js"></script>
 
 <!-- 拟态框 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<form action="${ctx}/admin/email/account/insert" method="post">
+		<form action="${ctx}/admin/emailAccountInfo/save" method="post">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
@@ -61,9 +72,11 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>Host</label> <select name="host" class="form-control select2" style="width: 100%;"> <#list
-							selectList as select>
-							<option value="${select.fieldValue}">${select.fieldKey}</option> </#list>
+						<label>Host</label> 
+						<select name="host" class="form-control select2" style="width: 100%;">
+						<#list selectList as select>
+							<option value="${select.fieldKey}">${select.fieldValue}</option>
+						</#list>
 						</select>
 					</div>
 					<div class="form-group">

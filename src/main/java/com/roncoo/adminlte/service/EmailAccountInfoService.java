@@ -1,24 +1,50 @@
 package com.roncoo.adminlte.service;
 
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
-import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
+ * 邮件账号服务功能
  * 
- * 作用功能：发件账号的服务接口类
- * 作者： LYQ
- * 时间：2016年10月18日
+ * @author LYQ
  */
 public interface EmailAccountInfoService {
-	
-	Page<RcEmailAccountInfo> queryForpage(Page<RcEmailAccountInfo> page,RcEmailAccountInfoExample example);
-	
+
+	/**
+	 * 分页查询
+	 * 
+	 * @param page
+	 * @param example
+	 * @return
+	 */
+	Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize);
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
 	RcEmailAccountInfo queryById(Long id);
-	
-	void insert(RcEmailAccountInfo info);
-	
+
+	/**
+	 * 添加
+	 * 
+	 * @param info
+	 */
+	void save(RcEmailAccountInfo info);
+
+	/**
+	 * 更新
+	 * 
+	 * @param info
+	 */
 	void update(RcEmailAccountInfo info);
-	
+
+	/**
+	 * 根据id删除
+	 * 
+	 * @param id
+	 */
 	void deleteById(Long id);
 }
