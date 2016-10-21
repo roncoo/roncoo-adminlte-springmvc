@@ -38,7 +38,7 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	private RcEmailInfoMapper mapper;
 
 	@Override
-	public int insert(RcEmailInfo rcEmailInfo) {
+	public int save(RcEmailInfo rcEmailInfo) {
 		rcEmailInfo.setStatusId("1");
 		rcEmailInfo.setCreateTime(new Date());
 		rcEmailInfo.setUpdateTime(new Date());
@@ -57,6 +57,16 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 		example.setPageSize(pageSize);
 		List<RcEmailInfo> list = mapper.selectByExample(example);
 		return new Page<RcEmailInfo>(count, totalPage, pageCurrent, pageSize, list);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		mapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public RcEmailInfo queryById(Long id) {
+		return mapper.selectByPrimaryKey(id);
 	}
 
 }

@@ -38,8 +38,25 @@ public class EmailInfoBiz {
 		return emailInfoService.listForPage(pageCurrent, pageSize);
 	}
 
+	/**
+	 * 发送邮件
+	 * @param rcEmailInfo
+	 */
 	public void sendMail(RcEmailInfo rcEmailInfo) {
 		emailInfoService.sendMail(rcEmailInfo);
+	}
+	
+	/**
+	 * 根据id进行删除
+	 * @param id
+	 */
+	public void deleteById(Long id){
+		emailInfoService.deleteById(id);
+	}
+	
+	public RcEmailInfo queryById(Long id){
+		return emailInfoService.queryById(id);
+		
 	}
 
 }

@@ -360,6 +360,7 @@
 		<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 		<!-- AdminLTE App -->
 		<script src="dist/js/app.min.js"></script>
+		
 	</div>
 </body>
 </html>

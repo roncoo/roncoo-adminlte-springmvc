@@ -38,7 +38,7 @@
 								<td>${data.sort}</td>
 								<td>${data.remark}</td>
 								<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-								<td><a href="${ctx}/admin/dataDictionaryList/list?id=${data.id}">
+								<td><a href="${ctx}/admin/dataDictionaryList/list?id=${data.id}&fc=${data.fieldCode}">
 										<button type="button" class="btn btn-primary btn-xs">查看</button>
 									</a>
 									<a href="${ctx}/admin/dataDictionary/delete?id=${data.id}">

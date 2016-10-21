@@ -1,7 +1,6 @@
 <#include "/macro/base.ftl" /> 
 <@header/> 
 <@menu activeId="email"/>
-
 <div class="content-wrapper">
 	<!-- Main content -->
 	<div class="row">
@@ -41,7 +40,7 @@
 							<i class=" fa fa-refresh"></i>
 						</button>
 						<div class="pull-right">
-							#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
+							${(page.pageCurrent-1)*page.pageSize}-${page.pageCurrent*page.pageSize}/${page.totalCount}
 							<div class="btn-group">
 								<button type="button" class="btn btn-default btn-sm">
 									<i class="fa fa-chevron-left"></i>
@@ -63,10 +62,18 @@
 									<td><input type="checkbox"></td>
 									<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
 									<td class="mailbox-name"><a href="read-mail.html">${info_index+1}</a></td>
-									<td class="mailbox-subject">${info.toUser}</td>
+									<td class="mailbox-user">${info.toUser}</td>
 									<td class="mailbox-subject">${info.subject}</td>
 									<td class="mailbox-attachment"><#if info.statusId =="0">警告</#if> <#if info.statusId =="1">可用</#if></td>
 									<td class="mailbox-date">${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+									<td width="120px">
+										<a href="${ctx}/admin/emailInfo/view?id=${info.id}">
+											<button type="button" class="btn btn-primary btn-xs">查看</button>
+										</a>
+										<a href="${ctx}/admin/emailInfo/delete?id=${info.id}">
+											<button type="button" class="btn btn-danger btn-xs">删除</button>
+										</a>
+									</td>
 								</tr>
 								</#list>
 

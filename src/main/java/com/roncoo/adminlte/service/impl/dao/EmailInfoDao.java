@@ -30,12 +30,28 @@ public interface EmailInfoDao {
 	 * @param rcEmailInfo
 	 * @return int
 	 */
-	int insert(RcEmailInfo rcEmailInfo);
+	int save(RcEmailInfo rcEmailInfo);
 
 	/**
+	 * 分页查询
+	 * 
 	 * @param pageCurrent
 	 * @param pageSize
 	 * @return
 	 */
 	Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize);
+
+	/**
+	 * 根据id删除
+	 * 
+	 * @param id
+	 */
+	void deleteById(Long id);
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 */
+	RcEmailInfo queryById(Long id);
 }

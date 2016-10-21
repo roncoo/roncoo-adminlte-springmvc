@@ -1,9 +1,13 @@
 package com.roncoo.adminlte.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
+import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.util.base.Page;
 
@@ -17,6 +21,9 @@ public class EmailAccountInfoBiz {
 
 	@Autowired
 	private EmailAccountInfoService emailAccountInfoService;
+	
+	@Autowired
+	private DataDictionaryListService dictionaryListService;
 
 	/**
 	 * 分页查询
@@ -44,5 +51,15 @@ public class EmailAccountInfoBiz {
 	 */
 	public void deleteById(Long id){
 		emailAccountInfoService.deleteById(id);
+	}
+	
+	/**
+	 * 获取下拉选项
+	 * @param fieldCode
+	 * @return
+	 */
+	public List<RcDataDictionaryList> listForFieldCode(String fieldCode){
+		return dictionaryListService.listForFieldCode(fieldCode);
+		
 	}
 }

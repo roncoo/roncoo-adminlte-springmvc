@@ -34,4 +34,19 @@ public interface EmailInfoService {
 	 * @param rcEmailInfo
 	 */
 	void sendMail(RcEmailInfo rcEmailInfo);
+
+	/**
+	 * 根据id删除
+	 * 
+	 * @param id
+	 */
+	void deleteById(Long id);
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	RcEmailInfo queryById(Long id);
 }

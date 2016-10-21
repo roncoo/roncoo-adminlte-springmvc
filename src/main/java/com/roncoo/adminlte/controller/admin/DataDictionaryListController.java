@@ -42,23 +42,26 @@ public class DataDictionaryListController extends BaseController {
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
 	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
 			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
-			@RequestParam(value = "id", defaultValue = "1") Long id, ModelMap modelMap) {
+			@RequestParam(value = "id", defaultValue = "1") Long id,
+			@RequestParam(value="fc") String fieldCode,
+			ModelMap modelMap) {
 		Page<RcDataDictionaryList> page = biz.listForPage(pageCurrent, pageSize, id);
 		modelMap.put("id", id);
+		modelMap.put("fieldCode", fieldCode);
 		modelMap.put("page", page);
 
 	}
 
 	@RequestMapping(value = SAVE)
 	public String save(RcDataDictionaryList dList, @RequestParam(name = "dId") Long dId) {
-		biz.save(dList, dId);
-		return "redirect:/admin/dataDictionaryList/list?id="+dId;
+		biz.save(dList);
+		return redirect("/admin/dataDictionaryList/list?id={0}&fc={1}", dId,dList.getFieldCode());
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(@RequestParam(value="id") Long id,  @RequestParam(value="dId") Long dId) {
+	public String delete(@RequestParam(value="id") Long id,  @RequestParam(value="dId") Long dId,@RequestParam(value="fc") String fieldCode) {
 		biz.deleteById(id);	
-		return redirect("redirect:/admin/dataDictionaryList/list?id={0}", dId);
+		return redirect("/admin/dataDictionaryList/list?id={0}&fc={1}", dId,fieldCode);
 		
 	}
 }

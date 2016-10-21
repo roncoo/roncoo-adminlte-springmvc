@@ -6,7 +6,7 @@
 	<!-- Main content -->
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-primary">
+			<div class="box box-primary" >
 				<div class="box-header with-border">
 					<h3 class="box-title">数据字典明细表</h3>
 					<div class="box-tools pull-right">
@@ -38,7 +38,7 @@
 								<td>${data.sort}</td>
 								<td>${data.remark}</td>
 								<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-								<td><a href="${ctx}/admin/dataDictionaryList/delete?id=${data.id}&dId=#{id}">
+								<td><a href="${ctx}/admin/dataDictionaryList/delete?id=${data.id}&dId=#{id}&fc=${fieldCode}">
 										<button type="button" class="btn btn-danger btn-xs">删除</button>
 								</a></td>
 							</tr>
@@ -61,7 +61,8 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<form action="${ctx}/admin/dataDictionaryList/save" method="post">
-			<input type="hidden" name="dId" value="#{id}">
+			<input type="hidden" name="dId" value="${id}"/>
+			<input type="hidden" name="fieldCode"  value="${fieldCode}"/>
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">

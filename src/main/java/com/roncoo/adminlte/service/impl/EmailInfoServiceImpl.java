@@ -61,10 +61,10 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	@Override
 	public void sendMail(RcEmailInfo rcEmailInfo) {
 		// 发送邮件
-		send("", "", null, ""); 
-		
+		send("", "", null, "");
+
 		// 保存记录
-		dao.insert(rcEmailInfo);
+		dao.save(rcEmailInfo);
 	}
 
 	/**
@@ -83,6 +83,16 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		dao.deleteById(id);
+	}
+
+	@Override
+	public RcEmailInfo queryById(Long id) {
+		return dao.queryById(id);
 	}
 
 	// 内部线程类，利用线程池异步发邮件。
@@ -122,5 +132,4 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 			}
 		}
 	}
-
 }

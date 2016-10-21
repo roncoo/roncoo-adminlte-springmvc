@@ -1,7 +1,5 @@
 package com.roncoo.adminlte.biz;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,15 +52,8 @@ public class DataDictionaryListBiz {
 	 * @param dList
 	 * @param id
 	 */
-	public void save(RcDataDictionaryList dList, Long id) {
-		RcDataDictionary dictionary = dictionaryService.queryById(id);
-		dList.setFieldCode(dictionary.getFieldCode());
+	public void save(RcDataDictionaryList dList) {
 		dictionaryListService.save(dList);
-	}
-	
-	public List<RcDataDictionaryList> listForFieldCode(String fieldCode){
-		return dictionaryListService.listForFieldCode(fieldCode);
-		
 	}
 
 }
