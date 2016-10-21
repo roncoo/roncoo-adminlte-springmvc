@@ -86,8 +86,8 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		dao.deleteById(id);
+	public int deleteById(Long id) {
+		return dao.deleteById(id);
 	}
 
 	@Override

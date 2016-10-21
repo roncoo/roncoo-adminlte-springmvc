@@ -42,7 +42,7 @@ public class IndexController extends BaseController {
 	 */
 	@RequestMapping(value = "/index", method = RequestMethod.POST)
 	public String postIndex() {
-		return "redirect:/admin/index";
+		return redirect("/admin/index");
 	}
 
 }

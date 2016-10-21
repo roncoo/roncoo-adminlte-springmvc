@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
-import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
 import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.service.impl.dao.DataDictionaryListDao;
 import com.roncoo.adminlte.util.base.Page;
@@ -22,36 +21,29 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 	private DataDictionaryListDao dao;
 
 	@Override
-	public Page<RcDataDictionaryList> listForPage(RcDataDictionaryList dList, int pageCurrent, int pageSize) {
-		return dao.listForPage(dList, pageCurrent, pageSize);
+	public Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode) {
+		return dao.listForPage(pageCurrent, pageSize, fieldCode);
 	}
 
 	@Override
-	public RcDataDictionaryList queryById(Long id) {
-		return null;
+	public int save(RcDataDictionaryList dList) {
+		return dao.insert(dList);
 	}
 
 	@Override
-	public void save(RcDataDictionaryList dList) {
-		dao.save(dList);
+	public int deleteById(Long id) {
+		return dao.deleteById(id);
 	}
 
 	@Override
-	public void update(RcDataDictionaryList dList, RcDataDictionaryListExample example) {
+	public int deleteByFieldCode(String fieldCode) {
+		return dao.deleteByFieldCode(fieldCode);
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		dao.deleteById(id);
+	public List<RcDataDictionaryList> listByFieldCode(String fieldCode) {
+		return dao.listByFieldCode(fieldCode);
 	}
 
-	@Override
-	public void delete(RcDataDictionaryList dList) {
-		dao.delete(dList);
-	}
 
-	@Override
-	public List<RcDataDictionaryList> listForFieldCode(String fieldCode) {
-		return dao.listForFieldCode(fieldCode);
-	}
 }

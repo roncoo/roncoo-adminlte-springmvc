@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
-import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.service.DataDictionaryService;
 import com.roncoo.adminlte.util.base.Page;
@@ -45,12 +44,8 @@ public class DataDictionaryBiz {
 	}
 
 	@Transactional
-	public void deleteById(Long id) {
-		RcDataDictionary dictionary = dictionaryService.queryById(id);
-		RcDataDictionaryList dList = new RcDataDictionaryList();
-		dList.setFieldCode(dictionary.getFieldCode());
-		dictionaryListService.delete(dList);
+	public void delete(Long id, String fieldCode) {
+		dictionaryListService.deleteByFieldCode(fieldCode);
 		dictionaryService.deleteById(id);
-
 	}
 }

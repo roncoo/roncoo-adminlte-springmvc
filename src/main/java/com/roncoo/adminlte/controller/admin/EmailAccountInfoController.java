@@ -46,11 +46,9 @@ public class EmailAccountInfoController extends BaseController {
 	private EmailAccountInfoBiz biz;
 
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
-			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
-		List<RcDataDictionaryList> select = biz.listForFieldCode(FIELDCODE);
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
 		Page<RcEmailAccountInfo> page = biz.listForPage(pageCurrent, pageSize);
-
 		modelMap.put("selectList", select);
 		modelMap.put("page", page);
 	}
@@ -58,12 +56,12 @@ public class EmailAccountInfoController extends BaseController {
 	@RequestMapping(value = SAVE)
 	public String insert(@ModelAttribute RcEmailAccountInfo info) {
 		biz.save(info);
-		return "redirect:/admin/emailAccountInfo/list";
+		return redirect("/admin/emailAccountInfo/list");
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam Long id) {
 		biz.deleteById(id);
-		return "redirect:/admin/emailAccountInfo/list";
+		return redirect("/admin/emailAccountInfo/list");
 	}
 }

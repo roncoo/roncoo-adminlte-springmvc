@@ -21,7 +21,7 @@ public class EmailAccountInfoBiz {
 
 	@Autowired
 	private EmailAccountInfoService emailAccountInfoService;
-	
+
 	@Autowired
 	private DataDictionaryListService dictionaryListService;
 
@@ -44,22 +44,23 @@ public class EmailAccountInfoBiz {
 	public void save(RcEmailAccountInfo info) {
 		emailAccountInfoService.save(info);
 	}
-	
+
 	/**
 	 * 根据id删除
+	 * 
 	 * @param id
 	 */
-	public void deleteById(Long id){
+	public void deleteById(Long id) {
 		emailAccountInfoService.deleteById(id);
 	}
-	
+
 	/**
 	 * 获取下拉选项
+	 * 
 	 * @param fieldCode
 	 * @return
 	 */
-	public List<RcDataDictionaryList> listForFieldCode(String fieldCode){
-		return dictionaryListService.listForFieldCode(fieldCode);
-		
+	public List<RcDataDictionaryList> listByFieldCode(String fieldCode) {
+		return dictionaryListService.listByFieldCode(fieldCode);
 	}
 }

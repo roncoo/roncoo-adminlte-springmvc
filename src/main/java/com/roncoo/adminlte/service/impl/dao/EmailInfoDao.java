@@ -46,7 +46,7 @@ public interface EmailInfoDao {
 	 * 
 	 * @param id
 	 */
-	void deleteById(Long id);
+	int deleteById(Long id);
 
 	/**
 	 * 根据id查询

@@ -48,8 +48,7 @@ public class EmailInfoController extends BaseController {
 	 * @param modelMap
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
-			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
 		Page<RcEmailInfo> page = biz.listForPage(pageCurrent, pageSize);
 		modelMap.put("page", page);
 	}
@@ -80,10 +79,9 @@ public class EmailInfoController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String delete(@RequestParam(value="id") Long id) {
+	public String delete(@RequestParam(value = "id") Long id) {
 		biz.deleteById(id);
-		return "redirect:/admin/emailInfo/list";
-
+		return redirect("/admin/emailInfo/list");
 	}
 
 	/**
@@ -92,7 +90,7 @@ public class EmailInfoController extends BaseController {
 	 * @param id
 	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
-	public void view(@RequestParam(value="id") Long id,ModelMap modelMap) {
+	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
 		RcEmailInfo info = biz.queryById(id);
 		modelMap.put("info", info);
 	}

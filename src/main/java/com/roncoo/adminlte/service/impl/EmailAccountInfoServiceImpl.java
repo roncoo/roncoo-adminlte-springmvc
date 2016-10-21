@@ -25,18 +25,18 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	}
 
 	@Override
-	public void save(RcEmailAccountInfo info) {
-		dao.save(info);
+	public int save(RcEmailAccountInfo info) {
+		return dao.insert(info);
 	}
 
 	@Override
-	public void update(RcEmailAccountInfo info) {
-		dao.update(info);
+	public int updateById(RcEmailAccountInfo info) {
+		return dao.updateById(info);
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		dao.deleteById(id);
+	public int deleteById(Long id) {
+		return dao.deleteById(id);
 	}
 
 }

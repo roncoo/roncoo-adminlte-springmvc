@@ -25,21 +25,21 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public void delete(RcEmailAccountInfoExample example) {
-		mapper.deleteByExample(example);
+	public int delete(RcEmailAccountInfoExample example) {
+		return mapper.deleteByExample(example);
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		mapper.deleteByPrimaryKey(id);
+	public int deleteById(Long id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public void save(RcEmailAccountInfo info) {
+	public int insert(RcEmailAccountInfo info) {
 		Date date = new Date();
 		info.setCreateTime(date);
 		info.setUpdateTime(date);
-		mapper.insertSelective(info);
+		return mapper.insertSelective(info);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public void update(RcEmailAccountInfo info) {
-		mapper.updateByPrimaryKeySelective(info);
+	public int updateById(RcEmailAccountInfo info) {
+		return mapper.updateByPrimaryKeySelective(info);
 	}
 }

@@ -30,7 +30,7 @@ public interface DataDictionaryListDao {
 	 * @param example
 	 * @return int
 	 */
-	int delete(RcDataDictionaryList dList);
+	int deleteByFieldCode(String FieldCode);
 
 	/**
 	 * 
@@ -49,7 +49,7 @@ public interface DataDictionaryListDao {
 	 * @param record
 	 * @return int
 	 */
-	int save(RcDataDictionaryList dList);
+	int insert(RcDataDictionaryList dList);
 
 	
 	/**
@@ -59,7 +59,7 @@ public interface DataDictionaryListDao {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcDataDictionaryList> listForPage(RcDataDictionaryList dList, int pageCurrent, int pageSize);
+	Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode);
 
 	/**
 	 * 
@@ -86,6 +86,6 @@ public interface DataDictionaryListDao {
 	 * @param fieldCode
 	 * @return
 	 */
-	List<RcDataDictionaryList> listForFieldCode(String fieldCode);
+	List<RcDataDictionaryList> listByFieldCode(String fieldCode);
 
 }

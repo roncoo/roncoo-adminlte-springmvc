@@ -32,19 +32,19 @@ public interface EmailAccountInfoService {
 	 * 
 	 * @param info
 	 */
-	void save(RcEmailAccountInfo info);
+	int save(RcEmailAccountInfo info);
 
 	/**
 	 * 更新
 	 * 
 	 * @param info
 	 */
-	void update(RcEmailAccountInfo info);
+	int updateById(RcEmailAccountInfo info);
 
 	/**
 	 * 根据id删除
 	 * 
 	 * @param id
 	 */
-	void deleteById(Long id);
+	int deleteById(Long id);
 }

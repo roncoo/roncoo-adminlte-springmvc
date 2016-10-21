@@ -3,7 +3,6 @@ package com.roncoo.adminlte.service;
 import java.util.List;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
-import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
@@ -21,49 +20,35 @@ public interface DataDictionaryListService {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcDataDictionaryList> listForPage(RcDataDictionaryList dList, int pageCurrent, int pageSize);
+	Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode);
 
-	/**
-	 * 根据id查询
-	 * 
-	 * @param id
-	 * @return
-	 */
-	RcDataDictionaryList queryById(Long id);
 
 	/**
 	 * 添加记录
 	 * 
 	 * @param dList
 	 */
-	void save(RcDataDictionaryList dList);
+	int save(RcDataDictionaryList dList);
 
-	/**
-	 * 更新
-	 * 
-	 * @param dList
-	 * @param example
-	 */
-	void update(RcDataDictionaryList dList, RcDataDictionaryListExample example);
 
 	/**
 	 * 根据id删除
 	 * 
 	 * @param id
 	 */
-	void deleteById(Long id);
+	int deleteById(Long id);
 
 	/**
 	 * 删除
 	 * 
 	 * @param dList
 	 */
-	void delete(RcDataDictionaryList dList);
+	int deleteByFieldCode(String fieldCode);
 	
 	/**
 	 * 根据fieldCode查询
 	 * @param fieldCode
 	 * @return
 	 */
-	List<RcDataDictionaryList> listForFieldCode(String fieldCode);
+	List<RcDataDictionaryList> listByFieldCode(String fieldCode);
 }

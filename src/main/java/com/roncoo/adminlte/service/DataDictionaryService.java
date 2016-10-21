@@ -39,5 +39,5 @@ public interface DataDictionaryService {
 	 * 根据id进行删除
 	 * @param id
 	 */
-	void deleteById(Long id);
+	int deleteById(Long id);
 }

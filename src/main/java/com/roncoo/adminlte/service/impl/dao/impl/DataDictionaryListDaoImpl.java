@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
@@ -31,10 +30,10 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public int delete(RcDataDictionaryList dList) {
+	public int deleteByFieldCode(String fieldCode) {
 		RcDataDictionaryListExample example = new RcDataDictionaryListExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andFieldCodeEqualTo(dList.getFieldCode());
+		criteria.andFieldCodeEqualTo(fieldCode);
 		return mapper.deleteByExample(example);
 	}
 
@@ -43,9 +42,8 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
-	@Transactional
 	@Override
-	public int save(RcDataDictionaryList dList) {
+	public int insert(RcDataDictionaryList dList) {
 		Date date = new Date();
 		dList.setCreateTime(date);
 		dList.setUpdateTime(date);
@@ -53,7 +51,7 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public Page<RcDataDictionaryList> listForPage(RcDataDictionaryList dList, int pageCurrent, int pageSize) {
+	public Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode) {
 		RcDataDictionaryListExample example = new RcDataDictionaryListExample();
 		example.setOrderByClause("sort desc");
 		int totalCount = mapper.countByExample(example);
@@ -63,7 +61,7 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
 		Criteria criteria = example.createCriteria();
-		criteria.andFieldCodeEqualTo(dList.getFieldCode());
+		criteria.andFieldCodeEqualTo(fieldCode);
 		List<RcDataDictionaryList> list = mapper.selectByExample(example);
 		Page<RcDataDictionaryList> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 		return page;
@@ -80,7 +78,7 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public List<RcDataDictionaryList> listForFieldCode(String fieldCode) {
+	public List<RcDataDictionaryList> listByFieldCode(String fieldCode) {
 		RcDataDictionaryListExample example = new RcDataDictionaryListExample();
 		example.setOrderByClause("sort desc");
 		Criteria criteria = example.createCriteria();

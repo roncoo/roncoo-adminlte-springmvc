@@ -25,7 +25,7 @@ public interface EmailAccountInfoDao {
 	 * @param example
 	 * @return
 	 */
-	void delete(RcEmailAccountInfoExample example);
+	int delete(RcEmailAccountInfoExample example);
 
 	/**
 	 * 根据id删除
@@ -33,7 +33,7 @@ public interface EmailAccountInfoDao {
 	 * @param id
 	 * @return
 	 */
-	void deleteById(Long id);
+	int deleteById(Long id);
 
 	/**
 	 * 添加
@@ -41,7 +41,7 @@ public interface EmailAccountInfoDao {
 	 * @param info
 	 * @return
 	 */
-	void save(RcEmailAccountInfo info);
+	int insert(RcEmailAccountInfo info);
 
 	/**
 	 * 分页查询
@@ -65,5 +65,5 @@ public interface EmailAccountInfoDao {
 	 * @param info
 	 * @return
 	 */
-	void update(RcEmailAccountInfo info);
+	int updateById(RcEmailAccountInfo info);
 }

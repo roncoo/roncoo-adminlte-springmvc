@@ -2,22 +2,18 @@
 <@header/> 
 <@menu activeId="email"/>
 <div class="content-wrapper">
-	<!-- Main content -->
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">收件箱</h3>
-
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
 							<input type="text" class="form-control input-sm" placeholder="搜索邮件......"> <span
 								class="glyphicon glyphicon-search form-control-feedback"></span>
 						</div>
 					</div>
-					<!-- /.box-tools -->
 				</div>
-				<!-- /.box-header -->
 				<div class="box-body no-padding">
 					<div class="mailbox-controls">
 						<!-- Check all button -->
@@ -35,7 +31,6 @@
 								<i class="fa fa-share"></i>
 							</button>
 						</div>
-						<!-- /.btn-group -->
 						<button type="button" class="btn btn-default btn-sm">
 							<i class=" fa fa-refresh"></i>
 						</button>
@@ -49,14 +44,11 @@
 									<i class="fa fa-chevron-right"></i>
 								</button>
 							</div>
-							<!-- /.btn-group -->
 						</div>
-						<!-- /.pull-right -->
 					</div>
 					<div class="table-responsive mailbox-messages" style="min-height: 350px;">
 						<table class="table table-hover table-striped">
 							<tbody>
-
 								<#list page.list as info>
 								<tr>
 									<td><input type="checkbox"></td>
@@ -76,14 +68,10 @@
 									</td>
 								</tr>
 								</#list>
-
 							</tbody>
 						</table>
-						<!-- /.table -->
 					</div>
-					<!-- /.mail-box-messages -->
 				</div>
-				<!-- /.box-body -->
 				<div class="box-footer no-padding">
 					<div class="mailbox-controls">
 						<!-- Check all button -->
@@ -101,7 +89,6 @@
 								<i class="fa fa-share"></i>
 							</button>
 						</div>
-						<!-- /.btn-group -->
 						<button type="button" class="btn btn-default btn-sm">
 							<i class="fa fa-refresh"></i>
 						</button>
@@ -127,22 +114,14 @@
 									</button>
 								</a> </#if> 
 							</div>
-							<!-- /.btn-group -->
 						</div>
-						<!-- /.pull-right -->
 					</div>
 				</div>
 			</div>
-			<!-- /. box -->
 		</div>
-		<!-- /.col -->
 	</div>
-	<!-- /.row -->
-	<!-- /.content -->
 </div>
-
-<@footer/>
-
+<@wrapper/>
 <!-- iCheck -->
 <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
 <!-- iCheck -->
@@ -198,3 +177,4 @@
 		});
 	});
 </script>
+<@footer/>

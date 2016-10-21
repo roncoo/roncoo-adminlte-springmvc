@@ -54,8 +54,8 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		mapper.deleteByPrimaryKey(id);
+	public int deleteById(Long id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 
 }

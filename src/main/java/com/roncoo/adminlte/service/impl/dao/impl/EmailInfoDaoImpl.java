@@ -60,8 +60,8 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		mapper.deleteByPrimaryKey(id);
+	public int deleteById(Long id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
