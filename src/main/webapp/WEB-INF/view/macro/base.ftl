@@ -159,6 +159,29 @@
 				<i class="fa fa-refresh fa-spin"></i> <span class="tip"> 正在加载 · · · </span>
 			</div>
 		</div>
+		
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">提示</h4>
+				</div>
+				<div class="modal-body">
+					是否确认删除？
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<a href="#">
+						<button type="button" class="btn btn-primary">确定</button>
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 </#macro>
 
 <#macro footer>
@@ -176,3 +199,4 @@
 </body>
 </html>
 </#macro>
+

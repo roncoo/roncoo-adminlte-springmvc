@@ -38,9 +38,9 @@
 								<td>${data.sort}</td>
 								<td>${data.remark}</td>
 								<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-								<td><a href="${ctx}/admin/dataDictionaryList/delete?id=${data.id}&dId=#{id}">
-										<button type="button" class="btn btn-danger btn-xs">删除</button>
-								</a></td>
+								<td>
+										<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete" data-title="测试">删除</button>
+								</td>
 							</tr>
 							</#list>
 						</tbody>
@@ -51,7 +51,6 @@
 	</div>
 </div>
 <#include "add.ftl" />
-
 <@wrapper/>
-<!-- 这里添加额外的css和js -->
+
 <@footer/>

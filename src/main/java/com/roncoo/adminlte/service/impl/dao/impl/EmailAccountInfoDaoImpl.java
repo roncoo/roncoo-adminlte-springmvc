@@ -10,6 +10,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
 import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailAccountInfoMapper;
+import com.roncoo.adminlte.util.Base64Util;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.SqlUtil;
 
@@ -36,6 +37,8 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 
 	@Override
 	public int insert(RcEmailAccountInfo info) {
+		String passwd = Base64Util.encrypt(info.getPasswd());
+		info.setPasswd(passwd);
 		Date date = new Date();
 		info.setCreateTime(date);
 		info.setUpdateTime(date);

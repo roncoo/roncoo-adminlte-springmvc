@@ -1,6 +1,4 @@
-<#include "/macro/base.ftl" /> 
-<@header/> 
-<@menu activeId="email"/>
+<#include "/macro/base.ftl" /> <@header/> <@menu activeId="email"/>
 <div class="content-wrapper">
 	<div class="row">
 		<div class="col-md-12">
@@ -9,40 +7,26 @@
 					<h3 class="box-title">收件箱</h3>
 					<div class="box-tools pull-right">
 						<div class="has-feedback">
-							<input type="text" class="form-control input-sm" placeholder="搜索邮件......"> <span
-								class="glyphicon glyphicon-search form-control-feedback"></span>
+							<input type="text" class="form-control input-sm" placeholder="搜索邮件......">
+							<span class="glyphicon glyphicon-search form-control-feedback"></span>
 						</div>
 					</div>
 				</div>
 				<div class="box-body no-padding">
 					<div class="mailbox-controls">
 						<!-- Check all button -->
-						<button type="button" class="btn btn-default btn-sm checkbox-toggle">
-							<i class="fa fa-square-o"></i>
-						</button>
+						<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
 						<div class="btn-group">
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-trash-o"></i>
-							</button>
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-reply"></i>
-							</button>
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-share"></i>
-							</button>
+							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
 						</div>
-						<button type="button" class="btn btn-default btn-sm">
-							<i class=" fa fa-refresh"></i>
-						</button>
+						<button type="button" class="btn btn-default btn-sm"><i class=" fa fa-refresh"></i></button>
 						<div class="pull-right">
 							${(page.pageCurrent-1)*page.pageSize}-${page.pageCurrent*page.pageSize}/${page.totalCount}
-							<div class="btn-group">
-								<button type="button" class="btn btn-default btn-sm">
-									<i class="fa fa-chevron-left"></i>
-								</button>
-								<button type="button" class="btn btn-default btn-sm">
-									<i class="fa fa-chevron-right"></i>
-								</button>
+							<div cl$ss="btn-group">
+								<button type$"button" class="btn btn-default b$n-sm"><i class="fa fa-chevron-left"></i></button>
+								<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
 							</div>
 						</div>
 					</div>
@@ -51,9 +35,17 @@
 							<tbody>
 								<#list page.list as info>
 								<tr>
-									<td><input type="checkbox"></td>
-									<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-									<td class="mailbox-name"><a href="read-mail.html">${info_index+1}</a></td>
+									<td>
+										<input type="checkbox">
+									</td>
+									<td class="mailbox-star">
+										<a href="#">
+											<i class="fa fa-star text-yellow"></i>
+										</a>
+									</td>
+									<td class="mailbox-name">
+										<a href="read-mail.html">${info_index+1}</a>
+									</td>
 									<td class="mailbox-user">${info.toUser}</td>
 									<td class="mailbox-subject">${info.subject}</td>
 									<td class="mailbox-attachment"><#if info.statusId =="0">警告</#if> <#if info.statusId =="1">可用</#if></td>
@@ -62,8 +54,11 @@
 										<a href="${ctx}/admin/emailInfo/view?id=${info.id}">
 											<button type="button" class="btn btn-primary btn-xs">查看</button>
 										</a>
-										<a href="${ctx}/admin/emailInfo/delete?id=${info.id}">
-											<button type="button" class="btn btn-danger btn-xs">删除</button>
+										<a href="${ctx}/admin/emailInfoemailInfodview?id=${info.id}>
+																		<button type="
+											button" class="btn btn-danger btn-xs">
+											删除
+											</button>
 										</a>
 									</td>
 								</tr>
@@ -75,43 +70,29 @@
 				<div class="box-footer no-padding">
 					<div class="mailbox-controls">
 						<!-- Check all button -->
-						<button type="button" class="btn btn-default btn-sm checkbox-toggle">
-							<i class="fa fa-square-o"></i>
-						</button>
+						<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
 						<div class="btn-group">
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-trash-o"></i>
-							</button>
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-reply"></i>
-							</button>
-							<button type="button" class="btn btn-default btn-sm">
-								<i class="fa fa-share"></i>
-							</button>
+							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
 						</div>
-						<button type="button" class="btn btn-default btn-sm">
-							<i class="fa fa-refresh"></i>
-						</button>
+						<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
 						<div class="pull-right">
 							#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
 							<div class="btn-group">
-								<#if (page.pageCurrent > 1)> <a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent-1}">
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fa fa-chevron-left"></i>
-									</button>
-								</a> </#if> <#if (page.pageCurrent <=1)> <a>
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fa fa-chevron-left"></i>
-									</button>
-								</a> </#if> <#if (page.pageCurrent
+								<#if (page.pageCurrent > 1)>
+								<a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent-1}">
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+								</a>
+								</#if> <#if (page.pageCurrent <=1)>
+								<a>
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+								</a>
+								</#if> <#if (page.pageCurrent
 								<page.totalPage)> <a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent+1}">
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fa fa-chevron-right"></i>
-									</button>
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
 								</a> </#if> <#if (page.pageCurrent >=page.totalPage)> <a>
-									<button type="button" class="btn btn-default btn-sm">
-										<i class="fa fa-chevron-right"></i>
-									</button>
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
 								</a> </#if> 
 							</div>
 						</div>
@@ -121,7 +102,7 @@
 		</div>
 	</div>
 </div>
-<@wrapper/>
+、 <@wrapper/>
 <!-- iCheck -->
 <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
 <!-- iCheck -->
