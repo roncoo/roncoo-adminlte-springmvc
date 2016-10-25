@@ -26,7 +26,7 @@
 								<th>排序</th>
 								<th>备注</th>
 								<th>创建时间</th>
-								<th>操作</th>
+								<th style="width: 20%">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -39,13 +39,9 @@
 									<td>${data.remark}</td>
 									<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 									<td>
-										<a href="${ctx}/admin/dataDictionaryList/view?id=${data.id}">
-											<button type="button" class="btn btn-primary btn-xs">查看</button>
-										</a>
-										<a href="${ctx}/admin/dataDictionaryList/edit?id=${data.id}&dId=${id}">
-											<button type="button" class="btn btn-info btn-xs">修改</button>
-										</a>
-										<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete" data-title="测试">删除</button>
+										<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/view?id=${data.id}">查看</a>
+										<a class="btn btn-info btn-xs" href="${ctx}/admin/dataDictionaryList/edit?id=${data.id}&dId=${id}">修改</a>
+										<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/dataDictionaryList/delete?id=${data.id}&dId=${id}&fieldCode=${data.fieldCode}')">删除</a>
 									</td>
 								</tr>
 							</#list>
@@ -58,5 +54,5 @@
 </div>
 <#include "add.ftl" />
 <@wrapper/>
-
+<@deleteHint/>
 <@footer/>

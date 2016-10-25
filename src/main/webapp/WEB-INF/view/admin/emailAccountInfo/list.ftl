@@ -17,9 +17,6 @@
 					</div>
 				</div>
 				<div class="box-body">
-
-
-
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -28,7 +25,7 @@
 								<th>host</th>
 								<th>备注</th>
 								<th>创建时间</th>
-								<th>操作</th>
+								<th style="width: 20%">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -40,15 +37,9 @@
 								<td>${info.remark}</td>
 								<td>${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 								<td>
-									<a href="${ctx}/admin/emailAccountInfo/view?id=${info.id}">
-										<button type="button" class="btn btn-primary btn-xs">查看</button>
-									</a>
-									<a href="${ctx}/admin/emailAccountInfo/edit?id=${info.id}">
-										<button type="button" class="btn btn-info btn-xs">修改</button>
-									</a>
-									<a href="${ctx}/admin/emailAccountInfo/delete?id=${info.id}">
-										<button type="button" class="btn btn-danger btn-xs">删除</button>
-									</a>
+									<a class="btn btn-primary btn-xs" href="${ctx}/admin/emailAccountInfo/view?id=${info.id}">查看</a>
+									<a class="btn btn-info btn-xs" href="${ctx}/admin/emailAccountInfo/edit?id=${info.id}">修改</a>
+									<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/emailAccountInfo/delete?id=${info.id}')">删除</a>
 								</td>
 							</tr>
 							</#list>
@@ -63,5 +54,5 @@
 <#include "add.ftl" />
 
 <@wrapper/>
-<!-- 这里添加额外的css和js -->
+<@deleteHint/>
 <@footer/>

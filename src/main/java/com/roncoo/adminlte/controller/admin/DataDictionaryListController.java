@@ -54,7 +54,7 @@ public class DataDictionaryListController extends BaseController {
 	@RequestMapping(value = SAVE)
 	public String save(RcDataDictionaryList dList, @RequestParam(name = "dId") Long dId) {
 		biz.save(dList);
-		return redirect("/admin/dataDictionaryList/list?id={0}&fc={1}", dId, dList.getFieldCode());
+		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, dList.getFieldCode());
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)

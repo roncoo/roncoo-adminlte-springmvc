@@ -1,4 +1,6 @@
-<#include "/macro/base.ftl" /> <@header/> <@menu activeId="dictionary"/>
+<#include "/macro/base.ftl" />
+ <@header/>
+ <@menu activeId="dictionary"/>
 
 <div class="content-wrapper">
 	<div class="row">
@@ -19,7 +21,7 @@
 								<th>排序</th>
 								<th>备注</th>
 								<th>创建时间</th>
-								<th>操作</th>
+								<th style="width: 20%">操作</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -31,18 +33,10 @@
 								<td>${data.remark}</td>
 								<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 								<td>
-									<a href="${ctx}/admin/dataDictionary/view?id=${data.id}">
-										<button type="button" class="btn btn-primary btn-xs">查看</button>
-									</a>
-									<a href="${ctx}/admin/dataDictionaryList/list?id=${data.id}&fieldCode=${data.fieldCode}">
-										<button type="button" class="btn btn-primary btn-xs">查看明细</button>
-									</a>
-									<a href="${ctx}/admin/dataDictionary/edit?id=${data.id}">
-											<button type="button" class="btn btn-info btn-xs">修改</button>
-									</a>
-									<a href="${ctx}/admin/dataDictionary/delete?id=${data.id}&fieldCode=${data.fieldCode}">
-										<button type="button" class="btn btn-danger btn-xs">删除</button>
-									</a>
+									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionary/view?id=${data.id}">查看</a>
+									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/list?id=${data.id}&fieldCode=${data.fieldCode}">查看明细</a>
+									<a class="btn btn-info btn-xs" href="${ctx}/admin/dataDictionary/edit?id=${data.id}">修改</a>
+									<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/dataDictionary/delete?id=${data.id}&fieldCode=${data.fieldCode}')">删除</a>
 								</td>
 							</tr>
 							</#list>
@@ -54,6 +48,7 @@
 	</div>
 </div>
 
-<#include "add.ftl" /> <@wrapper/>
-<!-- 这里添加额外的css和js -->
+<#include "add.ftl" />
+<@wrapper/>
+<@deleteHint/>
 <@footer/>

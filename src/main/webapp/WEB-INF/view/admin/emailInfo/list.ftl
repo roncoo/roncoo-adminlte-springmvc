@@ -65,12 +65,8 @@
 									<td class="mailbox-attachment"><#if info.statusId =="0">警告</#if> <#if info.statusId =="1">可用</#if></td>
 									<td class="mailbox-date">${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 									<td width="120px">
-										<a href="${ctx}/admin/emailInfo/view?id=${info.id}">
-											<button type="button" class="btn btn-primary btn-xs">查看</button>
-										</a>
-										<a href="${ctx}/admin/emailInfo/delete?id=${info.id}">
-											<button type="button" class="btn btn-danger btn-xs">删除</button>
-										</a>
+										<a class="btn btn-primary btn-xs" href="${ctx}/admin/emailInfo/view?id=${info.id}">查看</a>
+										<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/emailInfo/delete?id=${info.id}')">删除</a>
 									</td>
 								</tr>
 								</#list>
@@ -92,19 +88,25 @@
 							#{(page.pageCurrent-1)*page.pageSize+1}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
 							<div class="btn-group">
 								<#if (page.pageCurrent > 1)>
-								<a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent-1}&pageSize=${page.pageSize}">
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-								</a>
-								</#if> <#if (page.pageCurrent <=1)>
-								<a>
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-								</a>
-								</#if> <#if (page.pageCurrent
-								<page.totalPage)> <a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent+1}&pageSize=${page.pageSize}">
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-								</a> </#if> <#if (page.pageCurrent >=page.totalPage)> <a>
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-								</a> </#if> 
+									<a  href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent-1}&pageSize=${page.pageSize}">
+										<button type="button" ><i class="fa fa-chevron-left"></i></button>
+									</a>
+								</#if>
+								<#if (page.pageCurrent <=1)>
+									<a>
+										<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+									</a>
+								</#if>
+								<#if (page.pageCurrent < page.totalPage) > 
+									<a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent+1}&pageSize=${page.pageSize}">
+										<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+									</a> 
+								</#if> 
+								<#if (page.pageCurrent >=page.totalPage)>
+									 <a>
+										<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+									</a> 
+								</#if> 
 							</div>
 						</div>
 					</div>
@@ -113,7 +115,8 @@
 		</div>
 	</div>
 </div>
-、 <@wrapper/>
+<@wrapper/>
+<@deleteHint/>
 <!-- iCheck -->
 <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
 <!-- iCheck -->
