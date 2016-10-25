@@ -46,7 +46,8 @@ public class EmailAccountInfoController extends BaseController {
 	private EmailAccountInfoBiz biz;
 
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
+			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
 		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
 		Page<RcEmailAccountInfo> page = biz.listForPage(pageCurrent, pageSize);
 		modelMap.put("selectList", select);
@@ -62,6 +63,26 @@ public class EmailAccountInfoController extends BaseController {
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam Long id) {
 		biz.deleteById(id);
+		return redirect("/admin/emailAccountInfo/list");
+	}
+
+	@RequestMapping(value = VIEW, method = RequestMethod.GET)
+	public void view(@RequestParam Long id, ModelMap modelMap) {
+		RcEmailAccountInfo info = biz.queryById(id);
+		modelMap.put("info", info);
+	}
+
+	@RequestMapping(value = EDIT, method = RequestMethod.GET)
+	public void edit(@RequestParam Long id, ModelMap modelMap) {
+		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
+		RcEmailAccountInfo info = biz.queryById(id);
+		modelMap.put("selectList", select);
+		modelMap.put("info", info);
+	}
+
+	@RequestMapping(value = UPDATE)
+	public String update(@ModelAttribute RcEmailAccountInfo info) {
+		biz.update(info);
 		return redirect("/admin/emailAccountInfo/list");
 	}
 }

@@ -47,4 +47,19 @@ public interface EmailAccountInfoService {
 	 * @param id
 	 */
 	int deleteById(Long id);
+
+	/**
+	 * 随机获取一条记录
+	 * 
+	 * @return
+	 */
+	RcEmailAccountInfo queryByRand();
+
+	/**
+	 * 更新
+	 * 
+	 * @param info
+	 * @return
+	 */
+	int update(RcEmailAccountInfo info);
 }

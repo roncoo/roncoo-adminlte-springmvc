@@ -64,7 +64,18 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public int updateById(RcEmailAccountInfo info) {
+	public int update(RcEmailAccountInfo info) {
+		String passwd = Base64Util.encrypt(info.getPasswd());
+		info.setPasswd(passwd);
+		info.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(info);
+	}
+
+	@Override
+	public RcEmailAccountInfo queryByRand() {
+		RcEmailAccountInfo info = mapper.selectByRand();
+		String passwd = Base64Util.decode(info.getPasswd());
+		info.setPasswd(passwd);
+		return info;
 	}
 }

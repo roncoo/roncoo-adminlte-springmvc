@@ -31,17 +31,23 @@
 						</thead>
 						<tbody>
 							<#list page.list as data>
-							<tr>
-								<th>${data_index+1}</th>
-								<th>${data.fieldKey}</th>
-								<th>${data.fieldValue}</th>
-								<td>${data.sort}</td>
-								<td>${data.remark}</td>
-								<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-								<td>
+								<tr>
+									<th>${data_index+1}</th>
+									<th>${data.fieldKey}</th>
+									<th>${data.fieldValue}</th>
+									<td>${data.sort}</td>
+									<td>${data.remark}</td>
+									<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+									<td>
+										<a href="${ctx}/admin/dataDictionaryList/view?id=${data.id}">
+											<button type="button" class="btn btn-primary btn-xs">查看</button>
+										</a>
+										<a href="${ctx}/admin/dataDictionaryList/edit?id=${data.id}&dId=${id}">
+											<button type="button" class="btn btn-info btn-xs">修改</button>
+										</a>
 										<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete" data-title="测试">删除</button>
-								</td>
-							</tr>
+									</td>
+								</tr>
 							</#list>
 						</tbody>
 					</table>

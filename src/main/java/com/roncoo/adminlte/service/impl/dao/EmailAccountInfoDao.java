@@ -65,5 +65,13 @@ public interface EmailAccountInfoDao {
 	 * @param info
 	 * @return
 	 */
-	int updateById(RcEmailAccountInfo info);
+	int update(RcEmailAccountInfo info);
+	
+	/**
+	 * 随机读取
+	 * 
+	 * @return
+	 */
+	RcEmailAccountInfo queryByRand();
+
 }

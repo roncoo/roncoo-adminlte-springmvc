@@ -15,6 +15,7 @@
  */
 package com.roncoo.adminlte.service;
 
+import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.util.base.Page;
 
@@ -33,7 +34,7 @@ public interface EmailInfoService {
 	/**
 	 * @param rcEmailInfo
 	 */
-	void sendMail(RcEmailInfo rcEmailInfo);
+	void sendMail(RcEmailAccountInfo accountInfo, RcEmailInfo rcEmailInfo);
 
 	/**
 	 * 根据id删除

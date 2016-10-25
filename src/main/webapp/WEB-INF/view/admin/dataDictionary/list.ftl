@@ -1,7 +1,4 @@
-<#include "/macro/base.ftl" />
-<@header/> 
- 
-<@menu activeId="dictionary"/>
+<#include "/macro/base.ftl" /> <@header/> <@menu activeId="dictionary"/>
 
 <div class="content-wrapper">
 	<div class="row">
@@ -27,21 +24,27 @@
 						</thead>
 						<tbody>
 							<#list page.list as data>
-								<tr>
-									<td>${data_index+1}</td>
-									<td>${data.fieldName}</td>
-									<td>${data.sort}</td>
-									<td>${data.remark}</td>
-									<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-									<td>
-										<a href="${ctx}/admin/dataDictionaryList/list?id=${data.id}&fieldCode=${data.fieldCode}">
-											<button type="button" class="btn btn-primary btn-xs">查看</button>
-										</a>
-										<a href="${ctx}/admin/dataDictionary/delete?id=${data.id}&fieldCode=${data.fieldCode}">
-											<button type="button" class="btn btn-danger btn-xs">删除</button>
-										</a>
-									</td>
-								</tr>
+							<tr>
+								<td>${data_index+1}</td>
+								<td>${data.fieldName}</td>
+								<td>${data.sort}</td>
+								<td>${data.remark}</td>
+								<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+								<td>
+									<a href="${ctx}/admin/dataDictionary/view?id=${data.id}">
+										<button type="button" class="btn btn-primary btn-xs">查看</button>
+									</a>
+									<a href="${ctx}/admin/dataDictionaryList/list?id=${data.id}&fieldCode=${data.fieldCode}">
+										<button type="button" class="btn btn-primary btn-xs">查看明细</button>
+									</a>
+									<a href="${ctx}/admin/dataDictionary/edit?id=${data.id}">
+											<button type="button" class="btn btn-info btn-xs">修改</button>
+									</a>
+									<a href="${ctx}/admin/dataDictionary/delete?id=${data.id}&fieldCode=${data.fieldCode}">
+										<button type="button" class="btn btn-danger btn-xs">删除</button>
+									</a>
+								</td>
+							</tr>
 							</#list>
 						</tbody>
 					</table>
@@ -51,8 +54,6 @@
 	</div>
 </div>
 
-<#include "add.ftl" />
-
-<@wrapper/>
+<#include "add.ftl" /> <@wrapper/>
 <!-- 这里添加额外的css和js -->
 <@footer/>

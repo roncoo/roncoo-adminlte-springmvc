@@ -25,7 +25,7 @@
 				<td>
 				<table style="min-height:300px;">
 					<tr>
-						&nbsp;&nbsp;${content??}
+						&nbsp;&nbsp;${content}
 					</tr>
 				</table>
 				

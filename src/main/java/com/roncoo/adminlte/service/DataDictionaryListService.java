@@ -22,14 +22,12 @@ public interface DataDictionaryListService {
 	 */
 	Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode);
 
-
 	/**
 	 * 添加记录
 	 * 
 	 * @param dList
 	 */
 	int save(RcDataDictionaryList dList);
-
 
 	/**
 	 * 根据id删除
@@ -44,11 +42,37 @@ public interface DataDictionaryListService {
 	 * @param dList
 	 */
 	int deleteByFieldCode(String fieldCode);
-	
+
 	/**
 	 * 根据fieldCode查询
+	 * 
 	 * @param fieldCode
 	 * @return
 	 */
 	List<RcDataDictionaryList> listByFieldCode(String fieldCode);
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	RcDataDictionaryList queryById(Long id);
+
+	/**
+	 * 更新
+	 * 
+	 * @param dList
+	 * @return
+	 */
+	int update(RcDataDictionaryList dList);
+	
+	/**
+	 * 根据fieldCode更新
+	 * 
+	 * @param fieldCodePremise
+	 * @param fieldCode
+	 * @return
+	 */
+	int updateForFieldCode(String fieldCodePremise,String fieldCode);
 }

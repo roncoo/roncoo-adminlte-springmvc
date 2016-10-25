@@ -4,7 +4,7 @@
 <div class="content-wrapper">
 	<div class="row">
 		<div class="col-md-12">
-			<form action="${ctx}/admin/email/insert" method="post">
+			<form action="${ctx}/admin/emailInfo/send" method="post">
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="box-title">编写邮件</h3>

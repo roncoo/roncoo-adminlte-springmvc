@@ -44,7 +44,8 @@ public class DataDictionaryController extends BaseController {
 	 * 查看数据字典列表
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
+			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
 		Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
 		modelMap.put("page", page);
 	}
@@ -62,9 +63,49 @@ public class DataDictionaryController extends BaseController {
 		return redirect("/admin/dataDictionary/list");
 	}
 
+	/**
+	 * 删除
+	 * 
+	 * @param id
+	 * @param fieldCode
+	 * @return
+	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
+	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id,
+			@RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
 		biz.delete(id, fieldCode);
 		return redirect("/admin/dataDictionary/list");
+	}
+
+	/**
+	 * 查看详细信息
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
+	@RequestMapping(value = VIEW, method = RequestMethod.GET)
+	public void view(Long id, ModelMap modelMap) {
+		RcDataDictionary dictionary = biz.queryById(id);
+		modelMap.put("dictionary", dictionary);
+	}
+
+	/**
+	 * 修改
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
+	@RequestMapping(value = EDIT, method = RequestMethod.GET)
+	public void edit(Long id, ModelMap modelMap) {
+		RcDataDictionary dictionary = biz.queryById(id);
+		modelMap.put("dictionary", dictionary);
+	}
+
+	@RequestMapping(value = UPDATE)
+	public String update(@ModelAttribute RcDataDictionary dictionary,
+			@RequestParam(value = "oldFieldCode") String oldFieldCode) {
+		biz.update(dictionary, oldFieldCode);
+		return redirect("/admin/dataDictionary/list");
+
 	}
 }

@@ -58,4 +58,9 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public int update(RcDataDictionary dictionary) {
+		dictionary.setUpdateTime(new Date());
+		return mapper.updateByPrimaryKeySelective(dictionary);
+	}
 }

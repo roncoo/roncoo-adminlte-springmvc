@@ -40,6 +40,12 @@
 								<td>${info.remark}</td>
 								<td>${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 								<td>
+									<a href="${ctx}/admin/emailAccountInfo/view?id=${info.id}">
+										<button type="button" class="btn btn-primary btn-xs">查看</button>
+									</a>
+									<a href="${ctx}/admin/emailAccountInfo/edit?id=${info.id}">
+										<button type="button" class="btn btn-info btn-xs">修改</button>
+									</a>
 									<a href="${ctx}/admin/emailAccountInfo/delete?id=${info.id}">
 										<button type="button" class="btn btn-danger btn-xs">删除</button>
 									</a>

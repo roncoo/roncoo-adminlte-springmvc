@@ -2,8 +2,6 @@ package com.roncoo.adminlte.service.impl.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
 import com.roncoo.adminlte.util.base.Page;
@@ -68,7 +66,7 @@ public interface DataDictionaryListDao {
 	 * @param id
 	 * @return RcDataDictionaryList
 	 */
-	RcDataDictionaryList selectById(Long id);
+	RcDataDictionaryList queryById(Long id);
 
 	/**
 	 * 
@@ -78,8 +76,7 @@ public interface DataDictionaryListDao {
 	 * @param example
 	 * @return int
 	 */
-	int update(@Param("record") RcDataDictionaryList record,
-			@Param("example") RcDataDictionaryListExample example);
+	int update(RcDataDictionaryList dList);
 	
 	/**
 	 * 根据fieldCode查询
@@ -87,5 +84,13 @@ public interface DataDictionaryListDao {
 	 * @return
 	 */
 	List<RcDataDictionaryList> listByFieldCode(String fieldCode);
-
+	
+	/**
+	 * 根据fieldCode更新
+	 * 
+	 * @param fieldCodePremise
+	 * @param fieldCode
+	 * @return
+	 */
+	int updateForFieldCode(String fieldCodePremise,String fieldCode);
 }

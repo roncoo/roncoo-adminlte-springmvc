@@ -39,4 +39,9 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		return dao.deleteById(id);
 	}
 
+	@Override
+	public int update(RcDataDictionary dictionary) {
+		return dao.update(dictionary);
+	}
+
 }

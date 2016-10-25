@@ -18,7 +18,9 @@ package com.roncoo.adminlte.biz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;
 
@@ -30,6 +32,9 @@ public class EmailInfoBiz {
 
 	@Autowired
 	private EmailInfoService emailInfoService;
+
+	@Autowired
+	private EmailAccountInfoService emailAccountInfoService;
 
 	/**
 	 * 分页查询
@@ -44,7 +49,8 @@ public class EmailInfoBiz {
 	 * @param rcEmailInfo
 	 */
 	public void sendMail(RcEmailInfo rcEmailInfo) {
-		emailInfoService.sendMail(rcEmailInfo);
+		RcEmailAccountInfo info = emailAccountInfoService.queryByRand();
+		emailInfoService.sendMail(info, rcEmailInfo);
 	}
 
 	/**
@@ -56,8 +62,13 @@ public class EmailInfoBiz {
 		emailInfoService.deleteById(id);
 	}
 
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public RcEmailInfo queryById(Long id) {
 		return emailInfoService.queryById(id);
 	}
-
 }

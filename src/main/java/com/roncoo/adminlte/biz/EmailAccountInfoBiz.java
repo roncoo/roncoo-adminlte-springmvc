@@ -55,6 +55,25 @@ public class EmailAccountInfoBiz {
 	}
 
 	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public RcEmailAccountInfo queryById(Long id) {
+		return emailAccountInfoService.queryById(id);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param info
+	 */
+	public void update(RcEmailAccountInfo info) {
+		emailAccountInfoService.update(info);
+	}
+
+	/**
 	 * 获取下拉选项
 	 * 
 	 * @param fieldCode
@@ -63,4 +82,5 @@ public class EmailAccountInfoBiz {
 	public List<RcDataDictionaryList> listByFieldCode(String fieldCode) {
 		return dictionaryListService.listByFieldCode(fieldCode);
 	}
+
 }

@@ -14,6 +14,7 @@
 				</div>
 				<div class="box-body no-padding">
 					<div class="mailbox-controls">
+						<div class="mailbox-controls">
 						<!-- Check all button -->
 						<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
 						<div class="btn-group">
@@ -21,14 +22,27 @@
 							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
 							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
 						</div>
-						<button type="button" class="btn btn-default btn-sm"><i class=" fa fa-refresh"></i></button>
+						<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
 						<div class="pull-right">
-							${(page.pageCurrent-1)*page.pageSize}-${page.pageCurrent*page.pageSize}/${page.totalCount}
-							<div cl$ss="btn-group">
-								<button type$"button" class="btn btn-default b$n-sm"><i class="fa fa-chevron-left"></i></button>
-								<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+							#{(page.pageCurrent-1)*page.pageSize+1}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
+							<div class="btn-group">
+								<#if (page.pageCurrent > 1)>
+								<a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent-1}&pageSize=${page.pageSize}">
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+								</a>
+								</#if> <#if (page.pageCurrent <=1)>
+								<a>
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+								</a>
+								</#if> <#if (page.pageCurrent
+								<page.totalPage)> <a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent+1}&pageSize=${page.pageSize}">
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+								</a> </#if> <#if (page.pageCurrent >=page.totalPage)> <a>
+									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+								</a> </#if> 
 							</div>
 						</div>
+					</div>
 					</div>
 					<div class="table-responsive mailbox-messages" style="min-height: 350px;">
 						<table class="table table-hover table-striped">
@@ -54,11 +68,8 @@
 										<a href="${ctx}/admin/emailInfo/view?id=${info.id}">
 											<button type="button" class="btn btn-primary btn-xs">查看</button>
 										</a>
-										<a href="${ctx}/admin/emailInfoemailInfodview?id=${info.id}>
-																		<button type="
-											button" class="btn btn-danger btn-xs">
-											删除
-											</button>
+										<a href="${ctx}/admin/emailInfo/delete?id=${info.id}">
+											<button type="button" class="btn btn-danger btn-xs">删除</button>
 										</a>
 									</td>
 								</tr>
@@ -78,10 +89,10 @@
 						</div>
 						<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
 						<div class="pull-right">
-							#{(page.pageCurrent-1)*page.pageSize}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
+							#{(page.pageCurrent-1)*page.pageSize+1}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
 							<div class="btn-group">
 								<#if (page.pageCurrent > 1)>
-								<a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent-1}">
+								<a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent-1}&pageSize=${page.pageSize}">
 									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
 								</a>
 								</#if> <#if (page.pageCurrent <=1)>
@@ -89,7 +100,7 @@
 									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
 								</a>
 								</#if> <#if (page.pageCurrent
-								<page.totalPage)> <a href="${ctx}/admin/email/list?pageCurrent=#{page.pageCurrent+1}">
+								<page.totalPage)> <a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent+1}&pageSize=${page.pageSize}">
 									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
 								</a> </#if> <#if (page.pageCurrent >=page.totalPage)> <a>
 									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>

@@ -43,9 +43,39 @@ public class DataDictionaryBiz {
 		return dictionaryService.save(rcDataDictionary);
 	}
 
+	/**
+	 * 删除
+	 * 
+	 * @param id
+	 * @param fieldCode
+	 */
 	@Transactional
 	public void delete(Long id, String fieldCode) {
 		dictionaryListService.deleteByFieldCode(fieldCode);
 		dictionaryService.deleteById(id);
+	}
+
+	/**
+	 * 根据id查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public RcDataDictionary queryById(Long id) {
+		return dictionaryService.queryById(id);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param dictionary
+	 * @param oldFieldCode
+	 */
+	@Transactional
+	public void update(RcDataDictionary dictionary, String oldFieldCode) {
+		dictionaryService.update(dictionary);
+		if (oldFieldCode != dictionary.getFieldCode()) {
+			dictionaryListService.updateForFieldCode(oldFieldCode, dictionary.getFieldCode());
+		}
 	}
 }

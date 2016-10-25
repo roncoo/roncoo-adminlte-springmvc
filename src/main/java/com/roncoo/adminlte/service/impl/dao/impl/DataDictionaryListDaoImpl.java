@@ -68,13 +68,14 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public RcDataDictionaryList selectById(Long id) {
+	public RcDataDictionaryList queryById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int update(RcDataDictionaryList record, RcDataDictionaryListExample example) {
-		return mapper.updateByExampleSelective(record, example);
+	public int update(RcDataDictionaryList dList) {
+		dList.setUpdateTime(new Date());
+		return mapper.updateByPrimaryKeySelective(dList);
 	}
 
 	@Override
@@ -86,4 +87,13 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 		return mapper.selectByExample(example);
 	}
 
+	@Override
+	public int updateForFieldCode(String fieldCodePremise, String fieldCode) {
+		RcDataDictionaryList dList = new RcDataDictionaryList();
+		dList.setFieldCode(fieldCode);
+		RcDataDictionaryListExample example = new RcDataDictionaryListExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFieldCodeEqualTo(fieldCodePremise);
+		return mapper.updateByExampleSelective(dList, example);
+	}
 }

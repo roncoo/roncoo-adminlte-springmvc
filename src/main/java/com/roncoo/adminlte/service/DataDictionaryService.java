@@ -34,10 +34,20 @@ public interface DataDictionaryService {
 	 * @return
 	 */
 	RcDataDictionary queryById(Long id);
-	
+
 	/**
 	 * 根据id进行删除
+	 * 
 	 * @param id
 	 */
 	int deleteById(Long id);
+
+	/**
+	 * 更新
+	 * 
+	 * @param dictionary
+	 * @return
+	 */
+	int update(RcDataDictionary dictionary);
+
 }

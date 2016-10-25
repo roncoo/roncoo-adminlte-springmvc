@@ -68,8 +68,10 @@ public class EmailInfoController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/send")
-	public void send(@ModelAttribute RcEmailInfo rcEmailInfo) {
+	public String send(@ModelAttribute RcEmailInfo rcEmailInfo) {
 		biz.sendMail(rcEmailInfo);
+		return "redirect:/admin/emailInfo/list";
+		
 	}
 
 	/**

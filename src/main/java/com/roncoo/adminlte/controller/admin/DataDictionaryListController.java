@@ -18,6 +18,7 @@ package com.roncoo.adminlte.controller.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,10 @@ public class DataDictionaryListController extends BaseController {
 	private DataDictionaryListBiz biz;
 
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, @RequestParam(value = "id", defaultValue = "1") Long id, @RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
+			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
+			@RequestParam(value = "id", defaultValue = "-1") Long id,
+			@RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
 		Page<RcDataDictionaryList> page = biz.listForPage(pageCurrent, pageSize, fieldCode);
 		modelMap.put("id", id);
 		modelMap.put("fieldCode", fieldCode);
@@ -54,8 +58,28 @@ public class DataDictionaryListController extends BaseController {
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id") Long id, @RequestParam(value = "dId") Long dId, @RequestParam(value = "fc") String fieldCode) {
+	public String delete(@RequestParam(value = "id") Long id, @RequestParam(value = "dId") Long dId,
+			@RequestParam(value = "fieldCode") String fieldCode) {
 		biz.deleteById(id);
-		return redirect("/admin/dataDictionaryList/list?id={0}&fc={1}", dId, fieldCode);
+		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, fieldCode);
+	}
+
+	@RequestMapping(value = VIEW, method = RequestMethod.GET)
+	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
+		RcDataDictionaryList dictionaryList = biz.queryById(id);
+		modelMap.put("dictionaryList", dictionaryList);
+	}
+
+	@RequestMapping(value = EDIT, method = RequestMethod.GET)
+	public void edit(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "dId") Long dId,ModelMap modelMap) {
+		RcDataDictionaryList dictionaryList = biz.queryById(id);
+		modelMap.put("id", dId);
+		modelMap.put("dictionaryList", dictionaryList);
+	}
+
+	@RequestMapping(value = UPDATE)
+	public String update(@ModelAttribute RcDataDictionaryList dList, @RequestParam(value = "dId") Long dId) {
+		biz.update(dList);
+		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, dList.getFieldCode());
 	}
 }

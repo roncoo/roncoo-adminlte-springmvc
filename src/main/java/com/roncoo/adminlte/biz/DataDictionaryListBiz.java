@@ -47,4 +47,23 @@ public class DataDictionaryListBiz {
 		dictionaryListService.save(dList);
 	}
 
+	/**
+	 * 根据id获取
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public RcDataDictionaryList queryById(Long id) {
+		return dictionaryListService.queryById(id);
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param dList
+	 */
+	public void update(RcDataDictionaryList dList) {
+		dictionaryListService.update(dList);
+	}
+
 }

@@ -17,14 +17,8 @@
 
 	<!-- email发送 -->
 	<bean id="javaMailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<!-- 服务器 -->
-		<property name="host" value="${email.host}" />
 		<!-- 端口号 -->
 		<property name="port" value="${email.port}" />
-		<!-- 用户名 -->
-		<property name="username" value="${email.username}" />
-		<!-- 密码 -->
-		<property name="password" value="${email.password}" />
 		<!-- SMTP服务器验证 -->
 		<property name="javaMailProperties">
 			<props>
