@@ -207,7 +207,6 @@
 </div><!-- /.modal -->  
 
 <script type="text/javascript">
-
 	function delcfm(url) {  
 	    $('#url').val(url);//给会话中的隐藏属性URL赋值  
 	    $('#delcfmModel').modal();  

@@ -185,6 +185,9 @@
 				<version>9.3.11.v20160721</version>
 				<configuration>
 					<scanIntervalSeconds>1</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/roncoo-adminlte-springmvc</contextPath>
+					</webApp>
 				</configuration>
 			</plugin>
 
