@@ -1,5 +1,3 @@
-
-<!-- 拟态框 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<form action="${ctx}/admin/dataDictionaryList/save" method="post">
@@ -15,19 +13,19 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="exampleInputEmail1">关键词</label> <input type="text" class="form-control" name="fieldKey" id="fieldKey"
-							placeholder="输入key...">
+							placeholder="输入key..." >
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">默认值</label> <input type="text" class="form-control" name="fieldValue"
-							id="fieldValue" placeholder="输入value值...">
+							id="fieldValue" placeholder="输入value值..." >
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">排序</label> <input type="text" class="form-control" name="sort" id="sort"
-							placeholder="排序，请输入整数...">
+							placeholder="排序，请输入整数..." >
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">备注</label> <input type="text" class="form-control" name="remark" id="remark"
-							placeholder="输入备注...">
+							placeholder="输入备注..." >
 					</div>
 				</div>
 				<div class="modal-footer">

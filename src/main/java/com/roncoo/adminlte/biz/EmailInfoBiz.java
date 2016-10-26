@@ -15,11 +15,13 @@
  */
 package com.roncoo.adminlte.biz;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;
@@ -46,11 +48,13 @@ public class EmailInfoBiz {
 	/**
 	 * 发送邮件
 	 * 
-	 * @param rcEmailInfo
+	 * @param infoVo
 	 */
-	public void sendMail(RcEmailInfo rcEmailInfo) {
-		RcEmailAccountInfo info = emailAccountInfoService.queryByRand();
-		emailInfoService.sendMail(info, rcEmailInfo);
+	public void sendMail(RcEmailInfoVo infoVo) {
+		RcEmailAccountInfo accountInfo = emailAccountInfoService.queryByRand();
+		RcEmailInfo rcEmailInfo = new RcEmailInfo();
+		BeanUtils.copyProperties(infoVo, rcEmailInfo);
+		emailInfoService.sendMail(accountInfo, rcEmailInfo);
 	}
 
 	/**

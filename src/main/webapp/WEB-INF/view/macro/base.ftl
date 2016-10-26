@@ -233,3 +233,6 @@
 </html>
 </#macro>
 
+<#macro validation>
+	<#import "/spring.ftl" as spring /> 
+</#macro>

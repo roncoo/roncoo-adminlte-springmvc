@@ -18,12 +18,15 @@ package com.roncoo.adminlte.controller.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.biz.EmailInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
@@ -57,19 +60,21 @@ public class EmailInfoController extends BaseController {
 	 * 
 	 */
 	@RequestMapping(value = ADD, method = RequestMethod.GET)
-	public void add() {
-
+	public void add(ModelMap modelMap) {
 	}
 
 	/**
 	 * 发送邮件
 	 * 
-	 * @param rcEmailInfo
+	 * @param infoVo
 	 * @return
 	 */
 	@RequestMapping(value = "/send")
-	public String send(@ModelAttribute RcEmailInfo rcEmailInfo) {
-		biz.sendMail(rcEmailInfo);
+	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo infoVo,BindingResult bindingResult) {
+		if(bindingResult.hasErrors()){
+			return "/admin/emailInfo/add";
+		}
+		biz.sendMail(infoVo);
 		return "redirect:/admin/emailInfo/list";
 		
 	}

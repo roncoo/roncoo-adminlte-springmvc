@@ -18,6 +18,7 @@ package com.roncoo.adminlte.controller.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,8 +53,10 @@ public class DataDictionaryListController extends BaseController {
 	}
 
 	@RequestMapping(value = SAVE)
-	public String save(RcDataDictionaryList dList, @RequestParam(name = "dId") Long dId) {
-		biz.save(dList);
+	public String save( @ModelAttribute("dListVo")RcDataDictionaryList dList,BindingResult bindingResult, @RequestParam(name = "dId") Long dId) {
+		if(!bindingResult.hasErrors()){
+			biz.save(dList);
+		}
 		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, dList.getFieldCode());
 	}
 

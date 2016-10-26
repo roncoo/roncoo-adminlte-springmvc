@@ -124,6 +124,12 @@
 		</dependency>
 		<!-- Mybatis Dependency End -->
 
+		<!-- hibernate 校验 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
 		<!-- freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>

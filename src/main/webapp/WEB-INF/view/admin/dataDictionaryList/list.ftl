@@ -10,8 +10,6 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">数据字典明细表</h3>
 					<div class="box-tools pull-right">
-
-
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">添加</button>
 					</div>

@@ -1,6 +1,7 @@
 <#include "/macro/base.ftl" />
 <@header/> 
 <@menu activeId="email"/>
+<@validation/>
 <div class="content-wrapper">
 	<div class="row">
 		<div class="col-md-12">
@@ -11,17 +12,34 @@
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-							<input class="form-control" name="toUser" placeholder="发送至:">
+							<#if infoVo??>  
+							    <@spring.bind "infoVo.toUser" />  
+							    <@spring.showErrors "" "color:red"/>  
+							</#if> 
+							<input class="form-control" name="toUser" placeholder="发送至:" value="<#if infoVo??>${infoVo.toUser!}</#if>">
 						</div>
 						<div class="form-group">
-							<input class="form-control" name="subject" placeholder="主题:">
+							<#if infoVo??>  
+							    <@spring.bind "infoVo.subject" />  
+							    <@spring.showErrors "" "color:red"/>  
+							</#if>
+							<input class="form-control" name="subject" placeholder="主题:" value="<#if infoVo??>${infoVo.subject!}</#if>">
 						</div>
 						<div class="form-group">
-							<input class="form-control" name="title" placeholder="标题:">
+							<#if infoVo??>  
+							    <@spring.bind "infoVo.title" />  
+							    <@spring.showErrors "" "color:red"/>  
+							</#if>
+							<input class="form-control" name="title" placeholder="标题:" value="<#if infoVo??>${infoVo.title!}</#if>">
 						</div>
 						<div class="form-group">
-							<textarea id="textarea" name="content"  class="form-control" style="height: 300px" placeholder="正文.....">
-                    	</textarea>
+							<#if infoVo??>  
+							    <@spring.bind "infoVo.content" />  
+							    <@spring.showErrors "" "color:red"/>  
+							</#if>
+							<textarea id="textarea" name="content"  class="form-control" style="height: 300px" placeholder="正文....." >
+								<#if infoVo??>${infoVo.content!}</#if>
+                    		</textarea>
 						</div>
 						<div class="form-group"></div>
 					</div>

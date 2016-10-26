@@ -14,24 +14,13 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
+		
+<!-- 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />  -->
 
-	<!-- 注解支持 -->
-	<context:annotation-config />
+	<!-- 配置校验器 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<!-- 校验器，使用hibernate校验器 -->
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+	</bean>
 
-	<!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
-	<context:component-scan base-package="com.roncoo.adminlte" >
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
-		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
-	</context:component-scan>
-
-	<!-- 引入配置文件 -->
-	<context:property-placeholder location="classpath:/conf.properties" ignore-resource-not-found="true" />
-
-	<!-- 引入模块 -->
-	<import resource="classpath:/applicationContext-jdbc.xml" />
-	<import resource="classpath:/applicationContext-mail.xml" />
-	<import resource="classpath:/applicationContext-template.xml" />
-	<import resource="classpath:/applicationContext-thread.xml" />
-	
 </beans>
