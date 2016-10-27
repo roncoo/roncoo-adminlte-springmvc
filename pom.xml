@@ -23,6 +23,12 @@
 
 	<dependencies>
 
+		<!-- hibernate validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
 		<!-- file upload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -124,12 +130,6 @@
 		</dependency>
 		<!-- Mybatis Dependency End -->
 
-		<!-- hibernate 校验 -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-		</dependency>
-
 		<!-- freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -190,10 +190,10 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.3.11.v20160721</version>
 				<configuration>
-					<scanIntervalSeconds>1</scanIntervalSeconds>
 					<webApp>
 						<contextPath>/roncoo-adminlte-springmvc</contextPath>
 					</webApp>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
 				</configuration>
 			</plugin>
 
