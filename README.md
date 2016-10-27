@@ -5,7 +5,7 @@
 1. 框架完全是基于Spring IO platform，绝对拥抱Spring，版本的依赖关系再不用担心。
 2. 前端基于 **[龙果开源-后台管理UI Roncoo AdminLTE](https://github.com/roncoo/roncoo-adminLTE/)**，高端大气上档次。
 3. 实现了邮件发送功能，邮件增删改查功能
-
+4. 代码自动生成工具使用了[龙果开源-Mybatis代码自动生成工具](https://github.com/roncoo/roncoo-mybatis-generator)
 
 ###后台截图
 
