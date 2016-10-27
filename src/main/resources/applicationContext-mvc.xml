@@ -41,6 +41,13 @@
 	</mvc:interceptors> 
 	-->  
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<bean class="com.roncoo.adminlte.util.interceptor.SessionInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>  
 
 </beans>
