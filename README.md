@@ -3,7 +3,8 @@
 
 ###项目介绍
 1. 框架完全是基于Spring IO platform，绝对拥抱Spring，版本的依赖关系再不用担心。
-2. 前端基于 **[龙果开源-后台管理UI Roncoo AdminLTE](https://github.com/roncoo/roncoo-adminLTE)**，高端大气上档次。
+2. 前端基于 **[龙果开源-后台管理UI Roncoo AdminLTE](https://github.com/roncoo/roncoo-adminLTE/)**，高端大气上档次。
+3. 实现了邮件发送功能，邮件增删改查功能
 
 
 ###后台截图
@@ -45,8 +46,7 @@ roncoo-adminlte-springmvc/
 1. 继续优化，持续更新，增加各种demo实例
 2. 集成Spring Session，解决单节点问题
 3. 创建maven原型，实现快捷搭建项目架构
-4. 
 
 
 ###技术交流
-
+技术交流群：546588570
