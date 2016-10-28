@@ -47,17 +47,17 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 
 	@Override
 	public RcDataDictionaryList queryById(Long id) {
-		return dao.queryById(id);
+		return dao.selectById(id);
 	}
 
 	@Override
 	public int update(RcDataDictionaryList dList) {
-		return dao.update(dList);
+		return dao.updateById(dList);
 	}
 
 	@Override
 	public int updateForFieldCode(String fieldCodePremise, String fieldCode) {
-		return dao.updateForFieldCode(fieldCodePremise, fieldCode);
+		return dao.updateByFieldCode(fieldCodePremise, fieldCode);
 	}
 
 

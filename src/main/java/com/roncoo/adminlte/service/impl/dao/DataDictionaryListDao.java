@@ -1,25 +1,31 @@
+/*
+ * Copyright 2015-2016 RonCoo(http://www.roncoo.com) Group.
+ *  
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.roncoo.adminlte.service.impl.dao;
 
 import java.util.List;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
-import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
  * 
- * 作用功能：数据字典操作明细接口类 作者： LYQ 时间：2016年10月17日
+ * @author wujing
  */
 public interface DataDictionaryListDao {
 
-	/**
-	 * 
-	 * 功能：统计
-	 * 
-	 * @param example
-	 * @return int
-	 */
-	int countByExample(RcDataDictionaryListExample example);
 
 	/**
 	 * 
@@ -66,7 +72,7 @@ public interface DataDictionaryListDao {
 	 * @param id
 	 * @return RcDataDictionaryList
 	 */
-	RcDataDictionaryList queryById(Long id);
+	RcDataDictionaryList selectById(Long id);
 
 	/**
 	 * 
@@ -76,7 +82,7 @@ public interface DataDictionaryListDao {
 	 * @param example
 	 * @return int
 	 */
-	int update(RcDataDictionaryList dList);
+	int updateById(RcDataDictionaryList dList);
 	
 	/**
 	 * 根据fieldCode查询
@@ -92,5 +98,5 @@ public interface DataDictionaryListDao {
 	 * @param fieldCode
 	 * @return
 	 */
-	int updateForFieldCode(String fieldCodePremise,String fieldCode);
+	int updateByFieldCode(String fieldCodePremise,String fieldCode);
 }

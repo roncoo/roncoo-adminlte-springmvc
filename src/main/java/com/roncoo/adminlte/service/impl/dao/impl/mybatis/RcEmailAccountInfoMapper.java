@@ -8,29 +8,25 @@ import org.apache.ibatis.annotations.Param;
 
 @MyBatis
 public interface RcEmailAccountInfoMapper {
-	int countByExample(RcEmailAccountInfoExample example);
+    int countByExample(RcEmailAccountInfoExample example);
 
-	int deleteByExample(RcEmailAccountInfoExample example);
+    int deleteByExample(RcEmailAccountInfoExample example);
 
-	int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long id);
 
-	int insert(RcEmailAccountInfo record);
+    int insert(RcEmailAccountInfo record);
 
-	int insertSelective(RcEmailAccountInfo record);
+    int insertSelective(RcEmailAccountInfo record);
 
-	RcEmailAccountInfo selectByRand();
+    List<RcEmailAccountInfo> selectByExample(RcEmailAccountInfoExample example);
 
-	List<RcEmailAccountInfo> selectByExample(RcEmailAccountInfoExample example);
+    RcEmailAccountInfo selectByPrimaryKey(Long id);
 
-	RcEmailAccountInfo selectByPrimaryKey(Long id);
+    int updateByExampleSelective(@Param("record") RcEmailAccountInfo record, @Param("example") RcEmailAccountInfoExample example);
 
-	int updateByExampleSelective(@Param("record") RcEmailAccountInfo record,
-			@Param("example") RcEmailAccountInfoExample example);
+    int updateByExample(@Param("record") RcEmailAccountInfo record, @Param("example") RcEmailAccountInfoExample example);
 
-	int updateByExample(@Param("record") RcEmailAccountInfo record,
-			@Param("example") RcEmailAccountInfoExample example);
+    int updateByPrimaryKeySelective(RcEmailAccountInfo record);
 
-	int updateByPrimaryKeySelective(RcEmailAccountInfo record);
-
-	int updateByPrimaryKey(RcEmailAccountInfo record);
+    int updateByPrimaryKey(RcEmailAccountInfo record);
 }

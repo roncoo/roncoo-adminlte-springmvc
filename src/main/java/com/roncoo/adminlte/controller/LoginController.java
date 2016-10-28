@@ -17,21 +17,19 @@ package com.roncoo.adminlte.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.alibaba.fastjson.JSONObject;
-import com.roncoo.adminlte.util.Oauth2UrlUtil;
-import com.roncoo.adminlte.util.PostJsonUtil;
+import com.roncoo.adminlte.bean.Result;
+import com.roncoo.adminlte.biz.LoginBiz;
+import com.roncoo.adminlte.util.Constants;
 import com.roncoo.adminlte.util.base.BaseController;
 
 /**
@@ -43,29 +41,19 @@ import com.roncoo.adminlte.util.base.BaseController;
 @RequestMapping
 public class LoginController extends BaseController {
 
-	private static final String CLIENTID = Oauth2UrlUtil.readUrl("clientId").trim();
-	private static final String CLIENTSECRET = Oauth2UrlUtil.readUrl("clientSecret").trim();
-	private static final String RESPONSETYPE = Oauth2UrlUtil.readUrl("responseType").trim();
-	private static final String GRANTTYPE = Oauth2UrlUtil.readUrl("grantType").trim();
-	private static final String REDIRECTURI = Oauth2UrlUtil.readUrl("redirectUri").trim();
-	private static final String BASEURL = Oauth2UrlUtil.readUrl("baseUrl").trim();
-	private static final String OAUTH2URL = Oauth2UrlUtil.readUrl("oauth2Url").trim();
-	private static final String GETACCESSTOKENURL = Oauth2UrlUtil.readUrl("getAccessTokenUrl").trim();
-	
-	private static final String STATUS_CODE = "errCode";
-	private static final String RONCOONO="roncooNo";
-	private static final String RESULTDATA = "resultData";
+	@Autowired
+	private LoginBiz biz;
 
 	/**
 	 * 进入登陆页面
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLogin(HttpSession session) {
-		Object token = session.getAttribute("roncooNo");
+		Object token = session.getAttribute(Constants.Token.RONCOO);
 		if (token == null) {
 			return "login";
 		}
-		return "redirect:/admin/index";
+		return redirect("/admin/index");
 	}
 
 	/**
@@ -75,38 +63,25 @@ public class LoginController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void postLogin(HttpServletResponse response) throws IOException {
-		String url = BASEURL + OAUTH2URL.replace("{CLIENTID}", CLIENTID).replace("{RESPONSETYPE}", RESPONSETYPE)
-				.replace("{REDIRECTURI}", URLEncoder.encode(REDIRECTURI, "utf-8"));
-		response.sendRedirect(url);
+	public String postLogin() {
+		Result<String> result = biz.login();
+		if (result.isStatus()) {
+			logger.info(result.getResultData());
+			return redirect(result.getResultData());
+		}
+		return redirect("/login");
 	}
 
 	/**
 	 * 进入授权登录
 	 */
 	@RequestMapping(value = "/oauth", method = RequestMethod.GET)
-	public String oauth(@RequestParam(value = "code", defaultValue = "") String code,
-			RedirectAttributes redirectAttributes, HttpSession session) {
-		if (StringUtils.isEmpty(code)) {
-			redirectAttributes.addFlashAttribute("msg", "用户名不能为空");
-			return "error";
+	public String oauth(@RequestParam(value = "code", defaultValue = "") String code, RedirectAttributes redirectAttributes, HttpSession session) {
+		Result<String> result = biz.oauth(code);
+		if (result.isStatus()) {
+			session.setAttribute(Constants.Token.RONCOO, result.getResultData());
 		}
-
-		JSONObject param = new JSONObject();
-		param.put("clientId", CLIENTID);
-		param.put("clientSecret", CLIENTSECRET);
-		param.put("code", code);
-		param.put("grantType", GRANTTYPE);
-		String url = BASEURL + GETACCESSTOKENURL;
-		JSONObject resultJson = PostJsonUtil.doPost(url, param);
-		String status = resultJson.getString(STATUS_CODE);
-		if(status.equals("0")){
-			JSONObject jsonObj = resultJson.getJSONObject(RESULTDATA);
-			String roncooNo = jsonObj.getString(RONCOONO);
-			session.setAttribute("roncooNo", roncooNo);
-			return "redirect:/admin/index";
-		}
-		return "redirect:/login";
+		return redirect("/login");
 	}
 
 	/**
@@ -114,9 +89,9 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/exit", method = RequestMethod.GET)
 	public String exit(RedirectAttributes redirectAttributes, HttpSession session) {
-		session.removeAttribute("roncooNo");
+		session.removeAttribute(Constants.Token.RONCOO);
 		redirectAttributes.addFlashAttribute("msg", "您已经安全退出");
-		return "redirect:/login";
+		return redirect("/login");
 	}
 
 }

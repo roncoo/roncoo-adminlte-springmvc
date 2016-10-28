@@ -30,7 +30,7 @@ public interface EmailInfoDao {
 	 * @param rcEmailInfo
 	 * @return int
 	 */
-	int save(RcEmailInfo rcEmailInfo);
+	int insert(RcEmailInfo rcEmailInfo);
 
 	/**
 	 * 分页查询
@@ -53,5 +53,5 @@ public interface EmailInfoDao {
 	 * 
 	 * @param id
 	 */
-	RcEmailInfo queryById(Long id);
+	RcEmailInfo selectById(Long id);
 }

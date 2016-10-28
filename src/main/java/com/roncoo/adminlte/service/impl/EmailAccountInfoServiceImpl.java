@@ -22,7 +22,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 
 	@Override
 	public RcEmailAccountInfo queryById(Long id) {
-		RcEmailAccountInfo info = dao.queryById(id);
+		RcEmailAccountInfo info = dao.selectById(id);
 		String passwd = Base64Util.decode(info.getPasswd());
 		info.setPasswd(passwd);
 		return info;
@@ -35,7 +35,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 
 	@Override
 	public int updateById(RcEmailAccountInfo info) {
-		return dao.update(info);
+		return dao.updateById(info);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 
 	@Override
 	public int update(RcEmailAccountInfo info) {
-		return dao.update(info);
+		return dao.updateById(info);
 	}
 
 }

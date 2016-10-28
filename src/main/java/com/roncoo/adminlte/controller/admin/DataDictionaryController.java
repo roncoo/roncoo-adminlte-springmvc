@@ -44,8 +44,7 @@ public class DataDictionaryController extends BaseController {
 	 * 查看数据字典列表
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
-			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
 		Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
 		modelMap.put("page", page);
 	}
@@ -71,8 +70,7 @@ public class DataDictionaryController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id,
-			@RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
+	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
 		biz.delete(id, fieldCode);
 		return redirect("/admin/dataDictionary/list");
 	}
@@ -85,7 +83,7 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(Long id, ModelMap modelMap) {
-		RcDataDictionary dictionary = biz.queryById(id);
+		RcDataDictionary dictionary = biz.query(id);
 		modelMap.put("dictionary", dictionary);
 	}
 
@@ -97,13 +95,12 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(Long id, ModelMap modelMap) {
-		RcDataDictionary dictionary = biz.queryById(id);
+		RcDataDictionary dictionary = biz.query(id);
 		modelMap.put("dictionary", dictionary);
 	}
 
 	@RequestMapping(value = UPDATE)
-	public String update(@ModelAttribute RcDataDictionary dictionary,
-			@RequestParam(value = "oldFieldCode") String oldFieldCode) {
+	public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
 		biz.update(dictionary, oldFieldCode);
 		return redirect("/admin/dataDictionary/list");
 

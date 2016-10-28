@@ -24,6 +24,15 @@ public final class Constants {
 
 	private Constants() {
 	}
+	
+	/**
+	 * 状态说明
+	 * 
+	 * @author wujing
+	 */
+	public interface Token {
+		public final static String RONCOO = "roncoo";
+	}
 
 	/**
 	 * 状态说明

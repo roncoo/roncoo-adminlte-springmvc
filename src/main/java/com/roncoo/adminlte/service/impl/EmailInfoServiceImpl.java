@@ -71,7 +71,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 		send(accountInfo.getFromUser(),rcEmailInfo.getToUser(), rcEmailInfo.getSubject(), map, TEMPLATE);
 		rcEmailInfo.setFromUser(accountInfo.getFromUser());
 		// 保存记录
-		dao.save(rcEmailInfo);
+		dao.insert(rcEmailInfo);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 
 	@Override
 	public RcEmailInfo queryById(Long id) {
-		return dao.queryById(id);
+		return dao.selectById(id);
 	}
 
 	// 内部线程类，利用线程池异步发邮件。

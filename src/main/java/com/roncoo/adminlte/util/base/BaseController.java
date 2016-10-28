@@ -45,7 +45,7 @@ public class BaseController {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(redirect("/admin/emailAccountInfo/list?id={0}&my={1}", 1, "22"));
+		System.out.println(redirect("/admin/emailAccountInfo/list"));
 	}
 
 }

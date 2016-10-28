@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015-2016 RonCoo(http://www.roncoo.com) Group.
+ *  
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.roncoo.adminlte.service.impl.dao.impl;
 
 import java.util.Date;
@@ -19,16 +34,6 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 
 	@Autowired
 	private RcEmailAccountInfoMapper mapper;
-
-	@Override
-	public int count(RcEmailAccountInfoExample example) {
-		return mapper.countByExample(example);
-	}
-
-	@Override
-	public int delete(RcEmailAccountInfoExample example) {
-		return mapper.deleteByExample(example);
-	}
 
 	@Override
 	public int deleteById(Long id) {
@@ -59,12 +64,12 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public RcEmailAccountInfo queryById(Long id) {
+	public RcEmailAccountInfo selectById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int update(RcEmailAccountInfo info) {
+	public int updateById(RcEmailAccountInfo info) {
 		String passwd = Base64Util.encrypt(info.getPasswd());
 		info.setPasswd(passwd);
 		info.setUpdateTime(new Date());
@@ -73,9 +78,6 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 
 	@Override
 	public RcEmailAccountInfo queryByRand() {
-		RcEmailAccountInfo info = mapper.selectByRand();
-		String passwd = Base64Util.decode(info.getPasswd());
-		info.setPasswd(passwd);
-		return info;
+		return null;
 	}
 }

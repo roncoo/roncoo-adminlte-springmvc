@@ -21,7 +21,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
 	@Override
 	public int save(RcDataDictionary rcDataDictionary) {
-		return dao.save(rcDataDictionary);
+		return dao.insert(rcDataDictionary);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
 	@Override
 	public RcDataDictionary queryById(Long id) {
-		return dao.queryById(id);
+		return dao.selectById(id);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
 	@Override
 	public int update(RcDataDictionary dictionary) {
-		return dao.update(dictionary);
+		return dao.updateById(dictionary);
 	}
 
 }

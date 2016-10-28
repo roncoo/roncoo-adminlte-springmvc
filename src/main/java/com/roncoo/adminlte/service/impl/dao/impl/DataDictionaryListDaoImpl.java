@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015-2016 RonCoo(http://www.roncoo.com) Group.
+ *  
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.roncoo.adminlte.service.impl.dao.impl;
 
 import java.util.Date;
@@ -16,18 +31,13 @@ import com.roncoo.adminlte.util.base.SqlUtil;
 
 /**
  * 
- * 作用功能：数据字典明细接口实现类 作者： LYQ 时间：2016年10月18日
+ * @author wujing
  */
 @Repository
 public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 
 	@Autowired
 	private RcDataDictionaryListMapper mapper;
-
-	@Override
-	public int countByExample(RcDataDictionaryListExample example) {
-		return mapper.countByExample(example);
-	}
 
 	@Override
 	public int deleteByFieldCode(String fieldCode) {
@@ -68,12 +78,12 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public RcDataDictionaryList queryById(Long id) {
+	public RcDataDictionaryList selectById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int update(RcDataDictionaryList dList) {
+	public int updateById(RcDataDictionaryList dList) {
 		dList.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(dList);
 	}
@@ -88,7 +98,7 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public int updateForFieldCode(String fieldCodePremise, String fieldCode) {
+	public int updateByFieldCode(String fieldCodePremise, String fieldCode) {
 		RcDataDictionaryList dList = new RcDataDictionaryList();
 		dList.setFieldCode(fieldCode);
 		RcDataDictionaryListExample example = new RcDataDictionaryListExample();

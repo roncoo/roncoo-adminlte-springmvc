@@ -61,7 +61,7 @@ public class DataDictionaryBiz {
 	 * @param id
 	 * @return
 	 */
-	public RcDataDictionary queryById(Long id) {
+	public RcDataDictionary query(Long id) {
 		return dictionaryService.queryById(id);
 	}
 

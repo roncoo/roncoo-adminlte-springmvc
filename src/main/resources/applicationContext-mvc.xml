@@ -32,15 +32,6 @@
 	<mvc:resources location="/favicon.ico" mapping="/favicon.ico" />
 	
 	<!--配置拦截器, 多个拦截器,顺序执行 -->  
-	<!-- 
-	<mvc:interceptors>
-	    <mvc:interceptor>
-	        <mvc:mapping path="/admin/**" />  
-	        <bean class="com.roncoo.community.common.util.interceptor.SessionInterceptor"></bean>    
-	    </mvc:interceptor>  
-	</mvc:interceptors> 
-	-->  
-	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/**"/>

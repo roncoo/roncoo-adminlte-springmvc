@@ -38,7 +38,7 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	private RcEmailInfoMapper mapper;
 
 	@Override
-	public int save(RcEmailInfo rcEmailInfo) {
+	public int insert(RcEmailInfo rcEmailInfo) {
 		rcEmailInfo.setStatusId("1");
 		rcEmailInfo.setCreateTime(new Date());
 		rcEmailInfo.setUpdateTime(new Date());
@@ -65,7 +65,7 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	}
 
 	@Override
-	public RcEmailInfo queryById(Long id) {
+	public RcEmailInfo selectById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
