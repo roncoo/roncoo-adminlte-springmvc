@@ -3,6 +3,12 @@ package com.roncoo.adminlte.service.impl.dao.impl.base;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * @author wujing
+ * @param <K>
+ * @param <V>
+ */
 public interface CachedDao<K, V> {
 	void init();
 
@@ -14,9 +20,4 @@ public interface CachedDao<K, V> {
 
 	List<V> getList();
 
-	// void clear();
-
-	// void set(K k, V v);
-
-	// void remove(K v);
 }
