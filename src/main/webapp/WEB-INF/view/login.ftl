@@ -111,8 +111,9 @@
 	            that.removeClass('processing');
                 alert("登录成功")
 	        }, submitPhase1);
-	        return false;
+	        return true;
 	    });
+	    
 	    $(".login__signup a").on('click', function (e) {
 	        var that = $(".login__submit");
             that.addClass('processing success');
@@ -129,6 +130,7 @@
             }, submitPhase2);
             return false;
 	    });
+	    
 	    $(document).on('click', '.app__logout', function (e) {
 	        if (animating)
 	            return;

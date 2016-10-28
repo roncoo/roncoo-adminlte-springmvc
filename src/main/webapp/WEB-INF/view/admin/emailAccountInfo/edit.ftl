@@ -23,17 +23,17 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label>邮箱账号</label> <input type="text" class="form-control" name="fromUser" id="fromUser" value=${info.fromUser!} placeholder="输入邮箱...">
+								<label id="fromUserLabel">邮箱账号</label> <input type="text" class="form-control" name="fromUser" id="fromUser" value=${info.fromUser!} placeholder="输入邮箱...">
 							</div>
 							<div class="form-group">
-								<label>授权码</label> <input type="text" class="form-control" name="passwd" id="passwd" value=${info.passwd} placeholder="授权码...">
+								<label id="passwdLabel">授权码</label> <input type="text" class="form-control" name="passwd" id="passwd" value=${info.passwd} placeholder="授权码...">
 							</div>
 							<div class="form-group">
 								<label>备注</label> <input type="text" class="form-control" name="remark" id="remark" value="${info.remark}" placeholder="输入备注...">
 							</div>
 			             </div>
 						<div class="box-footer">
-		               		<button type="submit" class="btn btn-primary   pull-right">更新</button>
+		               		<button id="submit" type="submit" class="btn btn-primary   pull-right">更新</button>
 							<button type="reset" class="btn btn-danger   pull-right">清空</button>
 		              	</div>
 					</form>
@@ -43,5 +43,30 @@
 	<section class="content">
 </div>
 <@wrapper/>
-<!-- 这里添加额外的css和js -->
+<script type="text/javascript">
+$(document).ready(function(){
+	 $("#submit").click(function() {
+		 var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
+	 	var status = 1;
+	 	$("span").remove(".errorSpan");
+	 	$("br").remove(".errorBr");
+	 	if($("#fromUser").val()==""){
+	 		$("#fromUserLabel").prepend('<span class="errorSpan" style="color:red">*收件人不能为空</span><br class="errorBr"/>');
+	 		status=0;
+	 	}
+	 	if(!reg.test($("#fromUser").val())&&$("#fromUser").val()!=""){
+	 		$("#fromUserLabel").prepend('<span class="errorSpan" style="color:red">*收件人邮箱格式不正确</span><br class="errorBr"/>');
+	 		status=0;
+	 	}
+	 	if($("#passwd").val()==""){
+	 		$("#passwdLabel").prepend('<span class="errorSpan" style="color:red">*授权码不能为空</span><br class="errorBr"/>');
+	 		status=0;
+	 	}
+	 	if(status==0){
+	 		return false;
+	 	}
+		return true;
+	});
+});
+</script>
 <@footer/>

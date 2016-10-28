@@ -12,27 +12,53 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">关键词</label> <input type="text" class="form-control" name="fieldKey" id="fieldKey"
+						
+						<label for="exampleInput" id="fieldKeyLabel">关键词</label> <input type="text" class="form-control" name="fieldKey" id="fieldKey"
 							placeholder="输入key..." >
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">默认值</label> <input type="text" class="form-control" name="fieldValue"
+						<label for="exampleInput1" id="fieldValueLabel">默认值</label> <input type="text" class="form-control" name="fieldValue"
 							id="fieldValue" placeholder="输入value值..." >
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">排序</label> <input type="text" class="form-control" name="sort" id="sort"
+						<label for="exampleInput" id="sortLabel">排序</label> <input type="text" class="form-control" name="sort" id="sort"
 							placeholder="排序，请输入整数..." >
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">备注</label> <input type="text" class="form-control" name="remark" id="remark"
+						<label for="exampleInput" >备注</label> <input type="text" class="form-control" name="remark" id="remark"
 							placeholder="输入备注..." >
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="submit" class="btn btn-primary">保存</button>
+					<button id="submit"  type="submit" class="btn btn-primary" >保存</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	 $("#submit").click(function() {
+	 	var status = 1;
+	 	$("span").remove(".errorSpan");
+	 	$("br").remove(".errorBr");
+	 	if($("#fieldKey").val()==""){
+	 		$("#fieldKeyLabel").prepend('<span class="errorSpan" style="color:red">*Key不能为空</span><br class="errorBr"/>');
+	 		status=0;
+	 	}
+	 	if($("#fieldValue").val()==""){
+	 		$("#fieldValueLabel").prepend('<span class="errorSpan"  style="color:red">*默认值不能为空</span><br class="errorBr"/>');
+	 		status=0;
+	 	}
+	 	if($("#sort").val()==""){
+	 		$("#sortLabel").prepend('<span class="errorSpan"  style="color:red">*排序值不能为空</span><br  class="errorBr"/>');
+	 		status=0;
+	 	}
+	 	if(status==0){
+	 		return false;
+	 	}
+		return true;
+	});
+});
+</script>
