@@ -15,6 +15,7 @@
  */
 package com.roncoo.adminlte.service;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.util.base.Page;
 
@@ -31,7 +32,7 @@ public interface DataDictionaryService {
 	 * @param rcDataDictionary
 	 * @return
 	 */
-	int save(RcDataDictionary rcDataDictionary);
+	Result<RcDataDictionary> save(RcDataDictionary rcDataDictionary);
 
 	/**
 	 * 分页查询
@@ -63,6 +64,6 @@ public interface DataDictionaryService {
 	 * @param dictionary
 	 * @return
 	 */
-	int update(RcDataDictionary dictionary);
+	Result<RcDataDictionary> update(RcDataDictionary dictionary);
 
 }

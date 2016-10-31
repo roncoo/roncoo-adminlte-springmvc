@@ -18,13 +18,14 @@ package com.roncoo.adminlte.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.service.DataDictionaryService;
 import com.roncoo.adminlte.service.impl.dao.DataDictionaryDao;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
- * 数据字典接口实现类
+ * 数据字典
  * 
  * @author LYQ
  */
@@ -35,8 +36,15 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	private DataDictionaryDao dao;
 
 	@Override
-	public int save(RcDataDictionary rcDataDictionary) {
-		return dao.insert(rcDataDictionary);
+	public Result<RcDataDictionary> save(RcDataDictionary rcDataDictionary) {
+		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
+		// 校验字段
+
+		if (dao.insert(rcDataDictionary) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
@@ -55,8 +63,15 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
-	public int update(RcDataDictionary dictionary) {
-		return dao.updateById(dictionary);
+	public Result<RcDataDictionary> update(RcDataDictionary dictionary) {
+		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
+		// 校验字段
+
+		if (dao.updateById(dictionary) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 }
