@@ -25,6 +25,8 @@ import com.roncoo.adminlte.util.base.Page;
 public interface EmailInfoService {
 
 	/**
+	 * 分页获取
+	 * 
 	 * @param pageCurrent
 	 * @param pageSize
 	 * @return
@@ -32,6 +34,8 @@ public interface EmailInfoService {
 	Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize);
 
 	/**
+	 * 发送邮件
+	 * 
 	 * @param rcEmailInfo
 	 */
 	void sendMail(RcEmailAccountInfo accountInfo, RcEmailInfo rcEmailInfo);
