@@ -15,6 +15,9 @@
  */
 package com.roncoo.adminlte.biz;
 
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,9 +25,9 @@ import org.springframework.stereotype.Component;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
-import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.cache.EmailAccountInfoCache;
 
 /**
  * @author wujing
@@ -34,9 +37,9 @@ public class EmailInfoBiz {
 
 	@Autowired
 	private EmailInfoService emailInfoService;
-
+	
 	@Autowired
-	private EmailAccountInfoService emailAccountInfoService;
+	private EmailAccountInfoCache accountInfoCache;
 
 	/**
 	 * 分页查询
@@ -51,10 +54,12 @@ public class EmailInfoBiz {
 	 * @param infoVo
 	 */
 	public void sendMail(RcEmailInfoVo infoVo) {
-		RcEmailAccountInfo accountInfo = emailAccountInfoService.queryByRand();
+		List<RcEmailAccountInfo> accountList = accountInfoCache.getList();
+		Random random = new Random();
+		int index = random.nextInt(accountList.size());
 		RcEmailInfo rcEmailInfo = new RcEmailInfo();
 		BeanUtils.copyProperties(infoVo, rcEmailInfo);
-		emailInfoService.sendMail(accountInfo, rcEmailInfo);
+		emailInfoService.sendMail(accountList.get(index), rcEmailInfo);
 	}
 
 	/**

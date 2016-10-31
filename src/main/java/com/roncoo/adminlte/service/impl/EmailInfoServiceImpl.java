@@ -33,6 +33,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.service.impl.dao.EmailInfoDao;
+import com.roncoo.adminlte.util.Base64Util;
 import com.roncoo.adminlte.util.base.Page;
 
 import freemarker.template.Template;
@@ -95,7 +96,8 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	private void createMailSender(RcEmailAccountInfo info){
 		javaMailSender.setHost(info.getHost());
 		javaMailSender.setUsername(info.getFromUser());
-		javaMailSender.setPassword(info.getPasswd());
+		String passwd = Base64Util.decode(info.getPasswd());
+		javaMailSender.setPassword(passwd);
 	}
 
 	@Override

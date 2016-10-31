@@ -24,6 +24,7 @@ import com.roncoo.adminlte.service.impl.dao.impl.base.CachedDao;
  * @param <K>
  * @param <V>
  */
+
 public abstract class CachedDaoImpl<K, V> implements CachedDao<K, V> {
 	private ConcurrentMap<K, V> cached = new ConcurrentHashMap<K, V>();
 
