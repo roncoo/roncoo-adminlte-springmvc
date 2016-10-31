@@ -31,6 +31,8 @@ import com.roncoo.adminlte.util.ConfUtil;
 import com.roncoo.adminlte.util.RestTemplateUtil;
 
 /**
+ * 登录
+ * 
  * @author wujing
  */
 @Component
@@ -75,7 +77,6 @@ public class LoginBiz {
 		param.put("grantType", "authorization_code");
 		String url = ConfUtil.getProperty("baseUrl") + ConfUtil.getProperty("apiAccessTokenUrl");
 		JsonNode json = RestTemplateUtil.postForObject(url, param);
-		logger.info(json.toString());
 		int status = json.get("errCode").asInt();
 		if (0 == status) {
 			String roncooNo = json.get("resultData").get("roncooNo").asText();

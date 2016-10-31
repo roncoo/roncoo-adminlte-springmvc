@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.service.DataDictionaryService;
@@ -54,7 +55,7 @@ public class DataDictionaryBiz {
 	 * 
 	 * @param rcDataDictionary
 	 */
-	public int save(RcDataDictionary rcDataDictionary) {
+	public Result<RcDataDictionary> save(RcDataDictionary rcDataDictionary) {
 		return dictionaryService.save(rcDataDictionary);
 	}
 
@@ -88,7 +89,7 @@ public class DataDictionaryBiz {
 	 */
 	@Transactional
 	public void update(RcDataDictionary dictionary, String oldFieldCode) {
-		dictionaryService.update(dictionary);
+		Result<RcDataDictionary> result = dictionaryService.update(dictionary);
 		if (oldFieldCode != dictionary.getFieldCode()) {
 			dictionaryListService.updateForFieldCode(oldFieldCode, dictionary.getFieldCode());
 		}

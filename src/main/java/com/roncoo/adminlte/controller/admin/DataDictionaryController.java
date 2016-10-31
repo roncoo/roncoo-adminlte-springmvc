@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.biz.DataDictionaryBiz;
 import com.roncoo.adminlte.util.base.BaseController;
@@ -58,8 +59,12 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = SAVE)
 	public String save(@ModelAttribute RcDataDictionary rcDataDictionary) {
-		biz.save(rcDataDictionary);
-		return redirect("/admin/dataDictionary/list");
+		Result<RcDataDictionary> result = biz.save(rcDataDictionary);
+		if (result.isStatus()) {
+			return redirect("/admin/dataDictionary/list");
+		}
+		// 失败
+		return "/admin/dataDictionary/list";
 	}
 
 	/**
@@ -102,6 +107,7 @@ public class DataDictionaryController extends BaseController {
 	@RequestMapping(value = UPDATE)
 	public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
 		biz.update(dictionary, oldFieldCode);
+		// 更新之后，提示都没有
 		return redirect("/admin/dataDictionary/list");
 
 	}
