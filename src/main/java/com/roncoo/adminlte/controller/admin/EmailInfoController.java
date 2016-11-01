@@ -15,6 +15,8 @@
  */
 package com.roncoo.adminlte.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,12 +26,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.biz.EmailInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.PageBean;
 
 /**
  * email功能
@@ -54,6 +58,19 @@ public class EmailInfoController extends BaseController {
 	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
 		Page<RcEmailInfo> page = biz.listForPage(pageCurrent, pageSize);
 		modelMap.put("page", page);
+	}
+	
+	@RequestMapping(value="queryList",method=RequestMethod.GET)
+	@ResponseBody
+	public Page<RcEmailInfo> queryForList(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize){
+		Page<RcEmailInfo> page = biz.listForPage(pageCurrent, pageSize);
+		PageBean<List<RcEmailInfo>> pageBean = new PageBean<>();
+		pageBean.setData(page.getList());
+		pageBean.setDraw(page.getPageCurrent());
+		pageBean.setRecordsTotal(page.getTotalCount());
+		pageBean.setRecordsFiltered(page.getTotalCount());
+		return page;
+		
 	}
 
 	/**

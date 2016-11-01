@@ -1,8 +1,4 @@
 <#include "/macro/base.ftl" /> 
-<@header/> 
-<@menu activeId="dictionary"/>
-
-<div class="content-wrapper">
 	<!-- Main content -->
 	<div class="row">
 		<div class="col-md-12">
@@ -37,9 +33,9 @@
 									<td>${data.remark}</td>
 									<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 									<td>
-										<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/view?id=${data.id}">查看</a>
-										<a class="btn btn-info btn-xs" href="${ctx}/admin/dataDictionaryList/edit?id=${data.id}&dId=${id}">修改</a>
-										<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/dataDictionaryList/delete?id=${data.id}&dId=${id}&fieldCode=${data.fieldCode}')">删除</a>
+										<a class="btn btn-primary btn-xs"  target="modal" modal="lg"   href="${ctx}/admin/dataDictionaryList/view?id=${data.id}">查看</a>
+										<a class="btn btn-info btn-xs" target="modal" modal="lg"  href="${ctx}/admin/dataDictionaryList/edit?id=${data.id}&dId=${id}">修改</a>
+										<a class="btn btn-danger btn-xs"   data-body="确认要删除吗？" target="ajaxTodo"  href ="${ctx}/admin/dataDictionaryList/delete?id=${data.id}&dId=${id}&fieldCode=${data.fieldCode}">删除</a>
 									</td>
 								</tr>
 							</#list>
@@ -49,8 +45,5 @@
 			</div>
 		</div>
 	</div>
-</div>
+	
 <#include "add.ftl" />
-<@wrapper/>
-<@deleteHint/>
-<@footer/>
