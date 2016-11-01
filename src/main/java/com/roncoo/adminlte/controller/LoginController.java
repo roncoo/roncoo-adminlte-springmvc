@@ -66,7 +66,6 @@ public class LoginController extends BaseController {
 	public String postLogin() {
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
-			logger.info(result.getResultData());
 			return redirect(result.getResultData());
 		}
 		return redirect("/login");

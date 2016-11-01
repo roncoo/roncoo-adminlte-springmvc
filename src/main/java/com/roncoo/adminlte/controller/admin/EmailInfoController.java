@@ -15,8 +15,6 @@
  */
 package com.roncoo.adminlte.controller.admin;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -56,21 +54,13 @@ public class EmailInfoController extends BaseController {
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
 	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
-		Page<RcEmailInfo> page = biz.listForPage(pageCurrent, pageSize);
-		modelMap.put("page", page);
 	}
-	
-	@RequestMapping(value="queryList",method=RequestMethod.GET)
+
 	@ResponseBody
-	public Page<RcEmailInfo> queryForList(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize){
+	@RequestMapping(value = "page")
+	public PageBean<RcEmailInfo> queryForList(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 		Page<RcEmailInfo> page = biz.listForPage(pageCurrent, pageSize);
-		PageBean<List<RcEmailInfo>> pageBean = new PageBean<>();
-		pageBean.setData(page.getList());
-		pageBean.setDraw(page.getPageCurrent());
-		pageBean.setRecordsTotal(page.getTotalCount());
-		pageBean.setRecordsFiltered(page.getTotalCount());
-		return page;
-		
+		return new PageBean<RcEmailInfo>(page);
 	}
 
 	/**
@@ -87,13 +77,13 @@ public class EmailInfoController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/send")
-	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo infoVo,BindingResult bindingResult) {
-		if(bindingResult.hasErrors()){
+	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo infoVo, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
 			return "/admin/emailInfo/add";
 		}
 		biz.sendMail(infoVo);
 		return "redirect:/admin/emailInfo/list";
-		
+
 	}
 
 	/**

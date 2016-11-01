@@ -16,55 +16,88 @@
 package com.roncoo.adminlte.util.base;
 
 import java.io.Serializable;
+import java.util.List;
 
+/**
+ * 整合页面分页插件
+ * 
+ * @author wujing
+ * @param <T>
+ */
 public class PageBean<T> implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6975089268517363694L;
-	
-	//当前页面
-	private int draw;
-	
-	//总记录数
-	private int recordsTotal;
-	
-	//过滤后记录
-	private int recordsFiltered;
-	
-	//记录
-	private T data;
 
-	public int getDraw() {
-		return draw;
+	// 当前记录
+	private int iDisplayStart;
+
+	// 每页记录数
+	private int iDisplayLength;
+
+	// 总记录数
+	private int iTotalRecords;
+
+	// 过滤后记录
+	private int iTotalDisplayRecords;
+
+	// 记录
+	private List<T> data;
+
+	/**
+	 * @param iDisplayStart
+	 * @param iDisplayLength
+	 * @param iTotalRecords
+	 * @param iTotalDisplayRecords
+	 * @param data
+	 * @param pageBean
+	 * @param page
+	 */
+	public PageBean(Page<T> page) {
+		this.iDisplayStart = page.getPageCurrent();
+		this.iDisplayLength = page.getPageSize();
+		this.iTotalRecords = page.getTotalCount();
+		this.iTotalDisplayRecords = page.getTotalCount();
+		this.data = page.getList();
 	}
 
-	public void setDraw(int draw) {
-		this.draw = draw;
+	public int getiDisplayStart() {
+		return iDisplayStart;
 	}
 
-	public int getRecordsTotal() {
-		return recordsTotal;
+	public void setiDisplayStart(int iDisplayStart) {
+		this.iDisplayStart = iDisplayStart;
 	}
 
-	public void setRecordsTotal(int recordsTotal) {
-		this.recordsTotal = recordsTotal;
+	public int getiDisplayLength() {
+		return iDisplayLength;
 	}
 
-	public int getRecordsFiltered() {
-		return recordsFiltered;
+	public void setiDisplayLength(int iDisplayLength) {
+		this.iDisplayLength = iDisplayLength;
 	}
 
-	public void setRecordsFiltered(int recordsFiltered) {
-		this.recordsFiltered = recordsFiltered;
+	public int getiTotalRecords() {
+		return iTotalRecords;
 	}
 
-	public T getData() {
+	public void setiTotalRecords(int iTotalRecords) {
+		this.iTotalRecords = iTotalRecords;
+	}
+
+	public int getiTotalDisplayRecords() {
+		return iTotalDisplayRecords;
+	}
+
+	public void setiTotalDisplayRecords(int iTotalDisplayRecords) {
+		this.iTotalDisplayRecords = iTotalDisplayRecords;
+	}
+
+	public List<T> getData() {
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setData(List<T> data) {
 		this.data = data;
 	}
+
 }
