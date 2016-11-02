@@ -39,28 +39,19 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	@Override
 	public Result<RcDataDictionary> save(RcDataDictionary rcDataDictionary) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
-		String errMsg = "";
 		// 校验字段
 		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
-			errMsg += "fieldname为空;";
+			
 		}
 		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
-			errMsg += "fieldcode为空;";
+			
 		}
 		if (StringUtils.isEmpty(rcDataDictionary.getSort())) {
-			errMsg += "sort为空;";
-		}
-		if (StringUtils.hasText(errMsg)) {
-			result.setErrMsg(errMsg);
-		} else {
-			if (dao.insert(rcDataDictionary) > 0) {
-				result.setStatus(true);
-				result.setErrCode(0);
-			} else {
-				result.setErrMsg("数据字典插入信息失败");
-			}
+			
 		}
 		return result;
+
+
 	}
 
 	@Override
@@ -69,22 +60,18 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
+	
 	public Result<RcDataDictionary> queryById(Long id) {
-		Long temp = (long) -1;
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
-		RcDataDictionary resultData = null;
-		if (!id.equals(temp)) {
-			resultData = dao.selectById(id);
-			if(resultData!=null){
-				result.setStatus(true);
-				result.setErrCode(0);
-				result.setResultData(resultData);
-			}else{
-				result.setErrMsg("查询失败");
-			}
-		} else {
-			result.setErrMsg("此操作的id："+id+"为无效id");
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
 		}
+
+		RcDataDictionary resultData = dao.selectById(id);
+		result.setStatus(true);
+		result.setErrCode(0);
+		result.setResultData(resultData);
 		return result;
 	}
 
@@ -102,7 +89,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		}else{
 			result.setErrMsg("此操作的id："+id+"为无效id");
 		}
-		return dao.deleteById(id);
+		return 0;
 	}
 
 	@Override

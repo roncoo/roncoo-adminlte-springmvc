@@ -44,32 +44,27 @@ public class DataDictionaryListController extends BaseController {
 	private DataDictionaryListBiz biz;
 
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "id", defaultValue = "-1") Long id,
-			@RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
+	public void list(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
 		modelMap.put("id", id);
 		modelMap.put("fieldCode", fieldCode);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = PAGE)
-	public PageBean<RcDataDictionaryList> queryForList(@RequestParam(value = "start", defaultValue = "1") int start,
-			@RequestParam(value = "length", defaultValue = "10") int pageSize,
-			@RequestParam(value = "fieldCode") String fieldCode) {
+	public PageBean<RcDataDictionaryList> queryForList(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize, @RequestParam(value = "fieldCode") String fieldCode) {
 		int pageCurrent = (start / pageSize) + 1;
 		Page<RcDataDictionaryList> page = biz.listForPage(pageCurrent, pageSize, fieldCode);
 		return new PageBean<RcDataDictionaryList>(page);
 	}
 
 	@RequestMapping(value = ADD, method = RequestMethod.GET)
-	public void add(@RequestParam(value = "id", defaultValue = "-1") Long id,
-			@RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
+	public void add(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
 		modelMap.put("id", id);
 		modelMap.put("fieldCode", fieldCode);
 	}
 
 	@RequestMapping(value = SAVE)
-	public String save(@ModelAttribute("dListVo") RcDataDictionaryList dList, BindingResult bindingResult,
-			@RequestParam(name = "dId") Long dId) {
+	public String save(@ModelAttribute("dListVo") RcDataDictionaryList dList, BindingResult bindingResult, @RequestParam(name = "dId") Long dId) {
 		if (!bindingResult.hasErrors()) {
 			biz.save(dList);
 		}
@@ -77,21 +72,19 @@ public class DataDictionaryListController extends BaseController {
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id") Long id, @RequestParam(value = "dId") Long dId,
-			@RequestParam(value = "fieldCode") String fieldCode) {
+	public String delete(@RequestParam(value = "id") Long id, @RequestParam(value = "dId") Long dId, @RequestParam(value = "fieldCode") String fieldCode) {
 		biz.deleteById(id);
 		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, fieldCode);
 	}
 
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
-	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
+	public void view(@RequestParam(value = "id", required = false) Long id, ModelMap modelMap) {
 		RcDataDictionaryList dictionaryList = biz.queryById(id);
 		modelMap.put("dictionaryList", dictionaryList);
 	}
 
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
-	public void edit(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "dId") Long dId,
-			ModelMap modelMap) {
+	public void edit(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "dId") Long dId, ModelMap modelMap) {
 		RcDataDictionaryList dictionaryList = biz.queryById(id);
 		modelMap.put("id", dId);
 		modelMap.put("dictionaryList", dictionaryList);
