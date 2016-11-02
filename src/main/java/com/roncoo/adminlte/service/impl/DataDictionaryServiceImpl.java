@@ -41,8 +41,9 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		String errMsg = "";
 		// 校验字段
-		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
-			errMsg += "fieldname为空;";
+		if (!StringUtils.isEmpty(rcDataDictionary.getFieldName())) {
+			result.setErrMsg("fieldname为空");
+			return result;
 		}
 		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
 			errMsg += "fieldcode为空;";
@@ -70,21 +71,16 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
 	@Override
 	public Result<RcDataDictionary> queryById(Long id) {
-		Long temp = (long) -1;
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
-		RcDataDictionary resultData = null;
-		if (!id.equals(temp)) {
-			resultData = dao.selectById(id);
-			if(resultData!=null){
-				result.setStatus(true);
-				result.setErrCode(0);
-				result.setResultData(resultData);
-			}else{
-				result.setErrMsg("查询失败");
-			}
-		} else {
-			result.setErrMsg("此操作的id："+id+"为无效id");
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
 		}
+
+		RcDataDictionary resultData = dao.selectById(id);
+		result.setStatus(true);
+		result.setErrCode(0);
+		result.setResultData(resultData);
 		return result;
 	}
 
@@ -92,15 +88,15 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	public int deleteById(Long id) {
 		Long temp = (long) -1;
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
-		if(id.equals(temp)){
-			if(dao.deleteById(id)>0){
+		if (id.equals(temp)) {
+			if (dao.deleteById(id) > 0) {
 				result.setStatus(true);
 				result.setErrCode(0);
-			}else{
+			} else {
 				result.setErrMsg("删除操作失败");
 			}
-		}else{
-			result.setErrMsg("此操作的id："+id+"为无效id");
+		} else {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
 		}
 		return dao.deleteById(id);
 	}
