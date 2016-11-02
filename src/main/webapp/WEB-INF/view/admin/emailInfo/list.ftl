@@ -2,7 +2,7 @@
 	<div class="col-xs-12">
 		<div class="box">
 		<div class="box-header">
-			<h3 class="box-title">全功能表格实例</h3>
+			<h3 class="box-title">邮件列表</h3>
 		</div>
         <div class="box-body">
         	<div class="clearfix">
@@ -22,31 +22,20 @@
 	        	</div>
 	        	<div class="col-md-4">
 	        		<button type="submit" id="submitExample4" class="btn btn-primary">Submit</button>
-	        		<a class="btn btn-default" target="navTab" href="/include/index.html?cid=123">更多</a>
 	        	</div>
         	</div>
         	
-			<table id="example4" class="table table-bordered table-striped" >
+			<table id="emailInfo_tab" class="table table-bordered table-striped" >
 		        <thead>
 		            <tr>
-		                <th>Name</th>
-		                <th>Position</th>
-		                <th>Office</th>
-		                <th>Salary</th>
-		                <th>Start date</th>
-		                <th>more</th>
+		                <th>序号</th>
+		                <th>发件人</th>
+		                <th>收件人</th>
+		                <th>主题</th>
+		                <th>发送时间</th>
+		                <th>操作</th>
 		            </tr>
 		        </thead>
-		        <tfoot>
-		            <tr>
-		                <th>Name</th>
-		                <th>Position</th>
-		                <th>Office</th>
-		                <th>Salary</th>
-		                <th>Start date</th>
-		                <th>more</th>
-		            </tr>
-		        </tfoot>
 		    </table>
 			</div>
 		</div>
@@ -78,8 +67,7 @@
       autoclose: true
     });
 	//初始化表格
-
-     var example4 = $('#example4').DataTable( {
+     var emailInfo_tab = $('#emailInfo_tab').DataTable( {
         "dom": 'itflp',
         "processing": true,
 		"searching": false,
@@ -89,28 +77,35 @@
             "url": "plugins/datatables/language.json"
         },
         "ajax": {"url": "${ctx}/admin/emailInfo/page", "type":"post"},
-       
         "columns": [
-            { "data": "toUser" },
+            { "data": "id" },
             { "data": "fromUser" },
-            { "data": "title" },
+            { "data": "toUser" },
             { "data": "subject" },
-            { "data": "content" },
+            { "data": null },
             { "data": null }
         ],
-        "columnDefs": [ {
-            "targets": -1,
+        "columnDefs": [
+                       {
+                           targets: 4,
+                           data: "createTime",
+                           render: function (data) {
+                               return new Date(parseInt(data.createTime) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+                           }
+                       },
+               {
+            "targets": 5,
             "data": null,
             "render": function(data){
 				console.log(data);
-				return '<a class="btn btn-primary" target="modal" modal="lg" href="include/index.html">查看</a> &nbsp;<a class="btn btn-default" data-body="确认要删除吗？" target="ajaxTodo" href="include/index.html?uid='+ data.id + '">删除</a>'
+				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailInfo/view?id='+data.id+'">查看</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/emailInfo/delete?id='+ data.id + '">删除</a>'
 			}
         } ]
     } );
-
-$("#submitExample4").on("click",function(){
-	reloadTable(example4);
-})
+	
+	$(".btn-del").click(function(){
+		reloadTable(example4);
+	});
 
 //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
 function reloadTable(oTable) {

@@ -1,4 +1,3 @@
-
 <div class="row">
 	<div class="col-md-12">
 			<div class="box box-primary">
@@ -27,7 +26,7 @@
 							</div>
 			             </div>
 						<div class="box-footer">
-		               		<button id="submit" type="submit" class="btn btn-primary   pull-right">更新</button>
+		               		<button id="emilAccountInfo_submit" type="submit" class="btn btn-primary   pull-right">更新</button>
 							<button type="reset" class="btn btn-danger   pull-right">清空</button>
 		              	</div>
 					</form>
@@ -36,7 +35,7 @@
 	</div>
 <script type="text/javascript">
 $(document).ready(function(){
-	 $("#submit").click(function() {
+	 $("#emilAccountInfo_submit").click(function() {
 		 var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
 	 	var status = 1;
 	 	$("span").remove(".errorSpan");

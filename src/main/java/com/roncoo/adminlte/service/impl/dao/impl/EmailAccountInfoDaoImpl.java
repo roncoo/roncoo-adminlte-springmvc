@@ -58,6 +58,8 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
 		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
+		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
+		example.setPageSize(pageSize);
 		List<RcEmailAccountInfo> list = mapper.selectByExample(example);
 		Page<RcEmailAccountInfo> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 		return page;

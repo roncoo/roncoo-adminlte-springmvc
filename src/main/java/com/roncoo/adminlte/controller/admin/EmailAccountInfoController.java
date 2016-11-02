@@ -24,12 +24,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.biz.EmailAccountInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.PageBean;
 
 /**
  * 邮件账号controller
@@ -46,12 +48,22 @@ public class EmailAccountInfoController extends BaseController {
 	private EmailAccountInfoBiz biz;
 
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
-			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
-		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
+	public void list() {
+	}
+
+	@ResponseBody
+	@RequestMapping(value = PAGE)
+	public PageBean<RcEmailAccountInfo> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
+			@RequestParam(value = "length", defaultValue = "10") int pageSize) {
+		int pageCurrent = (start / pageSize) + 1;
 		Page<RcEmailAccountInfo> page = biz.listForPage(pageCurrent, pageSize);
+		return new PageBean<>(page);
+	}
+
+	@RequestMapping(value = ADD, method = RequestMethod.GET)
+	public void add(ModelMap modelMap) {
+		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
 		modelMap.put("selectList", select);
-		modelMap.put("page", page);
 	}
 
 	@RequestMapping(value = SAVE)

@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.biz.DataDictionaryBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.PageBean;
 
 /**
  * 数据字典
@@ -45,9 +47,23 @@ public class DataDictionaryController extends BaseController {
 	 * 查看数据字典列表
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
+	public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent,
+			@RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
 		Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
 		modelMap.put("page", page);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = PAGE)
+	public PageBean<RcDataDictionary> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
+			@RequestParam(value = "length", defaultValue = "10") int pageSize) {
+		int pageCurrent = (start / pageSize) + 1;
+		Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
+		return new PageBean<RcDataDictionary>(page);
+	}
+
+	@RequestMapping(value = ADD, method = RequestMethod.GET)
+	public void add() {
 	}
 
 	/**
@@ -75,7 +91,8 @@ public class DataDictionaryController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
+	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id,
+			@RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
 		biz.delete(id, fieldCode);
 		return redirect("/admin/dataDictionary/list");
 	}
@@ -105,7 +122,8 @@ public class DataDictionaryController extends BaseController {
 	}
 
 	@RequestMapping(value = UPDATE)
-	public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
+	public String update(@ModelAttribute RcDataDictionary dictionary,
+			@RequestParam(value = "oldFieldCode") String oldFieldCode) {
 		biz.update(dictionary, oldFieldCode);
 		// 更新之后，提示都没有
 		return redirect("/admin/dataDictionary/list");
