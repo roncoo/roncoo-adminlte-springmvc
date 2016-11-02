@@ -24,9 +24,9 @@
 					</div>
 				</div>
 				<div class="box-footer">
-					<button id="dataDictionary_add" type="submit" class="btn btn-xs btn-primary   pull-right">添加</button>
-					<button type="reset" class="btn btn-xs btn-danger  pull-right">清空</button>
-				</div>
+	                <button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
+	                <button id="dataDictionary_add" type="submit" class="btn btn-info pull-right">添加</button>
+              </div>
 			</form>
 		</div>
 	</div>

@@ -644,10 +644,10 @@ ifm.height = subWeb.body.scrollHeight;
       <div class="modal-body">
         <p>确认删除？</p>
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">确认</button> -->
-      </div>
+        <button type="button" class="btn btn-primary">确认</button> 
+      </div>-->
     </div>
     <!-- /.modal-content -->
   </div>

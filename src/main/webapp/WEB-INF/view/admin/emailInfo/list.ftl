@@ -103,7 +103,7 @@
         } ]
     } );
 	
-	$(".btn-del").click(function(){
+	$(".btn-primary").click(function(){
 		reloadTable(example4);
 	});
 

@@ -21,10 +21,10 @@
 							<label>备注:</label> <input type="text" class="form-control" name="remark" id="remark" value="${dictionary.remark}" placeholder="输入备注...">
 						</div>
 		             </div>
-					<div class="box-footer">
-	               		<button id="dataDictionary_submit" type="submit" class="btn btn-xs btn-primary   pull-right">更新</button>
-						<button type="reset" class="btn btn-xs btn-danger  pull-right">清空</button>
-	              	</div>
+	              	<div class="box-footer">
+		                <button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
+		                <button id="dataDictionary_submit" type="submit" class="btn btn-info pull-right">添加</button>
+              		</div>
 				</form>
 			</div>
 	</div>
