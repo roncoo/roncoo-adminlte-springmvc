@@ -77,7 +77,7 @@ public class DataDictionaryBiz {
 	 * @param id
 	 * @return
 	 */
-	public RcDataDictionary query(Long id) {
+	public Result<RcDataDictionary> query(Long id) {
 		return dictionaryService.queryById(id);
 	}
 
@@ -88,10 +88,15 @@ public class DataDictionaryBiz {
 	 * @param oldFieldCode
 	 */
 	@Transactional
-	public void update(RcDataDictionary dictionary, String oldFieldCode) {
+	public Result<RcDataDictionary> update(RcDataDictionary dictionary, String oldFieldCode) {
 		Result<RcDataDictionary> result = dictionaryService.update(dictionary);
-		if (oldFieldCode != dictionary.getFieldCode()) {
-			dictionaryListService.updateForFieldCode(oldFieldCode, dictionary.getFieldCode());
+		if(result.isStatus()){
+			if (oldFieldCode != dictionary.getFieldCode()) {
+				dictionaryListService.updateForFieldCode(oldFieldCode, dictionary.getFieldCode());
+			}
+			return result;
+		}else{
+			throw new RuntimeException();
 		}
 	}
 }

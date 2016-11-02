@@ -98,13 +98,13 @@
             "data": null,
             "render": function(data){
 				console.log(data);
-				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailInfo/view?id='+data.id+'">查看</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/emailInfo/delete?id='+ data.id + '">删除</a>'
+				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailInfo/view?id='+data.id+'">查看</a> &nbsp;<a class="btn btn-xs btn-default" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/emailInfo/delete?id='+ data.id + '">删除</a>'
 			}
         } ]
     } );
 	
-	$(".btn-primary").click(function(){
-		reloadTable(example4);
+	$(".btn-del").click(function(){
+		reloadTable(emailInfo_tab);
 	});
 
 //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器

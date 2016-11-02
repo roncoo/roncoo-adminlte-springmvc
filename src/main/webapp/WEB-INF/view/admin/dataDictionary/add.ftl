@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="box box-primary">
-			<form action="${ctx}/admin/dataDictionary/save" method="post">
+			<form id="dataDictionary-add-form" method="post">
 				<div class="box-header with-border">
 					<h3 class="box-title">数据字典添加</h3>
 				</div>
@@ -53,8 +53,34 @@ $(function(){
 		}
 		if (status == 0) {
 			return false;
+		}else{
+			ajaxPost();
 		}
-		return true;
 	});
+
+	function ajaxPost() {
+		var options = {
+	        url: '${ctx}/admin/dataDictionary/save',
+	        type: 'post',
+	        dataType: 'text',
+	        data: $("#dataDictionary-add-form").serialize(),
+	        success: function (data) {
+	        	reloadTable(dataDictionary_tab);
+	        }
+   		};
+    $.ajax(options);
+	}
+	//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
+     function reloadTable(oTable) {
+         var date = $("#tableParam").val();
+         var search = $("#search").val();
+         var param = {
+             "date": date,
+             "search": search
+         };
+         oTable.settings()[0].ajax.data = param;
+         oTable.ajax.reload();
+     }
+	
 });
 </script>
