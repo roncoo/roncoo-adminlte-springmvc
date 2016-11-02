@@ -17,6 +17,7 @@ package com.roncoo.adminlte.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
@@ -38,11 +39,26 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	@Override
 	public Result<RcDataDictionary> save(RcDataDictionary rcDataDictionary) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
+		String errMsg = "";
 		// 校验字段
-
-		if (dao.insert(rcDataDictionary) > 0) {
-			result.setStatus(true);
-			result.setErrCode(0);
+		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
+			errMsg += "fieldname为空;";
+		}
+		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
+			errMsg += "fieldcode为空;";
+		}
+		if (StringUtils.isEmpty(rcDataDictionary.getSort())) {
+			errMsg += "sort为空;";
+		}
+		if (StringUtils.hasText(errMsg)) {
+			result.setErrMsg(errMsg);
+		} else {
+			if (dao.insert(rcDataDictionary) > 0) {
+				result.setStatus(true);
+				result.setErrCode(0);
+			} else {
+				result.setErrMsg("数据字典插入信息失败");
+			}
 		}
 		return result;
 	}
@@ -53,23 +69,66 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
-	public RcDataDictionary queryById(Long id) {
-		return dao.selectById(id);
+	public Result<RcDataDictionary> queryById(Long id) {
+		Long temp = (long) -1;
+		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
+		RcDataDictionary resultData = null;
+		if (!id.equals(temp)) {
+			resultData = dao.selectById(id);
+			if(resultData!=null){
+				result.setStatus(true);
+				result.setErrCode(0);
+				result.setResultData(resultData);
+			}else{
+				result.setErrMsg("查询失败");
+			}
+		} else {
+			result.setErrMsg("此操作的id："+id+"为无效id");
+		}
+		return result;
 	}
 
 	@Override
 	public int deleteById(Long id) {
+		Long temp = (long) -1;
+		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
+		if(id.equals(temp)){
+			if(dao.deleteById(id)>0){
+				result.setStatus(true);
+				result.setErrCode(0);
+			}else{
+				result.setErrMsg("删除操作失败");
+			}
+		}else{
+			result.setErrMsg("此操作的id："+id+"为无效id");
+		}
 		return dao.deleteById(id);
 	}
 
 	@Override
-	public Result<RcDataDictionary> update(RcDataDictionary dictionary) {
+	public Result<RcDataDictionary> update(RcDataDictionary rcDataDictionary) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		// 校验字段
-
-		if (dao.updateById(dictionary) > 0) {
-			result.setStatus(true);
-			result.setErrCode(0);
+		String errMsg = "";
+		// 校验字段
+		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
+			errMsg += "fieldname为空;";
+		}
+		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
+			errMsg += "fieldcode为空;";
+		}
+		if (StringUtils.isEmpty(rcDataDictionary.getSort())) {
+			errMsg += "sort为空;";
+		}
+		if (StringUtils.hasText(errMsg)) {
+			result.setErrMsg(errMsg);
+		} else {
+			if (dao.updateById(rcDataDictionary) > 0) {
+				result.setStatus(true);
+				result.setErrCode(0);
+			} else {
+				result.setErrMsg("数据字典更新失败");
+			}
 		}
 		return result;
 	}

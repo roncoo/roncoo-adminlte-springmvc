@@ -49,7 +49,7 @@ public interface DataDictionaryService {
 	 * @param id
 	 * @return
 	 */
-	RcDataDictionary queryById(Long id);
+	Result<RcDataDictionary> queryById(Long id);
 
 	/**
 	 * 根据id进行删除

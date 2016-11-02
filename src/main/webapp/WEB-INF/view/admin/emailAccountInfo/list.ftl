@@ -78,46 +78,39 @@
 			});
 			//初始化表格
 
-			var emailAccountInfo_tab = $('#emailAccountInfo_tab')
-					.DataTable(
-							{
-								"dom" : 'itflp',
-								"processing" : true,
-								"searching" : false,
-								"serverSide" : true, //启用服务器端分页
-								"bInfo" : false,
-								"language" : {
-									"url" : "plugins/datatables/language.json"
-								},
-								"ajax" : {
-									"url" : "${ctx}/admin/emailAccountInfo/page",
-									"type" : "post"
-								},
-								"columns" : [ {
-									"data" : "id"
-								}, {
-									"data" : "fromUser"
-								}, {
-									"data" : "host"
-								}, {
-									"data" : "remark"
-								}, {
-									"data" : "createTime"
-								}, {
-									"data" : null
-								} ],
-								"columnDefs" : [ {
-									"targets" : -1,
-									"data" : null,
-									"render" : function(data) {
-										return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/view?id='
-												+ data.id
-												+ '">查看</a> &nbsp;<a class="btn btn-xs btn-info" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/edit?id='
-												+ data.id
-												+ '">修改</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/emailAccountInfo/delete?id='
-												+ data.id + '">删除</a>'
-									}
-								} ]
-							});
+			var emailAccountInfo_tab = $('#emailAccountInfo_tab').DataTable({
+				"dom" : 'itflp',
+				"processing" : true,
+				"searching" : false,
+				"serverSide" : true, //启用服务器端分页
+				"bInfo" : false,
+				"language" : {
+					"url" : "plugins/datatables/language.json"
+				},
+				"ajax" : {
+					"url" : "${ctx}/admin/emailAccountInfo/page",
+					"type" : "post"
+				},
+				"columns" : [ 
+				    {"data" : "id"}, 
+					{"data" : "fromUser"},
+					{"data" : "host"},
+					{"data" : "remark"},
+					{"data" : "createTime"},
+					{"data" : null} 
+					],
+				"columnDefs" : [ {
+					"targets" : -1,
+					"data" : null,
+					"render" : function(data) {
+						return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/view?id='
+								+ data.id
+								+ '">查看</a> &nbsp;<a class="btn btn-xs btn-info" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/edit?id='
+								+ data.id
+								+ '">修改</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/emailAccountInfo/delete?id='
+								+ data.id + '">删除</a>'
+					}
+				} ]
+			});
 		});
 	</script>

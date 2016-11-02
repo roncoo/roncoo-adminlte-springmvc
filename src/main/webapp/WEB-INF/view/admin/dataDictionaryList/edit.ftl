@@ -24,7 +24,7 @@
 		             </div>
 	              	<div class="box-footer">
 	                	<button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
-	                	<button id="dataDictionaryList_submit" type="submit" class="btn btn-info pull-right">添加</button>
+	                	<button id="dataDictionaryList_submit" type="button" class="btn btn-info pull-right" data-dismiss="modal">更新</button>
            			</div>
 				</form>
 			</div>
@@ -54,6 +54,7 @@ $(function(){
 	 		ajaxPost();
 	 	}
 	});
+	
 	function ajaxPost() {
 		var options = {
 	        url: '${ctx}/admin/dataDictionaryList/update',
@@ -61,10 +62,21 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionaryList-edit-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(tab-dictionaryList);
+	        	reloadTable(dataDictionaryList_tab);
 	        }
    		};
     $.ajax(options);
 	}
+	//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
+     function reloadTable(oTable) {
+         var date = $("#tableParam").val();
+         var search = $("#search").val();
+         var param = {
+             "date": date,
+             "search": search
+         };
+         oTable.settings()[0].ajax.data = param;
+         oTable.ajax.reload();
+     }
 });
 </script>

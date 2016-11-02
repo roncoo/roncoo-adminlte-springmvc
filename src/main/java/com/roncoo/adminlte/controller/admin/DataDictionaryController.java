@@ -15,6 +15,10 @@
  */
 package com.roncoo.adminlte.controller.admin;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,6 +43,7 @@ import com.roncoo.adminlte.util.base.PageBean;
 @Controller
 @RequestMapping(value = "/admin/dataDictionary", method = RequestMethod.POST)
 public class DataDictionaryController extends BaseController {
+	Logger LOG = LoggerFactory.getLogger(DataDictionaryController.class);
 
 	@Autowired
 	private DataDictionaryBiz biz;
@@ -78,9 +83,11 @@ public class DataDictionaryController extends BaseController {
 		Result<RcDataDictionary> result = biz.save(rcDataDictionary);
 		if (result.isStatus()) {
 			return redirect("/admin/dataDictionary/list");
+		} else {
+			LOG.error(result.getErrMsg());
+			// 失败
+			return "/admin/dataDictionary/list";
 		}
-		// 失败
-		return "/admin/dataDictionary/list";
 	}
 
 	/**
@@ -91,7 +98,7 @@ public class DataDictionaryController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id,
+	public String delete(@RequestParam(value = "id", defaultValue = "-1") Long id,
 			@RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
 		biz.delete(id, fieldCode);
 		return redirect("/admin/dataDictionary/list");
@@ -104,9 +111,12 @@ public class DataDictionaryController extends BaseController {
 	 * @param modelMap
 	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
-	public void view(Long id, ModelMap modelMap) {
-		RcDataDictionary dictionary = biz.query(id);
-		modelMap.put("dictionary", dictionary);
+	public void view(@RequestParam(value = "id", defaultValue = "-1") Long id, ModelMap modelMap,HttpServletResponse response) {
+		Result<RcDataDictionary> result = biz.query(id);
+		if(result.isStatus()){
+			System.out.println(result.getResultData().toString());
+			modelMap.put("dictionary", result.getResultData());
+		}
 	}
 
 	/**
@@ -117,8 +127,12 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(Long id, ModelMap modelMap) {
-		RcDataDictionary dictionary = biz.query(id);
-		modelMap.put("dictionary", dictionary);
+		Result<RcDataDictionary> result = biz.query(id);
+		if(result.isStatus()){
+			modelMap.put("dictionary", result.getResultData());
+		}else{
+			modelMap.put("dictionary", null);
+		}
 	}
 
 	@RequestMapping(value = UPDATE)
