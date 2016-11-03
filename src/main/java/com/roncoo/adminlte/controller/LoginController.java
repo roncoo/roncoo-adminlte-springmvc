@@ -63,10 +63,17 @@ public class LoginController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String postLogin() {
+	public String postLogin(HttpSession session) {
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
+			
+			// 本地发布修改这里，随便增加一个session值即可，请删除下面的：return redirect(result.getResultData());
+			// session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
+			
+			// 进行龙果学院授权登录
 			return redirect(result.getResultData());
+			
+			
 		}
 		return redirect("/login");
 	}
