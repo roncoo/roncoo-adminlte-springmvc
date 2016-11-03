@@ -18,8 +18,6 @@ package com.roncoo.adminlte.controller.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
-import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.biz.EmailInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
@@ -79,11 +76,8 @@ public class EmailInfoController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/send")
-	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo infoVo, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return "/admin/emailInfo/add";
-		}
-		Result<RcEmailInfo> result = biz.sendMail(infoVo);
+	public String send(@ModelAttribute RcEmailInfo rcEmailInfo) {
+		Result<RcEmailInfo> result = biz.sendMail(rcEmailInfo);
 		if(result.isStatus()){
 			return redirect("/admin/emailInfo/list");
 		}

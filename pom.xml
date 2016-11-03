@@ -23,12 +23,6 @@
 
 	<dependencies>
 
-		<!-- hibernate validator -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-		</dependency>
-
 		<!-- file upload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -129,7 +123,6 @@
 			<version>1.2.3</version>
 		</dependency>
 		<!-- Mybatis Dependency End -->
-
 
 		<!-- json -->
 		<dependency>

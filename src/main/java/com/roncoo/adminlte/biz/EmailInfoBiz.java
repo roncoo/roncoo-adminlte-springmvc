@@ -25,7 +25,6 @@ import org.springframework.stereotype.Component;
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
-import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.cache.EmailAccountInfoCache;
@@ -54,7 +53,7 @@ public class EmailInfoBiz {
 	 * 
 	 * @param infoVo
 	 */
-	public Result<RcEmailInfo> sendMail(RcEmailInfoVo infoVo) {
+	public Result<RcEmailInfo> sendMail(RcEmailInfo infoVo) {
 		List<RcEmailAccountInfo> accountList = accountInfoCache.getList();
 		Random random = new Random();
 		int index = random.nextInt(accountList.size());

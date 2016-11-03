@@ -7,7 +7,6 @@
 					<a class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/add">添加</a>
 				</div>
 			</div>
-			<!-- /.box-header -->
 			<div class="box-body">
 				<div class="clearfix">
 					<div class="col-md-4">
@@ -25,8 +24,7 @@
 						</div>
 					</div>
 					<div class="col-md-4">
-						<button type="submit" id="submitExample4" class="btn btn-primary">Submit</button>
-						<a class="btn btn-default" target="navTab" href="/include/index.html?cid=123">更多</a>
+						<button type="submit" id="submitExample4" class="btn btn-primary">查询</button>
 					</div>
 				</div>
 				<table id="dataDictionary_tab" class="table table-bordered table-striped">
@@ -37,43 +35,22 @@
 							<th>排序</th>
 							<th>备注</th>
 							<th>创建时间</th>
-							<th style="width: 20%">操作</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 				</table>
 			</div>
-			<!-- /.box-body -->
 		</div>
-		<!-- /.box -->
 	</div>
-	<!-- /.col -->
 </div>
-<!-- /.row -->
 
-<div class="modal fade" id="deleteUser">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<h4 class="modal-title">提示</h4>
-			</div>
-			<div class="modal-body">
-				<p>确认删除？</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">确认</button>
-			</div>
-		</div>
-	</div>
-	<!-- /.modal-content -->
-</div>
 <script>
 $(function() {
 	//Date picker
 	$('#tableParam').datepicker({
 		autoclose : true
 	});
+	
 	//初始化表格
 	var No=0;
 	var dataDictionary_tab = $('#dataDictionary_tab').DataTable({
