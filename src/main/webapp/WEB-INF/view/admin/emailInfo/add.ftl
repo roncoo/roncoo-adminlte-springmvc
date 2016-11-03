@@ -8,22 +8,16 @@
 				</div>
 				<div class="box-body">
 					<div class="form-group">
-						<#if infoVo??> <@spring.bind "infoVo.toUser" /> <@spring.showErrors "" "color:red"/> </#if>
-						<input class="form-control" name="toUser" placeholder="发送至:" value="<#if infoVo??>${infoVo.toUser!}</#if>">
+						<input class="form-control" name="toUser" placeholder="发送至:" >
 					</div>
 					<div class="form-group">
-						<#if infoVo??> <@spring.bind "infoVo.subject" /> <@spring.showErrors "" "color:red"/> </#if>
-						<input class="form-control" name="subject" placeholder="主题:" value="<#if infoVo??>${infoVo.subject!}</#if>">
+						<input class="form-control" name="subject" placeholder="主题:" >
 					</div>
 					<div class="form-group">
-						<#if infoVo??> <@spring.bind "infoVo.title" /> <@spring.showErrors "" "color:red"/> </#if>
-						<input class="form-control" name="title" placeholder="标题:" value="<#if infoVo??>${infoVo.title!}</#if>">
+						<input class="form-control" name="title" placeholder="标题:" >
 					</div>
 					<div class="form-group">
-						<#if infoVo??> <@spring.bind "infoVo.content" /> <@spring.showErrors "" "color:red"/> </#if>
-						<textarea id="textarea" name="content" class="form-control" style="height: 300px" placeholder="正文.....">
-								<#if infoVo??>${infoVo.content!}</#if>
-                    		</textarea>
+						<textarea id="textarea" name="content" class="form-control" style="height: 300px" placeholder="正文....."></textarea>
 					</div>
 					<div class="form-group"></div>
 				</div>

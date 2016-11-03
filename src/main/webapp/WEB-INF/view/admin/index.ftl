@@ -458,6 +458,7 @@
 	<script src="plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript">
+		var list_ajax;
 		//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
 		function reloadTable(oTable) {
 			var date = $("#tableParam").val();
