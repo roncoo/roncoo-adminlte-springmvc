@@ -27,12 +27,12 @@ public class Result<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 状态
+	 * 状态，默认是失败=false
 	 */
 	private boolean status = false;
 
 	/**
-	 * 错误码
+	 * 错误码，默认是失败=99，成功=0
 	 */
 	private int errCode = 99;
 

@@ -24,9 +24,9 @@ public final class Constants {
 
 	private Constants() {
 	}
-	
+
 	/**
-	 * 状态说明
+	 * 常量
 	 * 
 	 * @author wujing
 	 */
@@ -35,7 +35,7 @@ public final class Constants {
 	}
 
 	/**
-	 * 状态说明
+	 * 状态类型
 	 * 
 	 * @author wujing
 	 */
@@ -47,7 +47,7 @@ public final class Constants {
 	}
 
 	/**
-	 * 数字说明
+	 * 数字类型
 	 * 
 	 * @author wujing
 	 * @version 1.0

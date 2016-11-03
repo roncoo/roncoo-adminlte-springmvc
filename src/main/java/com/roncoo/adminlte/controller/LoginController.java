@@ -33,7 +33,7 @@ import com.roncoo.adminlte.util.Constants;
 import com.roncoo.adminlte.util.base.BaseController;
 
 /**
- * 登录功能
+ * 登录功能，集成了龙果学院的oauth登录
  * 
  * @author wujing
  */
@@ -45,7 +45,7 @@ public class LoginController extends BaseController {
 	private LoginBiz biz;
 
 	/**
-	 * 进入登陆页面
+	 * 进入登录页面
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLogin(HttpSession session) {
@@ -57,7 +57,7 @@ public class LoginController extends BaseController {
 	}
 
 	/**
-	 * 进行授权登录
+	 * 登录，跳转到龙果学院授权页面
 	 * 
 	 * @throws IOException
 	 * @throws UnsupportedEncodingException
@@ -72,14 +72,17 @@ public class LoginController extends BaseController {
 	}
 
 	/**
-	 * 进入授权登录
+	 * 授权登录
 	 */
 	@RequestMapping(value = "/oauth", method = RequestMethod.GET)
 	public String oauth(@RequestParam(value = "code", defaultValue = "") String code, RedirectAttributes redirectAttributes, HttpSession session) {
 		Result<String> result = biz.oauth(code);
 		if (result.isStatus()) {
+			// 成功之后，传入session
 			session.setAttribute(Constants.Token.RONCOO, result.getResultData());
 		}
+		
+		// 重定向到登录页面，由它来判断session进行登录
 		return redirect("/login");
 	}
 
