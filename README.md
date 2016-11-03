@@ -48,8 +48,9 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 
 ###下步计划
 1. 继续优化，持续更新，增加各种demo实例
-2. 集成Spring Session，解决单节点问题
-3. 创建maven原型，实现快捷搭建项目架构
+2. 集成权限模块，shiro或者spring security，待定
+3. 集成Spring Session，解决单节点问题
+4. 创建maven原型，实现快捷搭建项目架构
 
 
 ###技术交流
