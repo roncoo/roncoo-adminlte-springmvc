@@ -25,7 +25,7 @@
 				</div>
 				<div class="box-footer">
 	                <button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
-	                <button id="dataDictionary_add" type="submit" class="btn btn-info pull-right">添加</button>
+	                <button id="dataDictionary_add" type="button" class="btn btn-info pull-right">添加</button>
               </div>
 			</form>
 		</div>
@@ -53,9 +53,8 @@ $(function(){
 		}
 		if (status == 0) {
 			return false;
-		}else{
-			ajaxPost();
 		}
+		ajaxPost();
 	});
 
 	function ajaxPost() {
@@ -65,7 +64,8 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionary-add-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(dataDictionary_tab);
+	        	console.log(data)
+	        	reloadTable(list_ajax);
 	        }
    		};
     $.ajax(options);

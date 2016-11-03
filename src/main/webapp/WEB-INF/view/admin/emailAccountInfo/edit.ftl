@@ -27,7 +27,7 @@
 			             </div>
 		              	<div class="box-footer">
 			                <button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
-			                <button id="emilAccountInfo_submit" type="submit" class="btn btn-info pull-right">更新</button>
+			                <button id="emilAccountInfo_submit" type="button" class="btn btn-info pull-right" data-dismiss="modal">更新</button>
 		              	</div>
 					</form>
 				</div>
@@ -52,10 +52,10 @@ $(document).ready(function(){
 	 		$("#passwdLabel").prepend('<span class="errorSpan" style="color:red">*授权码不能为空</span><br class="errorBr"/>');
 	 		status=0;
 	 	}
-	 	if(status != 0){
-	 		ajaxPost();
+	 	if(status == 0){
+	 		return false;
 	 	}
-		return false;
+	 	ajaxPost();
 	});
 	
 	function ajaxPost() {
@@ -65,7 +65,7 @@ $(document).ready(function(){
 	        dataType: 'text',
 	        data: $("#emailAccountInfo-edit-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(emailAccountInfo_tab);
+	        	reloadTable(list_ajax);
 	        }
    		};
     $.ajax(options);

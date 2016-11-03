@@ -66,7 +66,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionaryList-add-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(dataDictionaryList_tab);
+	        	reloadTable(list_ajax);
 	        }
    		};
     $.ajax(options);

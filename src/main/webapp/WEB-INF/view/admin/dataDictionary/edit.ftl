@@ -23,7 +23,7 @@
 		             </div>
 	              	<div class="box-footer">
 		                <button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
-		                <button id="dataDictionary_submit" type="submit" class="btn btn-info pull-right">更新</button>
+		                <button id="dataDictionary_submit" type="button" data-dismiss="modal" class="btn btn-info pull-right">更新</button>
               		</div>
 				</form>
 			</div>
@@ -49,9 +49,8 @@ $(function(){
 	 	}
 	 	if(status==0){
 	 		return false;
-	 	}else{
-	 		ajaxPost();
 	 	}
+	 	ajaxPost();
 	});
 	function ajaxPost() {
 		var options = {
@@ -60,7 +59,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionary-edit-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(dataDictionary_tab);
+	        	reloadTable(list_ajax);
 	        }
    		};
     $.ajax(options);

@@ -4,7 +4,7 @@
 			<div class="box-header">
 				<h3 class="box-title">邮箱账号管理</h3>
 				<div class="box-tools pull-right">
-					<a class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/add">添加</a>
+					<a id="account_add" class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/add">添加</a>
 				</div>
 			</div>
 			<!-- /.box-header -->
@@ -26,7 +26,6 @@
 					</div>
 					<div class="col-md-4">
 						<button type="submit" id="submitExample4" class="btn btn-primary">Submit</button>
-						<a class="btn btn-default" target="navTab" href="/include/index.html?cid=123">更多</a>
 					</div>
 				</div>
 				<table id="emailAccountInfo_tab" class="table table-bordered table-striped">
@@ -119,7 +118,7 @@ $(function() {
 			"render" : function(data) {
 				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/view?id='
 						+ data.id
-						+ '">查看</a> &nbsp;<a class="btn btn-xs btn-info" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/edit?id='
+						+ '">查看</a> &nbsp;<a class="btn btn-xs btn-info account_edit" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/edit?id='
 						+ data.id
 						+ '">修改</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/emailAccountInfo/delete?id='
 						+ data.id + '">删除</a>'
@@ -130,8 +129,16 @@ $(function() {
     } );
 	
 	//点击删除确认时，删除后刷新
-    $(".btn-del").click(function(){
+    $(".btn-del").on('click',function(){
 		reloadTable(emailAccountInfo_tab);
+	});
+	
+	$("a").on('click',function(){
+		alert("點擊");
+	});
+	
+	$("#account_add").on('click',function(){
+		list_ajax = emailAccountInfo_tab;
 	});
 });
 </script>

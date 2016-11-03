@@ -4,7 +4,7 @@
 			<div class="box-header">
 				<h3 class="box-title">数据字典列表</h3>
 				<div class="box-tools pull-right">
-					<a class="btn btn-sm btn-primary"  target="modal" modal="lg" href="${ctx}/admin/dataDictionary/add">添加</a>
+					<a id="dictionary_add" class="btn btn-sm btn-primary"  target="modal" modal="lg" href="${ctx}/admin/dataDictionary/add">添加</a>
 				</div>
 			</div>
 			<div class="box-body">
@@ -105,5 +105,10 @@ $(function() {
     $(".btn-del").on("click",function(){
     	reloadTable(dataDictionary_tab);
     });
+    
+    $("#dictionary_add").click(function(){
+    	list_ajax = dataDictionary_tab;
+    });
+    
 });
 </script>
