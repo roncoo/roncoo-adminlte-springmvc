@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="box box-primary">
-			<form action="${ctx}/admin/emailAccountInfo/save" method="post">
+			<form id="emailAccountInfo-add-form"  method="post">
 				<div class="box-header with-border">
 					<h3 class="box-title">添加账号</h3>
 				</div>
@@ -56,10 +56,23 @@ $(function(){
 			$("#passwdLabel").prepend('<span class="errorSpan" style="color:red">*授权码不能为空</span><br class="errorBr"/>');
 			status = 0;
 		}
-		if (status == 0) {
-			return false;
+		if (status != 0) {
+			ajaxPost();
 		}
-		return true;
+		return false;
 	});
+	
+	function ajaxPost() {
+		var options = {
+	        url: '${ctx}/admin/emailAccountInfo/save',
+	        type: 'post',
+	        dataType: 'text',
+	        data: $("#emailAccountInfo-add-form").serialize(),
+	        success: function (data) {
+	        	reloadTable(emailAccountInfo_tab);
+	        }
+   		};
+    $.ajax(options);
+	}
 });
 </script>

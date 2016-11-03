@@ -60,7 +60,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionary-edit-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(tab-dictionaryList);
+	        	reloadTable(dataDictionary_tab);
 	        }
    		};
     $.ajax(options);

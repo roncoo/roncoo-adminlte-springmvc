@@ -75,6 +75,7 @@ $(function() {
 		autoclose : true
 	});
 	//初始化表格
+	var No=0;
 	var dataDictionary_tab = $('#dataDictionary_tab').DataTable({
 		"dom" : 'itflp',
 		"processing" : true,
@@ -89,14 +90,30 @@ $(function() {
 			"type" : "post"
 		},
 		"columns" : [ 
-		              {"data" : "id"},
+		              {"data" : null},
 		              {"data" : "fieldName"}, 
 		              {"data" : "sort"},
 		              {"data" : "remark"},
-		              {"data" : "createTime"}, 
+		              {"data" : null}, 
 		              {"data" : null} 
 		              ],
-		"columnDefs" : [ {
+		"columnDefs" : [ 
+					{
+					    targets: 0,
+					    data: null,
+					    render: function (data) {
+					    	No=No+1;
+					        return No;
+					    }
+					},
+					{
+					    targets: 4,
+					    data: "createTime",
+					    render: function (data) {
+					        return new Date(parseInt(data.createTime) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+					    }
+					},
+		                 {
 			"targets" : -1,
 			"data" : null,
 			"render" : function(data) {
@@ -112,23 +129,13 @@ $(function() {
 						+ data.id + '&fieldCode='+ data.fieldCode+'">删除</a>'
 			}
 		} ]
-	});
-		
-		//点击删除确认后，删除并刷新
-		$(".btn-del").click(function(){
-	 		reloadTable(dataDictionary_tab);
-	 	});
-		
-	   //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
-	     function reloadTable(oTable) {
-	         var date = $("#tableParam").val();
-	         var search = $("#search").val();
-	         var param = {
-	             "date": date,
-	             "search": search
-	         };
-	         oTable.settings()[0].ajax.data = param;
-	         oTable.ajax.reload();
-	     }
-	});
+	}).on('preXhr.dt', function ( e, settings, data ) {
+		No=0;
+    } );
+	
+	//点击删除确认时，删除后刷新;
+    $(".btn-del").on("click",function(){
+    	reloadTable(dataDictionary_tab);
+    });
+});
 </script>

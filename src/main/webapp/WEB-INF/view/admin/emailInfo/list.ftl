@@ -62,11 +62,14 @@
 </div>
   
 <script>
-  $(function () {
+$(function () {
+    //Date picker
     $('#tableParam').datepicker({
       autoclose: true
     });
+    
 	//初始化表格
+	var No=0;
      var emailInfo_tab = $('#emailInfo_tab').DataTable( {
         "dom": 'itflp',
         "processing": true,
@@ -78,7 +81,7 @@
         },
         "ajax": {"url": "${ctx}/admin/emailInfo/page", "type":"post"},
         "columns": [
-            { "data": "id" },
+            { "data": null },
             { "data": "fromUser" },
             { "data": "toUser" },
             { "data": "subject" },
@@ -86,11 +89,21 @@
             { "data": null }
         ],
         "columnDefs": [
+						{
+						    targets: 0,
+						    data: null,
+						    render: function (data) {
+						    	No=No+1;
+						        return No;
+						    }
+						},
                        {
                            targets: 4,
                            data: "createTime",
                            render: function (data) {
-                               return new Date(parseInt(data.createTime) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+                        	   var newDate = new Date();
+                        	   newDate.setTime(data.createTime * 1000);
+                               return newDate.toLocaleString();
                            }
                        },
                {
@@ -101,23 +114,13 @@
 				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailInfo/view?id='+data.id+'">查看</a> &nbsp;<a class="btn btn-xs btn-default" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/emailInfo/delete?id='+ data.id + '">删除</a>'
 			}
         } ]
+    } ).on('preXhr.dt', function ( e, settings, data ) {
+		No=0;
     } );
 
-//点击删除确认后，删除并刷新
-$(".btn-del").click(function(){
-	reloadTable(emailInfo_tab);
+	//点击删除确认后，删除并刷新
+	$(".btn-del").click(function(){
+		reloadTable(emailInfo_tab);
+	});
 });
-
-//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
-function reloadTable(oTable) {
-    var date = $("#tableParam").val();
-    var search = $("#search").val();
-    var param = {
-        "date": date,
-        "search": search
-    };
-    oTable.settings()[0].ajax.data = param;
-    oTable.ajax.reload();
-}
-  });
 </script>

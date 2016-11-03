@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 			<div class="box box-primary">
+			<input type="text" class="form-control" id="search">
 				<form id="dataDictionaryList-edit-form" role="form" method="post">
 					<input type="hidden" id="dId" name="dId" value=${id}>
 					<input type="hidden" id="id" name="id" value=${dictionaryList.id!}>
@@ -67,16 +68,5 @@ $(function(){
    		};
     $.ajax(options);
 	}
-	//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
-     function reloadTable(oTable) {
-         var date = $("#tableParam").val();
-         var search = $("#search").val();
-         var param = {
-             "date": date,
-             "search": search
-         };
-         oTable.settings()[0].ajax.data = param;
-         oTable.ajax.reload();
-     }
 });
 </script>

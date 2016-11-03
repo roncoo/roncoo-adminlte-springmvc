@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 			<div class="box box-primary">
-				<form action="${ctx}/admin/emailAccountInfo/update" method="post">
+				<form id="emailAccountInfo-edit-form" method="post">
 					<input type="hidden" id="id" name="id" value=${info.id}>
 					<div class="box-header with-border">
 						<h3 class="box-title">账号修改</h3>
@@ -27,7 +27,7 @@
 			             </div>
 		              	<div class="box-footer">
 			                <button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
-			                <button id="emilAccountInfo_submit" type="submit" class="btn btn-info pull-right">添加</button>
+			                <button id="emilAccountInfo_submit" type="submit" class="btn btn-info pull-right">更新</button>
 		              	</div>
 					</form>
 				</div>
@@ -52,10 +52,23 @@ $(document).ready(function(){
 	 		$("#passwdLabel").prepend('<span class="errorSpan" style="color:red">*授权码不能为空</span><br class="errorBr"/>');
 	 		status=0;
 	 	}
-	 	if(status==0){
-	 		return false;
+	 	if(status != 0){
+	 		ajaxPost();
 	 	}
-		return true;
+		return false;
 	});
+	
+	function ajaxPost() {
+		var options = {
+	        url: '${ctx}/admin/emailAccountInfo/update',
+	        type: 'post',
+	        dataType: 'text',
+	        data: $("#emailAccountInfo-edit-form").serialize(),
+	        success: function (data) {
+	        	reloadTable(emailAccountInfo_tab);
+	        }
+   		};
+    $.ajax(options);
+	}
 });
 </script>

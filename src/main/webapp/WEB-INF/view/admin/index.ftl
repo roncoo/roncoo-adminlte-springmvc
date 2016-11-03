@@ -720,6 +720,19 @@ ifm.height = subWeb.body.scrollHeight;
 <!-- DataTables -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+ //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
+     function reloadTable(oTable) {
+         var date = $("#tableParam").val();
+         var search = $("#search").val();
+         var param = {
+             "date": date,
+             "search": search
+         };
+         oTable.settings()[0].ajax.data = param;
+         oTable.ajax.reload();
+     }
+</script>
 </body>
 </html>
 
