@@ -65,59 +65,60 @@
 				<button type="button" class="btn btn-primary">确认</button>
 			</div>
 		</div>
-		<!-- /.modal-content -->
 	</div>
+	<!-- /.modal-content -->
+</div>
 <script>
-	// 表格使用 datatables插件，请查看文档http://datatables.club/reference/
-	// 下面是一个异步请求数据的案例
-	$(function() {
-		//Date picker
-		$('#tableParam').datepicker({
-			autoclose : true
-		});
-		//初始化表格
-		var dataDictionary_tab = $('#dataDictionary_tab').DataTable({
-			"dom" : 'itflp',
-			"processing" : true,
-			"searching" : false,
-			"serverSide" : true, //启用服务器端分页
-			"bInfo" : false,
-			"language" : {
-				"url" : "plugins/datatables/language.json"
-			},
-			"ajax" : {
-				"url" : "${ctx}/admin/dataDictionary/page",
-				"type" : "post"
-			},
-			"columns" : [ 
-			              {"data" : "id"},
-			              {"data" : "fieldName"}, 
-			              {"data" : "sort"},
-			              {"data" : "remark"},
-			              {"data" : "createTime"}, 
-			              {"data" : null} 
-			              ],
-			"columnDefs" : [ {
-				"targets" : -1,
-				"data" : null,
-				"render" : function(data) {
-					return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/view?id='
-							+ data.id
-							+ '">查看</a>&nbsp;<a class="btn btn-xs btn-info" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/edit?id='
-							+ data.id
-							+ '">修改</a>&nbsp;<a class="btn btn-xs btn-primary" target="navTab" href="${ctx}/admin/dataDictionaryList/list?id='
-							+ data.id
-							+ '&fieldCode='
-							+ data.fieldCode
-							+ '">明细</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/dataDictionary/delete?id='
-							+ data.id + '&fieldCode='+ data.fieldCode+'">删除</a>'
-				}
-			} ]
-		});
+$(function() {
+	//Date picker
+	$('#tableParam').datepicker({
+		autoclose : true
+	});
+	//初始化表格
+	var dataDictionary_tab = $('#dataDictionary_tab').DataTable({
+		"dom" : 'itflp',
+		"processing" : true,
+		"searching" : false,
+		"serverSide" : true, //启用服务器端分页
+		"bInfo" : false,
+		"language" : {
+			"url" : "plugins/datatables/language.json"
+		},
+		"ajax" : {
+			"url" : "${ctx}/admin/dataDictionary/page",
+			"type" : "post"
+		},
+		"columns" : [ 
+		              {"data" : "id"},
+		              {"data" : "fieldName"}, 
+		              {"data" : "sort"},
+		              {"data" : "remark"},
+		              {"data" : "createTime"}, 
+		              {"data" : null} 
+		              ],
+		"columnDefs" : [ {
+			"targets" : -1,
+			"data" : null,
+			"render" : function(data) {
+				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/view?id='
+						+ data.id
+						+ '">查看</a>&nbsp;<a class="btn btn-xs btn-info" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/edit?id='
+						+ data.id
+						+ '">修改</a>&nbsp;<a class="btn btn-xs btn-primary" target="navTab" href="${ctx}/admin/dataDictionaryList/list?id='
+						+ data.id
+						+ '&fieldCode='
+						+ data.fieldCode
+						+ '">明细</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/dataDictionary/delete?id='
+						+ data.id + '&fieldCode='+ data.fieldCode+'">删除</a>'
+			}
+		} ]
+	});
 		
+		//点击删除确认后，删除并刷新
 		$(".btn-del").click(function(){
 	 		reloadTable(dataDictionary_tab);
 	 	});
+		
 	   //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
 	     function reloadTable(oTable) {
 	         var date = $("#tableParam").val();
