@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.biz.DataDictionaryListBiz;
 import com.roncoo.adminlte.util.base.BaseController;
@@ -43,26 +44,56 @@ public class DataDictionaryListController extends BaseController {
 	@Autowired
 	private DataDictionaryListBiz biz;
 
+	/**
+	 * 查询列表
+	 * 
+	 * @param id
+	 * @param fieldCode
+	 * @param modelMap
+	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
 	public void list(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
 		modelMap.put("id", id);
 		modelMap.put("fieldCode", fieldCode);
 	}
 
+	/**
+	 * 分页查询
+	 * 
+	 * @param start
+	 * @param pageSize
+	 * @param fieldCode
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = PAGE)
 	public PageBean<RcDataDictionaryList> queryForList(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize, @RequestParam(value = "fieldCode") String fieldCode) {
 		int pageCurrent = (start / pageSize) + 1;
-		Page<RcDataDictionaryList> page = biz.listForPage(pageCurrent, pageSize, fieldCode);
-		return new PageBean<RcDataDictionaryList>(page);
+		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, fieldCode);
+		return new PageBean<RcDataDictionaryList>(result.getResultData());
 	}
 
+	/**
+	 * 添加
+	 * 
+	 * @param id
+	 * @param fieldCode
+	 * @param modelMap
+	 */
 	@RequestMapping(value = ADD, method = RequestMethod.GET)
 	public void add(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode, ModelMap modelMap) {
 		modelMap.put("id", id);
 		modelMap.put("fieldCode", fieldCode);
 	}
 
+	/**
+	 * 保存
+	 * 
+	 * @param dList
+	 * @param bindingResult
+	 * @param dId
+	 * @return
+	 */
 	@RequestMapping(value = SAVE)
 	public String save(@ModelAttribute("dListVo") RcDataDictionaryList dList, BindingResult bindingResult, @RequestParam(name = "dId") Long dId) {
 		if (!bindingResult.hasErrors()) {
@@ -71,25 +102,57 @@ public class DataDictionaryListController extends BaseController {
 		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, dList.getFieldCode());
 	}
 
+	/**
+	 * 删除
+	 * 
+	 * @param id
+	 * @param dId
+	 * @param fieldCode
+	 * @return
+	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id") Long id, @RequestParam(value = "dId") Long dId, @RequestParam(value = "fieldCode") String fieldCode) {
-		biz.deleteById(id);
+		biz.delete(id);
 		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, fieldCode);
 	}
 
+	/**
+	 * 查看
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(@RequestParam(value = "id", required = false) Long id, ModelMap modelMap) {
-		RcDataDictionaryList dictionaryList = biz.queryById(id);
-		modelMap.put("dictionaryList", dictionaryList);
+		Result<RcDataDictionaryList> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("dictionaryList", result.getResultData());
+		}
 	}
 
+	/**
+	 * 编辑
+	 * 
+	 * @param id
+	 * @param dId
+	 * @param modelMap
+	 */
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "dId") Long dId, ModelMap modelMap) {
-		RcDataDictionaryList dictionaryList = biz.queryById(id);
+		Result<RcDataDictionaryList> result = biz.query(id);
 		modelMap.put("id", dId);
-		modelMap.put("dictionaryList", dictionaryList);
+		if (result.isStatus()) {
+			modelMap.put("dictionaryList", result.getResultData());
+		}
 	}
 
+	/**
+	 * 更新
+	 * 
+	 * @param dList
+	 * @param dId
+	 * @return
+	 */
 	@RequestMapping(value = UPDATE)
 	public String update(@ModelAttribute RcDataDictionaryList dList, @RequestParam(value = "dId") Long dId) {
 		biz.update(dList);

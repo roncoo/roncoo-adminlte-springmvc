@@ -31,7 +31,7 @@ public interface EmailAccountInfoDao {
 	 * @param id
 	 * @return
 	 */
-	int deleteById(Long id);
+	int delete(Long id);
 
 	/**
 	 * 添加
@@ -55,7 +55,7 @@ public interface EmailAccountInfoDao {
 	 * @param id
 	 * @return
 	 */
-	RcEmailAccountInfo selectById(Long id);
+	RcEmailAccountInfo select(Long id);
 
 	/**
 	 * 更新
@@ -63,13 +63,8 @@ public interface EmailAccountInfoDao {
 	 * @param info
 	 * @return
 	 */
-	int updateById(RcEmailAccountInfo info);
+	int update(RcEmailAccountInfo info);
 
-	/**
-	 * 随机读取
-	 * 
-	 * @return
-	 */
-	RcEmailAccountInfo queryByRand();
+
 
 }

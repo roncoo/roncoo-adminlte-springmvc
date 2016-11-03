@@ -19,7 +19,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.service.impl.dao.DataDictionaryListDao;
@@ -36,44 +38,141 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 	private DataDictionaryListDao dao;
 
 	@Override
-	public Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode) {
-		return dao.listForPage(pageCurrent, pageSize, fieldCode);
+	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode) {
+		Result<Page<RcDataDictionaryList>> result = new Result<>();
+		if (pageCurrent < 1) {
+			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
+			return result;
+		}
+		if (pageSize < 1) {
+			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
+			return result;
+		}
+		if (!StringUtils.hasText(fieldCode)) {
+			result.setErrMsg("fieldCode不能为空");
+			return result;
+		}
+		Page<RcDataDictionaryList> resultData = dao.listForPage(pageCurrent, pageSize, fieldCode);
+		result.setResultData(resultData);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	public int save(RcDataDictionaryList dList) {
-		return dao.insert(dList);
+	public Result<RcDataDictionaryList> save(RcDataDictionaryList dList) {
+		Result<RcDataDictionaryList> result = new Result<>();
+		if (!StringUtils.hasText(dList.getFieldKey())) {
+			result.setErrMsg("fieldkey值不能为空");
+			return result;
+		}
+		if (!StringUtils.hasText(dList.getFieldValue())) {
+			result.setErrMsg("fieldvalue值不能为空");
+			return result;
+		}
+		if ((dList.getSort()) < 0) {
+			result.setErrMsg("sort值不能为空");
+			return result;
+		}
+		if (dao.insert(dList) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteById(Long id) {
-		return dao.deleteById(id);
+	public Result<RcDataDictionaryList> delete(Long id) {
+		Result<RcDataDictionaryList> result = new Result<>();
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
+		}
+		if (dao.delete(id) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteByFieldCode(String fieldCode) {
-		return dao.deleteByFieldCode(fieldCode);
+	public Result<RcDataDictionaryList> deleteByFieldCode(String fieldCode) {
+		Result<RcDataDictionaryList> result = new Result<>();
+		if (!StringUtils.hasText(fieldCode)) {
+			result.setErrMsg("fieldCode不能为空");
+			return result;
+		}
+		if (dao.deleteByFieldCode(fieldCode) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public List<RcDataDictionaryList> listByFieldCode(String fieldCode) {
-		return dao.listByFieldCode(fieldCode);
+	public Result<List<RcDataDictionaryList>> listByFieldCode(String fieldCode) {
+		Result<List<RcDataDictionaryList>> result = new Result<>();
+		if (!StringUtils.hasText(fieldCode)) {
+			result.setErrMsg("fieldCode");
+		}
+		List<RcDataDictionaryList> resultList = dao.listByFieldCode(fieldCode);
+		result.setResultData(resultList);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	public RcDataDictionaryList queryById(Long id) {
-		return dao.selectById(id);
+	public Result<RcDataDictionaryList> query(Long id) {
+		Result<RcDataDictionaryList> result = new Result<>();
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
+		}
+		RcDataDictionaryList dList = dao.select(id);
+		result.setResultData(dList);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	public int update(RcDataDictionaryList dList) {
-		return dao.updateById(dList);
+	public Result<RcDataDictionaryList> update(RcDataDictionaryList dList) {
+		Result<RcDataDictionaryList> result = new Result<>();
+		if (!StringUtils.hasText(dList.getFieldKey())) {
+			result.setErrMsg("fieldkey值不能为空");
+			return result;
+		}
+		if (!StringUtils.hasText(dList.getFieldValue())) {
+			result.setErrMsg("fieldvalue值不能为空");
+			return result;
+		}
+		if ((dList.getSort()) < 0) {
+			result.setErrMsg("sort值不能为空");
+			return result;
+		}
+		if (dao.update(dList) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public int updateForFieldCode(String fieldCodePremise, String fieldCode) {
-		return dao.updateByFieldCode(fieldCodePremise, fieldCode);
+	public Result<RcDataDictionaryList> updateForFieldCode(String fieldCodePremise, String fieldCode) {
+		Result<RcDataDictionaryList> result = new Result<>();
+		if (!StringUtils.hasText(fieldCodePremise)) {
+			result.setErrMsg("fieldCodePremise不能为空");
+			return result;
+		}
+		if (!StringUtils.hasText(fieldCode)) {
+			result.setErrMsg("fieldCode不能为空");
+			return result;
+		}
+		if (dao.updateByFieldCode(fieldCodePremise, fieldCode) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
-
-
 }

@@ -36,7 +36,7 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	private RcEmailAccountInfoMapper mapper;
 
 	@Override
-	public int deleteById(Long id) {
+	public int delete(Long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
@@ -66,20 +66,15 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public RcEmailAccountInfo selectById(Long id) {
+	public RcEmailAccountInfo select(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateById(RcEmailAccountInfo info) {
+	public int update(RcEmailAccountInfo info) {
 		String passwd = Base64Util.encrypt(info.getPasswd());
 		info.setPasswd(passwd);
 		info.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(info);
-	}
-
-	@Override
-	public RcEmailAccountInfo queryByRand() {
-		return null;
 	}
 }

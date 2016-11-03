@@ -44,7 +44,7 @@ public interface DataDictionaryListDao {
 	 * @param id
 	 * @return int
 	 */
-	int deleteById(Long id);
+	int delete(Long id);
 
 	/**
 	 * 
@@ -72,7 +72,7 @@ public interface DataDictionaryListDao {
 	 * @param id
 	 * @return RcDataDictionaryList
 	 */
-	RcDataDictionaryList selectById(Long id);
+	RcDataDictionaryList select(Long id);
 
 	/**
 	 * 
@@ -82,7 +82,7 @@ public interface DataDictionaryListDao {
 	 * @param example
 	 * @return int
 	 */
-	int updateById(RcDataDictionaryList dList);
+	int update(RcDataDictionaryList dList);
 	
 	/**
 	 * 根据fieldCode查询

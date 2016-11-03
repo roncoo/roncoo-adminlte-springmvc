@@ -49,7 +49,7 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	@Override
 	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize) {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
-		example.setOrderByClause("sort desc");
+		example.setOrderByClause("sort asc");
 		int totalCount = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
@@ -62,17 +62,17 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	}
 
 	@Override
-	public RcDataDictionary selectById(Long id) {
+	public RcDataDictionary select(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int deleteById(Long id) {
+	public int delete(Long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateById(RcDataDictionary dictionary) {
+	public int update(RcDataDictionary dictionary) {
 		dictionary.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(dictionary);
 	}

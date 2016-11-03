@@ -27,8 +27,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.service.EmailInfoService;
@@ -50,29 +52,87 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	private EmailInfoDao dao;
 
 	@Autowired
-	private JavaMailSenderImpl  javaMailSender;
+	private JavaMailSenderImpl javaMailSender;
 	@Autowired
 	private FreeMarkerConfigurer freeMarkerConfigurer;
 	@Autowired
 	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
 	@Override
-	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize) {
-		return dao.listForPage(pageCurrent, pageSize);
+	public Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize) {
+		Result<Page<RcEmailInfo>> result = new Result<>();
+		if (pageCurrent < 1) {
+			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
+			return result;
+		}
+		if (pageSize < 1) {
+			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
+			return result;
+		}
+		Page<RcEmailInfo> resultData = dao.listForPage(pageCurrent, pageSize);
+		result.setResultData(resultData);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	public void sendMail(RcEmailAccountInfo accountInfo, RcEmailInfo rcEmailInfo) {
-		//编辑发送器
+	public Result<RcEmailInfo> delete(Long id) {
+		Result<RcEmailInfo> result = new Result<>();
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
+		}
+		if (dao.delete(id) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
+	}
+
+	@Override
+	public Result<RcEmailInfo> query(Long id) {
+		Result<RcEmailInfo> result = new Result<>();
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
+		}
+		RcEmailInfo resultData = dao.select(id);
+		result.setResultData(resultData);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
+	}
+
+	@Override
+	public Result<RcEmailInfo> sendMail(RcEmailAccountInfo accountInfo, RcEmailInfo rcEmailInfo) {
+		Result<RcEmailInfo> result = new Result<>();
+		if(!StringUtils.hasText(rcEmailInfo.getToUser())){
+			result.setErrMsg("收件人不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(rcEmailInfo.getSubject())){
+			result.setErrMsg("主题不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(rcEmailInfo.getTitle())){
+			result.setErrMsg("标题不能为空");
+			return result;
+		}
+		// 编辑发送器
 		createMailSender(accountInfo);
-		
+
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("content", rcEmailInfo.getContent());
 		// 发送邮件
-		send(accountInfo.getFromUser(),rcEmailInfo.getToUser(), rcEmailInfo.getSubject(), map, TEMPLATE);
+		send(accountInfo.getFromUser(), rcEmailInfo.getToUser(), rcEmailInfo.getSubject(), map, TEMPLATE);
 		rcEmailInfo.setFromUser(accountInfo.getFromUser());
 		// 保存记录
-		dao.insert(rcEmailInfo);
+		if(dao.insert(rcEmailInfo)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	/**
@@ -82,32 +142,22 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	 * @param map
 	 * @param templatePath
 	 */
-	private void send(String fromUser,String to, String subject, Map<String, Object> map, String templatePath) {
+	private void send(String fromUser, String to, String subject, Map<String, Object> map, String templatePath) {
 		try {
 			// 从FreeMarker模板生成邮件内容
 			Template template = freeMarkerConfigurer.getConfiguration().getTemplate(templatePath);
 			String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, map);
-			this.threadPoolTaskExecutor.execute(new SendMailThread(fromUser,to, subject, text));
+			this.threadPoolTaskExecutor.execute(new SendMailThread(fromUser, to, subject, text));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private void createMailSender(RcEmailAccountInfo info){
+
+	private void createMailSender(RcEmailAccountInfo info) {
 		javaMailSender.setHost(info.getHost());
 		javaMailSender.setUsername(info.getFromUser());
 		String passwd = Base64Util.decode(info.getPasswd());
 		javaMailSender.setPassword(passwd);
-	}
-
-	@Override
-	public int deleteById(Long id) {
-		return dao.deleteById(id);
-	}
-
-	@Override
-	public RcEmailInfo queryById(Long id) {
-		return dao.selectById(id);
 	}
 
 	// 内部线程类，利用线程池异步发邮件。
@@ -117,7 +167,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 		private String subject;
 		private String content;
 
-		private SendMailThread(String fromUser,String to, String subject, String content) {
+		private SendMailThread(String fromUser, String to, String subject, String content) {
 			super();
 			this.fromUser = fromUser;
 			this.to = to;
@@ -127,12 +177,12 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 
 		@Override
 		public void run() {
-			send(fromUser,to, subject, content);
+			send(fromUser, to, subject, content);
 		}
 
 		private static final String NAME = "龙果学院";
 
-		public void send(String fromUser,String to, String subject, String text) {
+		public void send(String fromUser, String to, String subject, String text) {
 			try {
 				MimeMessage message = javaMailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");

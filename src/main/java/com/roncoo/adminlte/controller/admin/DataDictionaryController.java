@@ -40,96 +40,110 @@ import com.roncoo.adminlte.util.base.PageBean;
 @RequestMapping(value = "/admin/dataDictionary", method = RequestMethod.POST)
 public class DataDictionaryController extends BaseController {
 
-@Autowired
-private DataDictionaryBiz biz;
+	@Autowired
+	private DataDictionaryBiz biz;
 
-/**
- * 查看数据字典列表
- */
-@RequestMapping(value = LIST, method = RequestMethod.GET)
-public void list(@RequestParam(value = "pageCurrent", defaultValue = "1") int pageCurrent, @RequestParam(value = "pageSize", defaultValue = "20") int pageSize, ModelMap modelMap) {
-	Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
-	modelMap.put("page", page);
-}
+	/**
+	 * 查看数据字典列表
+	 */
+	@RequestMapping(value = LIST, method = RequestMethod.GET)
+	public void list() {
+	}
 
-@ResponseBody
-@RequestMapping(value = PAGE)
-public PageBean<RcDataDictionary> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize) {
-	int pageCurrent = (start / pageSize) + 1;
-	Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
-	return new PageBean<RcDataDictionary>(page);
-}
+	/**
+	 * 添加
+	 */
+	@RequestMapping(value = ADD, method = RequestMethod.GET)
+	public void add() {
+	}
 
-@RequestMapping(value = ADD, method = RequestMethod.GET)
-public void add() {
-}
+	/**
+	 * 分页查询
+	 * 
+	 * @param start
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = PAGE)
+	public PageBean<RcDataDictionary> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize) {
+		int pageCurrent = (start / pageSize) + 1;
+		Result<Page<RcDataDictionary>> result = biz.listForPage(pageCurrent, pageSize);
+		return new PageBean<RcDataDictionary>(result.getResultData());
+	}
 
-/**
- * 
- * 往数据字典中插入记录
- * 
- * @param dictionary
- * @return String
- */
-@RequestMapping(value = SAVE)
-public String save(@ModelAttribute RcDataDictionary rcDataDictionary, ModelMap modelMap) {
-	Result<RcDataDictionary> result = biz.save(rcDataDictionary);
-	if (result.isStatus()) {
+	/**
+	 * 
+	 * 往数据字典中插入记录
+	 * 
+	 * @param dictionary
+	 * @return String
+	 */
+	@RequestMapping(value = SAVE)
+	public String save(@ModelAttribute RcDataDictionary rcDataDictionary, ModelMap modelMap) {
+		Result<RcDataDictionary> result = biz.save(rcDataDictionary);
+		if (result.isStatus()) {
+			return redirect("/admin/dataDictionary/list");
+		}
+		return "admin/dataDictionary/list";
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param id
+	 * @param fieldCode
+	 * @return
+	 */
+	@RequestMapping(value = DELETE, method = RequestMethod.GET)
+	public String delete(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
+		biz.delete(id, fieldCode);
 		return redirect("/admin/dataDictionary/list");
 	}
-	// 失败
-	return "/admin/dataDictionary/list";
-}
 
-/**
- * 删除
- * 
- * @param id
- * @param fieldCode
- * @return
- */
-@RequestMapping(value = DELETE, method = RequestMethod.GET)
-public String delete(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
-	biz.delete(id, fieldCode);
-	return redirect("/admin/dataDictionary/list");
-}
-
-/**
- * 查看详细信息
- * 
- * @param id
- * @param modelMap
- */
-@RequestMapping(value = VIEW, method = RequestMethod.GET)
-public void view(@RequestParam(value = "id", defaultValue = "-1") Long id, ModelMap modelMap) {
-	Result<RcDataDictionary> result = biz.query(id);
-	if (result.isStatus()) {
-		System.out.println(result.getResultData().toString());
-		modelMap.put("dictionary", result.getResultData());
+	/**
+	 * 查看详细信息
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
+	@RequestMapping(value = VIEW, method = RequestMethod.GET)
+	public void view(@RequestParam(value = "id", defaultValue = "-1") Long id, ModelMap modelMap) {
+		Result<RcDataDictionary> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("dictionary", result.getResultData());
+		}
 	}
-}
 
-/**
- * 修改
- * 
- * @param id
- * @param modelMap
- */
-@RequestMapping(value = EDIT, method = RequestMethod.GET)
-public void edit(Long id, ModelMap modelMap) {
-	Result<RcDataDictionary> result = biz.query(id);
-	if (result.isStatus()) {
-		modelMap.put("dictionary", result.getResultData());
-	} else {
-		modelMap.put("dictionary", null);
+	/**
+	 * 编辑
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
+	@RequestMapping(value = EDIT, method = RequestMethod.GET)
+	public void edit(Long id, ModelMap modelMap) {
+		Result<RcDataDictionary> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("dictionary", result.getResultData());
+		}
 	}
-}
 
-@RequestMapping(value = UPDATE)
-public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
-	biz.update(dictionary, oldFieldCode);
-	// 更新之后，提示都没有
-	return redirect("/admin/dataDictionary/list");
+	/**
+	 * 更新
+	 * 
+	 * @param dictionary
+	 * @param oldFieldCode
+	 * @return
+	 */
+	@RequestMapping(value = UPDATE)
+	public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
+		Result<RcDataDictionary> result = biz.update(dictionary, oldFieldCode);
+		if (result.isStatus()) {
+			// 更新之后，提示都没有
+			return redirect("/admin/dataDictionary/list");
+		}
+		return "admin/dataDictionary/list";
 
-}
+	}
 }

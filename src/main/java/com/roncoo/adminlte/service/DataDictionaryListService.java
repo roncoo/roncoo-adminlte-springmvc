@@ -17,6 +17,7 @@ package com.roncoo.adminlte.service;
 
 import java.util.List;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.util.base.Page;
 
@@ -35,28 +36,28 @@ public interface DataDictionaryListService {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode);
+	Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode);
 
 	/**
 	 * 添加记录
 	 * 
 	 * @param dList
 	 */
-	int save(RcDataDictionaryList dList);
+	Result<RcDataDictionaryList> save(RcDataDictionaryList dList);
 
 	/**
 	 * 根据id删除
 	 * 
 	 * @param id
 	 */
-	int deleteById(Long id);
+	Result<RcDataDictionaryList> delete(Long id);
 
 	/**
 	 * 删除
 	 * 
 	 * @param dList
 	 */
-	int deleteByFieldCode(String fieldCode);
+	Result<RcDataDictionaryList> deleteByFieldCode(String fieldCode);
 
 	/**
 	 * 根据fieldCode查询
@@ -64,7 +65,7 @@ public interface DataDictionaryListService {
 	 * @param fieldCode
 	 * @return
 	 */
-	List<RcDataDictionaryList> listByFieldCode(String fieldCode);
+	Result<List<RcDataDictionaryList>> listByFieldCode(String fieldCode);
 
 	/**
 	 * 根据id查询
@@ -72,7 +73,7 @@ public interface DataDictionaryListService {
 	 * @param id
 	 * @return
 	 */
-	RcDataDictionaryList queryById(Long id);
+	Result<RcDataDictionaryList> query(Long id);
 
 	/**
 	 * 更新
@@ -80,7 +81,7 @@ public interface DataDictionaryListService {
 	 * @param dList
 	 * @return
 	 */
-	int update(RcDataDictionaryList dList);
+	Result<RcDataDictionaryList> update(RcDataDictionaryList dList);
 	
 	/**
 	 * 根据fieldCode更新
@@ -89,5 +90,5 @@ public interface DataDictionaryListService {
 	 * @param fieldCode
 	 * @return
 	 */
-	int updateForFieldCode(String fieldCodePremise,String fieldCode);
+	Result<RcDataDictionaryList> updateForFieldCode(String fieldCodePremise,String fieldCode);
 }

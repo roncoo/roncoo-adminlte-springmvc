@@ -48,7 +48,7 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public int deleteById(Long id) {
+	public int delete(Long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
@@ -78,12 +78,12 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public RcDataDictionaryList selectById(Long id) {
+	public RcDataDictionaryList select(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateById(RcDataDictionaryList dList) {
+	public int update(RcDataDictionaryList dList) {
 		dList.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(dList);
 	}

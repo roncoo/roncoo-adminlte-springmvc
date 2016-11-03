@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.biz.EmailAccountInfoBiz;
@@ -47,54 +48,115 @@ public class EmailAccountInfoController extends BaseController {
 	@Autowired
 	private EmailAccountInfoBiz biz;
 
+	/**
+	 * 列表
+	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
 	public void list() {
 	}
 
+	/**
+	 * 分页查询
+	 * 
+	 * @param start
+	 * @param pageSize
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = PAGE)
-	public PageBean<RcEmailAccountInfo> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
-			@RequestParam(value = "length", defaultValue = "10") int pageSize) {
+	public PageBean<RcEmailAccountInfo> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize) {
 		int pageCurrent = (start / pageSize) + 1;
-		Page<RcEmailAccountInfo> page = biz.listForPage(pageCurrent, pageSize);
-		return new PageBean<>(page);
+		Result<Page<RcEmailAccountInfo>> result = biz.listForPage(pageCurrent, pageSize);
+		return new PageBean<>(result.getResultData());
 	}
 
+	/**
+	 * 添加
+	 * 
+	 * @param modelMap
+	 */
 	@RequestMapping(value = ADD, method = RequestMethod.GET)
 	public void add(ModelMap modelMap) {
-		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
-		modelMap.put("selectList", select);
+		Result<List<RcDataDictionaryList>> result = biz.listByFieldCode(FIELDCODE);
+		if (result.isStatus()) {
+			modelMap.put("selectList", result.getResultData());
+		}
 	}
 
+	/**
+	 * 保存
+	 * 
+	 * @param info
+	 * @return
+	 */
 	@RequestMapping(value = SAVE)
 	public String insert(@ModelAttribute RcEmailAccountInfo info) {
-		biz.save(info);
-		return redirect("/admin/emailAccountInfo/list");
+		Result<RcEmailAccountInfo> result = biz.save(info);
+		if (result.isStatus()) {
+			return redirect("/admin/emailAccountInfo/list");
+		}
+		return "admin/emailAccountInfo/list";
 	}
 
+	/**
+	 * 删除
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam Long id) {
-		biz.deleteById(id);
-		return redirect("/admin/emailAccountInfo/list");
+		Result<RcEmailAccountInfo> result = biz.delete(id);
+		if (result.isStatus()) {
+			return redirect("/admin/emailAccountInfo/list");
+		}
+		return "admin/emailAccountInfo/list";
 	}
 
+	/**
+	 * 查看
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(@RequestParam Long id, ModelMap modelMap) {
-		RcEmailAccountInfo info = biz.queryById(id);
-		modelMap.put("info", info);
+		Result<RcEmailAccountInfo> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("info", result.getResultData());
+		}
 	}
 
+	/**
+	 * 编辑
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(@RequestParam Long id, ModelMap modelMap) {
-		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
-		RcEmailAccountInfo info = biz.queryById(id);
-		modelMap.put("selectList", select);
-		modelMap.put("info", info);
+		Result<List<RcDataDictionaryList>> dictionaryListResult = biz.listByFieldCode(FIELDCODE);
+		Result<RcEmailAccountInfo> emailAccountResult = biz.query(id);
+		if (dictionaryListResult.isStatus()) {
+			modelMap.put("selectList", dictionaryListResult.getResultData());
+		}
+		if (emailAccountResult.isStatus()) {
+			modelMap.put("info", emailAccountResult.getResultData());
+		}
 	}
 
+	/**
+	 * 更新
+	 * 
+	 * @param info
+	 * @return
+	 */
 	@RequestMapping(value = UPDATE)
 	public String update(@ModelAttribute RcEmailAccountInfo info) {
-		biz.update(info);
-		return redirect("/admin/emailAccountInfo/list");
+		Result<RcEmailAccountInfo> result = biz.update(info);
+		if (result.isStatus()) {
+			return redirect("/admin/emailAccountInfo/list");
+		}
+		return "admin/emailAccountInfo/list";
 	}
 }

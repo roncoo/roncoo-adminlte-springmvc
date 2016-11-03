@@ -41,34 +41,51 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		// 校验字段
 		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
-			
+			result.setErrMsg("fieldname不能为空");
+			return result;
 		}
 		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
-			
+			result.setErrMsg("fieldcode不能为空");
+			return result;
 		}
 		if (StringUtils.isEmpty(rcDataDictionary.getSort())) {
-			
+			result.setErrMsg("sort不能为空");
+			return result;
+		}
+		if(dao.insert(rcDataDictionary)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
 		}
 		return result;
 
-
 	}
 
 	@Override
-	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize) {
-		return dao.listForPage(pageCurrent, pageSize);
+	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize) {
+		Result<Page<RcDataDictionary>> result = new Result<Page<RcDataDictionary>>();
+		if (pageCurrent < 1) {
+			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
+			return result;
+		}
+		if (pageSize < 1) {
+			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
+			return result;
+		}
+		Page<RcDataDictionary> resultData = dao.listForPage(pageCurrent, pageSize);
+		result.setResultData(resultData);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	
-	public Result<RcDataDictionary> queryById(Long id) {
+	public Result<RcDataDictionary> query(Long id) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		if (id < 1) {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-
-		RcDataDictionary resultData = dao.selectById(id);
+		RcDataDictionary resultData = dao.select(id);
 		result.setStatus(true);
 		result.setErrCode(0);
 		result.setResultData(resultData);
@@ -76,48 +93,38 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
-	public int deleteById(Long id) {
-		Long temp = (long) -1;
+	public Result<RcDataDictionary> delete(Long id) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
-		if(id.equals(temp)){
-			if(dao.deleteById(id)>0){
-				result.setStatus(true);
-				result.setErrCode(0);
-			}else{
-				result.setErrMsg("删除操作失败");
-			}
-		}else{
-			result.setErrMsg("此操作的id："+id+"为无效id");
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
 		}
-		return 0;
+		if (dao.delete(id) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
 	public Result<RcDataDictionary> update(RcDataDictionary rcDataDictionary) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
-		// 校验字段
-		String errMsg = "";
-		// 校验字段
 		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
-			errMsg += "fieldname为空;";
+			result.setErrMsg("fieldname不能为空");
+			return result;
 		}
 		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
-			errMsg += "fieldcode为空;";
+			result.setErrMsg("fieldcode不能为空");
+			return result;
 		}
 		if (StringUtils.isEmpty(rcDataDictionary.getSort())) {
-			errMsg += "sort为空;";
+			result.setErrMsg("sort不能为空");
+			return result;
 		}
-		if (StringUtils.hasText(errMsg)) {
-			result.setErrMsg(errMsg);
-		} else {
-			if (dao.updateById(rcDataDictionary) > 0) {
-				result.setStatus(true);
-				result.setErrCode(0);
-			} else {
-				result.setErrMsg("数据字典更新失败");
-			}
+		if (dao.update(rcDataDictionary) > 0) {
+			result.setStatus(true);
+			result.setErrCode(0);
 		}
 		return result;
 	}
-
 }

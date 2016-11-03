@@ -48,14 +48,14 @@ public interface DataDictionaryDao {
 	 * @param id
 	 * @return
 	 */
-	RcDataDictionary selectById(Long id);
+	RcDataDictionary select(Long id);
 
 	/**
 	 * 根据id删除
 	 * 
 	 * @param id
 	 */
-	int deleteById(Long id);
+	int delete(Long id);
 
 	/**
 	 * 更新
@@ -63,6 +63,6 @@ public interface DataDictionaryDao {
 	 * @param dictionary
 	 * @return
 	 */
-	int updateById(RcDataDictionary dictionary);
+	int update(RcDataDictionary dictionary);
 
 }

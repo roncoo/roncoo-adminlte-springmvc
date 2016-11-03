@@ -17,7 +17,9 @@ package com.roncoo.adminlte.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
@@ -31,41 +33,98 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	private EmailAccountInfoDao dao;
 
 	@Override
-	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize) {
-		return dao.listForPage(pageCurrent, pageSize);
+	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize) {
+		Result<Page<RcEmailAccountInfo>> result = new Result<>();
+		if (pageCurrent < 1) {
+			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
+			return result;
+		}
+		if (pageSize < 1) {
+			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
+			return result;
+		}
+		Page<RcEmailAccountInfo> resultData = dao.listForPage(pageCurrent, pageSize);
+		result.setResultData(resultData);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	public RcEmailAccountInfo queryById(Long id) {
-		RcEmailAccountInfo info = dao.selectById(id);
-		String passwd = Base64Util.decode(info.getPasswd());
-		info.setPasswd(passwd);
-		return info;
+	public Result<RcEmailAccountInfo> query(Long id) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
+		}
+		
+		RcEmailAccountInfo resultData = dao.select(id);
+		//解密
+		String passwd = Base64Util.decode(resultData.getPasswd());
+		resultData.setPasswd(passwd);
+		
+		result.setResultData(resultData);
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	public int save(RcEmailAccountInfo info) {
-		return dao.insert(info);
+	public Result<RcEmailAccountInfo> save(RcEmailAccountInfo info) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if(!StringUtils.hasText(info.getFromUser())){
+			result.setErrMsg("用户名不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getHost())){
+			result.setErrMsg("host不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getPasswd())){
+			result.setErrMsg("授权码不能为空");
+			return result;
+		}
+		if(dao.insert(info)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public int updateById(RcEmailAccountInfo info) {
-		return dao.updateById(info);
+	public Result<RcEmailAccountInfo> delete(Long id) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if (id < 1) {
+			result.setErrMsg("此操作的id：" + id + "为无效id");
+			return result;
+		}
+		if(dao.delete(id)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteById(Long id) {
-		return dao.deleteById(id);
-	}
-
-	@Override
-	public RcEmailAccountInfo queryByRand() {
-		return dao.queryByRand();
-	}
-
-	@Override
-	public int update(RcEmailAccountInfo info) {
-		return dao.updateById(info);
+	public Result<RcEmailAccountInfo> update(RcEmailAccountInfo info) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if(!StringUtils.hasText(info.getFromUser())){
+			result.setErrMsg("用户名不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getHost())){
+			result.setErrMsg("host不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getPasswd())){
+			result.setErrMsg("授权码不能为空");
+			return result;
+		}
+		if(dao.update(info)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 }

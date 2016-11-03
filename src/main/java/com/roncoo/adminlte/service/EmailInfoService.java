@@ -15,6 +15,7 @@
  */
 package com.roncoo.adminlte.service;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.util.base.Page;
@@ -31,21 +32,14 @@ public interface EmailInfoService {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize);
-
-	/**
-	 * 发送邮件
-	 * 
-	 * @param rcEmailInfo
-	 */
-	void sendMail(RcEmailAccountInfo accountInfo, RcEmailInfo rcEmailInfo);
+	Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize);
 
 	/**
 	 * 根据id删除
 	 * 
 	 * @param id
 	 */
-	int deleteById(Long id);
+	Result<RcEmailInfo> delete(Long id);
 
 	/**
 	 * 根据id查询
@@ -53,5 +47,12 @@ public interface EmailInfoService {
 	 * @param id
 	 * @return
 	 */
-	RcEmailInfo queryById(Long id);
+	Result<RcEmailInfo> query(Long id);
+	
+	/**
+	 * 发送邮件
+	 * 
+	 * @param rcEmailInfo
+	 */
+	Result<RcEmailInfo> sendMail(RcEmailAccountInfo accountInfo, RcEmailInfo rcEmailInfo);
 }

@@ -22,6 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
@@ -44,7 +45,7 @@ public class EmailInfoBiz {
 	/**
 	 * 分页查询
 	 */
-	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize) {
+	public Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize) {
 		return emailInfoService.listForPage(pageCurrent, pageSize);
 	}
 
@@ -53,13 +54,13 @@ public class EmailInfoBiz {
 	 * 
 	 * @param infoVo
 	 */
-	public void sendMail(RcEmailInfoVo infoVo) {
+	public Result<RcEmailInfo> sendMail(RcEmailInfoVo infoVo) {
 		List<RcEmailAccountInfo> accountList = accountInfoCache.getList();
 		Random random = new Random();
 		int index = random.nextInt(accountList.size());
 		RcEmailInfo rcEmailInfo = new RcEmailInfo();
 		BeanUtils.copyProperties(infoVo, rcEmailInfo);
-		emailInfoService.sendMail(accountList.get(index), rcEmailInfo);
+		return emailInfoService.sendMail(accountList.get(index), rcEmailInfo);
 	}
 
 	/**
@@ -67,8 +68,8 @@ public class EmailInfoBiz {
 	 * 
 	 * @param id
 	 */
-	public void deleteById(Long id) {
-		emailInfoService.deleteById(id);
+	public Result<RcEmailInfo> delete(Long id) {
+		return emailInfoService.delete(id);
 	}
 
 	/**
@@ -77,7 +78,7 @@ public class EmailInfoBiz {
 	 * @param id
 	 * @return
 	 */
-	public RcEmailInfo queryById(Long id) {
-		return emailInfoService.queryById(id);
+	public Result<RcEmailInfo> query(Long id) {
+		return emailInfoService.query(id);
 	}
 }

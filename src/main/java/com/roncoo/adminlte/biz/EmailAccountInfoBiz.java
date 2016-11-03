@@ -20,6 +20,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.service.DataDictionaryListService;
@@ -47,7 +48,7 @@ public class EmailAccountInfoBiz {
 	 * @param pageSize
 	 * @return
 	 */
-	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize) {
+	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize) {
 		return emailAccountInfoService.listForPage(pageCurrent, pageSize);
 	}
 
@@ -56,8 +57,8 @@ public class EmailAccountInfoBiz {
 	 * 
 	 * @param rcEmailAccountInfo
 	 */
-	public void save(RcEmailAccountInfo info) {
-		emailAccountInfoService.save(info);
+	public Result<RcEmailAccountInfo> save(RcEmailAccountInfo info) {
+		return emailAccountInfoService.save(info);
 	}
 
 	/**
@@ -65,8 +66,8 @@ public class EmailAccountInfoBiz {
 	 * 
 	 * @param id
 	 */
-	public void deleteById(Long id) {
-		emailAccountInfoService.deleteById(id);
+	public Result<RcEmailAccountInfo> delete(Long id) {
+		return emailAccountInfoService.delete(id);
 	}
 
 	/**
@@ -75,8 +76,8 @@ public class EmailAccountInfoBiz {
 	 * @param id
 	 * @return
 	 */
-	public RcEmailAccountInfo queryById(Long id) {
-		return emailAccountInfoService.queryById(id);
+	public Result<RcEmailAccountInfo> query(Long id) {
+		return emailAccountInfoService.query(id);
 	}
 
 	/**
@@ -84,8 +85,8 @@ public class EmailAccountInfoBiz {
 	 * 
 	 * @param info
 	 */
-	public void update(RcEmailAccountInfo info) {
-		emailAccountInfoService.update(info);
+	public Result<RcEmailAccountInfo> update(RcEmailAccountInfo info) {
+		return emailAccountInfoService.update(info);
 	}
 
 	/**
@@ -94,7 +95,7 @@ public class EmailAccountInfoBiz {
 	 * @param fieldCode
 	 * @return
 	 */
-	public List<RcDataDictionaryList> listByFieldCode(String fieldCode) {
+	public Result<List<RcDataDictionaryList>> listByFieldCode(String fieldCode) {
 		return dictionaryListService.listByFieldCode(fieldCode);
 	}
 

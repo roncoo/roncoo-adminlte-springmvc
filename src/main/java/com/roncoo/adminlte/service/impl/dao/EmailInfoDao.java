@@ -46,12 +46,12 @@ public interface EmailInfoDao {
 	 * 
 	 * @param id
 	 */
-	int deleteById(Long id);
+	int delete(Long id);
 
 	/**
 	 * 根据id查询
 	 * 
 	 * @param id
 	 */
-	RcEmailInfo selectById(Long id);
+	RcEmailInfo select(Long id);
 }

@@ -41,7 +41,7 @@ public interface DataDictionaryService {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize);
+	Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize);
 
 	/**
 	 * 根据id查询
@@ -49,14 +49,14 @@ public interface DataDictionaryService {
 	 * @param id
 	 * @return
 	 */
-	Result<RcDataDictionary> queryById(Long id);
+	Result<RcDataDictionary> query(Long id);
 
 	/**
 	 * 根据id进行删除
 	 * 
 	 * @param id
 	 */
-	int deleteById(Long id);
+	Result<RcDataDictionary> delete(Long id);
 
 	/**
 	 * 更新
