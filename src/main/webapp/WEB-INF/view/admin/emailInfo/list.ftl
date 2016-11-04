@@ -3,6 +3,10 @@
 		<div class="box">
 		<div class="box-header">
 			<h3 class="box-title">邮件列表</h3>
+			<div class="box-tools pull-right">
+					<a id="emailInfo-send" class="btn btn-sm btn-primary" target="modal" modal="lg"
+						href="${ctx}/admin/emailInfo/add">发送</a>
+				</div>
 		</div>
         <div class="box-body">
         	<div class="clearfix">
@@ -121,6 +125,11 @@ $(function () {
 	//点击删除确认后，删除并刷新
 	$(".btn-del").click(function(){
 		reloadTable(emailInfo_tab);
+	});
+	
+	
+	$("#emailInfo-send").on('click',function(){
+		list_ajax = emailInfo_tab;
 	});
 	
 	$("#emailInfo-seek").on("click",function(){

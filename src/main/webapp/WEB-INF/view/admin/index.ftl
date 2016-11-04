@@ -143,14 +143,14 @@
 									<i class="fa fa-inbox"></i> <span>发件箱</span>
 								</a>
 							</li>
-							<li>
+							<!--<li>
 								<a target="navTab" href="${ctx}/admin/emailInfo/add">
 									<i class="fa fa-envelope-o"></i> 发送
 								</a>
-							</li>
+							</li>-->
 							<li>
 								<a target="navTab" href="${ctx}/admin/emailAccountInfo/list">
-									<i class="fa fa-circle-o"></i> 账号信息
+									<i class="fa fa-circle-o"></i> 账号管理
 								</a>
 							</li>
 						</ul>
