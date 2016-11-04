@@ -36,7 +36,7 @@ public interface DataDictionaryListService {
 	 * @param pageSize
 	 * @return
 	 */
-	Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode);
+	Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode,String premise,String datePremise);
 
 	/**
 	 * 添加记录

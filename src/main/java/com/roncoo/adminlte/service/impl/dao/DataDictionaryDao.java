@@ -40,7 +40,7 @@ public interface DataDictionaryDao {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize);
+	Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize,String premise,String datePremise);
 
 	/**
 	 * 根据id查询

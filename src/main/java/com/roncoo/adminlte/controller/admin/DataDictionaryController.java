@@ -66,9 +66,9 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = PAGE)
-	public PageBean<RcDataDictionary> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize) {
+	public PageBean<RcDataDictionary> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize,@RequestParam(value="date",required=false)String  date,@RequestParam(value="search",required=false)String search) {
 		int pageCurrent = (start / pageSize) + 1;
-		Result<Page<RcDataDictionary>> result = biz.listForPage(pageCurrent, pageSize);
+		Result<Page<RcDataDictionary>> result = biz.listForPage(pageCurrent, pageSize,search,date);
 		return new PageBean<RcDataDictionary>(result.getResultData());
 	}
 

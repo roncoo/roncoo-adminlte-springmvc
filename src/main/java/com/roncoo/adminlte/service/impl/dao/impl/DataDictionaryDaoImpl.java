@@ -20,9 +20,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample;
+import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.DataDictionaryDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcDataDictionaryMapper;
 import com.roncoo.adminlte.util.base.Page;
@@ -47,15 +49,27 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	}
 
 	@Override
-	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize) {
+	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
 		example.setOrderByClause("sort asc");
+		
 		int totalCount = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
 		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
+		
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
+		
+		Criteria criteria = example.createCriteria();
+		if(StringUtils.hasText(premise)){
+			criteria.andFieldNameLike(SqlUtil.like(premise));
+		}
+		if(StringUtils.hasText(datePremise)){
+			Date date = SqlUtil.formatTime(datePremise);
+			criteria.andCreateTimeBetween(date, SqlUtil.addDay(date,1));
+		}
+		
 		List<RcDataDictionary> list = mapper.selectByExample(example);
 		Page<RcDataDictionary> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 		return page;

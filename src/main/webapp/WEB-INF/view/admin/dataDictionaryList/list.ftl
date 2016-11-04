@@ -10,26 +10,25 @@
 			</div>
 			<div class="box-body">
 				<div class="clearfix">
-					<div class="col-md-4">
-						<div class="input-group date ">
-							<div class="input-group-addon">
-								<i class="fa fa-calendar"></i>
-							</div>
-							<input type="text" class="form-control pull-right" id="tableParam">
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="input-group">
-							<span class="input-group-addon"><i class="fa fa-search"></i></span>
-							<input type="text" class="form-control" id="search">
-						</div>
-					</div>
-					<div class="col-md-4">
-						<button type="submit" id="submitExample4" class="btn btn-primary">Submit</button>
-						<a class="btn btn-default" target="navTab" href="/include/index.html?cid=123">更多</a>
-					</div>
-				</div>
-				<table id="dataDictionaryList_tab" class="table table-bordered table-striped">
+	        	<div class="col-md-4">
+			        <div class="input-group date ">
+	                  <div class="input-group-addon">
+	                    <i class="fa fa-calendar"></i>
+	                  </div>
+	                  <input type="text" class="form-control pull-right" id="tableParam" placeholder="选择时间...">
+	                </div>
+	        	</div>
+	        	<div class="col-md-4">
+	        		<div class="input-group">
+		                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+		                <input type="text" class="form-control" id="search" placeholder="根据关键词搜索...">
+		            </div>
+	        	</div>
+	        	<div class="col-md-4">
+	        		<button type="button" id="dictionaryList-seek" class="btn btn-primary">搜索</button>
+	        	</div>
+        	</div>
+				<table id="dictionaryList_tab" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th>序号</th>
@@ -74,7 +73,7 @@
 
 		//初始化表格
 		var No = 0;
-		var dataDictionaryList_tab = $('#dataDictionaryList_tab')
+		var dictionaryList_tab = $('#dictionaryList_tab')
 				.DataTable(
 						{
 							"dom" : 'itflp',
@@ -130,7 +129,7 @@
 										"render" : function(data) {
 											return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/dataDictionaryList/view?id='
 													+ data.id
-													+ '">查看</a>&nbsp;<a class="btn btn-xs btn-info btn-edit" target="modal" modal="lg" href="${ctx}/admin/dataDictionaryList/edit?id='
+													+ '">查看</a>&nbsp;<a class="btn btn-xs btn-info dictionaryList-edit" target="modal" modal="lg" href="${ctx}/admin/dataDictionaryList/edit?id='
 													+ data.id
 													+ '&dId=${id}">修改</a>&nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/dataDictionaryList/delete?id='
 													+ data.id
@@ -143,16 +142,20 @@
 
 		//点击删除确认时，删除后刷新
 		$(".btn-del").click(function() {
-			reloadTable(dataDictionaryList_tab);
+			reloadTable(dictionaryList_tab);
 		});
 		
 		$("#list_add").click(function(){
-			list_ajax = dataDictionaryList_tab;
+			list_ajax = dictionaryList_tab;
 		});
 		
-		$(".btn-info").on("click",function(){
-			list_ajax = dataDictionaryList_tab;
-		});
+		//动态生成的元素需要这样做点击事件
+	    $(document).on("click", ".dictionaryList-edit", function() {  
+	    	list_ajax = dictionaryList_tab;
+	    }); 
 		
+	    $(document).on("click", "#dictionaryList-seek", function() { 
+	    	reloadTable(dictionaryList_tab);
+	    });
 	});
 </script>

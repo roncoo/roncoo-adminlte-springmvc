@@ -63,9 +63,9 @@ public class EmailInfoController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = PAGE)
-	public PageBean<RcEmailInfo> queryForList(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize) {
+	public PageBean<RcEmailInfo> queryForList(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize,@RequestParam(value="date",required=false)String  date,@RequestParam(value="search",required=false)String search) {
 		int pageCurrent = (start/pageSize)+1;
-		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize);
+		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize,search,date);
 		return new PageBean<RcEmailInfo>(result.getResultData());
 	}
 

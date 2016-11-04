@@ -48,8 +48,8 @@ public class EmailAccountInfoBiz {
 	 * @param pageSize
 	 * @return
 	 */
-	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize) {
-		return emailAccountInfoService.listForPage(pageCurrent, pageSize);
+	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
+		return emailAccountInfoService.listForPage(pageCurrent, pageSize,premise,datePremise);
 	}
 
 	/**

@@ -42,8 +42,9 @@ public class DataDictionaryListBiz {
 	 * @param id
 	 * @return
 	 */
-	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode) {
-		return dictionaryListService.listForPage(pageCurrent, pageSize, fieldCode);
+	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode,String premise,String datePremise) {
+		System.out.println("biz >>>>search:"+premise+"date:"+datePremise);
+		return dictionaryListService.listForPage(pageCurrent, pageSize, fieldCode,premise,datePremise);
 	}
 
 	/**

@@ -39,7 +39,7 @@ public interface EmailInfoDao {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize);
+	Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize,String premise,String datePremise);
 
 	/**
 	 * 根据id删除

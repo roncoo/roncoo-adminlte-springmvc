@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
@@ -61,7 +62,8 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode) {
+	public Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode,String premise,String datePremise) {
+		System.out.println("dao >>>>search:"+premise+"date:"+datePremise);
 		RcDataDictionaryListExample example = new RcDataDictionaryListExample();
 		example.setOrderByClause("sort desc");
 		int totalCount = mapper.countByExample(example);
@@ -72,6 +74,13 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 		example.setPageSize(pageSize);
 		Criteria criteria = example.createCriteria();
 		criteria.andFieldCodeEqualTo(fieldCode);
+		if(StringUtils.hasText(premise)){
+			criteria.andFieldKeyLike(SqlUtil.like(premise));
+		}
+		if(StringUtils.hasText(datePremise)){
+			Date date = SqlUtil.formatTime(datePremise);
+			criteria.andCreateTimeBetween(date, SqlUtil.addDay(date, 1));
+		}
 		List<RcDataDictionaryList> list = mapper.selectByExample(example);
 		Page<RcDataDictionaryList> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 		return page;

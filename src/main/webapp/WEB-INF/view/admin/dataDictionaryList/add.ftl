@@ -28,7 +28,7 @@
 		             </div>
 	              	<div class="box-footer">
 	                	<button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
-	                	<button id="dataDictionaryList_add" type="button" class="btn btn-info pull-right" data-dismiss="modal">更新</button>
+	                	<button id="dataDictionaryList_add" type="button" class="btn btn-info pull-right" data-dismiss="modal">添加</button>
            			</div>
 				</form>
 			</div>

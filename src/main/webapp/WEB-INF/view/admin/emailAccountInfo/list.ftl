@@ -15,17 +15,17 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input type="text" class="form-control pull-right" id="tableParam">
+							<input type="text" class="form-control pull-right" id="tableParam" placeholder="选择时间...">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-search"></i></span>
-							<input type="text" class="form-control" id="search">
+							<input type="text" class="form-control" id="search" placeholder="根据账号搜索...">
 						</div>
 					</div>
 					<div class="col-md-4">
-						<button type="submit" id="submitExample4" class="btn btn-primary">Submit</button>
+						<button type="submit" id="emailAccountInfo-seek" class="btn btn-primary">搜索</button>
 					</div>
 				</div>
 				<table id="emailAccountInfo_tab" class="table table-bordered table-striped">
@@ -133,12 +133,16 @@ $(function() {
 		reloadTable(emailAccountInfo_tab);
 	});
 	
-	$("a").on('click',function(){
-		alert("點擊");
-	});
+	//动态生成的元素需要这样做点击事件
+    $(document).on("click", ".account_edit", function() {  
+    	list_ajax = emailAccountInfo_tab;
+    }); 
 	
 	$("#account_add").on('click',function(){
 		list_ajax = emailAccountInfo_tab;
+	});
+	$("#emailAccountInfo-seek").on("click",function(){
+		reloadTable(emailAccountInfo_tab);
 	});
 });
 </script>

@@ -38,7 +38,8 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 	private DataDictionaryListDao dao;
 
 	@Override
-	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode) {
+	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode,String premise,String datePremise) {
+		System.out.println("Service >>>>search:"+premise+"date:"+datePremise);
 		Result<Page<RcDataDictionaryList>> result = new Result<>();
 		if (pageCurrent < 1) {
 			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
@@ -52,7 +53,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 			result.setErrMsg("fieldCode不能为空");
 			return result;
 		}
-		Page<RcDataDictionaryList> resultData = dao.listForPage(pageCurrent, pageSize, fieldCode);
+		Page<RcDataDictionaryList> resultData = dao.listForPage(pageCurrent, pageSize, fieldCode,premise,datePremise);
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);

@@ -20,9 +20,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
+import com.roncoo.adminlte.bean.entity.RcEmailInfoExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.EmailInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailInfoMapper;
 import com.roncoo.adminlte.util.base.Page;
@@ -46,15 +48,27 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	}
 
 	@Override
-	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize) {
+	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
 		RcEmailInfoExample example = new RcEmailInfoExample();
 		example.setOrderByClause(" id desc ");
+		
 		int count = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(count, pageSize, pageCurrent);
 		int totalPage = SqlUtil.countTotalPage(count, pageSize);
+		
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
+		
+		Criteria criteria = example.createCriteria();
+		if(StringUtils.hasText(premise)){
+			criteria.andToUserLike(SqlUtil.like(premise));
+		}
+		if(StringUtils.hasText(datePremise)){
+			Date date = SqlUtil.formatTime(datePremise);
+			criteria.andCreateTimeBetween(date, SqlUtil.addDay(date,1));
+		}
+		
 		List<RcEmailInfo> list = mapper.selectByExample(example);
 		return new Page<RcEmailInfo>(count, totalPage, pageCurrent, pageSize, list);
 	}

@@ -44,8 +44,8 @@ public class EmailInfoBiz {
 	/**
 	 * 分页查询
 	 */
-	public Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize) {
-		return emailInfoService.listForPage(pageCurrent, pageSize);
+	public Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
+		return emailInfoService.listForPage(pageCurrent, pageSize,premise,datePremise);
 	}
 
 	/**

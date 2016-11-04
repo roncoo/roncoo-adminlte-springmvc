@@ -11,17 +11,17 @@
 						<div class="input-group-addon">
 	                    	<i class="fa fa-calendar"></i>
 	                  	</div>
-	                  	<input type="text" class="form-control pull-right" id="tableParam">
+	                  	<input type="text" class="form-control pull-right" id="tableParam" placeholder="选择时间...">
 	                </div>
 	        	</div>
 	        	<div class="col-md-4">
 	        		<div class="input-group">
 		                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-		                <input type="text" class="form-control" id="search">
+		                <input type="text" class="form-control" id="search" placeholder="根据收件人搜索...">
 		            </div>
 	        	</div>
 	        	<div class="col-md-4">
-	        		<button type="submit" id="submitExample4" class="btn btn-primary">Submit</button>
+	        		<button type="button" id="emailInfo-seek" class="btn btn-primary">搜索</button>
 	        	</div>
         	</div>
         	
@@ -120,6 +120,10 @@ $(function () {
 
 	//点击删除确认后，删除并刷新
 	$(".btn-del").click(function(){
+		reloadTable(emailInfo_tab);
+	});
+	
+	$("#emailInfo-seek").on("click",function(){
 		reloadTable(emailInfo_tab);
 	});
 });

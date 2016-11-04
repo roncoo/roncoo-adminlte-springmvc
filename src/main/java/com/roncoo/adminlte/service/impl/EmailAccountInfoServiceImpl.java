@@ -33,7 +33,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	private EmailAccountInfoDao dao;
 
 	@Override
-	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize) {
+	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
 		Result<Page<RcEmailAccountInfo>> result = new Result<>();
 		if (pageCurrent < 1) {
 			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
@@ -43,7 +43,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
 			return result;
 		}
-		Page<RcEmailAccountInfo> resultData = dao.listForPage(pageCurrent, pageSize);
+		Page<RcEmailAccountInfo> resultData = dao.listForPage(pageCurrent, pageSize,premise,datePremise);
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);

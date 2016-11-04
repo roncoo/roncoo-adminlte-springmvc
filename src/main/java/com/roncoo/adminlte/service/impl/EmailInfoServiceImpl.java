@@ -59,7 +59,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
 	@Override
-	public Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize) {
+	public Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
 		Result<Page<RcEmailInfo>> result = new Result<>();
 		if (pageCurrent < 1) {
 			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
@@ -69,7 +69,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
 			return result;
 		}
-		Page<RcEmailInfo> resultData = dao.listForPage(pageCurrent, pageSize);
+		Page<RcEmailInfo> resultData = dao.listForPage(pageCurrent, pageSize,premise,datePremise);
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);
