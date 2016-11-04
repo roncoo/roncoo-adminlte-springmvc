@@ -187,7 +187,7 @@ public class SqlUtil {
 	public static Date formatTime(String dateStr) {
 		Date date = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			date = sdf.parse(dateStr);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -201,14 +201,27 @@ public class SqlUtil {
 	 * @param date
 	 * @return
 	 */
-	public static Date addDay(Date date,int day) {
+	public static Date addDay(Date date, int day) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal.add(Calendar.DAY_OF_YEAR, day);
 		return cal.getTime();
 	}
+
+	/**
+	 * 模糊查询
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String like(String str) {
+		return "%" + str + "%";
+	}
 	
-	public static String like(String str){
-		return "%"+str+"%";
+	public static void main(String[] args) {
+		String dateStr = "11/02/2016";
+		Date date = formatTime(dateStr);
+		System.out.println(date);
+	
 	}
 }
