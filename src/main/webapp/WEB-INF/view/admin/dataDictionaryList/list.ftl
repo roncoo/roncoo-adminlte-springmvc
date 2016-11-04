@@ -67,7 +67,7 @@
 <script type="text/javascript">
 	$(function() {
 		//Date picker
-		$('#tableParam').datepicker({
+		$('#seekTime').datepicker({
 			autoclose : true
 		});
 
