@@ -63,7 +63,6 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 
 	@Override
 	public Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode,String premise,String datePremise) {
-		System.out.println("dao >>>>search:"+premise+"date:"+datePremise);
 		RcDataDictionaryListExample example = new RcDataDictionaryListExample();
 		example.setOrderByClause("sort desc");
 		int totalCount = mapper.countByExample(example);

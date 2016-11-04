@@ -39,7 +39,6 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 
 	@Override
 	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode,String premise,String datePremise) {
-		System.out.println("Service >>>>search:"+premise+"date:"+datePremise);
 		Result<Page<RcDataDictionaryList>> result = new Result<>();
 		if (pageCurrent < 1) {
 			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);

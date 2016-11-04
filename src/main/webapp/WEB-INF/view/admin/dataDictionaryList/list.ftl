@@ -15,13 +15,13 @@
 	                  <div class="input-group-addon">
 	                    <i class="fa fa-calendar"></i>
 	                  </div>
-	                  <input type="text" class="form-control pull-right" id="tableParam" placeholder="选择时间...">
+	                  <input type="text" class="form-control pull-right"  id="seekTime"  placeholder="选择时间...">
 	                </div>
 	        	</div>
 	        	<div class="col-md-4">
 	        		<div class="input-group">
 		                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-		                <input type="text" class="form-control" id="search" placeholder="根据关键词搜索...">
+		                <input type="text" class="form-control" id="premise" placeholder="根据关键词搜索...">
 		            </div>
 	        	</div>
 	        	<div class="col-md-4">
@@ -155,7 +155,17 @@
 	    }); 
 		
 	    $(document).on("click", "#dictionaryList-seek", function() { 
-	    	reloadTable(dictionaryList_tab);
+ 	    	reloadTab(dictionaryList_tab);
 	    });
+	    function reloadTab(oTable) {
+			var date = $("#seekTime").val();
+			var search = $("#premise").val();
+			var param = {
+				"date" : date,
+				"search" : search
+			};
+			oTable.settings()[0].ajax.data = param;
+			oTable.ajax.reload();
+		}
 	});
 </script>
