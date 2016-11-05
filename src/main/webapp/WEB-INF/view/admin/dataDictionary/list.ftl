@@ -1,73 +1,68 @@
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">数据字典明细功能</h3>
-          <div class="box-tools pull-right">
+<div class="row">
+	<div class="col-xs-12">
+	   <div class="box">
+	     <div class="box-header">
+	       <h3 class="box-title">数据字典明细功能</h3>
+	       <div class="box-tools pull-right">
 				<a id="dictionary_add" class="btn btn-sm btn-primary"  target="modal" modal="lg" href="${ctx}/admin/dataDictionary/add">添加</a>
 			</div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-        	<div class="clearfix">
-	        	<div class="col-md-4">
-			        <div class="input-group date ">
-	                  <div class="input-group-addon">
-	                    <i class="fa fa-calendar"></i>
-	                  </div>
-	                  <input type="text" class="form-control pull-right" id=dictionary-time placeholder="选择时间...">
-	                </div>
-	        	</div>
-	        	<div class="col-md-4">
-	        		<div class="input-group">
-		                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-		                <input type="text" class="form-control" id="dictionary-premise" placeholder="根据字段名搜索...">
-		            </div>
-	        	</div>
-	        	<div class="col-md-4">
-	        		<button type="button" id="dictionary-seek" class="btn btn-primary">搜索</button>
-	        	</div>
-        	</div>
+	     </div>
+	     <div class="box-body">
+	     	<div class="clearfix">
+		      	<div class="col-md-4">
+		        <div class="input-group date ">
+		                <div class="input-group-addon">
+		                  <i class="fa fa-calendar"></i>
+		                </div>
+		                <input type="text" class="form-control pull-right" id=dictionary-time placeholder="选择时间...">
+		              </div>
+		      	</div>
+		      	<div class="col-md-4">
+		      		<div class="input-group">
+		               <span class="input-group-addon"><i class="fa fa-search"></i></span>
+		               <input type="text" class="form-control" id="dictionary-premise" placeholder="根据字段名搜索...">
+		           </div>
+		      	</div>
+		      	<div class="col-md-4">
+		      		<button type="button" id="dictionary-seek" class="btn btn-primary">搜索</button>
+		      	</div>
+	     	</div>
 			<table id="dictionary_tab" class="table table-bordered table-striped" >
-		        <thead>
-		            <tr>
-						<th>序号</th>
-						<th>字段名</th>
-						<th>排序</th>
-						<th>备注</th>
-						<th>创建时间</th>
-						<th>操作</th>
-						</tr>
-		        </thead>
-		    </table>
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-    </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
+		       <thead>
+		           <tr>
+					<th>序号</th>
+					<th>字段名</th>
+					<th>排序</th>
+					<th>备注</th>
+					<th>创建时间</th>
+					<th>操作</th>
+					</tr>
+		       </thead>
+		   </table>
+	     </div>
+	   </div>
+	</div>
+</div>
 
 <div class="modal fade" id="deleteUser">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">提示</h4>
-      </div>
-      <div class="modal-body">
-        <p>确认删除？</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">确认</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
+	<div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">×</span></button>
+	        <h4 class="modal-title">提示</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>确认删除？</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">确认</button>
+	      </div>
+	    </div>
+	</div>
+</div>
+  
 <script>
   $(function () {
     //Date picker

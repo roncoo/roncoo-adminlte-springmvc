@@ -1,4 +1,3 @@
-<#include "/macro/base.ftl" /> <@validation/>
 <div class="row">
 	<div class="col-md-12">
 		<form id="emailInfo-send-form" method="post">
@@ -24,7 +23,7 @@
 				<div class="box-footer">
 	                	<button type="button" class="btn btn-default"  data-dismiss="modal">取消</button>
 	                	<button id="emailInfo_send" type="button" class="btn btn-info pull-right" data-dismiss="modal">发送</button>
-           			</div>
+           		</div>
 			</div>
 		</form>
 	</div>

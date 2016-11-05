@@ -7,7 +7,6 @@
 					<a id="account_add" class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/emailAccountInfo/add">添加</a>
 				</div>
 			</div>
-			<!-- /.box-header -->
 			<div class="box-body">
 				<div class="clearfix">
 					<div class="col-md-4">
@@ -41,13 +40,10 @@
 					</thead>
 				</table>
 			</div>
-			<!-- /.box-body -->
 		</div>
-		<!-- /.box -->
 	</div>
-<!-- /.col -->
 </div>
-<!-- /.row -->
+
 <div class="modal fade" id="deleteUser">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
@@ -64,11 +60,11 @@
 			</div>
 		</div>
 	</div>
-	<!-- /.modal-content -->
 </div>
-<script>
+
+<script type="text/javascript">
 $(function() {
-	//Date picker
+	//初始化时间选择器
 	$('#accountInfo-time').datepicker({
 		autoclose : true
 	});

@@ -4,30 +4,29 @@
 			<div class="box-header">
 				<h3 class="box-title">数据字典明细列表</h3>
 				<div class="box-tools pull-right">
-					<a id="list_add" class="btn btn-sm btn-primary" target="modal" modal="lg"
-						href="${ctx}/admin/dataDictionaryList/add?id=${id}&fieldCode=${fieldCode}">添加</a>
+					<a id="list_add" class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/dataDictionaryList/add?id=${id}&fieldCode=${fieldCode}">添加</a>
 				</div>
 			</div>
 			<div class="box-body">
 				<div class="clearfix">
-	        	<div class="col-md-4">
-			        <div class="input-group date ">
-	                  <div class="input-group-addon">
-	                    <i class="fa fa-calendar"></i>
-	                  </div>
-	                  <input type="text" class="form-control pull-right"  id="dictionaryList-time"  placeholder="选择时间...">
-	                </div>
-	        	</div>
-	        	<div class="col-md-4">
-	        		<div class="input-group">
-		                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-		                <input type="text" class="form-control" id="dictionaryList-premise" placeholder="根据关键词搜索...">
-		            </div>
-	        	</div>
-	        	<div class="col-md-4">
-	        		<button type="button" id="dictionaryList-seek" class="btn btn-primary">搜索</button>
-	        	</div>
-        	</div>
+		        	<div class="col-md-4">
+				        <div class="input-group date ">
+		                  <div class="input-group-addon">
+		                    <i class="fa fa-calendar"></i>
+		                  </div>
+		                  <input type="text" class="form-control pull-right"  id="dictionaryList-time"  placeholder="选择时间...">
+		                </div>
+		        	</div>
+		        	<div class="col-md-4">
+		        		<div class="input-group">
+			                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+			                <input type="text" class="form-control" id="dictionaryList-premise" placeholder="根据关键词搜索...">
+			            </div>
+		        	</div>
+		        	<div class="col-md-4">
+		        		<button type="button" id="dictionaryList-seek" class="btn btn-primary">搜索</button>
+		        	</div>
+        		</div>
 				<table id="dictionaryList_tab" class="table table-bordered table-striped">
 					<thead>
 						<tr>
@@ -62,8 +61,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- /.modal-content -->
 </div>
+
 <script type="text/javascript">
 	$(function() {
 		//Date picker

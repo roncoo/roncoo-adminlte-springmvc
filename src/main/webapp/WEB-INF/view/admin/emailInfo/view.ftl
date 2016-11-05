@@ -25,6 +25,7 @@
 		                <tr>
 		                  <td style="min-height:300px">正文</td>
 		                  <td>${info.content}</td>
+		                 </tr>
 		              </table>
 	             </div>
 			</div>
