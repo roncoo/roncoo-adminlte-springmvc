@@ -460,9 +460,9 @@
 	<script type="text/javascript">
 		var list_ajax;
 		//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
-		window.reloadTable = function(oTable) {
-			var date = $("#tableParam").val();
-			var search = $("#search").val();
+		window.reloadTable = function(oTable,datePremise,premise) {
+			var date = $(datePremise).val();
+			var search = $(premise).val();
 			var param = {
 				"date" : date,
 				"search" : search

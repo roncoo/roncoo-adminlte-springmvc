@@ -69,7 +69,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#emailAccountInfo-add-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(list_ajax);
+	        	reloadTable(list_ajax,"#accountInfo-time","#accountInfo-premise");
 	        }
    		};
     $.ajax(options);

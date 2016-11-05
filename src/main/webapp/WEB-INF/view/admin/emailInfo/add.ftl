@@ -67,7 +67,7 @@
 		        data: $("#emailInfo-send-form").serialize(),
 		        success: function (data) {
 		        	console.log(data)
-		        	reloadTable(list_ajax);
+		        	reloadTable(list_ajax,"#emailInfo-time","#emailInfo-premise");
 		        }
 	   		};
 	    $.ajax(options);

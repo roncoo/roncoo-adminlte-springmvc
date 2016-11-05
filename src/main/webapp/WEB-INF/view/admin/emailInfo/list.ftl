@@ -15,13 +15,13 @@
 						<div class="input-group-addon">
 	                    	<i class="fa fa-calendar"></i>
 	                  	</div>
-	                  	<input type="text" class="form-control pull-right" id="tableParam" placeholder="选择时间...">
+	                  	<input type="text" class="form-control pull-right" id="emailInfo-time" placeholder="选择时间...">
 	                </div>
 	        	</div>
 	        	<div class="col-md-4">
 	        		<div class="input-group">
 		                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-		                <input type="text" class="form-control" id="search" placeholder="根据收件人搜索...">
+		                <input type="text" class="form-control" id="emailInfo-premise" placeholder="根据收件人搜索...">
 		            </div>
 	        	</div>
 	        	<div class="col-md-4">
@@ -68,7 +68,7 @@
 <script>
 $(function () {
     //Date picker
-    $('#tableParam').datepicker({
+    $('#emailInfo-time').datepicker({
       autoclose: true
     });
     
@@ -89,7 +89,7 @@ $(function () {
             { "data": "fromUser" },
             { "data": "toUser" },
             { "data": "subject" },
-            { "data": null },
+            { "data": "createTime" },
             { "data": null }
         ],
         "columnDefs": [
@@ -101,36 +101,6 @@ $(function () {
 						        return No;
 						    }
 						},
-                       {
-                           targets: 4,
-                           data: "createTime",
-                           render: function (data) {
-                        	   var now = new Date(parseInt(data.createTime) * 1);
-							   now =  now.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
-							   if(now.indexOf("下午") > 0) {
-								    
-								    var temp1 = now.substring(0,now.indexOf("下午"));   //2014/7/6
-								    var temp2 = now.substring(now.indexOf("下午")+2,now.length);  // 5:17:43
-								    var temp3 = temp2.substring(0,1);    //  5
-								    var temp4 = parseInt(temp3); // 5
-								    temp4 = 12 + temp4;  // 17
-								   }
-							   if(now.indexOf("上午") > 0) {
-								    
-								   var temp1 = now.substring(0,now.indexOf("上午"));   //2014/7/6
-								    var temp2 = now.substring(now.indexOf("上午")+2,now.length);  // 5:17:43
-								    var temp3 = temp2.substring(0,1);    //  5
-								    var index = 1;
-								    var temp4 = parseInt(temp3); // 5
-								    
-								   }
-								    var temp5 = temp4 + temp2.substring(1,temp2.length); // 17:17:43
-								    now = temp1 + temp5; // 2014/7/6 17:17:43
-								    now = now.replace("/","-"); //  2014-7/6 17:17:43
-								    now = now.replace("/","-"); //  2014-7-6 17:17:43
-							return  now;
-                           }
-                       },
                {
             "targets": 5,
             "data": null,
@@ -145,7 +115,7 @@ $(function () {
 
 	//点击删除确认后，删除并刷新
 	$(".btn-del").click(function(){
-		reloadTable(emailInfo_tab);
+		reloadTable(emailInfo_tab,"#emailInfo-time","#emailInfo-premise");
 	});
 	
 	
@@ -154,7 +124,7 @@ $(function () {
 	});
 	
 	$("#emailInfo-seek").on("click",function(){
-		reloadTable(emailInfo_tab);
+		reloadTable(emailInfo_tab,"#emailInfo-time","#emailInfo-premise");
 	});
 });
 </script>

@@ -65,7 +65,7 @@ $(function(){
 	        data: $("#dataDictionary-add-form").serialize(),
 	        success: function (data) {
 	        	console.log(data)
-	        	reloadTable(list_ajax);
+	        	reloadTable(list_ajax,"#dictionary-time","#dictionary-premise");
 	        }
    		};
     $.ajax(options);

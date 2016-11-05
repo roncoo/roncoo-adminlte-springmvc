@@ -59,7 +59,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionary-edit-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(list_ajax);
+	        	reloadTable(list_ajax,"#dictionary-time","#dictionary-premise");
 	        }
    		};
     $.ajax(options);

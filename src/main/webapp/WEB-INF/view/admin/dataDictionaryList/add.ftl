@@ -66,7 +66,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionaryList-add-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(list_ajax);
+	        	reloadTable(list_ajax,"#dictionaryList-time","#dictionaryList-premise");
 	        }
    		};
     $.ajax(options);

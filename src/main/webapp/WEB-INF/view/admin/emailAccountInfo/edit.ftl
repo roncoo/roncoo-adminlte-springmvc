@@ -65,7 +65,7 @@ $(document).ready(function(){
 	        dataType: 'text',
 	        data: $("#emailAccountInfo-edit-form").serialize(),
 	        success: function (data) {
-	        	reloadTable(list_ajax);
+	        	reloadTable(list_ajax,"#accountInfo-time","#accountInfo-premise");
 	        }
    		};
     $.ajax(options);
