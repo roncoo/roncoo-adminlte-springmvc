@@ -103,7 +103,7 @@
             "targets": 5,
             "data": null,
             "render": function(data){
-				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="include/index.html">查看</a> &nbsp;<a class="btn btn-xs btn-info dictionary-edit" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/edit?id='+data.id+'">修改</a>&nbsp;<a class="btn btn-xs btn-primary" target="navTab" href="${ctx}/admin/dataDictionaryList/list?id='+data.id+'&fieldCode='+data.fieldCode+'">明细</a>&nbsp;<a class="btn btn-xs btn-default" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/dataDictionary/delete?id='+ data.id + '&fieldCode='+data.fieldCode+'">删除</a>'
+				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/view?id='+data.id+'">查看</a> &nbsp;<a class="btn btn-xs btn-info dictionary-edit" target="modal" modal="lg" href="${ctx}/admin/dataDictionary/edit?id='+data.id+'">修改</a>&nbsp;<a class="btn btn-xs btn-primary" target="navTab" href="${ctx}/admin/dataDictionaryList/list?id='+data.id+'&fieldCode='+data.fieldCode+'">明细</a>&nbsp;<a class="btn btn-xs btn-default" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/dataDictionary/delete?id='+ data.id + '&fieldCode='+data.fieldCode+'">删除</a>'
 			}
         } ]
     } ).on('preXhr.dt', function ( e, settings, data ) {
