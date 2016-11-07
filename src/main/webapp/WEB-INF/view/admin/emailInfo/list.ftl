@@ -1,52 +1,17 @@
-<#include "/macro/base.ftl" /> <@header/> <@menu activeId="email"/>
+<#include "/macro/base.ftl" />
+<@header/>
+<@menu activeId="email"/>
 <div class="content-wrapper">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box box-primary">
+			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">收件箱</h3>
-					<div class="box-tools pull-right">
-						<div class="has-feedback">
-							<input type="text" class="form-control input-sm" placeholder="搜索邮件......">
-							<span class="glyphicon glyphicon-search form-control-feedback"></span>
-						</div>
-					</div>
+					<h3 class="box-title">发件箱</h3>
 				</div>
-				<div class="box-body no-padding">
-					<div class="mailbox-controls">
-						<div class="mailbox-controls">
-						<!-- Check all button -->
-						<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
-						<div class="btn-group">
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-						</div>
-						<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-						<div class="pull-right">
-							#{(page.pageCurrent-1)*page.pageSize+1}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
-							<div class="btn-group">
-								<#if (page.pageCurrent > 1)>
-								<a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent-1}&pageSize=${page.pageSize}">
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-								</a>
-								</#if> <#if (page.pageCurrent <=1)>
-								<a>
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-								</a>
-								</#if> <#if (page.pageCurrent
-								<page.totalPage)> <a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent+1}&pageSize=${page.pageSize}">
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-								</a> </#if> <#if (page.pageCurrent >=page.totalPage)> <a>
-									<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-								</a> </#if> 
-							</div>
-						</div>
-					</div>
-					</div>
-					<div class="table-responsive mailbox-messages" style="min-height: 350px;">
-						<table class="table table-hover table-striped">
-							<tbody>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered">
+						<tbody>
 								<#list page.list as info>
 								<tr>
 									<td>
@@ -71,105 +36,29 @@
 								</tr>
 								</#list>
 							</tbody>
-						</table>
-					</div>
+					</table>
 				</div>
-				<div class="box-footer no-padding">
-					<div class="mailbox-controls">
-						<!-- Check all button -->
-						<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
-						<div class="btn-group">
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-							<button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-						</div>
-						<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-						<div class="pull-right">
-							#{(page.pageCurrent-1)*page.pageSize+1}-#{page.pageCurrent*page.pageSize}/#{page.totalCount}
-							<div class="btn-group">
-								<#if (page.pageCurrent > 1)>
-									<a  href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent-1}&pageSize=${page.pageSize}">
-										<button type="button" ><i class="fa fa-chevron-left"></i></button>
-									</a>
-								</#if>
-								<#if (page.pageCurrent <=1)>
-									<a>
-										<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-									</a>
-								</#if>
-								<#if (page.pageCurrent < page.totalPage) > 
-									<a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.pageCurrent+1}&pageSize=${page.pageSize}">
-										<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-									</a> 
-								</#if> 
-								<#if (page.pageCurrent >=page.totalPage)>
-									 <a>
-										<button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-									</a> 
-								</#if> 
-							</div>
-						</div>
-					</div>
+				<!-- /.box-body -->
+				<div class="box-footer clearfix">
+					<ul class="pagination pagination-sm no-margin pull-right">
+						<li><a href="#">«</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">»</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<@wrapper/>
-<@deleteHint/>
+<@wrapper/> <@deleteHint/>
 <!-- iCheck -->
 <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
 <!-- Page Script -->
 <script>
-	$(function() {
-		//Enable iCheck plugin for checkboxes
-		//iCheck for checkbox and radio inputs
-		$('.mailbox-messages input[type="checkbox"]').iCheck({
-			checkboxClass : 'icheckbox_flat-blue',
-			radioClass : 'iradio_flat-blue'
-		});
 
-		//Enable check and uncheck all functionality
-		$(".checkbox-toggle").click(
-				function() {
-					var clicks = $(this).data('clicks');
-					if (clicks) {
-						//Uncheck all checkboxes
-						$(".mailbox-messages input[type='checkbox']").iCheck(
-								"uncheck");
-						$(".fa", this).removeClass("fa-check-square-o")
-								.addClass('fa-square-o');
-					} else {
-						//Check all checkboxes
-						$(".mailbox-messages input[type='checkbox']").iCheck(
-								"check");
-						$(".fa", this).removeClass("fa-square-o").addClass(
-								'fa-check-square-o');
-					}
-					$(this).data("clicks", !clicks);
-				});
-
-		//Handle starring for glyphicon and font awesome
-		$(".mailbox-star").click(function(e) {
-			e.preventDefault();
-			//detect type
-			var $this = $(this).find("a > i");
-			var glyph = $this.hasClass("glyphicon");
-			var fa = $this.hasClass("fa");
-
-			//Switch states
-			if (glyph) {
-				$this.toggleClass("glyphicon-star");
-				$this.toggleClass("glyphicon-star-empty");
-			}
-
-			if (fa) {
-				$this.toggleClass("fa-star");
-				$this.toggleClass("fa-star-o");
-			}
-		});
-	});
 </script>
 <@footer/>

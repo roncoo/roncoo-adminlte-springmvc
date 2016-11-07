@@ -17,7 +17,7 @@
 						<li>
 							<a href="${ctx}/admin/emailInfo/list">
 								<i class="fa fa-inbox"></i> 
-								<span>收件箱</span> 
+								<span>发件箱</span> 
 							</a>
 						</li>
 						<li>
