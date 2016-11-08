@@ -10,55 +10,96 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<table class="table table-bordered">
-						<tbody>
-								<#list page.list as info>
-								<tr>
-									<td>
-										<input type="checkbox">
-									</td>
-									<td class="mailbox-star">
-										<a href="#">
-											<i class="fa fa-star text-yellow"></i>
-										</a>
-									</td>
-									<td class="mailbox-name">
-										<a href="read-mail.html">${info_index+1}</a>
-									</td>
-									<td class="mailbox-user">${info.toUser}</td>
-									<td class="mailbox-subject">${info.subject}</td>
-									<td class="mailbox-attachment"><#if info.statusId =="0">警告</#if> <#if info.statusId =="1">可用</#if></td>
-									<td class="mailbox-date">${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-									<td width="120px">
-										<a class="btn btn-primary btn-xs" href="${ctx}/admin/emailInfo/view?id=${info.id}">查看</a>
-										<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/emailInfo/delete?id=${info.id}')">删除</a>
-									</td>
-								</tr>
-								</#list>
-							</tbody>
-					</table>
-				</div>
-				<!-- /.box-body -->
-				<div class="box-footer clearfix">
-					<ul class="pagination pagination-sm no-margin pull-right">
-						<li><a href="#">«</a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">»</a></li>
-					</ul>
-				</div>
+				<div class="clearfix">
+	        	<div class="col-md-4">
+			        <div class="input-group date ">
+	                  <div class="input-group-addon">
+	                    <i class="fa fa-calendar"></i>
+	                  </div>
+	                  <input type="text" class="form-control pull-right" id="tableParam">
+	                </div>
+	        	</div>
+	        	<div class="col-md-4">
+	        		<div class="input-group">
+		                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+		                <input type="text" class="form-control" id="search">
+		            </div>
+	        	</div>
+	        	<div class="col-md-4">
+	        		<button type="submit" id="submitExample4" class="btn btn-primary">查询</button>
+	        	</div>
+        	</div>
+			<table id="example4" class="table table-bordered" >
+		         <thead>
+		            <tr>
+		                <th>序号</th>
+		                <th>发件人</th>
+		                <th>收件人</th>
+		                <th>主题</th>
+		                <th>发送时间</th>
+		                <th>操作</th>
+		            </tr>
+		        </thead>
+		    </table>
+			</div>
 			</div>
 		</div>
 	</div>
 </div>
-<@wrapper/> <@deleteHint/>
+<@wrapper/>
+<@deleteHint/>
 <!-- iCheck -->
 <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
 <!-- Page Script -->
 <script>
+  $(function () {
+	//初始化表格
+	var No=0;
+     var example4 = $('#example4').DataTable( {
+        "dom": 'itflp',
+        "processing": true,
+		"searching": false,
+        "serverSide": true,   //启用服务器端分页
+		"bInfo": false,
+		"language": {
+            "url": "plugins/datatables/language.json"
+        }, 
+        "ajax": {"url":"${ctx}/admin/emailInfo/page","type":"post"},
+        "columns": [
+            { "data": null },
+            { "data": "fromUser" },
+            { "data": "toUser" },
+            { "data": "subject" },
+            { "data": "createTime" },
+            { "data": null }
+        ],
+        "columnDefs": [
+						{
+						    targets: 0,
+						    data: null,
+						    render: function (data) {
+						    	No=No+1;
+						        return No;
+						    }
+						},
+		               {
+		            "targets": 5,
+		            "data": null,
+		            "render": function(data){
+						console.log(data);
+						return '<a class="btn btn-xs btn-primary" href="${ctx}/admin/emailInfo/view?id='+data.id+'">查看</a> &nbsp;<a class="btn btn-xs btn-default" onClick="delcfm(\'${ctx}/admin/emailInfo/delete?id='+data.id+'\')">删除</a>'
+					}
+      			} ]
+    } ).on('preXhr.dt', function ( e, settings, data ) {
+		No=0;
+    } );
 
+	$("#submitExample4").on("click",function(){
+		reloadTable(example4);
+	})
+
+  });
 </script>
 <@footer/>

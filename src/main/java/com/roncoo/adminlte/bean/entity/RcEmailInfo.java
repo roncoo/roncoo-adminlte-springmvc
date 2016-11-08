@@ -3,13 +3,17 @@ package com.roncoo.adminlte.bean.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class RcEmailInfo implements Serializable {
     private Long id;
 
     private String statusId;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private String toUser;

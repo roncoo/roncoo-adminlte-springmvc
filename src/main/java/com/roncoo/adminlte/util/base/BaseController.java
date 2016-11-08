@@ -39,6 +39,7 @@ public class BaseController {
 	public static final String EDIT = "edit";
 	public static final String UPDATE = "update";
 	public static final String DELETE = "delete";
+	public static final String PAGE = "page";
 
 	public static String redirect(String format, Object... arguments) {
 		return new StringBuffer("redirect:").append(MessageFormat.format(format, arguments)).toString();

@@ -13,35 +13,18 @@
 					</div>
 				</div>
 				<div class="box-body">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>序号</th>
-								<th>字段名</th>
-								<th>排序</th>
-								<th>备注</th>
-								<th>创建时间</th>
-								<th style="width: 20%">操作</th>
+					<table id="example4" class="table table-bordered" >
+				         <thead>
+				           <tr>
+							<th>序号</th>
+							<th>字段名</th>
+							<th>排序</th>
+							<th>备注</th>
+							<th>创建时间</th>
+							<th>操作</th>
 							</tr>
-						</thead>
-						<tbody>
-							<#list page.list as data>
-							<tr>
-								<td>${data_index+1}</td>
-								<td>${data.fieldName}</td>
-								<td>${data.sort}</td>
-								<td>${data.remark}</td>
-								<td>${data.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-								<td>
-									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionary/view?id=${data.id}">查看</a>
-									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/list?id=${data.id}&fieldCode=${data.fieldCode}">查看明细</a>
-									<a class="btn btn-info btn-xs" href="${ctx}/admin/dataDictionary/edit?id=${data.id}">修改</a>
-									<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/dataDictionary/delete?id=${data.id}&fieldCode=${data.fieldCode}')">删除</a>
-								</td>
-							</tr>
-							</#list>
-						</tbody>
-					</table>
+				       </thead>
+				    </table>
 				</div>
 			</div>
 		</div>
@@ -51,4 +34,64 @@
 <#include "add.ftl" />
 <@wrapper/>
 <@deleteHint/>
+<!-- Page Script -->
+<script>
+  $(function () {
+	//初始化表格
+	var No=0;
+     var example4 = $('#example4').DataTable( {
+        "dom": 'itflp',
+        "processing": true,
+		"searching": false,
+        "serverSide": true,   //启用服务器端分页
+		"bInfo": false,
+		"language": {
+            "url": "plugins/datatables/language.json"
+        }, 
+        "ajax": {"url":"${ctx}/admin/dataDictionary/page","type":"post"},
+        "columns": [
+            { "data": null},
+            { "data": "fieldName" },
+            { "data": "sort" },
+            { "data": "remark" },
+            { "data": "createTime"},
+            { "data": null }
+        ],
+        "columnDefs": [
+					{
+					    targets: 0,
+					    data: null,
+					    render: function (data) {
+					    	No=No+1;
+					        return No;
+					    }
+					},
+                       {
+            "targets": 5,
+            "data": null,
+            "render": function(data){
+				return '<a class="btn btn-xs btn-primary" href="${ctx}/admin/dataDictionary/view?id='+data.id+'">查看</a> &nbsp;<a class="btn btn-xs btn-info dictionary-edit" href="${ctx}/admin/dataDictionary/edit?id='+data.id+'">修改</a>&nbsp;<a class="btn btn-xs btn-primary" href="${ctx}/admin/dataDictionaryList/list?id='+data.id+'&fieldCode='+data.fieldCode+'">明细</a>&nbsp;<a class="btn btn-xs btn-default" href="${ctx}/admin/dataDictionary/delete?id='+ data.id + '&fieldCode='+data.fieldCode+'">删除</a>'
+			}
+        } ]
+    } ).on('preXhr.dt', function ( e, settings, data ) {
+		No=0;
+    } );
+
+$("#submitExample4").on("click",function(){
+	reloadTable(example4);
+})
+
+//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
+function reloadTable(oTable) {
+    var date = $("#tableParam").val();
+    var search = $("#search").val();
+    var param = {
+        "date": date,
+        "search": search
+    };
+    oTable.settings()[0].ajax.data = param;
+    oTable.ajax.reload();
+}
+  });
+</script>
 <@footer/>
