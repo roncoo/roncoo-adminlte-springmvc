@@ -55,7 +55,9 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		if (dao.insert(rcDataDictionary) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setErrMsg("保存成功");
 		}
+		result.setResultData(rcDataDictionary);
 		return result;
 	}
 
@@ -73,6 +75,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		result.setResultData(dao.listForPage(pageCurrent, pageSize));
 		result.setErrCode(0);
 		result.setStatus(true);
+		result.setErrMsg("查询成功");
 		return result;
 	}
 
@@ -86,12 +89,13 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		result.setResultData(dao.selectById(id));
 		result.setErrCode(0);
 		result.setStatus(true);
+		result.setErrMsg("查询成功");
 		return result;
 	}
 
 	@Override
-	public Result<RcDataDictionary> deleteById(Long id) {
-		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
+	public Result<String> deleteById(Long id) {
+		Result<String> result = new Result<String>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;
@@ -99,6 +103,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		if(dao.deleteById(id)>0){
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setErrMsg("删除成功");
 		}
 		return result;
 	}
@@ -123,7 +128,9 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		if (dao.updateById(rcDataDictionary) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setErrMsg("更新成功");
 		}
+		result.setResultData(rcDataDictionary);
 		return result;
 	}
 

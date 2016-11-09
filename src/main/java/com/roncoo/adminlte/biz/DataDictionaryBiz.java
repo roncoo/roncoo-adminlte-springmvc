@@ -66,7 +66,7 @@ public class DataDictionaryBiz {
 	 * @param fieldCode
 	 */
 	@Transactional
-	public Result<RcDataDictionary> delete(Long id, String fieldCode) {
+	public Result<String> delete(Long id, String fieldCode) {
 		dictionaryListService.deleteByFieldCode(fieldCode);
 		return dictionaryService.deleteById(id);
 	}

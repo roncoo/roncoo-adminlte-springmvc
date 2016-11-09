@@ -56,14 +56,14 @@ public interface DataDictionaryService {
 	 * 
 	 * @param id
 	 */
-	Result<RcDataDictionary> deleteById(Long id);
+	Result<String> deleteById(Long id);
 
 	/**
 	 * 更新
 	 * 
-	 * @param dictionary
+	 * @param rcDataDictionary
 	 * @return
 	 */
-	Result<RcDataDictionary> update(RcDataDictionary dictionary);
+	Result<RcDataDictionary> update(RcDataDictionary rcDataDictionary);
 
 }

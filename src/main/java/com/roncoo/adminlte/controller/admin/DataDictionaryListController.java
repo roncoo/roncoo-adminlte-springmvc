@@ -76,8 +76,11 @@ public class DataDictionaryListController extends BaseController {
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id") Long id, @RequestParam(value = "dId") Long dId,
 			@RequestParam(value = "fieldCode") String fieldCode) {
-		biz.deleteById(id);
-		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, fieldCode);
+		Result<String> result = biz.deleteById(id);
+		if(result.isStatus()){
+			return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, fieldCode);
+		}
+		return fieldCode;
 	}
 
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)

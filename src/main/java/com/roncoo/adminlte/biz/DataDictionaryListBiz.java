@@ -49,7 +49,7 @@ public class DataDictionaryListBiz {
 	/**
 	 * 根据id删除
 	 */
-	public Result<RcDataDictionaryList> deleteById(Long id) {
+	public Result<String> deleteById(Long id) {
 		return dictionaryListService.deleteById(id);
 	}
 

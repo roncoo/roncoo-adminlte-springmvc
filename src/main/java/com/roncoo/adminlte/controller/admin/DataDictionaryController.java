@@ -88,7 +88,7 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
-		Result<RcDataDictionary> result= biz.delete(id, fieldCode);
+		Result<String> result= biz.delete(id, fieldCode);
 		if(result.isStatus()){
 			return redirect("/admin/dataDictionary/list");
 		}

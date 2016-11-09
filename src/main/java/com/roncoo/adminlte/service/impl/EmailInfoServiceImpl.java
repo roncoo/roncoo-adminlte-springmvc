@@ -72,6 +72,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 		result.setResultData(dao.listForPage(pageCurrent, pageSize));
 		result.setErrCode(0);
 		result.setStatus(true);
+		result.setErrMsg("查询成功");
 		return result;
 	}
 
@@ -119,6 +120,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 		if(dao.insert(rcEmailInfo)>0){
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setErrMsg("添加成功");
 		}
 		return result;
 	}
@@ -150,8 +152,8 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	}
 
 	@Override
-	public Result<RcEmailInfo> deleteById(Long id) {
-		Result<RcEmailInfo> result = new Result<RcEmailInfo>();
+	public Result<String> deleteById(Long id) {
+		Result<String> result = new Result<String>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;
@@ -159,6 +161,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 		if(dao.deleteById(id)>0){
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setErrMsg("删除成功");
 		}
 		return result;
 	}
@@ -173,6 +176,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 		result.setResultData(dao.selectById(id));
 		result.setErrCode(0);
 		result.setStatus(true);
+		result.setErrMsg("查询成功");
 		return result;
 	}
 

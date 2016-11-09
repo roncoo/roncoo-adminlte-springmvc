@@ -39,25 +39,27 @@ public interface DataDictionaryListService {
 	Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode);
 
 	/**
-	 * 添加记录
+	 * 保存
 	 * 
-	 * @param dList
+	 * @param rcDataDictionaryList
+	 * @return
 	 */
-	Result<RcDataDictionaryList> save(RcDataDictionaryList  rcDataDictionaryList);
+	Result<RcDataDictionaryList> save(RcDataDictionaryList rcDataDictionaryList);
 
 	/**
 	 * 根据id删除
 	 * 
 	 * @param id
 	 */
-	Result<RcDataDictionaryList> deleteById(Long id);
+	Result<String> deleteById(Long id);
 
 	/**
-	 * 删除
+	 * 根据fieldCode进行删除
 	 * 
-	 * @param dList
+	 * @param fieldCode
+	 * @return
 	 */
-	Result<RcDataDictionaryList> deleteByFieldCode(String fieldCode);
+	Result<String> deleteByFieldCode(String fieldCode);
 
 	/**
 	 * 根据fieldCode查询
@@ -78,11 +80,11 @@ public interface DataDictionaryListService {
 	/**
 	 * 更新
 	 * 
-	 * @param dList
+	 * @param rcDataDictionaryList
 	 * @return
 	 */
 	Result<RcDataDictionaryList> update(RcDataDictionaryList rcDataDictionaryList);
-	
+
 	/**
 	 * 根据fieldCode更新
 	 * 
@@ -90,5 +92,5 @@ public interface DataDictionaryListService {
 	 * @param fieldCode
 	 * @return
 	 */
-	Result<RcDataDictionaryList> updateForFieldCode(String fieldCodePremise,String fieldCode);
+	Result<String> updateForFieldCode(String fieldCodePremise, String fieldCode);
 }

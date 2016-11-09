@@ -62,7 +62,7 @@ public interface EmailAccountInfoService {
 	 * 
 	 * @param id
 	 */
-	Result<RcEmailAccountInfo> deleteById(Long id);
+	Result<String> deleteById(Long id);
 
 	/**
 	 * 更新

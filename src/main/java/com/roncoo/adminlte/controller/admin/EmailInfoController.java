@@ -103,8 +103,11 @@ public class EmailInfoController extends BaseController {
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id") Long id) {
-		biz.deleteById(id);
-		return redirect("/admin/emailInfo/list");
+		Result<String> result = biz.deleteById(id);
+		if(result.isStatus()){
+			return redirect("/admin/emailInfo/list");
+		}
+		return null;
 	}
 
 	/**

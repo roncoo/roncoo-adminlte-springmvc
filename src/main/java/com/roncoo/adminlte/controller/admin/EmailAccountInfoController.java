@@ -75,8 +75,11 @@ public class EmailAccountInfoController extends BaseController {
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam Long id) {
-		biz.deleteById(id);
-		return redirect("/admin/emailAccountInfo/list");
+		Result<String> result = biz.deleteById(id);
+		if(result.isStatus()){
+			return redirect("/admin/emailAccountInfo/list");
+		}
+		return null;
 	}
 
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)

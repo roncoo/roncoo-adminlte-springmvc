@@ -68,7 +68,7 @@ public class EmailInfoBiz {
 	 * 
 	 * @param id
 	 */
-	public Result<RcEmailInfo> deleteById(Long id) {
+	public Result<String> deleteById(Long id) {
 		return emailInfoService.deleteById(id);
 	}
 

@@ -46,7 +46,7 @@ public interface EmailInfoService {
 	 * 
 	 * @param id
 	 */
-	Result<RcEmailInfo> deleteById(Long id);
+	Result<String> deleteById(Long id);
 
 	/**
 	 * 根据id查询

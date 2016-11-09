@@ -55,6 +55,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 		result.setResultData( dao.listForPage(pageCurrent, pageSize, fieldCode));
 		result.setErrCode(0);
 		result.setStatus(true);
+		result.setErrMsg("查询成功");
 		return result;
 	}
 
@@ -76,14 +77,15 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 		if(dao.insert(rcDataDictionaryList)>0){
 			result.setErrCode(0);
 			result.setStatus(true);
-			result.setErrMsg("更新成功");
+			result.setErrMsg("保存成功");
 		}
+		result.setResultData(rcDataDictionaryList);
 		return result;
 	}
 
 	@Override
-	public Result<RcDataDictionaryList> deleteById(Long id) {
-		Result<RcDataDictionaryList> result = new Result<RcDataDictionaryList>();
+	public Result<String> deleteById(Long id) {
+		Result<String> result = new Result<String>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;
@@ -97,8 +99,8 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 	}
 
 	@Override
-	public Result<RcDataDictionaryList> deleteByFieldCode(String fieldCode) {
-		Result<RcDataDictionaryList> result = new Result<RcDataDictionaryList>();
+	public Result<String> deleteByFieldCode(String fieldCode) {
+		Result<String> result = new Result<String>();
 		if(!StringUtils.hasText(fieldCode)){
 			result.setErrMsg("fieldCode不能为空");
 			return result;
@@ -135,6 +137,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 		result.setResultData(dao.selectById(id));
 		result.setErrCode(0);
 		result.setStatus(true);
+		result.setErrMsg("查询成功");
 		return result;
 	}
 
@@ -158,12 +161,13 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 			result.setStatus(true);
 			result.setErrMsg("更新成功");
 		}
+		result.setResultData(rcDataDictionaryList);
 		return result;
 	}
 
 	@Override
-	public Result<RcDataDictionaryList> updateForFieldCode(String fieldCodePremise, String fieldCode) {
-		Result<RcDataDictionaryList> result = new Result<RcDataDictionaryList>();
+	public Result<String> updateForFieldCode(String fieldCodePremise, String fieldCode) {
+		Result<String> result = new Result<String>();
 		if(!StringUtils.hasText(fieldCodePremise)){
 			result.setErrMsg("fieldCodePremise不能为空");
 			return result;
