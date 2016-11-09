@@ -22,17 +22,16 @@ import com.roncoo.adminlte.util.base.Page;
 
 /**
  * 
- * @author wujing
+ * @author LYQ
+ *
  */
 public interface DataDictionaryListDao {
 
-
 	/**
+	 * 根据FieldCode删除
 	 * 
-	 * 功能：根据条件删除
-	 * 
-	 * @param example
-	 * @return int
+	 * @param FieldCode
+	 * @return
 	 */
 	int deleteByFieldCode(String FieldCode);
 
@@ -47,20 +46,19 @@ public interface DataDictionaryListDao {
 	int deleteById(Long id);
 
 	/**
+	 * 添加
 	 * 
-	 * 功能：添加
-	 * 
-	 * @param record
-	 * @return int
+	 * @param rcDataDictionaryList
+	 * @return
 	 */
-	int insert(RcDataDictionaryList dList);
+	int insert(RcDataDictionaryList rcDataDictionaryList);
 
-	
 	/**
 	 * 分页查询
-	 * @param dList
+	 * 
 	 * @param pageCurrent
 	 * @param pageSize
+	 * @param fieldCode
 	 * @return
 	 */
 	Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode);
@@ -75,22 +73,21 @@ public interface DataDictionaryListDao {
 	RcDataDictionaryList selectById(Long id);
 
 	/**
+	 * 根据id更新
 	 * 
-	 * 功能：更新
-	 * 
-	 * @param record
-	 * @param example
-	 * @return int
+	 * @param rcDataDictionaryList
+	 * @return
 	 */
-	int updateById(RcDataDictionaryList dList);
-	
+	int updateById(RcDataDictionaryList rcDataDictionaryList);
+
 	/**
 	 * 根据fieldCode查询
+	 * 
 	 * @param fieldCode
 	 * @return
 	 */
 	List<RcDataDictionaryList> listByFieldCode(String fieldCode);
-	
+
 	/**
 	 * 根据fieldCode更新
 	 * 
@@ -98,5 +95,5 @@ public interface DataDictionaryListDao {
 	 * @param fieldCode
 	 * @return
 	 */
-	int updateByFieldCode(String fieldCodePremise,String fieldCode);
+	int updateByFieldCode(String fieldCodePremise, String fieldCode);
 }

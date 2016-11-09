@@ -127,7 +127,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 
 	@Override
 	public Result<RcDataDictionaryList> queryById(Long id) {
-		Result<RcDataDictionaryList> result = new Result<>();
+		Result<RcDataDictionaryList> result = new Result<RcDataDictionaryList>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;

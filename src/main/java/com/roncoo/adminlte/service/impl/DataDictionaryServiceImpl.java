@@ -61,7 +61,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
 	@Override
 	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize) {
-		Result<Page<RcDataDictionary>> result = new Result<>();
+		Result<Page<RcDataDictionary>> result = new Result<Page<RcDataDictionary>>();
 		if(pageCurrent<1){
 			result.setErrMsg("pageCurrent有误");
 			return result;
@@ -78,7 +78,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
 	@Override
 	public Result<RcDataDictionary> queryById(Long id) {
-		Result<RcDataDictionary> result = new Result<>();
+		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;
@@ -91,7 +91,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
 	@Override
 	public Result<RcDataDictionary> deleteById(Long id) {
-		Result<RcDataDictionary> result = new Result<>();
+		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;

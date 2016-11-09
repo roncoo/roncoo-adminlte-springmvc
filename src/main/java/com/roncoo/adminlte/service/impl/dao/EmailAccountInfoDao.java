@@ -36,10 +36,10 @@ public interface EmailAccountInfoDao {
 	/**
 	 * 添加
 	 * 
-	 * @param info
+	 * @param rcEmailAccountInfo
 	 * @return
 	 */
-	int insert(RcEmailAccountInfo info);
+	int insert(RcEmailAccountInfo rcEmailAccountInfo);
 
 	/**
 	 * 分页查询
@@ -60,16 +60,9 @@ public interface EmailAccountInfoDao {
 	/**
 	 * 更新
 	 * 
-	 * @param info
+	 * @param rcEmailAccountInfo
 	 * @return
 	 */
-	int updateById(RcEmailAccountInfo info);
-
-	/**
-	 * 随机读取
-	 * 
-	 * @return
-	 */
-	RcEmailAccountInfo queryByRand();
+	int updateById(RcEmailAccountInfo rcEmailAccountInfo);
 
 }

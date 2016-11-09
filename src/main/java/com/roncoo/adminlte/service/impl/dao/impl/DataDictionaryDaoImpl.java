@@ -72,8 +72,8 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	}
 
 	@Override
-	public int updateById(RcDataDictionary dictionary) {
-		dictionary.setUpdateTime(new Date());
-		return mapper.updateByPrimaryKeySelective(dictionary);
+	public int updateById(RcDataDictionary rcDataDictionary) {
+		rcDataDictionary.setUpdateTime(new Date());
+		return mapper.updateByPrimaryKeySelective(rcDataDictionary);
 	}
 }

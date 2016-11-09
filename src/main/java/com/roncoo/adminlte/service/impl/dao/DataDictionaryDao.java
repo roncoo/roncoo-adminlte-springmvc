@@ -60,9 +60,9 @@ public interface DataDictionaryDao {
 	/**
 	 * 更新
 	 * 
-	 * @param dictionary
+	 * @param rcDataDictionary
 	 * @return
 	 */
-	int updateById(RcDataDictionary dictionary);
+	int updateById(RcDataDictionary rcDataDictionary);
 
 }

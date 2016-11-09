@@ -68,8 +68,8 @@ public class EmailAccountInfoController extends BaseController {
 	}
 
 	@RequestMapping(value = SAVE)
-	public String insert(@ModelAttribute RcEmailAccountInfo info) {
-		biz.save(info);
+	public String insert(@ModelAttribute RcEmailAccountInfo rcEmailAccountInfo) {
+		biz.save(rcEmailAccountInfo);
 		return redirect("/admin/emailAccountInfo/list");
 	}
 
@@ -100,8 +100,8 @@ public class EmailAccountInfoController extends BaseController {
 	}
 
 	@RequestMapping(value = UPDATE)
-	public String update(@ModelAttribute RcEmailAccountInfo info) {
-		Result<RcEmailAccountInfo> result = biz.update(info);
+	public String update(@ModelAttribute RcEmailAccountInfo rcEmailAccountInfo) {
+		Result<RcEmailAccountInfo> result = biz.update(rcEmailAccountInfo);
 		if(result.isStatus()){
 			return redirect("/admin/emailAccountInfo/list");
 		}

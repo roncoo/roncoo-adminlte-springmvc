@@ -52,14 +52,14 @@ public class EmailInfoBiz {
 	/**
 	 * 发送邮件
 	 * 
-	 * @param infoVo
+	 * @param rcEmailInfoVo
 	 */
-	public Result<RcEmailInfo> sendMail(RcEmailInfoVo infoVo) {
+	public Result<RcEmailInfo> sendMail(RcEmailInfoVo rcEmailInfoVo) {
 		List<RcEmailAccountInfo> accountList = accountInfoCache.getList();
 		Random random = new Random();
 		int index = random.nextInt(accountList.size());
 		RcEmailInfo rcEmailInfo = new RcEmailInfo();
-		BeanUtils.copyProperties(infoVo, rcEmailInfo);
+		BeanUtils.copyProperties(rcEmailInfoVo, rcEmailInfo);
 		return emailInfoService.sendMail(accountList.get(index), rcEmailInfo);
 	}
 

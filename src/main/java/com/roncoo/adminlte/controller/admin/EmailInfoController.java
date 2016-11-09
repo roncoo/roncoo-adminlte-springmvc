@@ -70,7 +70,7 @@ public class EmailInfoController extends BaseController {
 	}
 
 	/**
-	 * 
+	 * 添加
 	 */
 	@RequestMapping(value = ADD, method = RequestMethod.GET)
 	public void add(ModelMap modelMap) {
@@ -79,16 +79,19 @@ public class EmailInfoController extends BaseController {
 	/**
 	 * 发送邮件
 	 * 
-	 * @param infoVo
+	 * @param rcEmailInfoVo
 	 * @return
 	 */
 	@RequestMapping(value = "/send")
-	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo infoVo,BindingResult bindingResult) {
+	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo rcEmailInfoVo,BindingResult bindingResult) {
 		if(bindingResult.hasErrors()){
 			return "/admin/emailInfo/add";
 		}
-		biz.sendMail(infoVo);
-		return "redirect:/admin/emailInfo/list";
+		Result<RcEmailInfo> result= biz.sendMail(rcEmailInfoVo);
+		if(result.isStatus()){
+			return redirect("/admin/emailInfo/list");
+		}
+		return "/admin/emailInfo/list";
 		
 	}
 

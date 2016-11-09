@@ -65,13 +65,6 @@ public interface EmailAccountInfoService {
 	Result<RcEmailAccountInfo> deleteById(Long id);
 
 	/**
-	 * 随机获取一条记录
-	 * 
-	 * @return
-	 */
-	Result<RcEmailAccountInfo> queryByRand();
-
-	/**
 	 * 更新
 	 * 
 	 * @param info

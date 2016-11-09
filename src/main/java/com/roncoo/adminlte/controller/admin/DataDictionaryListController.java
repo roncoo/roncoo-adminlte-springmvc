@@ -65,12 +65,12 @@ public class DataDictionaryListController extends BaseController {
 	}
 
 	@RequestMapping(value = SAVE)
-	public String save(@ModelAttribute("dListVo") RcDataDictionaryList dList, BindingResult bindingResult,
+	public String save(@ModelAttribute("dListVo") RcDataDictionaryList rcDataDictionaryList, BindingResult bindingResult,
 			@RequestParam(name = "dId") Long dId) {
 		if (!bindingResult.hasErrors()) {
-			biz.save(dList);
+			biz.save(rcDataDictionaryList);
 		}
-		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, dList.getFieldCode());
+		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, rcDataDictionaryList.getFieldCode());
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
@@ -99,8 +99,11 @@ public class DataDictionaryListController extends BaseController {
 	}
 
 	@RequestMapping(value = UPDATE)
-	public String update(@ModelAttribute RcDataDictionaryList dList, @RequestParam(value = "dId") Long dId) {
-		biz.update(dList);
-		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, dList.getFieldCode());
+	public String update(@ModelAttribute RcDataDictionaryList rcDataDictionaryList, @RequestParam(value = "dId") Long dId) {
+		Result<RcDataDictionaryList> result = biz.update(rcDataDictionaryList);
+		if(result.isStatus()){
+			return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, rcDataDictionaryList.getFieldCode());
+		}
+		return null;
 	}
 }

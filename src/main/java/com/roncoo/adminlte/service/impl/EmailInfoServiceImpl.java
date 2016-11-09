@@ -60,7 +60,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 
 	@Override
 	public Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize) {
-		Result<Page<RcEmailInfo>> result = new Result<>();
+		Result<Page<RcEmailInfo>> result = new Result<Page<RcEmailInfo>>();
 		if(pageCurrent<1){
 			result.setErrMsg("pageCurrent有误");
 			return result;
@@ -76,17 +76,17 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 	}
 
 	@Override
-	public Result<RcEmailInfo> sendMail(RcEmailAccountInfo accountInfo, RcEmailInfo rcEmailInfo) {
-		Result<RcEmailInfo> result = new Result<>();
-		if(!StringUtils.hasText(accountInfo.getFromUser())){
+	public Result<RcEmailInfo> sendMail(RcEmailAccountInfo rcEmailAccountInfo, RcEmailInfo rcEmailInfo) {
+		Result<RcEmailInfo> result = new Result<RcEmailInfo>();
+		if(!StringUtils.hasText(rcEmailAccountInfo.getFromUser())){
 			result.setErrMsg("发件人不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(accountInfo.getHost())){
+		if(!StringUtils.hasText(rcEmailAccountInfo.getHost())){
 			result.setErrMsg("Host不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(accountInfo.getPasswd())){
+		if(!StringUtils.hasText(rcEmailAccountInfo.getPasswd())){
 			result.setErrMsg("授权码不能为空");
 			return result;
 		}
@@ -107,13 +107,13 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 			return result;
 		}
 		//编辑发送器
-		createMailSender(accountInfo);
+		createMailSender(rcEmailAccountInfo);
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("content", rcEmailInfo.getContent());
 		// 发送邮件
-		send(accountInfo.getFromUser(),rcEmailInfo.getToUser(), rcEmailInfo.getSubject(), map, TEMPLATE);
-		rcEmailInfo.setFromUser(accountInfo.getFromUser());
+		send(rcEmailAccountInfo.getFromUser(),rcEmailInfo.getToUser(), rcEmailInfo.getSubject(), map, TEMPLATE);
+		rcEmailInfo.setFromUser(rcEmailAccountInfo.getFromUser());
 		// 保存记录
 		
 		if(dao.insert(rcEmailInfo)>0){
@@ -151,7 +151,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 
 	@Override
 	public Result<RcEmailInfo> deleteById(Long id) {
-		Result<RcEmailInfo> result = new Result<>();
+		Result<RcEmailInfo> result = new Result<RcEmailInfo>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;
@@ -165,7 +165,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 
 	@Override
 	public Result<RcEmailInfo> queryById(Long id) {
-		Result<RcEmailInfo> result = new Result<>();
+		Result<RcEmailInfo> result = new Result<RcEmailInfo>();
 		if(id<1){
 			result.setErrMsg("此id无效");
 			return result;

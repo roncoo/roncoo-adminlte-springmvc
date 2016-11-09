@@ -41,13 +41,13 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public int insert(RcEmailAccountInfo info) {
-		String passwd = Base64Util.encrypt(info.getPasswd());
-		info.setPasswd(passwd);
+	public int insert(RcEmailAccountInfo rcEmailAccountInfo) {
+		String passwd = Base64Util.encrypt(rcEmailAccountInfo.getPasswd());
+		rcEmailAccountInfo.setPasswd(passwd);
 		Date date = new Date();
-		info.setCreateTime(date);
-		info.setUpdateTime(date);
-		return mapper.insertSelective(info);
+		rcEmailAccountInfo.setCreateTime(date);
+		rcEmailAccountInfo.setUpdateTime(date);
+		return mapper.insertSelective(rcEmailAccountInfo);
 	}
 
 	@Override
@@ -73,15 +73,10 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public int updateById(RcEmailAccountInfo info) {
-		String passwd = Base64Util.encrypt(info.getPasswd());
-		info.setPasswd(passwd);
-		info.setUpdateTime(new Date());
-		return mapper.updateByPrimaryKeySelective(info);
-	}
-
-	@Override
-	public RcEmailAccountInfo queryByRand() {
-		return null;
+	public int updateById(RcEmailAccountInfo rcEmailAccountInfo) {
+		String passwd = Base64Util.encrypt(rcEmailAccountInfo.getPasswd());
+		rcEmailAccountInfo.setPasswd(passwd);
+		rcEmailAccountInfo.setUpdateTime(new Date());
+		return mapper.updateByPrimaryKeySelective(rcEmailAccountInfo);
 	}
 }

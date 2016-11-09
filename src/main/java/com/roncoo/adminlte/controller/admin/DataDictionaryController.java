@@ -88,8 +88,11 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
-		biz.delete(id, fieldCode);
-		return redirect("/admin/dataDictionary/list");
+		Result<RcDataDictionary> result= biz.delete(id, fieldCode);
+		if(result.isStatus()){
+			return redirect("/admin/dataDictionary/list");
+		}
+		return null;
 	}
 
 	/**
@@ -121,8 +124,8 @@ public class DataDictionaryController extends BaseController {
 	}
 
 	@RequestMapping(value = UPDATE)
-	public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
-		Result<RcDataDictionary> result = biz.update(dictionary, oldFieldCode);
+	public String update(@ModelAttribute RcDataDictionary rcDataDictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
+		Result<RcDataDictionary> result = biz.update(rcDataDictionary, oldFieldCode);
 		if(result.isStatus()){
 			return redirect("/admin/dataDictionary/list");
 		}

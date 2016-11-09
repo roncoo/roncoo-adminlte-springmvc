@@ -53,11 +53,11 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public int insert(RcDataDictionaryList dList) {
+	public int insert(RcDataDictionaryList rcDataDictionaryList) {
 		Date date = new Date();
-		dList.setCreateTime(date);
-		dList.setUpdateTime(date);
-		return mapper.insertSelective(dList);
+		rcDataDictionaryList.setCreateTime(date);
+		rcDataDictionaryList.setUpdateTime(date);
+		return mapper.insertSelective(rcDataDictionaryList);
 	}
 
 	@Override
@@ -83,9 +83,9 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public int updateById(RcDataDictionaryList dList) {
-		dList.setUpdateTime(new Date());
-		return mapper.updateByPrimaryKeySelective(dList);
+	public int updateById(RcDataDictionaryList rcDataDictionaryList) {
+		rcDataDictionaryList.setUpdateTime(new Date());
+		return mapper.updateByPrimaryKeySelective(rcDataDictionaryList);
 	}
 
 	@Override

@@ -19,13 +19,15 @@ import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
- * @author wujing
+ * 
+ * @author LYQ
+ *
  */
 public interface EmailInfoDao {
 
 	/**
 	 * 
-	 * 添加记录
+	 * 添加
 	 * 
 	 * @param rcEmailInfo
 	 * @return int
