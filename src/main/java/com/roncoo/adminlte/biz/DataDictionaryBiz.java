@@ -66,9 +66,12 @@ public class DataDictionaryBiz {
 	 * @param fieldCode
 	 */
 	@Transactional
-	public void delete(Long id, String fieldCode) {
-		dictionaryListService.deleteByFieldCode(fieldCode);
-		dictionaryService.delete(id);
+	public Result<String> delete(Long id, String fieldCode) {
+		if (dictionaryListService.deleteByFieldCode(fieldCode).isStatus()) {
+			return dictionaryService.delete(id);
+		} else {
+			throw new RuntimeException("删除失败");
+		}
 	}
 
 	/**

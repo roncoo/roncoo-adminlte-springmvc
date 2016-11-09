@@ -66,10 +66,12 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = PAGE)
-	public PageBean<RcDataDictionary> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize,@RequestParam(value="date",required=false)String  date,@RequestParam(value="search",required=false)String search) {
-		int pageCurrent = (start / pageSize) + 1;
-		Result<Page<RcDataDictionary>> result = biz.listForPage(pageCurrent, pageSize,search,date);
-		return new PageBean<RcDataDictionary>(result.getResultData());
+	public PageBean<RcDataDictionary> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize, @RequestParam(value = "date", required = false) String date, @RequestParam(value = "search", required = false) String search) {
+		Result<Page<RcDataDictionary>> result = biz.listForPage((start / pageSize) + 1, pageSize, search, date);
+		if (result.isStatus()) {
+			return new PageBean<RcDataDictionary>(result.getResultData());
+		}
+		return new PageBean<RcDataDictionary>();
 	}
 
 	/**
@@ -97,7 +99,10 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
-		biz.delete(id, fieldCode);
+		Result<String> result = biz.delete(id, fieldCode);
+		if (result.isStatus()) {
+			return redirect("/admin/dataDictionary/list");
+		}
 		return redirect("/admin/dataDictionary/list");
 	}
 

@@ -43,6 +43,9 @@ public class PageBean<T> implements Serializable {
 	// 记录
 	private List<T> data;
 
+	public PageBean() {
+	}
+	
 	/**
 	 * @param iDisplayStart
 	 * @param iDisplayLength
