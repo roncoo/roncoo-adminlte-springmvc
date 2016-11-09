@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.roncoo.adminlte.util.cache;
+package com.roncoo.adminlte.cache;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -23,34 +23,32 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
-import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
-import com.roncoo.adminlte.service.impl.dao.impl.base.imple.CachedDaoImpl;
-import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailAccountInfoMapper;
+import com.roncoo.adminlte.service.EmailAccountInfoService;
+import com.roncoo.adminlte.util.base.CachedImpl;
 
 @Component
-public class EmailAccountInfoCache extends CachedDaoImpl<String, RcEmailAccountInfo> {
+public class EmailAccountInfoCache extends CachedImpl<String, RcEmailAccountInfo> {
 
 	@Autowired
-	private RcEmailAccountInfoMapper mapper;
+	private EmailAccountInfoService emailAccountInfoService;
 
-	private final static Long  INITIALDELAY = 300L;
-	private final static Long  PERIOD = 300L;
-	
+	private final static Long INITIALDELAY = 300L;
+	private final static Long PERIOD = 300L;
+
 	@PostConstruct
-	@Override
 	public void init() {
 		super.init(INITIALDELAY, PERIOD);
 	}
 
 	@Override
 	public void reloadFromDb(ConcurrentMap<String, RcEmailAccountInfo> cached) {
-		RcEmailAccountInfoExample example = new RcEmailAccountInfoExample();
-		example.setOrderByClause("create_time desc");
-		List<RcEmailAccountInfo> infoList = mapper.selectByExample(example);
-		for (int i = 0; i < infoList.size(); i++) {
-			String key = Integer.toString(i);
-			cached.putIfAbsent(key, infoList.get(i));
+		Result<List<RcEmailAccountInfo>> result = emailAccountInfoService.list();
+		if (result.isStatus()) {
+			for (RcEmailAccountInfo bean : result.getResultData()) {
+				cached.putIfAbsent(String.valueOf(bean.getId()), bean);
+			}
 		}
 	}
 

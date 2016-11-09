@@ -27,6 +27,7 @@ import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryListExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.DataDictionaryListDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcDataDictionaryListMapper;
+import com.roncoo.adminlte.util.DateUtil;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.SqlUtil;
 
@@ -49,7 +50,7 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public int delete(Long id) {
+	public int deleteById(Long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
@@ -77,8 +78,7 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 			criteria.andFieldKeyLike(SqlUtil.like(premise));
 		}
 		if(StringUtils.hasText(datePremise)){
-			Date date = SqlUtil.formatTime(datePremise);
-			criteria.andCreateTimeBetween(date, SqlUtil.addDay(date, 1));
+			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
 		}
 		List<RcDataDictionaryList> list = mapper.selectByExample(example);
 		Page<RcDataDictionaryList> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
@@ -86,12 +86,12 @@ public class DataDictionaryListDaoImpl implements DataDictionaryListDao {
 	}
 
 	@Override
-	public RcDataDictionaryList select(Long id) {
+	public RcDataDictionaryList selectById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int update(RcDataDictionaryList dList) {
+	public int updateById(RcDataDictionaryList dList) {
 		dList.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(dList);
 	}

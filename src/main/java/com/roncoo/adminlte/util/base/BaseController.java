@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 基础类
+ * 基础类，所以controller都应该继承这个类
  * 
  * @author wujing
  */
@@ -39,12 +39,12 @@ public class BaseController {
 	public static final String EDIT = "edit";
 	public static final String UPDATE = "update";
 	public static final String DELETE = "delete";
-	public static final String PAGE ="page";
+	public static final String PAGE = "page";
 
 	public static String redirect(String format, Object... arguments) {
 		return new StringBuffer("redirect:").append(MessageFormat.format(format, arguments)).toString();
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(redirect("/admin/emailAccountInfo/list"));
 	}

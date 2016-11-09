@@ -40,7 +40,7 @@ public interface DataDictionaryDao {
 	 * @param pageSize
 	 * @return
 	 */
-	Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize,String premise,String datePremise);
+	Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize, String premise, String datePremise);
 
 	/**
 	 * 根据id查询
@@ -48,14 +48,14 @@ public interface DataDictionaryDao {
 	 * @param id
 	 * @return
 	 */
-	RcDataDictionary select(Long id);
+	RcDataDictionary selectById(Long id);
 
 	/**
 	 * 根据id删除
 	 * 
 	 * @param id
 	 */
-	int delete(Long id);
+	int deleteById(Long id);
 
 	/**
 	 * 更新
@@ -63,6 +63,6 @@ public interface DataDictionaryDao {
 	 * @param dictionary
 	 * @return
 	 */
-	int update(RcDataDictionary dictionary);
+	int updateById(RcDataDictionary dictionary);
 
 }

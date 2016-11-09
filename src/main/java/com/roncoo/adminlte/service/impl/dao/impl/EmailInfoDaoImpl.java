@@ -27,6 +27,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.EmailInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailInfoMapper;
+import com.roncoo.adminlte.util.DateUtil;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.SqlUtil;
 
@@ -65,8 +66,7 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 			criteria.andToUserLike(SqlUtil.like(premise));
 		}
 		if(StringUtils.hasText(datePremise)){
-			Date date = SqlUtil.formatTime(datePremise);
-			criteria.andCreateTimeBetween(date, SqlUtil.addDay(date,1));
+			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
 		}
 		
 		List<RcEmailInfo> list = mapper.selectByExample(example);
@@ -74,12 +74,12 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	}
 
 	@Override
-	public int delete(Long id) {
+	public int deleteById(Long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public RcEmailInfo select(Long id) {
+	public RcEmailInfo selectById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 

@@ -24,7 +24,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
-import com.roncoo.adminlte.util.cache.EmailAccountInfoCache;
+import com.roncoo.adminlte.cache.EmailAccountInfoCache;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext-core.xml")

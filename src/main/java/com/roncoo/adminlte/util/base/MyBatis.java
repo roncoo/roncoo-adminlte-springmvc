@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 import org.springframework.stereotype.Component;
 
 /**
- * 标识MyBatis，方便 {@link org.mybatis.spring.mapper.MapperScannerConfigurer}的扫描
+ * MyBatis注解类，方便 {@link org.mybatis.spring.mapper.MapperScannerConfigurer}的扫描
  * 
  * @author wujing
  */

@@ -27,6 +27,7 @@ import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.DataDictionaryDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcDataDictionaryMapper;
+import com.roncoo.adminlte.util.DateUtil;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.SqlUtil;
 
@@ -49,44 +50,43 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	}
 
 	@Override
-	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
+	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
 		example.setOrderByClause("sort asc");
-		
+
 		int totalCount = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
 		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
-		
+
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
-		
+
 		Criteria criteria = example.createCriteria();
-		if(StringUtils.hasText(premise)){
+		if (StringUtils.hasText(premise)) {
 			criteria.andFieldNameLike(SqlUtil.like(premise));
 		}
-		if(StringUtils.hasText(datePremise)){
-			Date date = SqlUtil.formatTime(datePremise);
-			criteria.andCreateTimeBetween(date, SqlUtil.addDay(date,1));
+		if (StringUtils.hasText(datePremise)) {
+			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
 		}
-		
+
 		List<RcDataDictionary> list = mapper.selectByExample(example);
 		Page<RcDataDictionary> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 		return page;
 	}
 
 	@Override
-	public RcDataDictionary select(Long id) {
+	public RcDataDictionary selectById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int delete(Long id) {
+	public int deleteById(Long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public int update(RcDataDictionary dictionary) {
+	public int updateById(RcDataDictionary dictionary) {
 		dictionary.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(dictionary);
 	}

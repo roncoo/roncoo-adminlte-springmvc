@@ -28,8 +28,9 @@ import com.roncoo.adminlte.service.impl.dao.DataDictionaryListDao;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
+ * 数据字典明细服务接口实现类
  * 
- * 作用功能：数据字典明细服务接口实现类 作者： LYQ 时间：2016年10月18日
+ * @author wujing
  */
 @Service
 public class DataDictionaryListServiceImpl implements DataDictionaryListService {
@@ -38,7 +39,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 	private DataDictionaryListDao dao;
 
 	@Override
-	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode,String premise,String datePremise) {
+	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode, String premise, String datePremise) {
 		Result<Page<RcDataDictionaryList>> result = new Result<>();
 		if (pageCurrent < 1) {
 			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
@@ -52,7 +53,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 			result.setErrMsg("fieldCode不能为空");
 			return result;
 		}
-		Page<RcDataDictionaryList> resultData = dao.listForPage(pageCurrent, pageSize, fieldCode,premise,datePremise);
+		Page<RcDataDictionaryList> resultData = dao.listForPage(pageCurrent, pageSize, fieldCode, premise, datePremise);
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);
@@ -77,27 +78,29 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 		if (dao.insert(dList) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setResultData(dList);
 		}
 		return result;
 	}
 
 	@Override
-	public Result<RcDataDictionaryList> delete(Long id) {
-		Result<RcDataDictionaryList> result = new Result<>();
+	public Result<String> delete(Long id) {
+		Result<String> result = new Result<String>();
 		if (id < 1) {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		if (dao.delete(id) > 0) {
+		if (dao.deleteById(id) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setResultData("成功");
 		}
 		return result;
 	}
 
 	@Override
-	public Result<RcDataDictionaryList> deleteByFieldCode(String fieldCode) {
-		Result<RcDataDictionaryList> result = new Result<>();
+	public Result<String> deleteByFieldCode(String fieldCode) {
+		Result<String> result = new Result<>();
 		if (!StringUtils.hasText(fieldCode)) {
 			result.setErrMsg("fieldCode不能为空");
 			return result;
@@ -129,7 +132,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		RcDataDictionaryList dList = dao.select(id);
+		RcDataDictionaryList dList = dao.selectById(id);
 		result.setResultData(dList);
 		result.setStatus(true);
 		result.setErrCode(0);
@@ -151,7 +154,7 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 			result.setErrMsg("sort值不能为空");
 			return result;
 		}
-		if (dao.update(dList) > 0) {
+		if (dao.updateById(dList) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}
@@ -159,8 +162,8 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 	}
 
 	@Override
-	public Result<RcDataDictionaryList> updateForFieldCode(String fieldCodePremise, String fieldCode) {
-		Result<RcDataDictionaryList> result = new Result<>();
+	public Result<String> updateByFieldCode(String fieldCodePremise, String fieldCode) {
+		Result<String> result = new Result<String>();
 		if (!StringUtils.hasText(fieldCodePremise)) {
 			result.setErrMsg("fieldCodePremise不能为空");
 			return result;

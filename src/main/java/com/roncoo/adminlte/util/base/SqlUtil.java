@@ -15,10 +15,6 @@
  */
 package com.roncoo.adminlte.util.base;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -144,7 +140,7 @@ public class SqlUtil {
 		// 校验当前页数
 		pageCurrent = checkPageCurrent(totalCount, pageSize, pageCurrent);
 		pageSize = checkPageSize(pageSize); // 校验每页记录数
-		return " limit " + countOffset(pageCurrent, pageSize) + "," + pageSize;
+		return new StringBuffer().append(" limit ").append(countOffset(pageCurrent, pageSize)).append(",").append(pageSize).toString();
 	}
 
 	/**
@@ -156,7 +152,7 @@ public class SqlUtil {
 	 */
 	public static String countSql(String sql) {
 		String countSql = sql.substring(sql.toLowerCase().indexOf("from")); // 去除第一个from前的内容
-		return "select count(*) " + removeOrderBy(countSql);
+		return new StringBuffer().append("select count(*) ").append(removeOrderBy(countSql)).toString();
 	}
 
 	/**
@@ -173,39 +169,8 @@ public class SqlUtil {
 		while (mc.find()) {
 			mc.appendReplacement(strBuf, "");
 		}
-		;
 		mc.appendTail(strBuf);
 		return strBuf.toString();
-	}
-
-	/**
-	 * 格式化时间
-	 * 
-	 * @param dateStr
-	 * @return
-	 */
-	public static Date formatTime(String dateStr) {
-		Date date = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-			date = sdf.parse(dateStr);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
-	}
-
-	/**
-	 * 添加天数
-	 * 
-	 * @param date
-	 * @return
-	 */
-	public static Date addDay(Date date, int day) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.add(Calendar.DAY_OF_YEAR, day);
-		return cal.getTime();
 	}
 
 	/**
@@ -215,13 +180,7 @@ public class SqlUtil {
 	 * @return
 	 */
 	public static String like(String str) {
-		return "%" + str + "%";
+		return new StringBuffer().append("%").append(str).append("%").toString();
 	}
-	
-	public static void main(String[] args) {
-		String dateStr = "11/02/2016";
-		Date date = formatTime(dateStr);
-		System.out.println(date);
-	
-	}
+
 }

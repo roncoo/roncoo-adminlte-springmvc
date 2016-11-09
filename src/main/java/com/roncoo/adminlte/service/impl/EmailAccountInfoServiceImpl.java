@@ -15,6 +15,8 @@
  */
 package com.roncoo.adminlte.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -33,7 +35,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	private EmailAccountInfoDao dao;
 
 	@Override
-	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
+	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
 		Result<Page<RcEmailAccountInfo>> result = new Result<>();
 		if (pageCurrent < 1) {
 			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
@@ -43,7 +45,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
 			return result;
 		}
-		Page<RcEmailAccountInfo> resultData = dao.listForPage(pageCurrent, pageSize,premise,datePremise);
+		Page<RcEmailAccountInfo> resultData = dao.listForPage(pageCurrent, pageSize, premise, datePremise);
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);
@@ -57,12 +59,12 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		
-		RcEmailAccountInfo resultData = dao.select(id);
-		//解密
+
+		RcEmailAccountInfo resultData = dao.selectById(id);
+		// 解密
 		String passwd = Base64Util.decode(resultData.getPasswd());
 		resultData.setPasswd(passwd);
-		
+
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);
@@ -72,19 +74,19 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	@Override
 	public Result<RcEmailAccountInfo> save(RcEmailAccountInfo info) {
 		Result<RcEmailAccountInfo> result = new Result<>();
-		if(!StringUtils.hasText(info.getFromUser())){
+		if (!StringUtils.hasText(info.getFromUser())) {
 			result.setErrMsg("用户名不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(info.getHost())){
+		if (!StringUtils.hasText(info.getHost())) {
 			result.setErrMsg("host不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(info.getPasswd())){
+		if (!StringUtils.hasText(info.getPasswd())) {
 			result.setErrMsg("授权码不能为空");
 			return result;
 		}
-		if(dao.insert(info)>0){
+		if (dao.insert(info) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}
@@ -98,7 +100,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		if(dao.delete(id)>0){
+		if (dao.deleteById(id) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}
@@ -107,23 +109,34 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 
 	@Override
 	public Result<RcEmailAccountInfo> update(RcEmailAccountInfo info) {
-		Result<RcEmailAccountInfo> result = new Result<>();
-		if(!StringUtils.hasText(info.getFromUser())){
+		Result<RcEmailAccountInfo> result = new Result<RcEmailAccountInfo>();
+		if (!StringUtils.hasText(info.getFromUser())) {
 			result.setErrMsg("用户名不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(info.getHost())){
+		if (!StringUtils.hasText(info.getHost())) {
 			result.setErrMsg("host不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(info.getPasswd())){
+		if (!StringUtils.hasText(info.getPasswd())) {
 			result.setErrMsg("授权码不能为空");
 			return result;
 		}
-		if(dao.update(info)>0){
+		if (dao.updateById(info) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
+			result.setResultData(info);
 		}
+		return result;
+	}
+
+	@Override
+	public Result<List<RcEmailAccountInfo>> list() {
+		Result<List<RcEmailAccountInfo>> result = new Result<List<RcEmailAccountInfo>>();
+		List<RcEmailAccountInfo> list = dao.list();
+		result.setStatus(true);
+		result.setErrCode(0);
+		result.setResultData(list);
 		return result;
 	}
 

@@ -26,6 +26,7 @@ import com.roncoo.adminlte.util.ConfUtil;
 import com.roncoo.adminlte.util.Constants;
 
 /**
+ * Session拦截器
  * 
  * @author wujing
  */

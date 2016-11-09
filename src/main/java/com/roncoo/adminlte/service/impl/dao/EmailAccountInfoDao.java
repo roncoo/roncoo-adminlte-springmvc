@@ -15,6 +15,8 @@
  */
 package com.roncoo.adminlte.service.impl.dao;
 
+import java.util.List;
+
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.util.base.Page;
 
@@ -31,7 +33,7 @@ public interface EmailAccountInfoDao {
 	 * @param id
 	 * @return
 	 */
-	int delete(Long id);
+	int deleteById (Long id);
 
 	/**
 	 * 添加
@@ -47,7 +49,7 @@ public interface EmailAccountInfoDao {
 	 * @param example
 	 * @return
 	 */
-	Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize,String premise,String datePremise);
+	Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize, String premise, String datePremise);
 
 	/**
 	 * 根据id查询
@@ -55,7 +57,7 @@ public interface EmailAccountInfoDao {
 	 * @param id
 	 * @return
 	 */
-	RcEmailAccountInfo select(Long id);
+	RcEmailAccountInfo selectById(Long id);
 
 	/**
 	 * 更新
@@ -63,8 +65,11 @@ public interface EmailAccountInfoDao {
 	 * @param info
 	 * @return
 	 */
-	int update(RcEmailAccountInfo info);
+	int updateById(RcEmailAccountInfo info);
 
-
+	/**
+	 * @return
+	 */
+	List<RcEmailAccountInfo> list();
 
 }

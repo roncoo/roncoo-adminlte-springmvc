@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015-2016 RonCoo(http://www.roncoo.com) Group.
+ *  
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.roncoo.adminlte.util;
 
 import java.util.Map;
@@ -10,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * Restful 工具类
+ * Restful 调用工具类
  * 
  * @author wujing
  */
@@ -20,8 +35,8 @@ public class RestTemplateUtil {
 	private static SimpleClientHttpRequestFactory requestFactory = null;
 	static {
 		requestFactory = new SimpleClientHttpRequestFactory();
-		requestFactory.setConnectTimeout(10000); // 10秒
-		requestFactory.setReadTimeout(60000); // 60秒
+		requestFactory.setConnectTimeout(60000); // 连接超时时间，单位=毫秒
+		requestFactory.setReadTimeout(60000); // 读取超时时间，单位=毫秒
 	}
 	private static RestTemplate restTemplate = new RestTemplate(requestFactory);
 

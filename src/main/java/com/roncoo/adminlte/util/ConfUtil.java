@@ -26,7 +26,6 @@ import java.util.Properties;
 public class ConfUtil {
 
 	private ConfUtil() {
-
 	}
 
 	/**
@@ -44,10 +43,26 @@ public class ConfUtil {
 		}
 	}
 
+	/**
+	 * 根据key读取value
+	 * 
+	 * @param keyName
+	 *            key
+	 * @return
+	 */
 	public static String getProperty(String keyName) {
-		return properties.getProperty(keyName);
+		return getProperty(keyName, "");
 	}
 
+	/**
+	 * 根据key读取value，key为空，返回默认值
+	 * 
+	 * @param keyName
+	 *            key
+	 * @param defaultValue
+	 *            默认值
+	 * @return
+	 */
 	public static String getProperty(String keyName, String defaultValue) {
 		return properties.getProperty(keyName, defaultValue);
 	}

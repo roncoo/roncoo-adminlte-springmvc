@@ -85,7 +85,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		RcDataDictionary resultData = dao.select(id);
+		RcDataDictionary resultData = dao.selectById(id);
 		result.setStatus(true);
 		result.setErrCode(0);
 		result.setResultData(resultData);
@@ -93,13 +93,13 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
-	public Result<RcDataDictionary> delete(Long id) {
-		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
+	public Result<String> delete(Long id) {
+		Result<String> result = new Result<String>();
 		if (id < 1) {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		if (dao.delete(id) > 0) {
+		if (dao.deleteById(id) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}
@@ -121,7 +121,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 			result.setErrMsg("sort不能为空");
 			return result;
 		}
-		if (dao.update(rcDataDictionary) > 0) {
+		if (dao.updateById(rcDataDictionary) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}

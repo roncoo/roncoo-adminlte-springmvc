@@ -28,6 +28,7 @@ import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailAccountInfoMapper;
 import com.roncoo.adminlte.util.Base64Util;
+import com.roncoo.adminlte.util.DateUtil;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.SqlUtil;
 
@@ -38,7 +39,7 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	private RcEmailAccountInfoMapper mapper;
 
 	@Override
-	public int delete(Long id) {
+	public int deleteById(Long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
@@ -53,7 +54,7 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
+	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
 		RcEmailAccountInfoExample example = new RcEmailAccountInfoExample();
 		example.setOrderByClause("id desc");
 		int totalCount = mapper.countByExample(example);
@@ -62,13 +63,12 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
-		Criteria criteria=example.createCriteria();
+		Criteria criteria = example.createCriteria();
 		if (StringUtils.hasText(premise)) {
 			criteria.andFromUserLike(SqlUtil.like(premise));
 		}
-		if(StringUtils.hasText(datePremise)){
-			Date date = SqlUtil.formatTime(datePremise);
-			criteria.andCreateTimeBetween(date, SqlUtil.addDay(date, 1));
+		if (StringUtils.hasText(datePremise)) {
+			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
 		}
 		List<RcEmailAccountInfo> list = mapper.selectByExample(example);
 		Page<RcEmailAccountInfo> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
@@ -76,15 +76,22 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public RcEmailAccountInfo select(Long id) {
+	public RcEmailAccountInfo selectById(Long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int update(RcEmailAccountInfo info) {
+	public int updateById(RcEmailAccountInfo info) {
 		String passwd = Base64Util.encrypt(info.getPasswd());
 		info.setPasswd(passwd);
 		info.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(info);
+	}
+
+	@Override
+	public List<RcEmailAccountInfo> list() {
+		RcEmailAccountInfoExample example = new RcEmailAccountInfoExample();
+		example.setOrderByClause("id desc");
+		return mapper.selectByExample(example);
 	}
 }

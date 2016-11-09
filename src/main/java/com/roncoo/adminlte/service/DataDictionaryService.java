@@ -56,7 +56,7 @@ public interface DataDictionaryService {
 	 * 
 	 * @param id
 	 */
-	Result<RcDataDictionary> delete(Long id);
+	Result<String> delete(Long id);
 
 	/**
 	 * 更新

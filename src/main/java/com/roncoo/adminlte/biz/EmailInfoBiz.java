@@ -25,9 +25,9 @@ import org.springframework.stereotype.Component;
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.cache.EmailAccountInfoCache;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;
-import com.roncoo.adminlte.util.cache.EmailAccountInfoCache;
 
 /**
  * @author wujing

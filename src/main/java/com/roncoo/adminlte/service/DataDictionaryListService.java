@@ -50,14 +50,14 @@ public interface DataDictionaryListService {
 	 * 
 	 * @param id
 	 */
-	Result<RcDataDictionaryList> delete(Long id);
+	Result<String> delete(Long id);
 
 	/**
 	 * 删除
 	 * 
 	 * @param dList
 	 */
-	Result<RcDataDictionaryList> deleteByFieldCode(String fieldCode);
+	Result<String> deleteByFieldCode(String fieldCode);
 
 	/**
 	 * 根据fieldCode查询
@@ -90,5 +90,5 @@ public interface DataDictionaryListService {
 	 * @param fieldCode
 	 * @return
 	 */
-	Result<RcDataDictionaryList> updateForFieldCode(String fieldCodePremise,String fieldCode);
+	Result<String> updateByFieldCode(String fieldCodePremise,String fieldCode);
 }

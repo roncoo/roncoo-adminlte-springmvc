@@ -46,8 +46,8 @@ public class DataDictionaryBiz {
 	 * @param pageSize
 	 * @return
 	 */
-	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
-		return dictionaryService.listForPage(pageCurrent, pageSize,premise,datePremise);
+	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
+		return dictionaryService.listForPage(pageCurrent, pageSize, premise, datePremise);
 	}
 
 	/**
@@ -90,9 +90,9 @@ public class DataDictionaryBiz {
 	@Transactional
 	public Result<RcDataDictionary> update(RcDataDictionary dictionary, String oldFieldCode) {
 		Result<RcDataDictionary> result = dictionaryService.update(dictionary);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			if (oldFieldCode != dictionary.getFieldCode()) {
-				dictionaryListService.updateForFieldCode(oldFieldCode, dictionary.getFieldCode());
+				dictionaryListService.updateByFieldCode(oldFieldCode, dictionary.getFieldCode());
 			}
 		}
 		return result;

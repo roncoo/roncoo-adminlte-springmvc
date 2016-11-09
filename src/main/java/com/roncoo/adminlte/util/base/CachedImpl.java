@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.roncoo.adminlte.service.impl.dao.impl.base.imple;
+package com.roncoo.adminlte.util.base;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,8 +30,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.roncoo.adminlte.service.impl.dao.impl.base.CachedDao;
-
 /**
  * 缓存基本支撑类
  * 
@@ -39,7 +37,7 @@ import com.roncoo.adminlte.service.impl.dao.impl.base.CachedDao;
  * @param <K>
  * @param <V>
  */
-public abstract class CachedDaoImpl<K, V> implements CachedDao<K, V> {
+public abstract class CachedImpl<K, V> {
 	private ConcurrentMap<K, V> cached = new ConcurrentHashMap<K, V>();
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());

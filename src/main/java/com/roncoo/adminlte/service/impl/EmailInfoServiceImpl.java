@@ -83,7 +83,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		if (dao.delete(id) > 0) {
+		if (dao.deleteById(id) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}
@@ -97,7 +97,7 @@ public class EmailInfoServiceImpl implements EmailInfoService {
 			result.setErrMsg("此操作的id：" + id + "为无效id");
 			return result;
 		}
-		RcEmailInfo resultData = dao.select(id);
+		RcEmailInfo resultData = dao.selectById(id);
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);
