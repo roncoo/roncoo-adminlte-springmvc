@@ -219,33 +219,50 @@
       <div class="modal-footer">  
          <input type="hidden" id="url"/>  
          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
-         <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>  
+         <a id="urlSubmit" class="btn btn-success" data-dismiss="modal">确定</a>  
       </div>  
-    </div><!-- /.modal-content -->  
-  </div><!-- /.modal-dialog -->  
-</div><!-- /.modal -->  
+    </div>
+  </div>
+</div> 
 
 <script type="text/javascript">
-	function delcfm(url) {  
+function delcfm(url) {  
 	    $('#url').val(url);//给会话中的隐藏属性URL赋值  
 	    $('#delcfmModel').modal();  
-	}  
+	} 
+$(function(){
+
+	 
 	function urlSubmit(){  
 	    var url=$.trim($("#url").val());//获取会话中的隐藏属性URL  
 	    window.location.href=url;   
-	}  
-	
-	//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
-	function reloadTable(oTable) {
-	    var date = $("#tableParam").val();
-	    var search = $("#search").val();
-	    var param = {
-	        "date": date,
-	        "search": search
-	    };
-	    oTable.settings()[0].ajax.data = param;
-	    oTable.ajax.reload();
 	}
+
+	$("#urlSubmit").on("click",function(){
+		var url=$.trim($("#url").val());
+		ajaxPost(url);
+	});
+	
+	function ajaxPost(url) {
+		var options = {
+			url: url,
+			type: 'post',
+			dataType: 'text',
+			success: function (data) {
+			var date = $("#tableParam").val();
+			    var search = $("#search").val();
+			    var param = {
+			        "date": date,
+			        "search": search
+			    };
+			    example4.settings()[0].ajax.data = param;
+				window.location.reload(example4);
+				
+			}
+		};
+	$.ajax(options);
+	}
+});
 </script>
 </#macro>
 

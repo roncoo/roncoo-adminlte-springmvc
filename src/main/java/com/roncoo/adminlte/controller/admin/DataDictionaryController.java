@@ -55,8 +55,11 @@ public class DataDictionaryController extends BaseController {
 	@RequestMapping(value = PAGE)
 	public PageBean<RcDataDictionary> page(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize, ModelMap modelMap){
 		int pageCurrent = (start/pageSize)+1;
-		Page<RcDataDictionary> page = biz.listForPage(pageCurrent, pageSize);
-		return new PageBean<>(page);
+		Result<Page<RcDataDictionary>> result = biz.listForPage(pageCurrent, pageSize);
+		if(result.isStatus()){
+			return new PageBean<>(result.getResultData());
+		}
+		return null;
 	}
 
 	/**
@@ -97,8 +100,10 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(Long id, ModelMap modelMap) {
-		RcDataDictionary dictionary = biz.query(id);
-		modelMap.put("dictionary", dictionary);
+		Result<RcDataDictionary> result = biz.query(id);
+		if(result.isStatus()){
+			modelMap.put("dictionary", result.getResultData());
+		}
 	}
 
 	/**
@@ -109,15 +114,19 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(Long id, ModelMap modelMap) {
-		RcDataDictionary dictionary = biz.query(id);
-		modelMap.put("dictionary", dictionary);
+		Result<RcDataDictionary> result = biz.query(id);
+		if(result.isStatus()){
+			modelMap.put("dictionary", result.getResultData());
+		}
 	}
 
 	@RequestMapping(value = UPDATE)
 	public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
-		biz.update(dictionary, oldFieldCode);
-		// 更新之后，提示都没有
-		return redirect("/admin/dataDictionary/list");
+		Result<RcDataDictionary> result = biz.update(dictionary, oldFieldCode);
+		if(result.isStatus()){
+			return redirect("/admin/dataDictionary/list");
+		}
+		return "/admin/dataDictionary/list";
 
 	}
 }

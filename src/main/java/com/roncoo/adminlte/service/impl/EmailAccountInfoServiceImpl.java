@@ -17,7 +17,9 @@ package com.roncoo.adminlte.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
@@ -31,41 +33,125 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	private EmailAccountInfoDao dao;
 
 	@Override
-	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize) {
-		return dao.listForPage(pageCurrent, pageSize);
+	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize) {
+		Result<Page<RcEmailAccountInfo>> result = new Result<>();
+		if(pageCurrent<1){
+			result.setErrMsg("pageCurrent有误");
+			return result;
+		}
+		if(pageSize<1){
+			result.setErrMsg("pageSize有误");
+			return result;
+		}
+		result.setResultData(dao.listForPage(pageCurrent, pageSize));
+		result.setErrCode(0);
+		result.setStatus(true);
+		return result;
 	}
 
 	@Override
-	public RcEmailAccountInfo queryById(Long id) {
+	public Result<RcEmailAccountInfo> queryById(Long id) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if(id<1){
+			result.setErrMsg("此id无效");
+			return result;
+		}
 		RcEmailAccountInfo info = dao.selectById(id);
 		String passwd = Base64Util.decode(info.getPasswd());
 		info.setPasswd(passwd);
-		return info;
+		result.setResultData(info);
+		result.setErrCode(0);
+		result.setStatus(true);
+		return result;
 	}
 
 	@Override
-	public int save(RcEmailAccountInfo info) {
-		return dao.insert(info);
+	public Result<RcEmailAccountInfo> save(RcEmailAccountInfo info) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if(!StringUtils.hasText(info.getFromUser())){
+			result.setErrMsg("账号不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getHost())){
+			result.setErrMsg("Host不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getPasswd())){
+			result.setErrMsg("授权码不能为空");
+			return result;
+		}
+		if(dao.insert(info)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public int updateById(RcEmailAccountInfo info) {
-		return dao.updateById(info);
+	public Result<RcEmailAccountInfo> updateById(RcEmailAccountInfo info) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if(!StringUtils.hasText(info.getFromUser())){
+			result.setErrMsg("账号不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getHost())){
+			result.setErrMsg("Host不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getPasswd())){
+			result.setErrMsg("授权码不能为空");
+			return result;
+		}
+		if(dao.updateById(info)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteById(Long id) {
-		return dao.deleteById(id);
+	public Result<RcEmailAccountInfo> deleteById(Long id) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if(id<1){
+			result.setErrMsg("此id无效");
+			return result;
+		}
+		if(dao.deleteById(id)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public RcEmailAccountInfo queryByRand() {
-		return dao.queryByRand();
+	public Result<RcEmailAccountInfo> queryByRand() {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		result.setResultData(dao.queryByRand());
+		result.setStatus(true);
+		result.setErrCode(0);
+		return result;
 	}
 
 	@Override
-	public int update(RcEmailAccountInfo info) {
-		return dao.updateById(info);
+	public Result<RcEmailAccountInfo> update(RcEmailAccountInfo info) {
+		Result<RcEmailAccountInfo> result = new Result<>();
+		if(!StringUtils.hasText(info.getFromUser())){
+			result.setErrMsg("账号不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getHost())){
+			result.setErrMsg("Host不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(info.getPasswd())){
+			result.setErrMsg("授权码不能为空");
+			return result;
+		}
+		if(dao.updateById(info)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 }

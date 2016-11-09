@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.biz.DataDictionaryListBiz;
 import com.roncoo.adminlte.util.base.BaseController;
@@ -56,8 +57,11 @@ public class DataDictionaryListController extends BaseController {
 			@RequestParam(value = "length", defaultValue = "10") int pageSize,
 			@RequestParam(value = "fieldCode") String fieldCode) {
 		int pageCurrent = (start / pageSize) + 1;
-		Page<RcDataDictionaryList> page = biz.listForPage(pageCurrent, pageSize, fieldCode);
-		return new PageBean<>(page);
+		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, fieldCode);
+		if (result.isStatus()) {
+			return new PageBean<>(result.getResultData());
+		}
+		return null;
 	}
 
 	@RequestMapping(value = SAVE)
@@ -78,16 +82,20 @@ public class DataDictionaryListController extends BaseController {
 
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
-		RcDataDictionaryList dictionaryList = biz.queryById(id);
-		modelMap.put("dictionaryList", dictionaryList);
+		Result<RcDataDictionaryList> result = biz.queryById(id);
+		if(result.isStatus()){
+			modelMap.put("dictionaryList", result.getResultData());
+		}
 	}
 
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "dId") Long dId,
 			ModelMap modelMap) {
-		RcDataDictionaryList dictionaryList = biz.queryById(id);
+		Result<RcDataDictionaryList> result = biz.queryById(id);
 		modelMap.put("id", dId);
-		modelMap.put("dictionaryList", dictionaryList);
+		if(result.isStatus()){
+			modelMap.put("dictionaryList", result.getResultData());
+		}
 	}
 
 	@RequestMapping(value = UPDATE)

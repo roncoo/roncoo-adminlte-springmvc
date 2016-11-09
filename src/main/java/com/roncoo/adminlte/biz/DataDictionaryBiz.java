@@ -46,7 +46,7 @@ public class DataDictionaryBiz {
 	 * @param pageSize
 	 * @return
 	 */
-	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize) {
+	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize) {
 		return dictionaryService.listForPage(pageCurrent, pageSize);
 	}
 
@@ -66,9 +66,9 @@ public class DataDictionaryBiz {
 	 * @param fieldCode
 	 */
 	@Transactional
-	public void delete(Long id, String fieldCode) {
+	public Result<RcDataDictionary> delete(Long id, String fieldCode) {
 		dictionaryListService.deleteByFieldCode(fieldCode);
-		dictionaryService.deleteById(id);
+		return dictionaryService.deleteById(id);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class DataDictionaryBiz {
 	 * @param id
 	 * @return
 	 */
-	public RcDataDictionary query(Long id) {
+	public Result<RcDataDictionary> query(Long id) {
 		return dictionaryService.queryById(id);
 	}
 
@@ -88,10 +88,11 @@ public class DataDictionaryBiz {
 	 * @param oldFieldCode
 	 */
 	@Transactional
-	public void update(RcDataDictionary dictionary, String oldFieldCode) {
+	public Result<RcDataDictionary> update(RcDataDictionary dictionary, String oldFieldCode) {
 		Result<RcDataDictionary> result = dictionaryService.update(dictionary);
 		if (oldFieldCode != dictionary.getFieldCode()) {
 			dictionaryListService.updateForFieldCode(oldFieldCode, dictionary.getFieldCode());
 		}
+		return result;
 	}
 }

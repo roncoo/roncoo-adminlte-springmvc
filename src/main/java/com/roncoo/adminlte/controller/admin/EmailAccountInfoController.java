@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.biz.EmailAccountInfoBiz;
@@ -49,17 +50,21 @@ public class EmailAccountInfoController extends BaseController {
 
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
 	public void list( ModelMap modelMap) {
-		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
-		modelMap.put("selectList", select);
+		Result<List<RcDataDictionaryList>> result = biz.listByFieldCode(FIELDCODE);
+		if(result.isStatus()){
+			modelMap.put("selectList", result.getResultData());
+		}
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = PAGE)
 	public PageBean<RcEmailAccountInfo> page(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize, ModelMap modelMap){
 		int pageCurrent = (start/pageSize)+1;
-		Page<RcEmailAccountInfo> page = biz.listForPage(pageCurrent, pageSize);
-		return  new PageBean<RcEmailAccountInfo>(page);
-		
+		Result<Page<RcEmailAccountInfo>> result = biz.listForPage(pageCurrent, pageSize);
+		if(result.isStatus()){
+			return  new PageBean<RcEmailAccountInfo>(result.getResultData());
+		}
+		return null;
 	}
 
 	@RequestMapping(value = SAVE)
@@ -76,21 +81,30 @@ public class EmailAccountInfoController extends BaseController {
 
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(@RequestParam Long id, ModelMap modelMap) {
-		RcEmailAccountInfo info = biz.queryById(id);
-		modelMap.put("info", info);
+		Result<RcEmailAccountInfo> result = biz.queryById(id);
+		if(result.isStatus()){
+			modelMap.put("info", result.getResultData());
+		}
 	}
 
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(@RequestParam Long id, ModelMap modelMap) {
-		List<RcDataDictionaryList> select = biz.listByFieldCode(FIELDCODE);
-		RcEmailAccountInfo info = biz.queryById(id);
-		modelMap.put("selectList", select);
-		modelMap.put("info", info);
+		Result<List<RcDataDictionaryList>> rcDataDictionaryListResult = biz.listByFieldCode(FIELDCODE);
+		Result<RcEmailAccountInfo> result = biz.queryById(id);
+		if(rcDataDictionaryListResult.isStatus()){
+			modelMap.put("selectList", rcDataDictionaryListResult.getResultData());
+		}
+		if (result.isStatus()) {
+			modelMap.put("info", result.getResultData());
+		}
 	}
 
 	@RequestMapping(value = UPDATE)
 	public String update(@ModelAttribute RcEmailAccountInfo info) {
-		biz.update(info);
-		return redirect("/admin/emailAccountInfo/list");
+		Result<RcEmailAccountInfo> result = biz.update(info);
+		if(result.isStatus()){
+			return redirect("/admin/emailAccountInfo/list");
+		}
+		return "/admin/emailAccountInfo/list";
 	}
 }

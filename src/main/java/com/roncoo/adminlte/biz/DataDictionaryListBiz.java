@@ -18,6 +18,7 @@ package com.roncoo.adminlte.biz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.util.base.Page;
@@ -41,25 +42,25 @@ public class DataDictionaryListBiz {
 	 * @param id
 	 * @return
 	 */
-	public Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode) {
+	public Result<Page<RcDataDictionaryList>> listForPage(int pageCurrent, int pageSize, String fieldCode) {
 		return dictionaryListService.listForPage(pageCurrent, pageSize, fieldCode);
 	}
 
 	/**
 	 * 根据id删除
 	 */
-	public void deleteById(Long id) {
-		dictionaryListService.deleteById(id);
+	public Result<RcDataDictionaryList> deleteById(Long id) {
+		return dictionaryListService.deleteById(id);
 	}
 
 	/**
 	 * 添加
 	 * 
-	 * @param dList
+	 * @param rcDataDictionaryList
 	 * @param id
 	 */
-	public void save(RcDataDictionaryList dList) {
-		dictionaryListService.save(dList);
+	public Result<RcDataDictionaryList> save(RcDataDictionaryList rcDataDictionaryList) {
+		return dictionaryListService.save(rcDataDictionaryList);
 	}
 
 	/**
@@ -68,17 +69,17 @@ public class DataDictionaryListBiz {
 	 * @param id
 	 * @return
 	 */
-	public RcDataDictionaryList queryById(Long id) {
+	public Result<RcDataDictionaryList> queryById(Long id) {
 		return dictionaryListService.queryById(id);
 	}
 
 	/**
 	 * 更新
 	 * 
-	 * @param dList
+	 * @param rDataDictionaryList
 	 */
-	public void update(RcDataDictionaryList dList) {
-		dictionaryListService.update(dList);
+	public Result<RcDataDictionaryList> update(RcDataDictionaryList rDataDictionaryList) {
+		return dictionaryListService.update(rDataDictionaryList);
 	}
 
 }

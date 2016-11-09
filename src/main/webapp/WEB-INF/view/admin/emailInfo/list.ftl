@@ -56,7 +56,7 @@
 <script>
   $(function () {
 	//初始化表格
-	var No=0;
+	 var No=0;
      var example4 = $('#example4').DataTable( {
         "dom": 'itflp',
         "processing": true,

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.biz.EmailInfoBiz;
@@ -59,11 +60,13 @@ public class EmailInfoController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = PAGE)
-	public PageBean<RcEmailInfo> page(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize, ModelMap modelMap){
+	public PageBean<RcEmailInfo> page(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize){
 		int pageCurrent = (start/pageSize)+1;
-		Page<RcEmailInfo> page = biz.listForPage(pageCurrent, pageSize);
-		modelMap.put("page", page);
-		return new PageBean<RcEmailInfo>(page);
+		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize);
+		if(result.isStatus()){
+			return new PageBean<RcEmailInfo>(result.getResultData());
+		}
+		return new PageBean<RcEmailInfo>(null);
 	}
 
 	/**
@@ -108,8 +111,10 @@ public class EmailInfoController extends BaseController {
 	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
-		RcEmailInfo info = biz.queryById(id);
-		modelMap.put("info", info);
+		Result<RcEmailInfo> result = biz.queryById(id);
+		if(result.isStatus()){
+			modelMap.put("info", result.getResultData());
+		}
 	}
 
 }

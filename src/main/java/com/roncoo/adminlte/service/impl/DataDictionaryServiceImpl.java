@@ -17,6 +17,7 @@ package com.roncoo.adminlte.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
@@ -39,7 +40,18 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	public Result<RcDataDictionary> save(RcDataDictionary rcDataDictionary) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		// 校验字段
-
+		if(!StringUtils.hasText(rcDataDictionary.getFieldName())){
+			result.setErrMsg("字段名不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(rcDataDictionary.getFieldCode())){
+			result.setErrMsg("Code不能为空");
+			return result;
+		}
+		if(rcDataDictionary.getSort()<1){
+			result.setErrMsg("排序无效");
+			return result;
+		}
 		if (dao.insert(rcDataDictionary) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
@@ -48,26 +60,67 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
-	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize) {
-		return dao.listForPage(pageCurrent, pageSize);
+	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize) {
+		Result<Page<RcDataDictionary>> result = new Result<>();
+		if(pageCurrent<1){
+			result.setErrMsg("pageCurrent有误");
+			return result;
+		}
+		if(pageSize<1){
+			result.setErrMsg("pageSize有误");
+			return result;
+		}
+		result.setResultData(dao.listForPage(pageCurrent, pageSize));
+		result.setErrCode(0);
+		result.setStatus(true);
+		return result;
 	}
 
 	@Override
-	public RcDataDictionary queryById(Long id) {
-		return dao.selectById(id);
+	public Result<RcDataDictionary> queryById(Long id) {
+		Result<RcDataDictionary> result = new Result<>();
+		if(id<1){
+			result.setErrMsg("此id无效");
+			return result;
+		}
+		result.setResultData(dao.selectById(id));
+		result.setErrCode(0);
+		result.setStatus(true);
+		return result;
 	}
 
 	@Override
-	public int deleteById(Long id) {
-		return dao.deleteById(id);
+	public Result<RcDataDictionary> deleteById(Long id) {
+		Result<RcDataDictionary> result = new Result<>();
+		if(id<1){
+			result.setErrMsg("此id无效");
+			return result;
+		}
+		if(dao.deleteById(id)>0){
+			result.setStatus(true);
+			result.setErrCode(0);
+		}
+		return result;
 	}
 
 	@Override
-	public Result<RcDataDictionary> update(RcDataDictionary dictionary) {
+	public Result<RcDataDictionary> update(RcDataDictionary rcDataDictionary) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		// 校验字段
-
-		if (dao.updateById(dictionary) > 0) {
+		// 校验字段
+		if(!StringUtils.hasText(rcDataDictionary.getFieldName())){
+			result.setErrMsg("字段名不能为空");
+			return result;
+		}
+		if(!StringUtils.hasText(rcDataDictionary.getFieldCode())){
+			result.setErrMsg("Code不能为空");
+			return result;
+		}
+		if(rcDataDictionary.getSort()<1){
+			result.setErrMsg("排序无效");
+			return result;
+		}
+		if (dao.updateById(rcDataDictionary) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}
