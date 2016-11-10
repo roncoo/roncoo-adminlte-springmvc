@@ -105,10 +105,9 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 			result.setErrMsg("fieldCode不能为空");
 			return result;
 		}
-		if (dao.deleteByFieldCode(fieldCode) > 0) {
-			result.setStatus(true);
-			result.setErrCode(0);
-		}
+		dao.deleteByFieldCode(fieldCode);
+		result.setStatus(true);
+		result.setErrCode(0);
 		return result;
 	}
 

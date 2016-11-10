@@ -129,9 +129,7 @@
 				});
 
 		//点击删除确认时，删除后刷新
-		$(".btn-del").click(function() {
-			reloadTable(dictionaryList_tab,"#dictionaryList-time","#dictionaryList-premise");
-		});
+		
 		
 		$("#list_add").click(function(){
 			list_ajax = dictionaryList_tab;
@@ -143,6 +141,10 @@
 	    }); 
 		
 	    $(document).on("click", "#dictionaryList-seek", function() { 
+	    	reloadTable(dictionaryList_tab,"#dictionaryList-time","#dictionaryList-premise");
+	    });
+	    
+	     $(document).on("click", ".btn-del", function() { 
 	    	reloadTable(dictionaryList_tab,"#dictionaryList-time","#dictionaryList-premise");
 	    });
 	    

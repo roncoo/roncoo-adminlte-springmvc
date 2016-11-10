@@ -122,7 +122,7 @@ public final class DateUtil {
 	 * @return Date
 	 */
 	public static Date parseDate(String dateStr) {
-		return parseDate(dateStr, "dd/MM/yyyy");
+		return parseDate(dateStr, "MM/dd/yyyy");
 	}
 
 	/**
