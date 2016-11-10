@@ -113,14 +113,16 @@ $(function () {
 		No=0;
     } );
 
-	//删除回调
-	$(".btn-del").click(function(){
-		reloadTable(emailInfo_tab,"#emailInfo-time","#emailInfo-premise");
-	});
+	
 	
 	//发送邮件，把回调事件存放在全局变量中
 	$("#emailInfo-send").on('click',function(){
 		list_ajax = emailInfo_tab;
+	});
+	
+	//删除回调
+	$(".btn-del").on("click",function(){
+		reloadTable(emailInfo_tab,"#emailInfo-time","#emailInfo-premise");
 	});
 	
 	//查询回调

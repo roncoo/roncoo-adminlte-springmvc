@@ -69,9 +69,8 @@ public class DataDictionaryBiz {
 	public Result<String> delete(Long id, String fieldCode) {
 		if (dictionaryListService.deleteByFieldCode(fieldCode).isStatus()) {
 			return dictionaryService.delete(id);
-		} else {
-			throw new RuntimeException("删除失败");
 		}
+		return null;
 	}
 
 	/**

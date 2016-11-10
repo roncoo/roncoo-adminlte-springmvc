@@ -120,13 +120,14 @@
     	list_ajax = dictionary_tab;
     });
     
-	//点击删除确认时，删除后刷新;
-	 $(document).on("click", ".btn-del", function() {
-		 reloadTable(dictionary_tab,"#dictionary-time","#dictionary-premise");
-    });
+	
 	 
 	 $("#dictionary-seek").on("click",function(){
-			reloadTable(dictionary_tab,"#dictionary-time","#dictionary-premise");
-		});
+		 reloadTable(dictionary_tab,"#dictionary-time","#dictionary-premise");
+	});
+	
+	$(document).on("click", ".btn-del", function() { 
+	    reloadTable(dictionary_tab,"#dictionary-time","#dictionary-premise");
+	 });
   });
 </script>

@@ -28,8 +28,9 @@
 		</form>
 	</div>
 </div>
-<script>
-	$(function() {
+
+<script type="text/javascript">
+	$(document).ready(function() {
 		$("#textarea").wysihtml5();
 		
 		$("#emailInfo_send").click(function(){
