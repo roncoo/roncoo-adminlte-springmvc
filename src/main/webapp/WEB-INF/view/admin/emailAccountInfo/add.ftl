@@ -13,8 +13,8 @@
 					<div class="form-group">
 						<label>Host</label> 
 						<select name="host" class="form-control select2" style="width: 100%;">
-						<#list selectList as select>
-							<option value="${select.fieldKey}">${select.fieldValue}</option>
+						<#list option as option>
+							<option value="${option.fieldKey}">${option.fieldValue}</option>
 						</#list>
 						</select>
 					</div>

@@ -17,8 +17,8 @@
 							<div class="form-group">
 								<label>Host</label> 
 								<select name="host" class="form-control select2" style="width: 100%;">
-									<#list selectList as select>
-										<option <#if info.host == select.fieldValue>selected="selected"</#if> value="${select.fieldValue}">${select.fieldKey}</option>
+									<#list option as option>
+										<option <#if info.host == option.fieldValue>selected="selected"</#if> value="${option.fieldValue}">${option.fieldKey}</option>
 									</#list>
 								</select>
 							</div>

@@ -30,7 +30,7 @@ import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
- * 数据字典
+ * 数据字典Controller
  * 
  * @author LYQ
  */
@@ -42,22 +42,25 @@ public class DataDictionaryController extends BaseController {
 	private DataDictionaryBiz biz;
 
 	/**
-	 * 查看数据字典列表
+	 * 分页查看
+	 * 
+	 * @param pageCurrent
+	 * @param pageSize
+	 * @param modelMap
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
 	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, ModelMap modelMap) {
 		Result<Page<RcDataDictionary>> result = biz.listForPage(pageCurrent, pageSize);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			modelMap.put("page", result.getResultData());
 		}
 	}
-	
+
 	/**
+	 * 保存
 	 * 
-	 * 往数据字典中插入记录
-	 * 
-	 * @param dictionary
-	 * @return String
+	 * @param rcDataDictionary
+	 * @return
 	 */
 	@RequestMapping(value = SAVE)
 	public String save(@ModelAttribute RcDataDictionary rcDataDictionary) {
@@ -65,7 +68,6 @@ public class DataDictionaryController extends BaseController {
 		if (result.isStatus()) {
 			return redirect("/admin/dataDictionary/list");
 		}
-		// 失败
 		return "/admin/dataDictionary/list";
 	}
 
@@ -78,15 +80,15 @@ public class DataDictionaryController extends BaseController {
 	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id", defaultValue = "0") Long id, @RequestParam(value = "fieldCode", defaultValue = "") String fieldCode) {
-		Result<String> result= biz.delete(id, fieldCode);
-		if(result.isStatus()){
+		Result<String> result = biz.delete(id, fieldCode);
+		if (result.isStatus()) {
 			return redirect("/admin/dataDictionary/list");
 		}
 		return null;
 	}
 
 	/**
-	 * 查看详细信息
+	 * 查看
 	 * 
 	 * @param id
 	 * @param modelMap
@@ -94,7 +96,7 @@ public class DataDictionaryController extends BaseController {
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(Long id, ModelMap modelMap) {
 		Result<RcDataDictionary> result = biz.query(id);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			modelMap.put("dictionary", result.getResultData());
 		}
 	}
@@ -108,15 +110,22 @@ public class DataDictionaryController extends BaseController {
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(Long id, ModelMap modelMap) {
 		Result<RcDataDictionary> result = biz.query(id);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			modelMap.put("dictionary", result.getResultData());
 		}
 	}
 
+	/**
+	 * 更新
+	 * 
+	 * @param rcDataDictionary
+	 * @param oldFieldCode
+	 * @return
+	 */
 	@RequestMapping(value = UPDATE)
 	public String update(@ModelAttribute RcDataDictionary rcDataDictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
 		Result<RcDataDictionary> result = biz.update(rcDataDictionary, oldFieldCode);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			return redirect("/admin/dataDictionary/list");
 		}
 		return "/admin/dataDictionary/list";

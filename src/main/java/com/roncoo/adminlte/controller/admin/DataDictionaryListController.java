@@ -42,8 +42,17 @@ public class DataDictionaryListController extends BaseController {
 	@Autowired
 	private DataDictionaryListBiz biz;
 
+	/**
+	 * 分页查询
+	 * 
+	 * @param modelMap
+	 * @param pageCurrent
+	 * @param pageSize
+	 * @param id
+	 * @param fieldCode
+	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(ModelMap modelMap,@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode) {
+	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode) {
 		modelMap.put("id", id);
 		modelMap.put("fieldCode", fieldCode);
 		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, fieldCode);
@@ -52,6 +61,14 @@ public class DataDictionaryListController extends BaseController {
 		}
 	}
 
+	/**
+	 * 保存
+	 * 
+	 * @param rcDataDictionaryList
+	 * @param bindingResult
+	 * @param dId
+	 * @return
+	 */
 	@RequestMapping(value = SAVE)
 	public String save(@ModelAttribute("dListVo") RcDataDictionaryList rcDataDictionaryList, BindingResult bindingResult, @RequestParam(name = "dId") Long dId) {
 		if (!bindingResult.hasErrors()) {
@@ -60,6 +77,14 @@ public class DataDictionaryListController extends BaseController {
 		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, rcDataDictionaryList.getFieldCode());
 	}
 
+	/**
+	 * 删除
+	 * 
+	 * @param id
+	 * @param dId
+	 * @param fieldCode
+	 * @return
+	 */
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id") Long id, @RequestParam(value = "dId") Long dId, @RequestParam(value = "fieldCode") String fieldCode) {
 		Result<String> result = biz.deleteById(id);
@@ -69,6 +94,12 @@ public class DataDictionaryListController extends BaseController {
 		return fieldCode;
 	}
 
+	/**
+	 * 查看
+	 * 
+	 * @param id
+	 * @param modelMap
+	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
 		Result<RcDataDictionaryList> result = biz.queryById(id);
@@ -77,6 +108,13 @@ public class DataDictionaryListController extends BaseController {
 		}
 	}
 
+	/**
+	 * 修改
+	 * 
+	 * @param id
+	 * @param dId
+	 * @param modelMap
+	 */
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "dId") Long dId, ModelMap modelMap) {
 		Result<RcDataDictionaryList> result = biz.queryById(id);
@@ -86,6 +124,13 @@ public class DataDictionaryListController extends BaseController {
 		}
 	}
 
+	/**
+	 * 更新
+	 * 
+	 * @param rcDataDictionaryList
+	 * @param dId
+	 * @return
+	 */
 	@RequestMapping(value = UPDATE)
 	public String update(@ModelAttribute RcDataDictionaryList rcDataDictionaryList, @RequestParam(value = "dId") Long dId) {
 		Result<RcDataDictionaryList> result = biz.update(rcDataDictionaryList);

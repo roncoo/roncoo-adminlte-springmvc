@@ -33,7 +33,7 @@ import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
 
 /**
- * email功能
+ * emailController
  * 
  * @author LYQ
  */
@@ -52,16 +52,18 @@ public class EmailInfoController extends BaseController {
 	 * @param modelMap
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize,ModelMap modelMap) {
+	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, ModelMap modelMap) {
 		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			modelMap.put("page", result.getResultData());
 		}
-		
+
 	}
 
 	/**
 	 * 添加
+	 * 
+	 * @param modelMap
 	 */
 	@RequestMapping(value = ADD, method = RequestMethod.GET)
 	public void add(ModelMap modelMap) {
@@ -71,23 +73,24 @@ public class EmailInfoController extends BaseController {
 	 * 发送邮件
 	 * 
 	 * @param rcEmailInfoVo
+	 * @param bindingResult
 	 * @return
 	 */
 	@RequestMapping(value = "/send")
-	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo rcEmailInfoVo,BindingResult bindingResult) {
-		if(bindingResult.hasErrors()){
+	public String send(@Validated @ModelAttribute("infoVo") RcEmailInfoVo rcEmailInfoVo, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
 			return "/admin/emailInfo/add";
 		}
-		Result<RcEmailInfo> result= biz.sendMail(rcEmailInfoVo);
-		if(result.isStatus()){
+		Result<RcEmailInfo> result = biz.sendMail(rcEmailInfoVo);
+		if (result.isStatus()) {
 			return redirect("/admin/emailInfo/list");
 		}
 		return "/admin/emailInfo/list";
-		
+
 	}
 
 	/**
-	 * 根据id删除
+	 * 删除
 	 * 
 	 * @param id
 	 * @return
@@ -95,21 +98,22 @@ public class EmailInfoController extends BaseController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(@RequestParam(value = "id") Long id) {
 		Result<String> result = biz.deleteById(id);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			return redirect("/admin/emailInfo/list");
 		}
 		return null;
 	}
 
 	/**
-	 * 根据id查看
+	 * 查看
 	 * 
 	 * @param id
+	 * @param modelMap
 	 */
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
 	public void view(@RequestParam(value = "id") Long id, ModelMap modelMap) {
 		Result<RcEmailInfo> result = biz.queryById(id);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			modelMap.put("info", result.getResultData());
 		}
 	}
