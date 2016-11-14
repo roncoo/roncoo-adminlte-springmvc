@@ -20,9 +20,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample;
+import com.roncoo.adminlte.bean.entity.RcDataDictionaryExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.DataDictionaryDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcDataDictionaryMapper;
 import com.roncoo.adminlte.util.base.Page;
@@ -47,9 +49,17 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	}
 
 	@Override
-	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize) {
+	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize, String date, String search) {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
 		example.setOrderByClause("sort desc");
+		Criteria criteria = example.createCriteria();
+		if (StringUtils.hasText(date)) {
+			Date time = SqlUtil.formatterDate(date);
+			criteria.andCreateTimeBetween(time, SqlUtil.addDay(time, 1));
+		}
+		if (StringUtils.hasText(search)) {
+			criteria.andFieldNameLike(SqlUtil.like(search));
+		}
 		int totalCount = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);

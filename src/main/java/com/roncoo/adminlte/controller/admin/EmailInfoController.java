@@ -52,8 +52,11 @@ public class EmailInfoController extends BaseController {
 	 * @param modelMap
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, ModelMap modelMap) {
-		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize);
+	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, ModelMap modelMap, @RequestParam(required = false) String date, @RequestParam(required = false) String search) {
+		modelMap.put("date", date);
+		modelMap.put("search", search);
+		
+		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize, date, search);
 		if (result.isStatus()) {
 			modelMap.put("page", result.getResultData());
 		}

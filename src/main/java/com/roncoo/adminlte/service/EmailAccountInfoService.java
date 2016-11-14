@@ -33,7 +33,7 @@ public interface EmailAccountInfoService {
 	 * @param example
 	 * @return
 	 */
-	Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize);
+	Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize, String date, String search);
 
 	/**
 	 * 根据id查询

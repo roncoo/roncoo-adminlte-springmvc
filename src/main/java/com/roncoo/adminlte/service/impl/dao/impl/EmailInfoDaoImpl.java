@@ -20,9 +20,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfoExample;
+import com.roncoo.adminlte.bean.entity.RcEmailInfoExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.EmailInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailInfoMapper;
 import com.roncoo.adminlte.util.base.Page;
@@ -46,9 +48,17 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	}
 
 	@Override
-	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize) {
+	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize, String date, String search) {
 		RcEmailInfoExample example = new RcEmailInfoExample();
 		example.setOrderByClause(" id desc ");
+		Criteria criteria = example.createCriteria();
+		if (StringUtils.hasText(date)) {
+			Date time = SqlUtil.formatterDate(date); 
+			criteria.andCreateTimeBetween(time, SqlUtil.addDay(time, 1));
+		}
+		if (StringUtils.hasText(search)) {
+			criteria.andToUserLike(SqlUtil.like(search));
+		}
 		int count = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(count, pageSize, pageCurrent);

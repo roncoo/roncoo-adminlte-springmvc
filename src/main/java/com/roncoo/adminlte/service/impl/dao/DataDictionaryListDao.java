@@ -61,7 +61,7 @@ public interface DataDictionaryListDao {
 	 * @param fieldCode
 	 * @return
 	 */
-	Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode);
+	Page<RcDataDictionaryList> listForPage(int pageCurrent, int pageSize, String fieldCode, String date, String search);
 
 	/**
 	 * 

@@ -52,10 +52,13 @@ public class DataDictionaryListController extends BaseController {
 	 * @param fieldCode
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode) {
+	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode, @RequestParam(required = false) String date, @RequestParam(required = false) String search) {
+		modelMap.put("date", date);
+		modelMap.put("search", search);
 		modelMap.put("id", id);
 		modelMap.put("fieldCode", fieldCode);
-		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, fieldCode);
+
+		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, fieldCode, date, search);
 		if (result.isStatus()) {
 			modelMap.put("page", result.getResultData());
 		}

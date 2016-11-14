@@ -10,6 +10,27 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
+					<div class="clearfix">
+	            		<form action="${ctx}/admin/emailInfo/list">
+							<div class="col-md-4">
+								<div class="input-group date ">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control pull-right" id="date" name="date" value="${date!}" placeholder="选择时间...">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-search"></i></span>
+									<input type="text" class="form-control" name="search" value="${search!}" placeholder="根据收件人搜索...">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-primary btn-sm">查询</button>
+							</div>
+						</form>
+					</div>
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -44,19 +65,19 @@
 						<#if page.pageCurrent ==1>
 							<li><a href="javascript:volid(0);">首页</a></li>
 						<#else>
-							<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=1">首页</a></li>
+							<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=1&date=${date!}&search=${search!}">首页</a></li>
 						</#if>
 						<#list 1..page.totalPage as index>
 							<#if index == page.pageCurrent>
 								<li class="active"><a href="javascript:volid(0);">${index}</a></li>
 							<#else>
-								<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=${index}">${index}</a></li>
+								<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=${index}&date=${date!}&search=${search!}">${index}</a></li>
 							</#if>
 						</#list>
 						<#if page.pageCurrent ==page.totalPage>
 							<li><a href="javascript:volid(0);">尾页</a></li>
 						<#else>
-							<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.totalPage}">尾页</a></li>
+							<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.totalPage}&date=${date!}&search=${search!}">尾页</a></li>
 						</#if>
 					</ul>
 				</div>

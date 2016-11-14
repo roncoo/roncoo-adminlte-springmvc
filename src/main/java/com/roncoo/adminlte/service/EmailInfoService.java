@@ -32,7 +32,7 @@ public interface EmailInfoService {
 	 * @param pageSize
 	 * @return
 	 */
-	Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize);
+	Result<Page<RcEmailInfo>> listForPage(int pageCurrent, int pageSize, String date, String search);
 
 	/**
 	 * 发送邮件

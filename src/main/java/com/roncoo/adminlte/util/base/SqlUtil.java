@@ -15,6 +15,10 @@
  */
 package com.roncoo.adminlte.util.base;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,6 +59,9 @@ public class SqlUtil {
 	 * @return totalPage 总页数.
 	 */
 	public static int countTotalPage(final int totalCount, final int pageSize) {
+		if (totalCount == 0) {
+			return 1;
+		}
 		if (totalCount % pageSize == 0) {
 			return totalCount / pageSize; // 刚好整除
 		} else {
@@ -172,4 +179,44 @@ public class SqlUtil {
 		mc.appendTail(strBuf);
 		return strBuf.toString();
 	}
+
+	/**
+	 * 格式化时间
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static Date formatterDate(String date) {
+		Date time = null;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			time = sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return time;
+	}
+
+	/**
+	 * 添加天数
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static Date addDay(Date date, int day) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.DAY_OF_YEAR, day);
+		return cal.getTime();
+	}
+
+	/**
+	 * 模糊查询
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static String like(String str) {
+		return "%" + str + "%";
+	};
 }

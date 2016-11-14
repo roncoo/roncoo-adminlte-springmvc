@@ -47,7 +47,7 @@ public interface EmailAccountInfoDao {
 	 * @param example
 	 * @return
 	 */
-	Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize);
+	Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize, String date, String search);
 
 	/**
 	 * 根据id查询

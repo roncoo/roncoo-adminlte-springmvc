@@ -54,13 +54,16 @@ public class EmailAccountInfoController extends BaseController {
 	 * @param pageSize
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize) {
+	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, @RequestParam(required = false) String date, @RequestParam(required = false) String search) {
+		modelMap.put("date", date);
+		modelMap.put("search", search);
+
 		Result<List<RcDataDictionaryList>> resultOption = biz.listByFieldCode(FIELDCODE);
 		if (resultOption.isStatus()) {
 			modelMap.put("option", resultOption.getResultData());
 		}
 
-		Result<Page<RcEmailAccountInfo>> resultPage = biz.listForPage(pageCurrent, pageSize);
+		Result<Page<RcEmailAccountInfo>> resultPage = biz.listForPage(pageCurrent, pageSize, date, search);
 		if (resultPage.isStatus()) {
 			modelMap.put("page", resultPage.getResultData());
 		}

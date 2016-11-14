@@ -58,6 +58,10 @@
 	
 	<!-- Bootstrap 3.3.6 -->
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<!-- daterange picker -->
+	<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+	<!-- bootstrap datepicker -->
+	<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="dist/css/font-awesome.min.css">
 	<!-- Ionicons -->
@@ -238,7 +242,7 @@
 </#macro>
 
 <#macro footer>
-		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
 		<script src="plugins/datatables/jquery.dataTables.min.js"></script>
 		<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 		<!-- Bootstrap 3.3.6 -->
@@ -250,6 +254,13 @@
 		<!-- AdminLTE App -->
 		<script src="dist/js/app.min.js"></script>
 		<script src="dist/js/demo.js"></script>
+		<script>
+		  $(function(){
+		    $('#date').datepicker({
+		      autoclose: true
+		    });
+		  });
+		</script>
 	</div>
 </body>
 </html>

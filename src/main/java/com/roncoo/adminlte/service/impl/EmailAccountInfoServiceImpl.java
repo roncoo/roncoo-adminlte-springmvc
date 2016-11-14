@@ -33,17 +33,17 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	private EmailAccountInfoDao dao;
 
 	@Override
-	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize) {
+	public Result<Page<RcEmailAccountInfo>> listForPage(int pageCurrent, int pageSize, String date, String search) {
 		Result<Page<RcEmailAccountInfo>> result = new Result<Page<RcEmailAccountInfo>>();
-		if(pageCurrent<1){
+		if (pageCurrent < 1) {
 			result.setErrMsg("pageCurrent有误");
 			return result;
 		}
-		if(pageSize<1){
+		if (pageSize < 1) {
 			result.setErrMsg("pageSize有误");
 			return result;
 		}
-		result.setResultData(dao.listForPage(pageCurrent, pageSize));
+		result.setResultData(dao.listForPage(pageCurrent, pageSize, date, search));
 		result.setErrCode(0);
 		result.setStatus(true);
 		result.setErrMsg("查询成功");
@@ -53,7 +53,7 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	@Override
 	public Result<RcEmailAccountInfo> queryById(Long id) {
 		Result<RcEmailAccountInfo> result = new Result<RcEmailAccountInfo>();
-		if(id<1){
+		if (id < 1) {
 			result.setErrMsg("此id无效");
 			return result;
 		}
@@ -70,19 +70,19 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	@Override
 	public Result<RcEmailAccountInfo> save(RcEmailAccountInfo rcEmailAccountInfo) {
 		Result<RcEmailAccountInfo> result = new Result<RcEmailAccountInfo>();
-		if(!StringUtils.hasText(rcEmailAccountInfo.getFromUser())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getFromUser())) {
 			result.setErrMsg("账号不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcEmailAccountInfo.getHost())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getHost())) {
 			result.setErrMsg("Host不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcEmailAccountInfo.getPasswd())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getPasswd())) {
 			result.setErrMsg("授权码不能为空");
 			return result;
 		}
-		if(dao.insert(rcEmailAccountInfo)>0){
+		if (dao.insert(rcEmailAccountInfo) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 			result.setErrMsg("保存成功");
@@ -93,19 +93,19 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	@Override
 	public Result<RcEmailAccountInfo> updateById(RcEmailAccountInfo rcEmailAccountInfo) {
 		Result<RcEmailAccountInfo> result = new Result<RcEmailAccountInfo>();
-		if(!StringUtils.hasText(rcEmailAccountInfo.getFromUser())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getFromUser())) {
 			result.setErrMsg("账号不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcEmailAccountInfo.getHost())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getHost())) {
 			result.setErrMsg("Host不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcEmailAccountInfo.getPasswd())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getPasswd())) {
 			result.setErrMsg("授权码不能为空");
 			return result;
 		}
-		if(dao.updateById(rcEmailAccountInfo)>0){
+		if (dao.updateById(rcEmailAccountInfo) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 			result.setErrMsg("更新成功");
@@ -116,11 +116,11 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	@Override
 	public Result<String> deleteById(Long id) {
 		Result<String> result = new Result<String>();
-		if(id<1){
+		if (id < 1) {
 			result.setErrMsg("此id无效");
 			return result;
 		}
-		if(dao.deleteById(id)>0){
+		if (dao.deleteById(id) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 			result.setErrMsg("删除成功");
@@ -131,19 +131,19 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 	@Override
 	public Result<RcEmailAccountInfo> update(RcEmailAccountInfo rcEmailAccountInfo) {
 		Result<RcEmailAccountInfo> result = new Result<RcEmailAccountInfo>();
-		if(!StringUtils.hasText(rcEmailAccountInfo.getFromUser())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getFromUser())) {
 			result.setErrMsg("账号不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcEmailAccountInfo.getHost())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getHost())) {
 			result.setErrMsg("Host不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcEmailAccountInfo.getPasswd())){
+		if (!StringUtils.hasText(rcEmailAccountInfo.getPasswd())) {
 			result.setErrMsg("授权码不能为空");
 			return result;
 		}
-		if(dao.updateById(rcEmailAccountInfo)>0){
+		if (dao.updateById(rcEmailAccountInfo) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 			result.setErrMsg("更新成功");

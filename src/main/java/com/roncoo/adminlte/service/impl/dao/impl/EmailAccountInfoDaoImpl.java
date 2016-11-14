@@ -20,9 +20,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample;
+import com.roncoo.adminlte.bean.entity.RcEmailAccountInfoExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcEmailAccountInfoMapper;
 import com.roncoo.adminlte.util.Base64Util;
@@ -51,10 +53,17 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	}
 
 	@Override
-	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize) {
+	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize, String date, String search) {
 		RcEmailAccountInfoExample example = new RcEmailAccountInfoExample();
 		example.setOrderByClause("id desc");
-		
+		Criteria criteria = example.createCriteria();
+		if(StringUtils.hasText(date)){
+			Date time = SqlUtil.formatterDate(date);
+			criteria.andCreateTimeBetween(time, SqlUtil.addDay(time, 1));
+		}
+		if(StringUtils.hasText(search)){
+			criteria.andFromUserLike(SqlUtil.like(search));
+		}
 		int totalCount = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
 		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
@@ -62,7 +71,7 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 		example.setPageSize(pageSize);
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		List<RcEmailAccountInfo> list = mapper.selectByExample(example);
-		
+
 		Page<RcEmailAccountInfo> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 		return page;
 	}

@@ -40,15 +40,15 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	public Result<RcDataDictionary> save(RcDataDictionary rcDataDictionary) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		// 校验字段
-		if(!StringUtils.hasText(rcDataDictionary.getFieldName())){
+		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
 			result.setErrMsg("字段名不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcDataDictionary.getFieldCode())){
+		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
 			result.setErrMsg("Code不能为空");
 			return result;
 		}
-		if(rcDataDictionary.getSort()<1){
+		if (rcDataDictionary.getSort() < 1) {
 			result.setErrMsg("排序无效");
 			return result;
 		}
@@ -62,17 +62,17 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
-	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize) {
+	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize, String date, String search) {
 		Result<Page<RcDataDictionary>> result = new Result<Page<RcDataDictionary>>();
-		if(pageCurrent<1){
+		if (pageCurrent < 1) {
 			result.setErrMsg("pageCurrent有误");
 			return result;
 		}
-		if(pageSize<1){
+		if (pageSize < 1) {
 			result.setErrMsg("pageSize有误");
 			return result;
 		}
-		result.setResultData(dao.listForPage(pageCurrent, pageSize));
+		result.setResultData(dao.listForPage(pageCurrent, pageSize, date, search));
 		result.setErrCode(0);
 		result.setStatus(true);
 		result.setErrMsg("查询成功");
@@ -82,7 +82,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	@Override
 	public Result<RcDataDictionary> queryById(Long id) {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
-		if(id<1){
+		if (id < 1) {
 			result.setErrMsg("此id无效");
 			return result;
 		}
@@ -96,11 +96,11 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	@Override
 	public Result<String> deleteById(Long id) {
 		Result<String> result = new Result<String>();
-		if(id<1){
+		if (id < 1) {
 			result.setErrMsg("此id无效");
 			return result;
 		}
-		if(dao.deleteById(id)>0){
+		if (dao.deleteById(id) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 			result.setErrMsg("删除成功");
@@ -113,15 +113,15 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 		Result<RcDataDictionary> result = new Result<RcDataDictionary>();
 		// 校验字段
 		// 校验字段
-		if(!StringUtils.hasText(rcDataDictionary.getFieldName())){
+		if (!StringUtils.hasText(rcDataDictionary.getFieldName())) {
 			result.setErrMsg("字段名不能为空");
 			return result;
 		}
-		if(!StringUtils.hasText(rcDataDictionary.getFieldCode())){
+		if (!StringUtils.hasText(rcDataDictionary.getFieldCode())) {
 			result.setErrMsg("Code不能为空");
 			return result;
 		}
-		if(rcDataDictionary.getSort()<1){
+		if (rcDataDictionary.getSort() < 1) {
 			result.setErrMsg("排序无效");
 			return result;
 		}
