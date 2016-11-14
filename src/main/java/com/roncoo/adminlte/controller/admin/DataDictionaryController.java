@@ -22,14 +22,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
 import com.roncoo.adminlte.biz.DataDictionaryBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
-import com.roncoo.adminlte.util.base.PageBean;
 
 /**
  * 数据字典
@@ -47,21 +45,13 @@ public class DataDictionaryController extends BaseController {
 	 * 查看数据字典列表
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list() {
-		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = PAGE)
-	public PageBean<RcDataDictionary> page(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize, ModelMap modelMap){
-		int pageCurrent = (start/pageSize)+1;
+	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, ModelMap modelMap) {
 		Result<Page<RcDataDictionary>> result = biz.listForPage(pageCurrent, pageSize);
 		if(result.isStatus()){
-			return new PageBean<>(result.getResultData());
+			modelMap.put("page", result.getResultData());
 		}
-		return null;
 	}
-
+	
 	/**
 	 * 
 	 * 往数据字典中插入记录

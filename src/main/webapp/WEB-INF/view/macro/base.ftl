@@ -219,50 +219,21 @@
       <div class="modal-footer">  
          <input type="hidden" id="url"/>  
          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
-         <a id="urlSubmit" class="btn btn-success" data-dismiss="modal">确定</a>  
+         <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>  
       </div>  
-    </div>
-  </div>
-</div> 
+    </div><!-- /.modal-content -->  
+  </div><!-- /.modal-dialog -->  
+</div><!-- /.modal -->  
 
 <script type="text/javascript">
-function delcfm(url) {  
+	function delcfm(url) {  
 	    $('#url').val(url);//给会话中的隐藏属性URL赋值  
 	    $('#delcfmModel').modal();  
-	} 
-$(function(){
-
-	 
+	}  
 	function urlSubmit(){  
 	    var url=$.trim($("#url").val());//获取会话中的隐藏属性URL  
 	    window.location.href=url;   
-	}
-
-	$("#urlSubmit").on("click",function(){
-		var url=$.trim($("#url").val());
-		ajaxPost(url);
-	});
-	
-	function ajaxPost(url) {
-		var options = {
-			url: url,
-			type: 'post',
-			dataType: 'text',
-			success: function (data) {
-			var date = $("#tableParam").val();
-			    var search = $("#search").val();
-			    var param = {
-			        "date": date,
-			        "search": search
-			    };
-			    example4.settings()[0].ajax.data = param;
-				window.location.reload(example4);
-				
-			}
-		};
-	$.ajax(options);
-	}
-});
+	}  
 </script>
 </#macro>
 

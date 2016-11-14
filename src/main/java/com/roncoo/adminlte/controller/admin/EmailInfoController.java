@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
@@ -32,7 +31,6 @@ import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.biz.EmailInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
-import com.roncoo.adminlte.util.base.PageBean;
 
 /**
  * email功能
@@ -54,19 +52,12 @@ public class EmailInfoController extends BaseController {
 	 * @param modelMap
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list() {
-		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = PAGE)
-	public PageBean<RcEmailInfo> page(@RequestParam(value = "start", defaultValue = "1") int start, @RequestParam(value = "length", defaultValue = "10") int pageSize){
-		int pageCurrent = (start/pageSize)+1;
+	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize,ModelMap modelMap) {
 		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize);
 		if(result.isStatus()){
-			return new PageBean<RcEmailInfo>(result.getResultData());
+			modelMap.put("page", result.getResultData());
 		}
-		return new PageBean<RcEmailInfo>(null);
+		
 	}
 
 	/**
