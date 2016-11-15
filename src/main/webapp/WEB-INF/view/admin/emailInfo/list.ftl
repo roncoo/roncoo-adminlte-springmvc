@@ -60,7 +60,7 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-				<@initPage url="${ctx}/admin/emailInfo/list" paginationSize=5/>
+				<@initPage url="${ctx}/admin/emailInfo/list?" paginationSize=5/>
 			</div>
 		</div>
 	</div>

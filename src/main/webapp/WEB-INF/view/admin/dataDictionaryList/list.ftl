@@ -67,40 +67,7 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-				<div class="box-footer clearfix">
-					<ul class="pagination pagination-sm no-margin pull-right">
-						<#assign paginationSize=5>
-						<#if ((page.pageCurrent-paginationSize/2)>1)>
-							<#assign begin = (page.pageCurrent-paginationSize/2)>
-						<#else>
-							<#assign begin = 1>
-						</#if>
-						
-						<#if ((begin + (paginationSize - 1))>page.totalPage)>
-							<#assign end = page.totalPage>
-						<#else>
-							<#assign end = (begin + (paginationSize - 1))>
-						</#if>
-						
-						<#if page.pageCurrent ==1>
-							<li><a href="javascript:volid(0);">首页</a></li>
-						<#else>
-							<li><a href="${ctx}/admin/dataDictionaryList/list?pageCurrent=1&date=${date!}&search=${search!}&fieldCode=${fieldCode}">首页</a></li>
-						</#if>
-						<#list begin..end as index>
-							<#if index == page.pageCurrent>
-								<li class="active"><a href="javascript:volid(0);">${index}</a></li>
-							<#else>
-								<li><a href="${ctx}/admin/dataDictionaryList/list?pageCurrent=${index}&date=${date!}&search=${search!}&fieldCode=${fieldCode}">${index}</a></li>
-							</#if>
-						</#list>
-						<#if page.pageCurrent ==page.totalPage>
-							<li><a href="javascript:volid(0);">尾页</a></li>
-						<#else>
-							<li><a href="${ctx}/admin/dataDictionaryList/list?pageCurrent=${page.totalPage}&date=${date!}&search=${search!}&fieldCode=${fieldCode}">尾页</a></li>
-						</#if>
-					</ul>
-				</div>
+				<@initPage url="${ctx}/admin/dataDictionaryList/list?fieldCode=${fieldCode}&" paginationSize=5/>
 			</div>
 		</div>
 	</div>
