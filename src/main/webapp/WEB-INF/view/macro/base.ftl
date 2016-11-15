@@ -81,6 +81,8 @@
 	<![endif]-->
 	<!-- jQuery 2.2.3 -->
 	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	
+	<script type="text/javascript" src="plugins/ckeditor/ckeditor.js"></script>
 </head>
 <body class="sidebar-mini skin-blue fixed">
 <div class="wrapper">

@@ -37,7 +37,7 @@
 							    <@spring.bind "infoVo.content" />  
 							    <@spring.showErrors "" "color:red"/>  
 							</#if>
-							<textarea id="textarea" name="content"  class="form-control" style="height: 300px" placeholder="正文....." >
+							<textarea name="content" rows="10" cols="10" class="ckeditor" >
 								<#if infoVo??>${infoVo.content!}</#if>
                     		</textarea>
 						</div>
@@ -59,18 +59,4 @@
 	</div>
 </div>
 <@wrapper/>
-<!-- iCheck -->
-<script src="plugins/iCheck/icheck.min.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- iCheck -->
-<link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
-<!-- bootstrap wysihtml5 - text editor -->
-<link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-<!-- Page Script -->
-<script>
-	$(function() {
-		$("#textarea").wysihtml5();
-	});
-</script>
 <@footer/>
