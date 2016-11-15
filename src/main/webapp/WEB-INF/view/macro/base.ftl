@@ -243,6 +243,7 @@
 
 <#macro footer>
 		<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+		<script src="plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
 		<script src="plugins/datatables/jquery.dataTables.min.js"></script>
 		<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 		<!-- Bootstrap 3.3.6 -->
@@ -257,7 +258,10 @@
 		<script>
 		  $(function(){
 		    $('#date').datepicker({
-		      autoclose: true
+		      language: 'zh-CN',
+		      format: 'yyyy-mm-dd',
+		      autoclose: true,
+		      todayHighlight: true
 		    });
 		  });
 		</script>

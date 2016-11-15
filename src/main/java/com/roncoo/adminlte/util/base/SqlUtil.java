@@ -189,7 +189,7 @@ public class SqlUtil {
 	public static Date formatterDate(String date) {
 		Date time = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			time = sdf.parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
