@@ -53,8 +53,8 @@
 								<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 								<td>
 									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionary/view?id=${bean.id}">查看</a>
-									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/list?id=${bean.id}&fieldCode=${bean.fieldCode}">明细</a>
 									<a class="btn btn-info btn-xs" href="${ctx}/admin/dataDictionary/edit?id=${bean.id}">修改</a>
+									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/list?dId=${bean.id}&fieldCode=${bean.fieldCode}">明细</a>
 									<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/dataDictionary/delete?id=${bean.id}&fieldCode=${bean.fieldCode}')">删除</a>
 								</td>
 							</#list>

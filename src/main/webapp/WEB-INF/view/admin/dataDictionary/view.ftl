@@ -8,7 +8,10 @@
 		<div class="col-md-12">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">数字字典明细详情</h3>
+						<h3 class="box-title">数字字典详情</h3>
+						<div class="pull-right">
+							<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
+						</div>
 					</div>
 					<div class="box-body  no-padding">
 						<table class="table table-striped">

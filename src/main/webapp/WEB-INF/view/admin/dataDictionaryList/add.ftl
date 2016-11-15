@@ -1,7 +1,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<form action="${ctx}/admin/dataDictionaryList/save" method="post">
-			<input type="hidden" name="dId" value="${id}"/>
+			<input type="hidden" name="dId" value="${dId}"/>
 			<input type="hidden" name="fieldCode"  value="${fieldCode}"/>
 			<div class="modal-content">
 				<div class="modal-header">

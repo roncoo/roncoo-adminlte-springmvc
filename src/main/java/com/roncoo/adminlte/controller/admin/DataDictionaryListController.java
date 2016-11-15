@@ -52,10 +52,10 @@ public class DataDictionaryListController extends BaseController {
 	 * @param fieldCode
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "1") int pageSize, @RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "fieldCode") String fieldCode, @RequestParam(required = false) String date, @RequestParam(required = false) String search) {
+	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, @RequestParam(value = "dId", defaultValue = "-1") Long dId, @RequestParam(value = "fieldCode") String fieldCode, @RequestParam(required = false) String date, @RequestParam(required = false) String search) {
 		modelMap.put("date", date);
 		modelMap.put("search", search);
-		modelMap.put("id", id);
+		modelMap.put("dId", dId);
 		modelMap.put("fieldCode", fieldCode);
 
 		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, fieldCode, date, search);
@@ -77,7 +77,7 @@ public class DataDictionaryListController extends BaseController {
 		if (!bindingResult.hasErrors()) {
 			biz.save(rcDataDictionaryList);
 		}
-		return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, rcDataDictionaryList.getFieldCode());
+		return redirect("/admin/dataDictionaryList/list?dId={0}&fieldCode={1}", dId, rcDataDictionaryList.getFieldCode());
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class DataDictionaryListController extends BaseController {
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
 	public void edit(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "dId") Long dId, ModelMap modelMap) {
 		Result<RcDataDictionaryList> result = biz.queryById(id);
-		modelMap.put("id", dId);
+		modelMap.put("dId", dId);
 		if (result.isStatus()) {
 			modelMap.put("dictionaryList", result.getResultData());
 		}
@@ -138,7 +138,7 @@ public class DataDictionaryListController extends BaseController {
 	public String update(@ModelAttribute RcDataDictionaryList rcDataDictionaryList, @RequestParam(value = "dId") Long dId) {
 		Result<RcDataDictionaryList> result = biz.update(rcDataDictionaryList);
 		if (result.isStatus()) {
-			return redirect("/admin/dataDictionaryList/list?id={0}&fieldCode={1}", dId, rcDataDictionaryList.getFieldCode());
+			return redirect("/admin/dataDictionaryList/list?dId={0}&fieldCode={1}", dId, rcDataDictionaryList.getFieldCode());
 		}
 		return null;
 	}

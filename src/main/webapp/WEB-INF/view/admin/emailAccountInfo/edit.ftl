@@ -12,6 +12,9 @@
 						<input type="hidden" id="id" name="id" value=${info.id}>
 						<div class="box-header with-border">
 							<h3 class="box-title">账号修改</h3>
+							<div class="pull-right">
+								<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
+							</div>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
@@ -33,8 +36,10 @@
 							</div>
 			             </div>
 						<div class="box-footer">
-		               		<button id="submit" type="submit" class="btn btn-primary   pull-right">更新</button>
-							<button type="reset" class="btn btn-danger   pull-right">清空</button>
+							<div class="pull-right">
+								<button type="reset" class="btn btn-sm">清空</button>
+			               		<button id="submit" type="submit" class="btn btn-primary btn-sm">更新</button>
+							</div>
 		              	</div>
 					</form>
 				</div>
