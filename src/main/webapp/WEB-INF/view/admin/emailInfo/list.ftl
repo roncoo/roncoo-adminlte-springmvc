@@ -60,27 +60,7 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-				<div class="box-footer clearfix">
-					<ul class="pagination pagination-sm no-margin pull-right">
-						<#if page.pageCurrent ==1>
-							<li><a href="javascript:volid(0);">首页</a></li>
-						<#else>
-							<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=1&date=${date!}&search=${search!}">首页</a></li>
-						</#if>
-						<#list 1..page.totalPage as index>
-							<#if index == page.pageCurrent>
-								<li class="active"><a href="javascript:volid(0);">${index}</a></li>
-							<#else>
-								<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=${index}&date=${date!}&search=${search!}">${index}</a></li>
-							</#if>
-						</#list>
-						<#if page.pageCurrent ==page.totalPage>
-							<li><a href="javascript:volid(0);">尾页</a></li>
-						<#else>
-							<li><a href="${ctx}/admin/emailInfo/list?pageCurrent=${page.totalPage}&date=${date!}&search=${search!}">尾页</a></li>
-						</#if>
-					</ul>
-				</div>
+				<@initPage url="${ctx}/admin/emailInfo/list" paginationSize=5/>
 			</div>
 		</div>
 	</div>

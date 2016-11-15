@@ -269,3 +269,40 @@
 <#macro validation>
 	<#import "/spring.ftl" as spring /> 
 </#macro>
+
+<#macro initPage url paginationSize>
+<div class="box-footer clearfix">
+	<ul class="pagination pagination-sm no-margin pull-right">
+		<#if ((page.pageCurrent-paginationSize/2)>1)>
+			<#assign begin = (page.pageCurrent-paginationSize/2)>
+		<#else>
+			<#assign begin = 1>
+		</#if>
+		
+		<#if ((begin + (paginationSize - 1))>page.totalPage)>
+			<#assign end = page.totalPage>
+		<#else>
+			<#assign end = (begin + (paginationSize - 1))>
+		</#if>
+		
+		
+		<#if page.pageCurrent ==1>
+			<li><a href="javascript:volid(0);">首页</a></li>
+		<#else>
+			<li><a href=${url}?pageCurrent=1&date=${date!}&search=${search!}>首页</a></li>
+		</#if>
+		<#list begin..end as index>
+			<#if index == page.pageCurrent>
+				<li class="active"><a href="javascript:volid(0);">${index}</a></li>
+			<#else>
+				<li><a href=${url}?pageCurrent=${index}&date=${date!}&search=${search!}>${index}</a></li>
+			</#if>
+		</#list>
+		<#if page.pageCurrent ==page.totalPage>
+			<li><a href="javascript:volid(0);">尾页</a></li>
+		<#else>
+			<li><a href=${url}?pageCurrent=${page.totalPage}&date=${date!}&search=${search!}>尾页</a></li>
+		</#if>
+	</ul>
+</div>
+</#macro>
