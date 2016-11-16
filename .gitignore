@@ -7,3 +7,4 @@
 .project
 .springBeans
 /bin/
+src/main/resources/conf/prod/base.properties
