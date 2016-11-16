@@ -57,7 +57,7 @@ public class DataDictionaryListController extends BaseController {
 	 * @param fieldCode
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "1") int pageSize, HttpServletRequest request) {
+	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, HttpServletRequest request) {
 		// modelMap.put("date", date);
 		// modelMap.put("search", search);
 		// modelMap.put("dId", dId);
