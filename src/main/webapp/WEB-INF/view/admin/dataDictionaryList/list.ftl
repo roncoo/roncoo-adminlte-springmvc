@@ -14,7 +14,7 @@
 				</div>
 				<div class="box-body">
 					<div class="clearfix">
-	            		<form action="${ctx}/admin/dataDictionaryList/list">
+	            		<form action="${ctx}/admin/dataDictionaryList/list" method="post">
 	            			<input type="hidden" name="fieldCode" value="${param['fieldCode']}"/>
 	            			<input type="hidden" name="dId" value="${param['dId']}"/>
 							<div class="col-md-4">

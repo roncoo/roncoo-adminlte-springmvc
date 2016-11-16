@@ -14,7 +14,7 @@
             <!-- /.box-header -->
             <div class="box-body">
             	<div class="clearfix">
-            		<form action="${ctx}/admin/emailAccountInfo/list">
+            		<form action="${ctx}/admin/emailAccountInfo/list" method="post">
 						<div class="col-md-4">
 							<div class="input-group date ">
 								<div class="input-group-addon">

@@ -13,7 +13,7 @@
 				</div>
 				<div class="box-body">
 					<div class="clearfix">
-	            		<form action="${ctx}/admin/dataDictionary/list">
+	            		<form action="${ctx}/admin/dataDictionary/list" method="post">
 							<div class="col-md-4">
 								<div class="input-group date ">
 									<div class="input-group-addon">
