@@ -13,19 +13,19 @@
 				</div>
 				<div class="box-body">
 					<div class="clearfix">
-	            		<form action="${ctx}/admin/emailAccountInfo/list">
+	            		<form action="${ctx}/admin/dataDictionary/list">
 							<div class="col-md-4">
 								<div class="input-group date ">
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control pull-right" id="date" name="date" value="${date!}" placeholder="选择时间...">
+									<input type="text" class="form-control pull-right" id="date" name="date" value="${param['date']!}" placeholder="选择时间...">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-search"></i></span>
-									<input type="text" class="form-control" name="search" value="${search!}" placeholder="根据账号搜索...">
+									<input type="text" class="form-control" name="search" value="${param['search']!}" placeholder="根据字段名搜索...">
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -62,7 +62,7 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-				<@initPage url="${ctx}/admin/dataDictionary/list?" paginationSize=5/>
+				<@initPage url="${ctx}/admin/dataDictionary/list" paginationSize=5/>
 			</div>
 		</div>
 	</div>

@@ -15,6 +15,10 @@
  */
 package com.roncoo.adminlte.controller.admin;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +35,7 @@ import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.biz.EmailInfoBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.ParamUtil;
 
 /**
  * emailController
@@ -52,14 +57,17 @@ public class EmailInfoController extends BaseController {
 	 * @param modelMap
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, ModelMap modelMap, @RequestParam(required = false) String date, @RequestParam(required = false) String search) {
-		modelMap.put("date", date);
-		modelMap.put("search", search);
+	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, HttpServletRequest request, ModelMap modelMap) {
+		Map<String, Object> params = ParamUtil.getParamsMap(request, null);
+		modelMap.put("param", params);
 		
-		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize, date, search);
+		Result<Page<RcEmailInfo>> result = biz.listForPage(pageCurrent, pageSize, (String) params.get("date"), (String) params.get("search"));
 		if (result.isStatus()) {
 			modelMap.put("page", result.getResultData());
 		}
+		
+		String paramUrl = ParamUtil.getParamUrl(request, params, "pageCurrent");
+		modelMap.put("paramUrl", paramUrl);
 
 	}
 

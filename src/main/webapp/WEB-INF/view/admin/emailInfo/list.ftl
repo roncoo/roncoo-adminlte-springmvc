@@ -17,13 +17,13 @@
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control pull-right" id="date" name="date" value="${date!}" placeholder="选择时间...">
+									<input type="text" class="form-control pull-right" id="date" name="date" value="${param['date']!}" placeholder="选择时间...">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-search"></i></span>
-									<input type="text" class="form-control" name="search" value="${search!}" placeholder="根据收件人搜索...">
+									<input type="text" class="form-control" name="search"  value="${param['search']!}" placeholder="根据收件人搜索...">
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -60,7 +60,7 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-				<@initPage url="${ctx}/admin/emailInfo/list?" paginationSize=5/>
+				<@initPage url="${ctx}/admin/emailInfo/list" paginationSize=5/>
 			</div>
 		</div>
 	</div>
