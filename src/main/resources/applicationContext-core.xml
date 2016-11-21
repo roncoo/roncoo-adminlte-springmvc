@@ -35,6 +35,5 @@
 	<import resource="classpath:/applicationContext-mail.xml" />
 	<import resource="classpath:/applicationContext-template.xml" />
 	<import resource="classpath:/applicationContext-thread.xml" />
-	<import resource="classpath:/applicationContext-shiro.xml" />
 	
 </beans>

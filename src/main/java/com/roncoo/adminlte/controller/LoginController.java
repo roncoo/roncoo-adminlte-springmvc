@@ -20,7 +20,6 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,7 +82,6 @@ public class LoginController extends BaseController {
 		if (result.isStatus()) {
 			session.setAttribute(Constants.Token.RONCOO, result.getResultData());
 		}
-		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, result.getResultData());
 		return redirect("/login");
 	}
 
