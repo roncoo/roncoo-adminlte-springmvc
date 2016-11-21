@@ -15,6 +15,10 @@
  */
 package com.roncoo.adminlte.controller.admin;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,6 +33,7 @@ import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.biz.DataDictionaryListBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.ParamUtil;
 
 /**
  * 数据字典明细Controller
@@ -52,16 +57,22 @@ public class DataDictionaryListController extends BaseController {
 	 * @param fieldCode
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, @RequestParam(value = "dId", defaultValue = "-1") Long dId, @RequestParam(value = "fieldCode") String fieldCode, @RequestParam(required = false) String date, @RequestParam(required = false) String search) {
-		modelMap.put("date", date);
-		modelMap.put("search", search);
-		modelMap.put("dId", dId);
-		modelMap.put("fieldCode", fieldCode);
+	public void list(ModelMap modelMap, @RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, HttpServletRequest request) {
+		// modelMap.put("date", date);
+		// modelMap.put("search", search);
+		// modelMap.put("dId", dId);
+		// modelMap.put("fieldCode", fieldCode);
+		
+		Map<String, Object> params = ParamUtil.getParamsMap(request, null);
+		modelMap.put("param", params);
 
-		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, fieldCode, date, search);
+		Result<Page<RcDataDictionaryList>> result = biz.listForPage(pageCurrent, pageSize, (String) params.get("fieldCode"), (String) params.get("date"), (String) params.get("search"));
 		if (result.isStatus()) {
 			modelMap.put("page", result.getResultData());
 		}
+		
+		String paramUrl = ParamUtil.getParamUrl(request, params, "pageCurrent");
+		modelMap.put("paramUrl", paramUrl);
 	}
 
 	/**

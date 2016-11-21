@@ -51,7 +51,7 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	@Override
 	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize, String date, String search) {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
-		example.setOrderByClause("sort desc");
+		example.setOrderByClause("sort asc");
 		Criteria criteria = example.createCriteria();
 		if (StringUtils.hasText(date)) {
 			Date time = SqlUtil.formatterDate(date);

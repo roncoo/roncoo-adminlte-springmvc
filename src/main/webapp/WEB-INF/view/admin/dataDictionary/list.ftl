@@ -13,19 +13,19 @@
 				</div>
 				<div class="box-body">
 					<div class="clearfix">
-	            		<form action="${ctx}/admin/emailAccountInfo/list">
+	            		<form action="${ctx}/admin/dataDictionary/list" method="post">
 							<div class="col-md-4">
 								<div class="input-group date ">
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control pull-right" id="date" name="date" value="${date!}" placeholder="选择时间...">
+									<input type="text" class="form-control pull-right" id="date" name="date" value="${param['date']!}" placeholder="选择时间...">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-search"></i></span>
-									<input type="text" class="form-control" name="search" value="${search!}" placeholder="根据账号搜索...">
+									<input type="text" class="form-control" name="search" value="${param['search']!}" placeholder="根据字段名搜索...">
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -46,23 +46,25 @@
 						</thead>
 						<tbody>
 							<#list page.list as bean>
-								<td>${bean_index+1}</td>
-								<td>${bean.fieldName}</td>
-								<td>${bean.sort}</td>
-								<td>${bean.remark}</td>
-								<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-								<td>
-									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionary/view?id=${bean.id}">查看</a>
-									<a class="btn btn-info btn-xs" href="${ctx}/admin/dataDictionary/edit?id=${bean.id}">修改</a>
-									<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/list?dId=${bean.id}&fieldCode=${bean.fieldCode}">明细</a>
-									<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/dataDictionary/delete?id=${bean.id}&fieldCode=${bean.fieldCode}')">删除</a>
-								</td>
+								<tr>
+									<td>${bean_index+1}</td>
+									<td>${bean.fieldName}</td>
+									<td>${bean.sort}</td>
+									<td>${bean.remark}</td>
+									<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+									<td>
+										<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionary/view?id=${bean.id}">查看</a>
+										<a class="btn btn-info btn-xs" href="${ctx}/admin/dataDictionary/edit?id=${bean.id}">修改</a>
+										<a class="btn btn-primary btn-xs" href="${ctx}/admin/dataDictionaryList/list?dId=${bean.id}&fieldCode=${bean.fieldCode}">明细</a>
+										<a class="btn btn-danger btn-xs" onClick="delcfm('${ctx}/admin/dataDictionary/delete?id=${bean.id}&fieldCode=${bean.fieldCode}')">删除</a>
+									</td>
+								</tr>
 							</#list>
 						</tbody>
 					</table>
 				</div>
 				<!-- /.box-body -->
-				<@initPage url="${ctx}/admin/dataDictionary/list?" paginationSize=5/>
+				<@initPage url="${ctx}/admin/dataDictionary/list" paginationSize=5/>
 			</div>
 		</div>
 	</div>

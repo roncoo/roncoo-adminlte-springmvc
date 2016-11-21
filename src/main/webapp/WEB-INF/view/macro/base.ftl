@@ -39,6 +39,12 @@
 					</a>
 				</li>
 				
+				<li class="<#if activeId=='security'>active</#if>">
+					<a href="${ctx}/admin/security/list">
+						<i class="fa fa-folder"></i> <span>权限管理</span> </i>
+					</a>
+				</li>
+				
 			</ul>
 		</section>
 		<!-- /.sidebar -->
@@ -136,7 +142,7 @@
 									<a href="javascript:void(0);" class="btn btn-default btn-flat">密码修改</a>
 								</div>
 								<div class="pull-right">
-									<a href="javascript:void(0);" class="btn btn-default btn-flat">安全退出</a>
+									<a href="${ctx}/exit" class="btn btn-default btn-flat">安全退出</a>
 								</div>
 							</li>
 						</ul>
@@ -295,19 +301,19 @@
 		<#if page.pageCurrent ==1>
 			<li><a href="javascript:volid(0);">首页</a></li>
 		<#else>
-			<li><a href=${url}pageCurrent=1&date=${date!}&search=${search!}>首页</a></li>
+			<li><a href=${url}${paramUrl}pageCurrent=1>首页</a></li>
 		</#if>
 		<#list begin..end as index>
 			<#if index == page.pageCurrent>
 				<li class="active"><a href="javascript:volid(0);">${index}</a></li>
 			<#else>
-				<li><a href=${url}pageCurrent=${index}&date=${date!}&search=${search!}>${index}</a></li>
+				<li><a href=${url}${paramUrl}pageCurrent=${index}>${index}</a></li>
 			</#if>
 		</#list>
 		<#if page.pageCurrent ==page.totalPage>
 			<li><a href="javascript:volid(0);">尾页</a></li>
 		<#else>
-			<li><a href=${url}pageCurrent=${page.totalPage}&date=${date!}&search=${search!}>尾页</a></li>
+			<li><a href=${url}${paramUrl}pageCurrent=${page.totalPage}>尾页</a></li>
 		</#if>
 	</ul>
 </div>
