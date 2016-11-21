@@ -39,6 +39,12 @@
 					</a>
 				</li>
 				
+				<li class="<#if activeId=='security'>active</#if>">
+					<a href="${ctx}/admin/security/list">
+						<i class="fa fa-folder"></i> <span>权限管理</span> </i>
+					</a>
+				</li>
+				
 			</ul>
 		</section>
 		<!-- /.sidebar -->
@@ -136,7 +142,7 @@
 									<a href="javascript:void(0);" class="btn btn-default btn-flat">密码修改</a>
 								</div>
 								<div class="pull-right">
-									<a href="javascript:void(0);" class="btn btn-default btn-flat">安全退出</a>
+									<a href="${ctx}/exit" class="btn btn-default btn-flat">安全退出</a>
 								</div>
 							</li>
 						</ul>

@@ -57,7 +57,7 @@ public class EmailInfoController extends BaseController {
 	 * @param modelMap
 	 */
 	@RequestMapping(value = LIST, method = RequestMethod.GET)
-	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "3") int pageSize, HttpServletRequest request, ModelMap modelMap) {
+	public void list(@RequestParam(defaultValue = "1") int pageCurrent, @RequestParam(defaultValue = "10") int pageSize, HttpServletRequest request, ModelMap modelMap) {
 		Map<String, Object> params = ParamUtil.getParamsMap(request, null);
 		modelMap.put("param", params);
 		
