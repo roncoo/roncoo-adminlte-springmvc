@@ -1,37 +1,26 @@
 <#include "/macro/base.ftl" /> 
 <@header/> 
-
 <@menu activeId="security"/>
-
 <div class="content-wrapper">
 	<section class="content">
-		<div class="box box-info">
+		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">权限演示</h3>
-			</div>
-			<div class="box-body">
-				<div class="row">
-					<form action="${ctx}/admin/security/update">
-						<div class="col-xs-1">
-						</div>
-						<div class="col-xs-4">
-							<select name=role class="form-control select2" style="width: 100%;">
-								<option value="admin" selected="selected">admin</option>
-								<option value="user">user</option>
-							</select>
-						</div>
-						<div class="col-xs-2">
-							<button type="submit" class="btn btn-block btn-primary">访问</button>
-						</div>
-					<form>
-					<div class="col-xs-2">
-						<a class="btn btn-primary" href="${ctx}/admin/security/view">访问</a>
-					</div>
+				<h3 class="box-title">数据管理</h3>
+				<div class="pull-right">
+					<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
 				</div>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-striped">
+					<tbody>
+					      
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</section>
 </div>
 
 <@wrapper/>
+<!-- 这里添加额外的css和js -->
 <@footer/>
