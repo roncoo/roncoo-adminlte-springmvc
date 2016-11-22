@@ -3,7 +3,7 @@ package com.roncoo.adminlte.bean.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class RcEmailInfo implements Serializable {
+public class RcUserRole implements Serializable {
     private Long id;
 
     private String statusId;
@@ -12,15 +12,9 @@ public class RcEmailInfo implements Serializable {
 
     private Date updateTime;
 
-    private String toUser;
+    private Long userId;
 
-    private String fromUser;
-
-    private String title;
-
-    private String subject;
-
-    private String content;
+    private Long rolesId;
 
     private static final long serialVersionUID = 1L;
 
@@ -56,44 +50,20 @@ public class RcEmailInfo implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getToUser() {
-        return toUser;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setToUser(String toUser) {
-        this.toUser = toUser == null ? null : toUser.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getFromUser() {
-        return fromUser;
+    public Long getRolesId() {
+        return rolesId;
     }
 
-    public void setFromUser(String fromUser) {
-        this.fromUser = fromUser == null ? null : fromUser.trim();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject == null ? null : subject.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setRolesId(Long rolesId) {
+        this.rolesId = rolesId;
     }
 
     @Override
@@ -106,11 +76,8 @@ public class RcEmailInfo implements Serializable {
         sb.append(", statusId=").append(statusId);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
-        sb.append(", toUser=").append(toUser);
-        sb.append(", fromUser=").append(fromUser);
-        sb.append(", title=").append(title);
-        sb.append(", subject=").append(subject);
-        sb.append(", content=").append(content);
+        sb.append(", userId=").append(userId);
+        sb.append(", rolesId=").append(rolesId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
