@@ -32,6 +32,7 @@ public class SecurityController extends BaseController {
 
 	@RequestMapping(value = "exit", method = RequestMethod.GET)
 	public String exit() {
+		
 		return redirect("login");
 	}
 }
