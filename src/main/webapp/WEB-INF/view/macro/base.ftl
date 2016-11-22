@@ -40,7 +40,7 @@
 				</li>
 				
 				<li class="<#if activeId=='security'>active</#if>">
-					<a href="${ctx}/admin/security/list">
+					<a href="${ctx}/admin/security/login">
 						<i class="fa fa-folder"></i> <span>权限管理</span> </i>
 					</a>
 				</li>
