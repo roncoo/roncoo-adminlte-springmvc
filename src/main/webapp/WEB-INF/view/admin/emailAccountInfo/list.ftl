@@ -66,7 +66,10 @@
 $(function() {
 	//初始化时间选择器
 	$('#accountInfo-time').datepicker({
-		autoclose : true
+		language: 'zh-CN',
+		format: 'yyyy-mm-dd',
+		autoclose: true,
+		todayHighlight: true
 	});
 	//初始化表格
 	

@@ -52,6 +52,14 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 	public Page<RcEmailInfo> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
 		RcEmailInfoExample example = new RcEmailInfoExample();
 		example.setOrderByClause(" id desc ");
+
+		Criteria criteria = example.createCriteria();
+		if(StringUtils.hasText(premise)){
+			criteria.andToUserLike(SqlUtil.like(premise));
+		}
+		if(StringUtils.hasText(datePremise)){
+			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
+		}
 		
 		int count = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
@@ -61,13 +69,6 @@ public class EmailInfoDaoImpl implements EmailInfoDao {
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
 		
-		Criteria criteria = example.createCriteria();
-		if(StringUtils.hasText(premise)){
-			criteria.andToUserLike(SqlUtil.like(premise));
-		}
-		if(StringUtils.hasText(datePremise)){
-			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
-		}
 		
 		List<RcEmailInfo> list = mapper.selectByExample(example);
 		return new Page<RcEmailInfo>(count, totalPage, pageCurrent, pageSize, list);

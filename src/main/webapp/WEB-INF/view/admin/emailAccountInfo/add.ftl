@@ -68,6 +68,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#emailAccountInfo-add-form").serialize(),
 	        success: function (data) {
+	        	alertMsg("添加成功","success");
 	        	reloadTable(list_ajax,"#accountInfo-time","#accountInfo-premise");
 	        }
    		};

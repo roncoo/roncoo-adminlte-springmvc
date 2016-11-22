@@ -64,6 +64,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionaryList-edit-form").serialize(),
 	        success: function (data) {
+	        	alertMsg("修改成功","success");
 	        	reloadTable(list_ajax,"#dictionaryList-time","#dictionaryList-premise");
 	        }
    		};

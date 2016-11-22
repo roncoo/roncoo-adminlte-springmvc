@@ -67,7 +67,10 @@
 	$(function() {
 		//Date picker
 		$('#dictionaryList-time').datepicker({
-			autoclose : true
+			language: 'zh-CN',
+			format: 'yyyy-mm-dd',
+			autoclose: true,
+			todayHighlight: true
 		});
 
 		//初始化表格

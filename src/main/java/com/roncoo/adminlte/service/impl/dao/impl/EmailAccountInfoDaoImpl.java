@@ -57,12 +57,6 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 	public Page<RcEmailAccountInfo> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
 		RcEmailAccountInfoExample example = new RcEmailAccountInfoExample();
 		example.setOrderByClause("id desc");
-		int totalCount = mapper.countByExample(example);
-		pageSize = SqlUtil.checkPageSize(pageSize);
-		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
-		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
-		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
-		example.setPageSize(pageSize);
 		Criteria criteria = example.createCriteria();
 		if (StringUtils.hasText(premise)) {
 			criteria.andFromUserLike(SqlUtil.like(premise));
@@ -70,6 +64,13 @@ public class EmailAccountInfoDaoImpl implements EmailAccountInfoDao {
 		if (StringUtils.hasText(datePremise)) {
 			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
 		}
+		int totalCount = mapper.countByExample(example);
+		pageSize = SqlUtil.checkPageSize(pageSize);
+		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
+		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
+		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
+		example.setPageSize(pageSize);
+		
 		List<RcEmailAccountInfo> list = mapper.selectByExample(example);
 		Page<RcEmailAccountInfo> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 		return page;

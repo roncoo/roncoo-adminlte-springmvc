@@ -60,6 +60,7 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#dataDictionary-edit-form").serialize(),
 	        success: function (data) {
+	        	alertMsg("修改成功","success");
 	        	reloadTable(list_ajax,"#dictionary-time","#dictionary-premise");
 	        }
    		};

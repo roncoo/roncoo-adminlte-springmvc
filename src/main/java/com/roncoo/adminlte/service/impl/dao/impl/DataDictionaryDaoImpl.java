@@ -53,6 +53,14 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
 		example.setOrderByClause("sort asc");
+		
+		Criteria criteria = example.createCriteria();
+		if (StringUtils.hasText(premise)) {
+			criteria.andFieldNameLike(SqlUtil.like(premise));
+		}
+		if (StringUtils.hasText(datePremise)) {
+			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
+		}
 
 		int totalCount = mapper.countByExample(example);
 		pageSize = SqlUtil.checkPageSize(pageSize);
@@ -62,13 +70,7 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
 
-		Criteria criteria = example.createCriteria();
-		if (StringUtils.hasText(premise)) {
-			criteria.andFieldNameLike(SqlUtil.like(premise));
-		}
-		if (StringUtils.hasText(datePremise)) {
-			criteria.andCreateTimeBetween(DateUtil.parseDate(datePremise), DateUtil.addDate(DateUtil.parseDate(datePremise), 1));
-		}
+		
 
 		List<RcDataDictionary> list = mapper.selectByExample(example);
 		Page<RcDataDictionary> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
