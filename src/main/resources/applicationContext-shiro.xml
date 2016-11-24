@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+		 xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	default-lazy-init="true">
 
 	<description>Shiro安全配置</description>
-
+	
+	<aop:config proxy-target-class="true"></aop:config>
 	<!-- 項目自定义的Realm -->
-	<bean id="userRealm" class="com.roncoo.adminlte.util.realm.UserRealm"/>
+<!-- 	<bean id="userRealm" class="com.roncoo.adminlte.util.realm.UserRealm"/> -->
+	
+	<bean id="userRealm" class="com.roncoo.adminlte.util.realm.RoncooRealm"/>
 	
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm" />
@@ -18,16 +23,20 @@
 		<!-- Shiro的核心安全接口,这个属性是必须的 --> 
 		<property name="securityManager" ref="securityManager" />
 		<!-- 身份认证失败，则跳转到登录页面的配置 --> 
-		<property name="loginUrl" value="/admin/security/login" />
+		<property name="loginUrl" value="/login" />
 		<!-- 权限认证失败，则跳转到指定页面 -->  
-        <property name="unauthorizedUrl" value="/admin/security/login"/>
+        <property name="unauthorizedUrl" value="/admin/index"/>
         <!-- Shiro连接约束配置,即过滤链的定义 --> 
 		<property name="filterChainDefinitions">
 			<value>
-				/admin/security/login = authc
-				/admin/security/exit = logout
-				/admin/security/list =authc,roles[admin]
-				/admin/security/* = authcBasic
+				/login = authc
+				/exit = logout
+				/admin/index=anon
+				/admin/emailInfo/**=authc,roles[user]
+				/admin/emailAccountInfo/**=authc,roles[user]
+				/admin/dataDictionary/**=authc,roles[user]
+				/admin/security/**=authcBasic,roles[admin]
+				/admin/** = authcBasic
 			</value>
 		</property>
 	</bean>
