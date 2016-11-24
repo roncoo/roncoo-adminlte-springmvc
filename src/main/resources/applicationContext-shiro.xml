@@ -24,6 +24,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<!-- 身份认证失败，则跳转到登录页面的配置 --> 
 		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/logon" />
 		<!-- 权限认证失败，则跳转到指定页面 -->  
         <property name="unauthorizedUrl" value="/admin/index"/>
         <!-- Shiro连接约束配置,即过滤链的定义 --> 
@@ -31,7 +32,7 @@
 			<value>
 				/login = authc
 				/exit = logout
-				/admin/index=anon
+				/admin/index=user
 				/admin/emailInfo/**=authc,roles[user]
 				/admin/emailAccountInfo/**=authc,roles[user]
 				/admin/dataDictionary/**=authc,roles[user]

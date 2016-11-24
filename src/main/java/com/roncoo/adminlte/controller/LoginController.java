@@ -66,6 +66,18 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String postLogin() {
+		
+//		Result<String> result = biz.login();
+//		if (result.isStatus()) {
+//			logger.info(result.getResultData());
+//			return redirect(result.getResultData());
+//		}
+//		return redirect("/login");
+		return redirect("/logon");
+	}
+	
+	@RequestMapping(value = "/logon")
+	public String logon(){
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
 			logger.info(result.getResultData());

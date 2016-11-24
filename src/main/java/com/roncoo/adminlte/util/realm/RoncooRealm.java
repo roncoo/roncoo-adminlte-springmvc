@@ -20,9 +20,9 @@ public class RoncooRealm extends AuthorizingRealm {
 		HashSet<String> roleSet = new HashSet<String>();
 		HashSet<String> permissionSet = new HashSet<String>();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		String userno = (String) principals.getPrimaryPrincipal();
-		System.out.println(userno);
-		if (userno != null) {
+		String username = (String) principals.getPrimaryPrincipal();
+		System.out.println(username);
+		if (username != null) {
 			roleSet.add("user");
 			permissionSet.add("user:*");
 		}
@@ -34,9 +34,11 @@ public class RoncooRealm extends AuthorizingRealm {
 	}
 
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		System.out.println("验证");
-		return new SimpleAuthenticationInfo("roncoo", "roncoo", "roncooRealm");
+		String username = (String)token.getPrincipal();
+		String password = new String((char[])token.getCredentials());
+		return new SimpleAuthenticationInfo(username, password, "roncooRealm");
 	}
 
 }
