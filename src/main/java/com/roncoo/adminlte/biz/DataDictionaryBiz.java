@@ -90,7 +90,7 @@ public class DataDictionaryBiz {
 	@Transactional
 	public Result<RcDataDictionary> update(RcDataDictionary dictionary, String oldFieldCode) {
 		Result<RcDataDictionary> result = dictionaryService.update(dictionary);
-		if (oldFieldCode != dictionary.getFieldCode()) {
+		if (!oldFieldCode.equals(dictionary.getFieldCode())) {
 			dictionaryListService.updateForFieldCode(oldFieldCode, dictionary.getFieldCode());
 		}
 		return result;
