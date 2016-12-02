@@ -46,7 +46,7 @@
 					<div class="box-footer">
 						<div class="pull-right">
 							<button type="reset" class="btn btn-default">
-								<i class="fa fa-pencil"></i> 重置
+								<i class="fa fa-rotate-left"></i> 重置
 							</button>
 							<button type="submit" class="btn btn-primary">
 								<i class="fa fa-envelope-o"></i> 发送

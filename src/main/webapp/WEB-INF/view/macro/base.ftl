@@ -265,11 +265,17 @@
 		<script src="dist/js/demo.js"></script>
 		<script>
 		  $(function(){
-		    $('#date').datepicker({
+		    $("#date").datepicker({
 		      language: 'zh-CN',
 		      format: 'yyyy-mm-dd',
 		      autoclose: true,
 		      todayHighlight: true
+		    });
+		    
+		    $("#reset").on("click",function(){
+		    	$("#date").val("");
+		    	$("#search").val("");
+		    	$("#search-form").submit();
 		    });
 		  });
 		</script>
@@ -299,9 +305,11 @@
 		
 		
 		<#if page.pageCurrent ==1>
-			<li><a href="javascript:volid(0);">首页</a></li>
+			<li class="disabled"><a href="javascript:volid(0);">首页</a></li>
+			<li class="disabled"><a href="javascript:volid(0);">上一页</a></li>
 		<#else>
 			<li><a href=${url}${paramUrl}pageCurrent=1>首页</a></li>
+			<li><a href=${url}${paramUrl}pageCurrent=${page.pageCurrent-1}>上一页</a></li>
 		</#if>
 		<#list begin..end as index>
 			<#if index == page.pageCurrent>
@@ -311,8 +319,10 @@
 			</#if>
 		</#list>
 		<#if page.pageCurrent ==page.totalPage>
-			<li><a href="javascript:volid(0);">尾页</a></li>
+			<li class="disabled"><a href="javascript:volid(0);">下一页</a></li>
+			<li class="disabled"><a href="javascript:volid(0);">尾页</a></li>
 		<#else>
+			<li><a href=${url}${paramUrl}pageCurrent=${page.pageCurrent+1}>下一页</a></li>
 			<li><a href=${url}${paramUrl}pageCurrent=${page.totalPage}>尾页</a></li>
 		</#if>
 	</ul>

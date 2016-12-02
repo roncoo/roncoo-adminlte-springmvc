@@ -13,9 +13,6 @@
 						<input type="hidden" id="id" name="id" value=${dictionary.id}>
 						<div class="box-header with-border">
 							<h3 class="box-title">数据字典修改</h3>
-							<div class="pull-right">
-								<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
-							</div>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
@@ -33,7 +30,7 @@
 			             </div>
 						<div class="box-footer">
 							<div class="pull-right">
-								<button type="reset" class="btn btn-sm">清空</button>
+								<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
 			               		<button id="submit" type="submit" class="btn btn-sm btn-primary">更新</button>
 							</div>
 		              	</div>

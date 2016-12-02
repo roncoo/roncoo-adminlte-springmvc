@@ -28,8 +28,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="submit" class="btn btn-primary" id="submit">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+					<button type="submit" class="btn btn-primary" id="submit"><i class="fa fa-save"></i>保存</button>
 				</div>
 			</div>
 		</form>

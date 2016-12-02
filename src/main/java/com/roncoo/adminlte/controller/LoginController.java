@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,7 @@ import com.roncoo.adminlte.util.base.BaseController;
  */
 @Controller
 @RequestMapping
+@EnableRedisHttpSession
 public class LoginController extends BaseController {
 
 	@Autowired
@@ -76,7 +78,7 @@ public class LoginController extends BaseController {
 		return redirect("/logon");
 	}
 	
-	@RequestMapping(value = "/logon")
+	@RequestMapping(value = "/logon", method = RequestMethod.GET)
 	public String logon(){
 		Result<String> result = biz.login();
 		if (result.isStatus()) {

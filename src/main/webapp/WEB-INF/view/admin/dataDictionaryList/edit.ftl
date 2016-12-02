@@ -14,9 +14,6 @@
 						<input type="hidden" id="fieldCode" name="fieldCode" value=${dictionaryList.fieldCode!}>
 						<div class="box-header with-border">
 							<h3 class="box-title">数据字典明细修改</h3>
-							<div class="pull-right">
-								<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
-							</div>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
@@ -34,7 +31,7 @@
 			             </div>
 						<div class="box-footer">
 							<div class="pull-right">
-								<button type="reset" class="btn btn-sm">清空</button>
+								<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
 			               		<button  id="submit"  type="submit" class="btn btn-primary btn-sm">更新</button>
 							</div>
 		              	</div>

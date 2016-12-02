@@ -11,27 +11,29 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="clearfix">
-	            		<form action="${ctx}/admin/emailInfo/list" method="post">
+	            		<form id="search-form" action="${ctx}/admin/emailInfo/list" method="post">
 							<div class="col-md-4">
 								<div class="input-group date ">
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control pull-right" id="date" name="date" value="${param['date']!}" placeholder="选择时间...">
+									<input type="text" class="form-control pull-right input-sm" id="date" name="date" value="${param['date']!}" placeholder="选择时间...">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-search"></i></span>
-									<input type="text" class="form-control" name="search"  value="${param['search']!}" placeholder="根据收件人搜索...">
+									<input type="text" class="form-control input-sm" id="search" name="search"  value="${param['search']!}" placeholder="根据收件人搜索...">
 								</div>
 							</div>
 							<div class="col-md-4">
-								<button type="submit" class="btn btn-primary btn-sm">查询</button>
+								<button type="submit" id="reset" class="btn btn-warning btn-sm"><i class="fa fa-rotate-left"></i>重置</button>
+								<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>查询</button>
 							</div>
 						</form>
+						<br/><br/>
 					</div>
-					<table class="table table-bordered">
+					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>序号</th>
@@ -50,9 +52,9 @@
 									<td>${bean.toUser}</td>
 									<td>${bean.subject}</td>
 									<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-									<td>
-										<a class="btn btn-xs btn-primary" href="${ctx}/admin/emailInfo/view?id=${bean.id}">查看</a>
-										<a  class="btn btn-xs btn-default" onClick="delcfm('${ctx}/admin/emailInfo/delete?id=${bean.id}')">删除</a>
+									<td style="width:25%;">
+										<a class="btn btn-sm btn-primary" href="${ctx}/admin/emailInfo/view?id=${bean.id}">查看</a>
+										<a class="btn btn-sm btn-danger" onClick="delcfm('${ctx}/admin/emailInfo/delete?id=${bean.id}')">删除</a>
 									</td>
 								</tr>
 							</#list>
