@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
@@ -75,10 +76,11 @@ public class LoginController extends BaseController {
 //			return redirect(result.getResultData());
 //		}
 //		return redirect("/login");
-		return redirect("/logon");
+		
+		return redirect("/certification");
 	}
 	
-	@RequestMapping(value = "/logon", method = RequestMethod.GET)
+	@RequestMapping(value = "/certification", method = RequestMethod.GET)
 	public String logon(){
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
@@ -107,6 +109,7 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/exit", method = RequestMethod.GET)
 	public String exit(RedirectAttributes redirectAttributes, HttpSession session) {
 		session.removeAttribute(Constants.Token.RONCOO);
+		SecurityUtils.getSubject().logout();
 		redirectAttributes.addFlashAttribute("msg", "您已经安全退出");
 		return redirect("/login");
 	}

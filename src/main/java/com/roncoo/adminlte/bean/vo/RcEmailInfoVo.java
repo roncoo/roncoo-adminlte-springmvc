@@ -18,124 +18,116 @@ package com.roncoo.adminlte.bean.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class RcEmailInfoVo implements Serializable {
-    private Long id;
+	private Long id;
 
-    private String statusId;
+	private String statusId;
 
-    private Date createTime;
+	private Date createTime;
 
-    private Date updateTime;
+	private Date updateTime;
 
-    @NotEmpty(message="*收件人不能为空")
-    @Email(message="*请输入正确的邮箱格式")
-    private String toUser;
+	private String toUser;
 
-    private String fromUser;
-    
-    @NotEmpty(message="*标题不能为空，请输入....")
-    private String title;
+	private String fromUser;
 
-    @NotEmpty(message="*主题不能为空，请输入....")
-    private String subject;
+	private String title;
 
-    @NotEmpty(message="*邮件正文内容不能为空，请书写...")
-    private String content;
+	private String subject;
 
-    private static final long serialVersionUID = 1L;
+	private String content;
 
-    public Long getId() {
-        return id;
-    }
+	private static final long serialVersionUID = 1L;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getStatusId() {
-        return statusId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setStatusId(String statusId) {
-        this.statusId = statusId == null ? null : statusId.trim();
-    }
+	public String getStatusId() {
+		return statusId;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setStatusId(String statusId) {
+		this.statusId = statusId == null ? null : statusId.trim();
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public String getToUser() {
-        return toUser;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
-    public void setToUser(String toUser) {
-        this.toUser = toUser == null ? null : toUser.trim();
-    }
+	public String getToUser() {
+		return toUser;
+	}
 
-    public String getFromUser() {
-        return fromUser;
-    }
+	public void setToUser(String toUser) {
+		this.toUser = toUser == null ? null : toUser.trim();
+	}
 
-    public void setFromUser(String fromUser) {
-        this.fromUser = fromUser == null ? null : fromUser.trim();
-    }
+	public String getFromUser() {
+		return fromUser;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setFromUser(String fromUser) {
+		this.fromUser = fromUser == null ? null : fromUser.trim();
+	}
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getSubject() {
-        return subject;
-    }
+	public void setTitle(String title) {
+		this.title = title == null ? null : title.trim();
+	}
 
-    public void setSubject(String subject) {
-        this.subject = subject == null ? null : subject.trim();
-    }
+	public String getSubject() {
+		return subject;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setSubject(String subject) {
+		this.subject = subject == null ? null : subject.trim();
+	}
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
+	public String getContent() {
+		return content;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", statusId=").append(statusId);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", toUser=").append(toUser);
-        sb.append(", fromUser=").append(fromUser);
-        sb.append(", title=").append(title);
-        sb.append(", subject=").append(subject);
-        sb.append(", content=").append(content);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
+	public void setContent(String content) {
+		this.content = content == null ? null : content.trim();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(getClass().getSimpleName());
+		sb.append(" [");
+		sb.append("Hash = ").append(hashCode());
+		sb.append(", id=").append(id);
+		sb.append(", statusId=").append(statusId);
+		sb.append(", createTime=").append(createTime);
+		sb.append(", updateTime=").append(updateTime);
+		sb.append(", toUser=").append(toUser);
+		sb.append(", fromUser=").append(fromUser);
+		sb.append(", title=").append(title);
+		sb.append(", subject=").append(subject);
+		sb.append(", content=").append(content);
+		sb.append(", serialVersionUID=").append(serialVersionUID);
+		sb.append("]");
+		return sb.toString();
+	}
 }

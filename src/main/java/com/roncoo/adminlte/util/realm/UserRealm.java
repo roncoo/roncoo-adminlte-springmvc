@@ -28,7 +28,6 @@ public class UserRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		System.out.println("权限");
 		HashSet<String> roleSet = new HashSet<String>();
 		HashSet<String> permissionSet = new HashSet<String>();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
@@ -52,7 +51,7 @@ public class UserRealm extends AuthorizingRealm {
 						List<RcRolePermissions> rpList = resultRP.getResultData();
 						for (RcRolePermissions rcRolePermissions : rpList) {
 							Result<RcPermission> resultP = biz.getPermission(rcRolePermissions.getPermissionId());
-							if(resultP.isStatus()){
+							if (resultP.isStatus()) {
 								permissionSet.add(resultP.getResultData().getPermissionsValue());
 							}
 						}
@@ -60,8 +59,6 @@ public class UserRealm extends AuthorizingRealm {
 				}
 			}
 		}
-		System.out.println(roleSet);
-		System.out.println(permissionSet);
 		authorizationInfo.setRoles(roleSet);
 		authorizationInfo.setStringPermissions(permissionSet);
 		return authorizationInfo;
@@ -69,11 +66,9 @@ public class UserRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-		System.out.println("验证");
 		String userno = (String) authenticationToken.getPrincipal();
 		String password = new String((char[]) authenticationToken.getCredentials());
 		Result<RcUser> result = biz.login(userno, password);
-		System.out.println(result.isStatus());
 		if (result.isStatus()) {
 			RcUser user = result.getResultData();
 			return new SimpleAuthenticationInfo(user.getUserNo(), user.getPassword(), getName());
