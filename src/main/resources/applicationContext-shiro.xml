@@ -30,13 +30,13 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/login = authc
-				/exit = logout
+				/exit = authc
 				/admin/index=user
 				/admin/emailInfo/**=authc,roles[user]
 				/admin/emailAccountInfo/**=authc,roles[user]
 				/admin/dataDictionary/**=authc,roles[user]
 				/admin/security/**=authcBasic,roles[admin]
-				/admin/** = authcBasic
+				/admin/** = authc
 			</value>
 		</property>
 	</bean>

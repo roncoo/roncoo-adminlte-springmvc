@@ -68,7 +68,7 @@ public class LoginController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String postLogin() {
+	public void postLogin() {
 		
 //		Result<String> result = biz.login();
 //		if (result.isStatus()) {
@@ -77,7 +77,6 @@ public class LoginController extends BaseController {
 //		}
 //		return redirect("/login");
 		
-		return redirect("/certification");
 	}
 	
 	@RequestMapping(value = "/certification", method = RequestMethod.GET)
