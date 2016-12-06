@@ -52,7 +52,11 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 			result.setErrMsg("sort不能为空");
 			return result;
 		}
-		if(dao.insert(rcDataDictionary)>0){
+		if (dao.selectByFieldCode(rcDataDictionary.getFieldCode()) != null) {
+			result.setErrMsg("FieldCode已经存在");
+			return result;
+		}
+		if (dao.insert(rcDataDictionary) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
 		}
@@ -61,7 +65,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 	}
 
 	@Override
-	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize,String premise,String datePremise) {
+	public Result<Page<RcDataDictionary>> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
 		Result<Page<RcDataDictionary>> result = new Result<Page<RcDataDictionary>>();
 		if (pageCurrent < 1) {
 			result.setErrMsg("参数pageCurrent有误,pageCurrent=" + pageCurrent);
@@ -71,7 +75,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 			result.setErrMsg("参数pageSize有误,pageSize=" + pageSize);
 			return result;
 		}
-		Page<RcDataDictionary> resultData = dao.listForPage(pageCurrent, pageSize,premise,datePremise);
+		Page<RcDataDictionary> resultData = dao.listForPage(pageCurrent, pageSize, premise, datePremise);
 		result.setResultData(resultData);
 		result.setStatus(true);
 		result.setErrCode(0);

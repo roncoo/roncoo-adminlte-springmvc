@@ -65,4 +65,12 @@ public interface DataDictionaryDao {
 	 */
 	int updateById(RcDataDictionary dictionary);
 
+	/**
+	 * 根据FieldCode查询
+	 * 
+	 * @param FieldCode
+	 * @return
+	 */
+	RcDataDictionary selectByFieldCode(String FieldCode);
+
 }

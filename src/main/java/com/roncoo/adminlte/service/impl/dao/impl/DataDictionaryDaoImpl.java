@@ -53,7 +53,7 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	public Page<RcDataDictionary> listForPage(int pageCurrent, int pageSize, String premise, String datePremise) {
 		RcDataDictionaryExample example = new RcDataDictionaryExample();
 		example.setOrderByClause("sort asc");
-		
+
 		Criteria criteria = example.createCriteria();
 		if (StringUtils.hasText(premise)) {
 			criteria.andFieldNameLike(SqlUtil.like(premise));
@@ -69,8 +69,6 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		example.setPageSize(pageSize);
-
-		
 
 		List<RcDataDictionary> list = mapper.selectByExample(example);
 		Page<RcDataDictionary> page = new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
@@ -91,5 +89,17 @@ public class DataDictionaryDaoImpl implements DataDictionaryDao {
 	public int updateById(RcDataDictionary dictionary) {
 		dictionary.setUpdateTime(new Date());
 		return mapper.updateByPrimaryKeySelective(dictionary);
+	}
+
+	@Override
+	public RcDataDictionary selectByFieldCode(String FieldCode) {
+		RcDataDictionaryExample example = new RcDataDictionaryExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andFieldCodeEqualTo(FieldCode);
+		List<RcDataDictionary> resultList = mapper.selectByExample(example);
+		if (resultList.size() > 0) {
+			return resultList.get(0);
+		}
+		return null;
 	}
 }
