@@ -67,16 +67,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public void postLogin(HttpSession session) {
-//		Result<String> result = biz.login();
-//		if (result.isStatus()) {
-//			
-//			// 本地发布修改这里，随便增加一个session值即可，请删除下面的：return redirect(result.getResultData());
-//			//session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
-//			
-//			// 进行龙果学院授权登录
-//			return redirect(result.getResultData());
-//		}
-//		return redirect("/login");
+
 	}
 	
 	@RequestMapping(value = "/certification", method = RequestMethod.GET)
@@ -84,6 +75,9 @@ public class LoginController extends BaseController {
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
 			logger.info(result.getResultData());
+			
+			// 本地发布修改这里，随便增加一个session值即可，请删除下面的：return redirect(result.getResultData());
+			//session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
 			return redirect(result.getResultData());
 		}
 		return redirect("/login");
