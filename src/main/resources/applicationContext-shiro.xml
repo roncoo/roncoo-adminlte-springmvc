@@ -7,9 +7,6 @@
 
 	<description>Shiro安全配置</description>
 
-	<!-- 項目自定义的Realm -->
-	<!-- <bean id="userRealm" class="com.roncoo.adminlte.controller.realm.UserRealm"/> -->
-
 	<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.RoncooRealm" />
 
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -24,12 +21,12 @@
 		<!-- 身份认证失败，则跳转到登录页面的配置 -->
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/certification" />
-		
+
 		<!-- Shiro连接约束配置,即过滤链的定义 -->
 		<property name="filterChainDefinitions">
 			<value>
 				/login = authc
-				/exit = anon 
+				/exit = anon
 				/admin/index=user
 				/admin/emailInfo/**=authc,roles[user]
 				/admin/emailAccountInfo/**=authc,roles[user]
