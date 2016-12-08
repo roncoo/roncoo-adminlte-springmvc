@@ -24,6 +24,8 @@
 		<!-- 身份认证失败，则跳转到登录页面的配置 -->
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/certification" />
+		<!-- 权限认证失败，则跳转到指定页面 -->
+		<property name="unauthorizedUrl" value="/login" />
 		<!-- Shiro连接约束配置,即过滤链的定义 -->
 		<property name="filterChainDefinitions">
 			<value>

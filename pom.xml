@@ -95,6 +95,12 @@
 			<artifactId>shiro-ehcache</artifactId>
 			<version>${org.apache.shiro.version}</version>
 		</dependency>
+		
+		<!-- spring session -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency>
 
 		<!-- Spring -->
 		<dependency>

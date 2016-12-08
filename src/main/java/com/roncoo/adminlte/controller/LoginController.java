@@ -20,7 +20,9 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.config.annotation.web.http.EnableSpringHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +41,7 @@ import com.roncoo.adminlte.util.base.BaseController;
  */
 @Controller
 @RequestMapping
+@EnableSpringHttpSession
 public class LoginController extends BaseController {
 
 	@Autowired
@@ -107,6 +110,7 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/exit", method = RequestMethod.GET)
 	public String exit(RedirectAttributes redirectAttributes, HttpSession session) {
 		session.removeAttribute(Constants.Token.RONCOO);
+		SecurityUtils.getSubject().logout();
 		redirectAttributes.addFlashAttribute("msg", "您已经安全退出");
 		return redirect("/login");
 	}

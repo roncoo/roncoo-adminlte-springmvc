@@ -81,7 +81,7 @@
 								<a href="javascript:void(0);" class="btn btn-default btn-flat">密码修改</a>
 							</div>
 							<div class="pull-right">
-								<a href="javascript:void(0);" class="btn btn-default btn-flat">安全退出</a>
+								<a href="${ctx}/exit" class="btn btn-default btn-flat">安全退出</a>
 							</div>
 						</li>
 					</ul>
