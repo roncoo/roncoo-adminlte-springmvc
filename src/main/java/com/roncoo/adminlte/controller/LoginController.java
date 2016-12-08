@@ -80,12 +80,15 @@ public class LoginController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/certification", method = RequestMethod.GET)
-	public String logon(){
+	public String certification(HttpSession session){
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
 			logger.info(result.getResultData());
 			return redirect(result.getResultData());
 		}
+		
+		//本地登录把上面的注释掉和把 下面的注释去掉
+		//session.setAttribute(Constants.Token.RONCOO,"www.roncoo.com");
 		return redirect("/login");
 	}
 

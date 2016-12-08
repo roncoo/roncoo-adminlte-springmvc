@@ -3,6 +3,7 @@ package com.roncoo.adminlte.util.realm;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -10,6 +11,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +22,7 @@ import com.roncoo.adminlte.bean.entity.RcRolePermissions;
 import com.roncoo.adminlte.bean.entity.RcUser;
 import com.roncoo.adminlte.bean.entity.RcUserRole;
 import com.roncoo.adminlte.biz.UserBiz;
+import com.roncoo.adminlte.util.Constants;
 
 public class UserRealm extends AuthorizingRealm {
 
@@ -70,6 +73,8 @@ public class UserRealm extends AuthorizingRealm {
 		String password = new String((char[]) authenticationToken.getCredentials());
 		Result<RcUser> result = biz.login(userno, password);
 		if (result.isStatus()) {
+			Session session = SecurityUtils.getSubject().getSession();
+			session.setAttribute(Constants.Token.RONCOO, userno);
 			RcUser user = result.getResultData();
 			return new SimpleAuthenticationInfo(user.getUserNo(), user.getPassword(), getName());
 		}
