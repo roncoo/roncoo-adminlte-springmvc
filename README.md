@@ -44,6 +44,44 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 * 数据库连接池：Alibaba Druid
 
 
+###本地运行
+```
+方法一、修改LoginController 下的certification()方法
+
+@RequestMapping(value = "/certification", method = RequestMethod.GET)
+	public String certification(){
+		Result<String> result = biz.login();
+		if (result.isStatus()) {
+			logger.info(result.getResultData());
+			// 本地发布修改这里，随便增加一个session值即可，
+			然后删除return redirect(result.getResultData());
+			//session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
+			return redirect(result.getResultData());
+		}
+		return redirect("/login");
+	}
+	
+	
+	
+方法二
+	第一步：修改login.ftl页面,删除下面两句
+	<!--账号密码-->
+	<input type="hidden" name="username" value="roncoo"/>
+	<input type="hidden" name="password" value="roncoo"/>
+
+	第二步：修改applicationContext-shiro.xml
+	//本地运行把UserRealm注释去掉，把RoncooRealm注销掉
+	<!-- 	
+	<bean id="userRealm"
+	class="com.roncoo.adminlte.controller.realm.UserRealm"/>
+	 -->
+	<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.RoncooRealm" />
+
+	第三步：往数据库添加用户、角色、权限和相关关系
+	
+```
+
+
 ###帮助文档
 1. 如何发布，请看视频！ 免费，免费，免费
 

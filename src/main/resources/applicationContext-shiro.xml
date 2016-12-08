@@ -6,6 +6,9 @@
 	default-lazy-init="true">
 
 	<description>Shiro安全配置</description>
+	
+	<!-- 本地运行时使用 -->
+	<!--<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.UserRealm" /> -->
 
 	<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.RoncooRealm" />
 
@@ -21,7 +24,7 @@
 		<!-- 身份认证失败，则跳转到登录页面的配置 -->
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/certification" />
-
+		<property name="unauthorizedUrl" value="/error" />
 		<!-- Shiro连接约束配置,即过滤链的定义 -->
 		<property name="filterChainDefinitions">
 			<value>

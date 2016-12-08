@@ -71,7 +71,7 @@ public class LoginController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/certification", method = RequestMethod.GET)
-	public String logon(){
+	public String certification(){
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
 			logger.info(result.getResultData());
