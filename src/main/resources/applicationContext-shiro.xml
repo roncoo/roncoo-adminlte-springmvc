@@ -6,9 +6,10 @@
 	default-lazy-init="true">
 
 	<description>Shiro安全配置</description>
-	
+
 	<!-- 本地运行时使用 -->
-	<!--<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.UserRealm" /> -->
+	<!--<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.UserRealm" 
+		/> -->
 
 	<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.RoncooRealm" />
 
@@ -29,13 +30,10 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/login = authc
-				/exit = anon
-				/admin/index=user
-				/admin/emailInfo/**=authc,roles[user]
-				/admin/emailAccountInfo/**=authc,roles[user]
-				/admin/dataDictionary/**=authc,roles[user]
+				/exit= anon
+				/oauth= authcBasic,roles[user]
 				/admin/security/**=authcBasic,roles[admin]
-				/admin/** = authc
+				/admin/** = authcBasic,roles[user]
 			</value>
 		</property>
 	</bean>
@@ -49,11 +47,13 @@
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
 	<!-- AOP式方法级权限检查 -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true" />
 	</bean>
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 </beans>
