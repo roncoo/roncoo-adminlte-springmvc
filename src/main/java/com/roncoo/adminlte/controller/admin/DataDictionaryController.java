@@ -40,7 +40,7 @@ import com.roncoo.adminlte.util.base.ParamUtil;
  * @author LYQ
  */
 @Controller
-@RequestMapping(value = "/admin/dataDictionary", method = RequestMethod.POST)
+@RequestMapping(value = "/admin/dataDictionary/", method = RequestMethod.POST)
 public class DataDictionaryController extends BaseController {
 
 	@Autowired
