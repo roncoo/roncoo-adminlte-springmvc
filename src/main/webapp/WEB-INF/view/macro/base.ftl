@@ -30,6 +30,11 @@
 					<i class="fa fa-folder"></i> <span>数据字典管理</span> </i>
 				</a>
 			</li>
+			<li>
+				<a target="navTab" href="${ctx}/admin/security/list">
+					<i class="fa fa-folder"></i> <span>权限管理</span> </i>
+				</a>
+			</li>
 		</ul>
 	</section>
 </aside>
