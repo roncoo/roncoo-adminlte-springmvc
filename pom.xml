@@ -16,7 +16,6 @@
 	<name>roncoo-adminlte-springmvc Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-
 	<properties>
 		<org.apache.shiro.version>1.3.2</org.apache.shiro.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
