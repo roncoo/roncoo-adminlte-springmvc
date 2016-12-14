@@ -89,4 +89,16 @@ public class RoleDaoImpl implements RoleDao {
 		return mapper.selectByExample(example);
 	}
 
+	@Override
+	public RcRole selectByRoleName(String roleName) {
+		RcRoleExample example = new RcRoleExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andRoleNameEqualTo(roleName);
+		List<RcRole> resultData = mapper.selectByExample(example);
+		if (resultData.size() < 1) {
+			return null;
+		}
+		return resultData.get(0);
+	}
+
 }

@@ -65,12 +65,23 @@ public class RolePermissionsDaoImpl implements RolePermissionsDao {
 	}
 
 	@Override
-	public int deleteById(Long id) {
-		return mapper.deleteByPrimaryKey(id);
+	public RcRolePermissions selectById(long id) {
+		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public RcRolePermissions selectById(long id) {
-		return mapper.selectByPrimaryKey(id);
+	public int deleteByRoleId(long roleId) {
+		RcRolePermissionsExample example = new RcRolePermissionsExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andRoleIdEqualTo(roleId);
+		return mapper.deleteByExample(example);
+	}
+
+	@Override
+	public int countByRoleId(long roleId) {
+		RcRolePermissionsExample example = new RcRolePermissionsExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andRoleIdEqualTo(roleId);
+		return mapper.countByExample(example);
 	}
 }

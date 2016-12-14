@@ -1,5 +1,7 @@
 package com.roncoo.adminlte.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -112,6 +114,32 @@ public class PermissionServiceImpl implements PermissionService {
 		result.setResultData(resultData);
 		result.setErrCode(0);
 		result.setStatus(true);
+		result.setErrMsg("查询成功");
+		return result;
+	}
+
+	@Override
+	public Result<List<RcPermission>> listForId(List<Long> idList) {
+		Result<List<RcPermission>> result = new Result<List<RcPermission>>();
+		if (idList.size() < 1) {
+			result.setErrMsg("没有id需要查询");
+			return result;
+		}
+		List<RcPermission> resultData = dao.listForId(idList);
+		result.setErrCode(0);
+		result.setStatus(true);
+		result.setResultData(resultData);
+		result.setErrMsg("查询成功");
+		return result;
+	}
+
+	@Override
+	public Result<List<RcPermission>> list() {
+		Result<List<RcPermission>> result = new Result<List<RcPermission>>();
+		List<RcPermission> resultData = dao.list();
+		result.setErrCode(0);
+		result.setStatus(true);
+		result.setResultData(resultData);
 		result.setErrMsg("查询成功");
 		return result;
 	}

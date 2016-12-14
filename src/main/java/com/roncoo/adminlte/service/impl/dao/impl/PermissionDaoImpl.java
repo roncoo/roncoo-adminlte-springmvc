@@ -56,7 +56,7 @@ public class PermissionDaoImpl implements PermissionDao {
 	}
 
 	@Override
-	public int deleteById(Long id) {
+	public int deleteById(long id) {
 		return mapper.deleteByPrimaryKey(id);
 	}
 
@@ -80,5 +80,21 @@ public class PermissionDaoImpl implements PermissionDao {
 		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
 		List<RcPermission> list = mapper.selectByExample(example);
 		return new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
+	}
+
+	@Override
+	public List<RcPermission> listForId(List<Long> idList) {
+		RcPermissionExample example = new RcPermissionExample();
+		example.setOrderByClause("id desc");
+		Criteria criteria = example.createCriteria();
+		criteria.andIdIn(idList);
+		return mapper.selectByExample(example);
+	}
+
+	@Override
+	public List<RcPermission> list() {
+		RcPermissionExample example = new RcPermissionExample();
+		example.setOrderByClause("id desc");
+		return mapper.selectByExample(example);
 	}
 }

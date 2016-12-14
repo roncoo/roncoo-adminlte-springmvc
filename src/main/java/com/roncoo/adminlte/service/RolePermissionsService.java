@@ -31,11 +31,11 @@ public interface RolePermissionsService {
 
 	Result<List<RcRolePermissions>> queryByRoleId(long id);
 
-	Result<Integer> insert(RcRolePermissions rcRolePermissions);
+	Result<Integer> save(long roleId, List<Long> permissionList);
 
-	Result<Integer> update(RcRolePermissions rcRolePermissions);
-
-	Result<Integer> delete(long id);
+	Result<Integer> update(long roleId, List<Long> permissionList);
+	
+	Result<Integer> delete(long roleId);
 
 	Result<Integer> deleteByRolePermissions(RcRolePermissions rcRolePermissions);
 

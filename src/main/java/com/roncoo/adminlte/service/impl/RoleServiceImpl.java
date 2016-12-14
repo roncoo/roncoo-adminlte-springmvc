@@ -45,6 +45,10 @@ public class RoleServiceImpl implements RoleService {
 			result.setErrMsg("角色值不能为空");
 			return result;
 		}
+		if (dao.selectByRoleName(rcRole.getRoleName()) != null) {
+			result.setErrMsg("角色已经存在");
+			return result;
+		}
 		int resultNum = dao.insert(rcRole);
 		if (resultNum > 0) {
 			result.setErrCode(0);
@@ -111,6 +115,25 @@ public class RoleServiceImpl implements RoleService {
 		Result<List<RcRole>> result = new Result<List<RcRole>>();
 		List<RcRole> resultData = dao.list();
 		if (resultData.size() > 0) {
+			result.setResultData(resultData);
+			result.setErrCode(0);
+			result.setStatus(true);
+			result.setErrMsg("查询成功");
+			return result;
+		}
+		result.setErrMsg("查询失败");
+		return result;
+	}
+
+	@Override
+	public Result<RcRole> queryByRoleName(String roleName) {
+		Result<RcRole> result = new Result<RcRole>();
+		if (!StringUtils.hasText(roleName)) {
+			result.setErrMsg("角色名不能为空");
+			return result;
+		}
+		RcRole resultData = dao.selectByRoleName(roleName);
+		if (resultData != null) {
 			result.setResultData(resultData);
 			result.setErrCode(0);
 			result.setStatus(true);

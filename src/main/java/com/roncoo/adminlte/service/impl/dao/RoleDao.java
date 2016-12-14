@@ -29,6 +29,8 @@ import com.roncoo.adminlte.util.base.Page;
 public interface RoleDao {
 
 	RcRole selectById(long id);
+	
+	RcRole selectByRoleName(String roleName);
 
 	int insert(RcRole role);
 

@@ -18,6 +18,12 @@ import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.ParamUtil;
 
+/**
+ * 用户Controller
+ * 
+ * @author LYQ
+ *
+ */
 @Controller
 @RequestMapping(value = "/admin/permission/", method = RequestMethod.POST)
 public class PermissionController extends BaseController {
@@ -51,7 +57,7 @@ public class PermissionController extends BaseController {
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
 	public String delete(long id) {
 		Result<Integer> result = biz.delete(id);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			return redirect("/admin/permission/list");
 		}
 		return null;
@@ -77,7 +83,7 @@ public class PermissionController extends BaseController {
 	@RequestMapping(value = UPDATE)
 	public String update(RcPermission rcPermission) {
 		Result<Integer> result = biz.update(rcPermission);
-		if(result.isStatus()){
+		if (result.isStatus()) {
 			return redirect("/admin/permission/list");
 		}
 		return null;

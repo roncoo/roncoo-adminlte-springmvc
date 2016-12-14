@@ -1,5 +1,6 @@
 package com.roncoo.adminlte.controller.admin;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +13,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.roncoo.adminlte.bean.Result;
+import com.roncoo.adminlte.bean.entity.RcPermission;
 import com.roncoo.adminlte.bean.entity.RcRole;
+import com.roncoo.adminlte.bean.vo.RcRoleVo;
 import com.roncoo.adminlte.biz.RoleBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.ParamUtil;
+import com.roncoo.adminlte.util.base.StringUtils;
 
+/**
+ * 角色Controller
+ * 
+ * @author LYQ
+ *
+ */
 @Controller
 @RequestMapping(value = "/admin/role/", method = RequestMethod.POST)
 public class RoleController extends BaseController {
@@ -35,33 +45,63 @@ public class RoleController extends BaseController {
 		if (result.isStatus()) {
 			modelMap.put("page", result.getResultData());
 		}
+		// 获取权限选项
+		Result<List<RcPermission>> resultPermission = biz.queryPermissionList();
+		if (resultPermission.isStatus()) {
+			modelMap.put("permissions", resultPermission.getResultData());
+		}
 		// 动态拼接查询条件
 		String paramUrl = ParamUtil.getParamUrl(request, params, "pageCurrent");
 		modelMap.put("paramUrl", paramUrl);
 	}
 
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
-	public void view(long id) {
-
+	public void view(ModelMap modelMap, long id) {
+		Result<RcRoleVo> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("bean", result.getResultData());
+		}
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public void delete(long id) {
-
+	public String delete(long id) {
+		Result<Integer> result = biz.delete(id);
+		if(result.isStatus()){
+			return redirect("/admin/role/list");
+		}
+		return null;
 	}
 
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
-	public void edit(long id) {
+	public void edit(ModelMap modelMap, long id) {
+		Result<RcRoleVo> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("bean", result.getResultData());
+		}
 
+		Result<List<RcPermission>> resultPermission = biz.queryPermissionList();
+		if (resultPermission.isStatus()) {
+			modelMap.put("permissions", resultPermission.getResultData());
+		}
 	}
 
 	@RequestMapping(value = SAVE)
-	public void save(RcRole rcRole) {
-
+	public String save(RcRole rcRole, String permission) {
+		List<Long> permissions = StringUtils.toLongList(permission, ",");
+		Result<Integer> result = biz.save(rcRole, permissions);
+		if (result.isStatus()) {
+			return redirect("/admin/role/list");
+		}
+		return null;
 	}
 
 	@RequestMapping(value = UPDATE)
-	public void update(RcRole rcRole) {
-
+	public String update(RcRole rcRole, String permission) {
+		List<Long> permissions = StringUtils.toLongList(permission, ",");
+		Result<Integer> result = biz.update(rcRole, permissions);
+		if (result.isStatus()) {
+			return redirect("/admin/role/list");
+		}
+		return null;
 	}
 }

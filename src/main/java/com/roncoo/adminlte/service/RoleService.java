@@ -30,6 +30,8 @@ import com.roncoo.adminlte.util.base.Page;
 public interface RoleService {
 
 	Result<RcRole> query(long id);
+	
+	Result<RcRole> queryByRoleName(String roleName);
 
 	Result<Integer> save(RcRole rcRole);
 

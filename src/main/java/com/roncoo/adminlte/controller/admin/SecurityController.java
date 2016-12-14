@@ -1,6 +1,5 @@
 package com.roncoo.adminlte.controller.admin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,14 @@ import com.roncoo.adminlte.biz.UserBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.ParamUtil;
+import com.roncoo.adminlte.util.base.StringUtils;
 
+/**
+ * 用户Controller
+ * 
+ * @author LYQ
+ *
+ */
 @Controller
 @RequestMapping(value = "/admin/security/", method = RequestMethod.POST)
 public class SecurityController extends BaseController {
@@ -71,13 +77,7 @@ public class SecurityController extends BaseController {
 
 	@RequestMapping(value = UPDATE)
 	public String update(RcUser rcUser, @RequestParam(value = "role", required = false) String role) {
-		ArrayList<Long> roles = new ArrayList<Long>();
-		if (role != null) {
-			String[] roleStr = role.split(",");
-			for (String string : roleStr) {
-				roles.add(Long.parseLong(string));
-			}
-		}
+		List<Long> roles = StringUtils.toLongList(role, ",");
 		Result<Integer> result = biz.update(rcUser, roles);
 		if (result.isStatus()) {
 			return redirect("/admin/security/list");
@@ -87,13 +87,7 @@ public class SecurityController extends BaseController {
 
 	@RequestMapping(value = SAVE)
 	public String save(RcUser rcUser, @RequestParam(value = "role", required = false) String role) {
-		ArrayList<Long> roles = new ArrayList<Long>();
-		if (role != null) {
-			String[] roleStr = role.split(",");
-			for (String string : roleStr) {
-				roles.add(Long.parseLong(string));
-			}
-		}
+		List<Long> roles = StringUtils.toLongList(role, ",");
 		Result<Integer> result = biz.save(rcUser, roles);
 		if (result.isStatus()) {
 			return redirect("/admin/security/list");

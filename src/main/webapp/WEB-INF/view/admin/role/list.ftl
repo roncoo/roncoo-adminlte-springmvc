@@ -80,6 +80,7 @@
 		</div>
 	</div>
 </div>
+<#include "add.ftl" />
 <@wrapper/>
 <@deleteHint/>
 <@footer/>
