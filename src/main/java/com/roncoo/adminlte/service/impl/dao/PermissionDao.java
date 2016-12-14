@@ -15,8 +15,6 @@
  */
 package com.roncoo.adminlte.service.impl.dao;
 
-import java.util.List;
-
 import com.roncoo.adminlte.bean.entity.RcPermission;
 import com.roncoo.adminlte.util.base.Page;
 
@@ -36,6 +34,4 @@ public interface PermissionDao {
 	int deleteById(Long id);
 	
 	Page<RcPermission> listForPage(int pageCurrent, int pageSize, String date, String search);
-	
-	List<RcPermission> list(List<Long> premise);
 }

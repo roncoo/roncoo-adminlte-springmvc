@@ -8,7 +8,9 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">用户角色管理</h3>
 					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加</button>
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+							<i class="fa fa-plus"></i>添加
+						</button>
 					</div>
 				</div>
 				<!-- /.box-header -->
@@ -30,8 +32,12 @@
 								</div>
 							</div>
 							<div class="col-md-4">
-								<button type="submit" id="reset" class="btn btn-warning btn-sm"><i class="fa fa-rotate-left"></i>重置</button>
-								<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>查询</button>
+								<button type="submit" id="reset" class="btn btn-warning btn-sm">
+									<i class="fa fa-rotate-left"></i>重置
+								</button>
+								<button type="submit" class="btn btn-primary btn-sm">
+									<i class="fa fa-search"></i>查询
+								</button>
 							</div>
 						</form>
 						<br/><br/>

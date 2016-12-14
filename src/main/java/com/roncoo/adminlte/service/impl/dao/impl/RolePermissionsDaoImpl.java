@@ -73,13 +73,4 @@ public class RolePermissionsDaoImpl implements RolePermissionsDao {
 	public RcRolePermissions selectById(long id) {
 		return mapper.selectByPrimaryKey(id);
 	}
-
-	@Override
-	public List<RcRolePermissions> list(List<Long> premise) {
-		RcRolePermissionsExample example = new RcRolePermissionsExample();
-		example.setOrderByClause("id desc");
-		Criteria criteria = example.createCriteria();
-		criteria.andIdIn(premise);
-		return mapper.selectByExample(example);
-	}
 }

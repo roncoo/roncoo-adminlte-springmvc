@@ -1,45 +1,43 @@
 <#include "/macro/base.ftl" /> 
 <@header/> 
-
 <@menu activeId="email"/>
-
 <div class="content-wrapper">
 	<section class="content">
 	<div class="row">
 		<div class="col-md-12">
-				<div class="box box-primary">
-					<form action="${ctx}/admin/emailAccountInfo/update" method="post">
-						<input type="hidden" id="id" name="id" value=${info.id}>
-						<div class="box-header with-border">
-							<h3 class="box-title">账号修改</h3>
+			<div class="box box-primary">
+				<form action="${ctx}/admin/emailAccountInfo/update" method="post">
+					<input type="hidden" id="id" name="id" value=${info.id}>
+					<div class="box-header with-border">
+						<h3 class="box-title">账号修改</h3>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+							<label>Host</label> 
+							<select name="host" class="form-control select2" style="width: 100%;">
+								<#list option as option>
+									<option <#if info.host == option.fieldValue>selected="selected"</#if> value="${option.fieldValue}">${option.fieldKey}</option>
+								</#list>
+							</select>
 						</div>
-						<div class="box-body">
-							<div class="form-group">
-								<label>Host</label> 
-								<select name="host" class="form-control select2" style="width: 100%;">
-									<#list option as option>
-										<option <#if info.host == option.fieldValue>selected="selected"</#if> value="${option.fieldValue}">${option.fieldKey}</option>
-									</#list>
-								</select>
-							</div>
-							<div class="form-group">
-								<label id="fromUserLabel">邮箱账号</label> <input type="text" class="form-control" name="fromUser" id="fromUser" value=${info.fromUser!} placeholder="输入邮箱...">
-							</div>
-							<div class="form-group">
-								<label id="passwdLabel">授权码</label> <input type="text" class="form-control" name="passwd" id="passwd" value=${info.passwd} placeholder="授权码...">
-							</div>
-							<div class="form-group">
-								<label>备注</label> <input type="text" class="form-control" name="remark" id="remark" value="${info.remark}" placeholder="输入备注...">
-							</div>
-			             </div>
-						<div class="box-footer">
-							<div class="pull-right">
-								<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
-			               		<button id="submit" type="submit" class="btn btn-primary btn-sm">更新</button>
-							</div>
-		              	</div>
-					</form>
-				</div>
+						<div class="form-group">
+							<label id="fromUserLabel">邮箱账号</label> <input type="text" class="form-control" name="fromUser" id="fromUser" value=${info.fromUser!} placeholder="输入邮箱...">
+						</div>
+						<div class="form-group">
+							<label id="passwdLabel">授权码</label> <input type="text" class="form-control" name="passwd" id="passwd" value=${info.passwd} placeholder="授权码...">
+						</div>
+						<div class="form-group">
+							<label>备注</label> <input type="text" class="form-control" name="remark" id="remark" value="${info.remark}" placeholder="输入备注...">
+						</div>
+		             </div>
+					<div class="box-footer">
+						<div class="pull-right">
+							<button class="btn btn-sm btn-info" onClick="history.back();">返回</button>
+		               		<button id="submit" type="submit" class="btn btn-primary btn-sm">更新</button>
+						</div>
+	              	</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	<section class="content">

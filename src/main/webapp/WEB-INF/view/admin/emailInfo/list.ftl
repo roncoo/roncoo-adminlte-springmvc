@@ -27,8 +27,12 @@
 								</div>
 							</div>
 							<div class="col-md-4">
-								<button type="submit" id="reset" class="btn btn-warning btn-sm"><i class="fa fa-rotate-left"></i>重置</button>
-								<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>查询</button>
+								<button type="submit" id="reset" class="btn btn-warning btn-sm">
+									<i class="fa fa-rotate-left"></i>重置
+								</button>
+								<button type="submit" class="btn btn-primary btn-sm">
+									<i class="fa fa-search"></i>查询
+								</button>
 							</div>
 						</form>
 						<br/><br/>

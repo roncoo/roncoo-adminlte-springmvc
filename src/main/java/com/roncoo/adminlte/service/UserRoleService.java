@@ -38,9 +38,9 @@ public interface UserRoleService {
 
 	Result<Integer> update(RcUserRole rcUserRole);
 
+	Result<Integer> updateByUserId(long userId, List<Long> roles);
+	
 	Result<Integer> delete(long id);
 
 	Result<Integer> deleteByUserRole(RcUserRole rcUserRole);
-
-	Result<Integer> updateByUserId(long userId, List<Long> roles);
 }

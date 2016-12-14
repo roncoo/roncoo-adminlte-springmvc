@@ -1,12 +1,12 @@
 <#include "/macro/base.ftl" /> 
 <@header/> 
-<@menu activeId="email"/>
+<@menu activeId="security"/>
 <div class="content-wrapper">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">账号详情</h3>
+					<h3 class="box-title">用户详情</h3>
 					<div class="pull-right">
 						<button class="btn btn-sm btn-info" onClick="history.back();">
 							<i class="fa fa-reply"></i>返回
@@ -15,35 +15,35 @@
 				</div>
 				<div class="box-body  no-padding">
 					<table class="table table-striped">
-		            	<tr>
-		                	<td>账号：</td>
-		                	<td style="width: 90%">${info.fromUser!}</td>
+		                <tr>
+		                	<td>角色：</td>
+		                	<td style="width: 90%">${bean.permissionsName!}</td>
 		                </tr>
 		                <tr>
-		                	<td>授权码：</td>
-		                	<td>${info.passwd}</td>
+		                	<td>角色值：</td>
+		                	<td>${bean.permissionsValue!}</td>
 		                </tr>
 		                <tr>
-		                	<td>服务器:</td>
-		                	<td>${info.host}</td>
+			                <td>用户状态：</td>
+			                <td>
+			                  	<#if bean.statusId == '0'>不可用</#if>
+			                  	<#if bean.statusId == '1'>可用</#if>
+			                </td>
 		                </tr>
 		                <tr>
 		                	<td>创建时间：</td>
-		                	<td>${info.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+		                	<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 		                </tr>
 		                <tr>
 		                	<td>更新时间：</td>
-		                	<td>${info.updateTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+		                	<td>${bean.updateTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 		                </tr>
-		                <tr>
-		                	<td style="min-height:300px">备注:</td>
-		                	<td>${info.remark}</td>
-		                </tr>
-		         	</table>
+		              </table>
 	             </div>
 			</div>
 		</div>
 	</div>
 </div>
 <@wrapper/>
+<!-- 这里添加额外的css和js -->
 <@footer/>

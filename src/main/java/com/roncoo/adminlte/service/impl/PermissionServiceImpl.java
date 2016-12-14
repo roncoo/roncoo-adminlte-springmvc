@@ -1,7 +1,5 @@
 package com.roncoo.adminlte.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -30,12 +28,15 @@ public class PermissionServiceImpl implements PermissionService {
 			result.setErrCode(0);
 			result.setStatus(true);
 			result.setResultData(rcPermission);
+			result.setErrMsg("查询成功");
+			return result;
 		}
+		result.setErrMsg("查询失败");
 		return result;
 	}
 
 	@Override
-	public Result<Integer> insert(RcPermission rcPermission) {
+	public Result<Integer> save(RcPermission rcPermission) {
 		Result<Integer> result = new Result<Integer>();
 		if (!StringUtils.hasText(rcPermission.getPermissionsName())) {
 			result.setErrMsg("权限名不能为空");
@@ -49,7 +50,10 @@ public class PermissionServiceImpl implements PermissionService {
 		if (resultNum > 0) {
 			result.setErrCode(0);
 			result.setStatus(true);
+			result.setErrMsg("添加成功");
+			return result;
 		}
+		result.setErrMsg("添加失败");
 		return result;
 	}
 
@@ -68,7 +72,10 @@ public class PermissionServiceImpl implements PermissionService {
 		if (resultNum > 0) {
 			result.setErrCode(0);
 			result.setStatus(true);
+			result.setErrMsg("更新成功");
+			return result;
 		}
+		result.setErrMsg("更新失败");
 		return result;
 	}
 
@@ -83,7 +90,10 @@ public class PermissionServiceImpl implements PermissionService {
 		if (resultNum > 0) {
 			result.setErrCode(0);
 			result.setStatus(true);
+			result.setErrMsg("删除成功");
+			return result;
 		}
+		result.setErrMsg("删除失败");
 		return result;
 	}
 
@@ -103,25 +113,6 @@ public class PermissionServiceImpl implements PermissionService {
 		result.setErrCode(0);
 		result.setStatus(true);
 		result.setErrMsg("查询成功");
-		return result;
-	}
-
-	@Override
-	public Result<List<RcPermission>> list(List<Long> premise) {
-		Result<List<RcPermission>> result = new Result<List<RcPermission>>();
-		if (premise.size() < 1) {
-			result.setErrMsg("查询调价不能为空");
-			return result;
-		}
-		List<RcPermission> resultData = dao.list(premise);
-		if (resultData.size() > 0) {
-			result.setResultData(resultData);
-			result.setErrCode(0);
-			result.setStatus(true);
-			result.setErrMsg("查询成功");
-			return result;
-		}
-		result.setErrMsg("查询失败");
 		return result;
 	}
 }

@@ -1,10 +1,7 @@
 <#include "/macro/base.ftl" /> 
 <@header/> 
-
 <@menu activeId="email"/>
-
 <div class="content-wrapper">
-	<section class="content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
@@ -15,10 +12,12 @@
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-							<label id="userNoLabel">账号</label> <input type="text" class="form-control" name="userNo" id="userNo" value=${bean.userNo!} disabled placeholder="输入账号...">
+							<label id="userNoLabel">账号</label>
+							<input type="text" class="form-control" name="userNo" id="userNo" value=${bean.userNo!} disabled placeholder="输入账号...">
 						</div>
 						<div class="form-group">
-							<label id="nickNameLabel">昵称</label> <input type="text" class="form-control" name="nickName" id="nickName" value=${bean.nickName!} placeholder="输入昵称...">
+							<label id="nickNameLabel">昵称</label>
+							<input type="text" class="form-control" name="nickName" id="nickName" value=${bean.nickName!} placeholder="输入昵称...">
 						</div>
 						<div class="form-group">
 							<label>性别</label> 
@@ -52,10 +51,6 @@
 			</div>
 		</div>
 	</div>
-	<section class="content">
 </div>
 <@wrapper/>
-<script type="text/javascript">
-
-</script>
 <@footer/>

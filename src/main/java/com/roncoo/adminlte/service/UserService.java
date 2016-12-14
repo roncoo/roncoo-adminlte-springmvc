@@ -26,8 +26,12 @@ import com.roncoo.adminlte.util.base.Page;
  *
  */
 public interface UserService {
-	
+
 	Result<RcUser> login(String userno, String password);
+
+	Result<Page<RcUser>> listForPage(int pageCurrent, int pageSize, String date, String search);
+
+	Result<RcUser> query(long id);
 
 	Result<RcUser> queryByUserNo(String userno);
 
@@ -36,8 +40,5 @@ public interface UserService {
 	Result<Integer> update(RcUser rcUser);
 
 	Result<Integer> delete(long id);
-	
-	Result<Page<RcUser>> listForPage(int pageCurrent, int pageSize, String date, String search);
-	
-	Result<RcUser> query(long id);
+
 }

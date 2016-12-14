@@ -35,16 +35,38 @@
 				
 				<li class="<#if activeId=='dictionary'>active</#if>">
 					<a href="${ctx}/admin/dataDictionary/list">
-						<i class="fa fa-folder"></i> <span>数据字典管理</span> </i>
+						<i class="fa fa-folder"></i> <span>数据字典管理</span>
 					</a>
 				</li>
 				
 				<@shiro.hasPermission name="manager:read">
-				<li class="<#if activeId=='security'>active</#if>">
-					<a href="${ctx}/admin/security/list">
-						<i class="fa fa-folder"></i> <span>用户管理</span> </i>
-					</a>
-				</li>
+					<li class="<#if activeId=='security'>active</#if>">
+						<a href="javascript:void(0);">
+							<i class="fa fa-envelope"></i> 
+							<span>权限管理</span> 
+							<span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="${ctx}/admin/security/list">
+									<i class="fa fa-inbox"></i> 
+									<span>用户管理</span> 
+								</a>
+							</li>
+							<li>
+								<a href="${ctx}/admin/role/list">
+									<i class="fa fa-inbox"></i> 
+									<span>角色管理</span> 
+								</a>
+							</li>
+							<li>
+								<a href="${ctx}/admin/permission/list">
+									<i class="fa fa-inbox"></i> 
+									<span>权限管理</span> 
+								</a>
+							</li>
+						</ul>
+					</li>
 				</@shiro.hasPermission>
 			</ul>
 		</section>

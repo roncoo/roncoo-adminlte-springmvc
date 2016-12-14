@@ -81,15 +81,4 @@ public class PermissionDaoImpl implements PermissionDao {
 		List<RcPermission> list = mapper.selectByExample(example);
 		return new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
 	}
-
-	@Override
-	public List<RcPermission> list(List<Long> premise) {
-		RcPermissionExample example = new RcPermissionExample();
-		example.setOrderByClause("id desc");
-		Criteria criteria = example.createCriteria();
-		criteria.andIdIn(premise);
-		List<RcPermission> result = mapper.selectByExample(example);
-		return result;
-	}
-
 }

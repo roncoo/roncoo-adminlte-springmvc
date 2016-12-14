@@ -1,4 +1,3 @@
-<!-- 拟态框 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<form action="${ctx}/admin/security/save" method="post">
@@ -11,13 +10,16 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label id="userNoLabel">账号</label> <input type="text" class="form-control" name="userNo" id="userNo" placeholder="输入账号...">
+						<label id="userNoLabel">账号</label>
+						<input type="text" class="form-control" name="userNo" id="userNo" placeholder="输入账号...">
 					</div>
 					<div class="form-group">
-						<label id="passwordLabel">密码</label> <input type="password" class="form-control" name="password" id="password" placeholder="输入密码...">
+						<label id="passwordLabel">密码</label>
+						<input type="password" class="form-control" name="password" id="password" placeholder="输入密码...">
 					</div>
 					<div class="form-group">
-						<label id="nickNameLabel">昵称</label> <input type="text" class="form-control" name="nickName" id="nickName" placeholder="输入昵称...">
+						<label id="nickNameLabel">昵称</label>
+						<input type="text" class="form-control" name="nickName" id="nickName" placeholder="输入昵称...">
 					</div>
 					<div class="form-group">
 						<label>性别</label> 
@@ -36,13 +38,14 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
-					<button type="submit" class="btn btn-primary" id="submit"><i class="fa fa-save"></i>保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<i class="fa fa-close"></i>关闭
+					</button>
+					<button type="submit" class="btn btn-primary" id="submit">
+						<i class="fa fa-save"></i>保存
+					</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
-<script type="text/javascript">
-
-</script>

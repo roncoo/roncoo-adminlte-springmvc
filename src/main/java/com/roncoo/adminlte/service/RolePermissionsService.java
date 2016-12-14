@@ -39,5 +39,4 @@ public interface RolePermissionsService {
 
 	Result<Integer> deleteByRolePermissions(RcRolePermissions rcRolePermissions);
 
-	Result<List<RcRolePermissions>> list(List<Long> premise);
 }
