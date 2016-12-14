@@ -8,9 +8,9 @@
 	<description>Shiro安全配置</description>
 
 	<!-- 項目自定义的Realm -->
-	<!-- <bean id="userRealm" class="com.roncoo.adminlte.util.realm.UserRealm"/> -->
+	<bean id="userRealm" class="com.roncoo.adminlte.util.realm.UserRealm"/>
 
-	<bean id="userRealm" class="com.roncoo.adminlte.util.realm.RoncooRealm" />
+<!-- 	<bean id="userRealm" class="com.roncoo.adminlte.util.realm.RoncooRealm" /> -->
 
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm" />
@@ -31,8 +31,8 @@
 			<value>
 				/login = authc
 				/exit = anon
-				/admin/security/**=authcBasic,roles[admin]
-				/admin/** = authcBasic,roles[user]
+				/admin/security/**=authcBasic,perms[manager:read]
+				/admin/** = authcBasic,user
 			</value>
 		</property>
 	</bean>

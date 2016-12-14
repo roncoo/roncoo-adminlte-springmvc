@@ -17,6 +17,7 @@ package com.roncoo.adminlte.service;
 
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcUser;
+import com.roncoo.adminlte.util.base.Page;
 
 /**
  * 用户Service
@@ -30,9 +31,13 @@ public interface UserService {
 
 	Result<RcUser> queryByUserNo(String userno);
 
-	Result<Integer> insert(RcUser rcUser);
+	Result<Integer> save(RcUser rcUser);
 
 	Result<Integer> update(RcUser rcUser);
 
 	Result<Integer> delete(long id);
+	
+	Result<Page<RcUser>> listForPage(int pageCurrent, int pageSize, String date, String search);
+	
+	Result<RcUser> query(long id);
 }

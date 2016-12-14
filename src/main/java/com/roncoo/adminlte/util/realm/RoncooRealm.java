@@ -22,6 +22,7 @@ public class RoncooRealm extends AuthorizingRealm {
 		if (username != null) {
 			roleSet.add("user");
 			permissionSet.add("user:*");
+			permissionSet.add("admin:*");
 		}
 		authorizationInfo.setRoles(roleSet);
 		authorizationInfo.setStringPermissions(permissionSet);

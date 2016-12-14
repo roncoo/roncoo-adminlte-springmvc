@@ -39,12 +39,13 @@
 					</a>
 				</li>
 				
+				<@shiro.hasPermission name="manager:read">
 				<li class="<#if activeId=='security'>active</#if>">
-					<a href="${ctx}/admin/security/login">
-						<i class="fa fa-folder"></i> <span>权限管理</span> </i>
+					<a href="${ctx}/admin/security/list">
+						<i class="fa fa-folder"></i> <span>用户管理</span> </i>
 					</a>
 				</li>
-				
+				</@shiro.hasPermission>
 			</ul>
 		</section>
 		<!-- /.sidebar -->

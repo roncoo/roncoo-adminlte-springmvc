@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  * @author LYQ
  *
  */
-public class ParamUtil {
+public final class ParamUtil {
 
 	/**
 	 * 获取所有参数

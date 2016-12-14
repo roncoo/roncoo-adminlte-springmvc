@@ -8,6 +8,7 @@ import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcUser;
 import com.roncoo.adminlte.service.UserService;
 import com.roncoo.adminlte.service.impl.dao.UserDao;
+import com.roncoo.adminlte.util.base.Page;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Result<Integer> insert(RcUser rcUser) {
+	public Result<Integer> save(RcUser rcUser) {
 		Result<Integer> result = new Result<Integer>();
 		if (!StringUtils.hasText(rcUser.getUserNo())) {
 			result.setErrMsg("账号不能为空");
@@ -60,11 +61,17 @@ public class UserServiceImpl implements UserService {
 		if (!StringUtils.hasText(rcUser.getPassword())) {
 			result.setErrMsg("密码不能为空");
 		}
-		int resultNum = dao.insert(rcUser);
-		if (resultNum > 0) {
-			result.setErrCode(0);
-			result.setStatus(true);
+		RcUser user = dao.selectByUserNo(rcUser.getUserNo());
+		if (user == null) {
+			int resultNum = dao.insert(rcUser);
+			if (resultNum > 0) {
+				result.setErrCode(0);
+				result.setStatus(true);
+				result.setErrMsg("添加成功");
+				return result;
+			}
 		}
+		result.setErrMsg("添加失败");
 		return result;
 	}
 
@@ -91,6 +98,44 @@ public class UserServiceImpl implements UserService {
 			result.setErrCode(0);
 			result.setStatus(true);
 		}
+		return result;
+	}
+
+	@Override
+	public Result<Page<RcUser>> listForPage(int pageCurrent, int pageSize, String date, String search) {
+		Result<Page<RcUser>> result = new Result<Page<RcUser>>();
+		if (pageCurrent < 1) {
+			result.setErrMsg("pageCurrent有误");
+			return result;
+		}
+		if (pageSize < 1) {
+			result.setErrMsg("pageSize有误");
+			return result;
+		}
+		Page<RcUser> resultData = dao.listForPage(pageCurrent, pageSize, date, search);
+		result.setResultData(resultData);
+		result.setErrCode(0);
+		result.setStatus(true);
+		result.setErrMsg("查询成功");
+		return result;
+	}
+
+	@Override
+	public Result<RcUser> query(long id) {
+		Result<RcUser> result = new Result<RcUser>();
+		if (id < 1) {
+			result.setErrMsg("用户id不存在");
+			return result;
+		}
+		RcUser resultData = dao.select(id);
+		if (resultData != null) {
+			result.setErrCode(0);
+			result.setStatus(true);
+			result.setErrMsg("查询成功");
+			result.setResultData(resultData);
+			return result;
+		}
+		result.setErrMsg("查询失败");
 		return result;
 	}
 }

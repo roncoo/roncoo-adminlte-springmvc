@@ -128,15 +128,31 @@ public class UserRoleServiceImpl implements UserRoleService {
 			result.setErrMsg("此用户id无效");
 			return result;
 		}
-		if (rcUserRole.getRolesId() < 0) {
-			result.setErrMsg("此角色id无效");
-			return result;
-		}
 		int resultNum = dao.delectByRcUserRole(rcUserRole);
 		if (resultNum > 0) {
 			result.setErrCode(0);
 			result.setStatus(true);
 		}
+		return result;
+	}
+
+	@Override
+	public Result<Integer> updateByUserId(long userId, List<Long> roles) {
+		Result<Integer> result = new Result<Integer>();
+		RcUserRole rcUserRole = new RcUserRole();
+		if (userId < 1) {
+			result.setErrMsg("用户id不能为空");
+			return result;
+		}
+		dao.deleteByUserId(userId);
+		for (Long rolesId : roles) {
+			rcUserRole.setUserId(userId);
+			rcUserRole.setRolesId(rolesId);
+			dao.insert(rcUserRole);
+		}
+		result.setErrCode(0);
+		result.setStatus(true);
+		result.setErrMsg("更新成功");
 		return result;
 	}
 }

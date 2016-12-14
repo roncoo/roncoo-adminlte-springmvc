@@ -34,8 +34,10 @@ public interface RolePermissionsService {
 	Result<Integer> insert(RcRolePermissions rcRolePermissions);
 
 	Result<Integer> update(RcRolePermissions rcRolePermissions);
-	
+
 	Result<Integer> delete(long id);
-	
+
 	Result<Integer> deleteByRolePermissions(RcRolePermissions rcRolePermissions);
+
+	Result<List<RcRolePermissions>> list(List<Long> premise);
 }

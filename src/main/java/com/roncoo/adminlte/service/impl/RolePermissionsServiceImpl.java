@@ -119,4 +119,23 @@ public class RolePermissionsServiceImpl implements RolePermissionsService {
 		}
 		return result;
 	}
+
+	@Override
+	public Result<List<RcRolePermissions>> list(List<Long> premise) {
+		Result<List<RcRolePermissions>> result = new Result<List<RcRolePermissions>>();
+		if (premise.size() < 1) {
+			result.setErrMsg("查询调价不能为空");
+			return result;
+		}
+		List<RcRolePermissions> resultData = dao.list(premise);
+		if (resultData.size() > 0) {
+			result.setResultData(resultData);
+			result.setErrCode(0);
+			result.setStatus(true);
+			result.setErrMsg("查询成功");
+			return result;
+		}
+		result.setErrMsg("查询失败");
+		return result;
+	}
 }

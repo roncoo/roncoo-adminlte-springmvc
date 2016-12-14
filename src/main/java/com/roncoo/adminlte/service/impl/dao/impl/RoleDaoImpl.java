@@ -16,13 +16,19 @@
 package com.roncoo.adminlte.service.impl.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.roncoo.adminlte.bean.entity.RcRole;
+import com.roncoo.adminlte.bean.entity.RcRoleExample;
+import com.roncoo.adminlte.bean.entity.RcRoleExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.RoleDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcRoleMapper;
+import com.roncoo.adminlte.util.base.Page;
+import com.roncoo.adminlte.util.base.SqlUtil;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -52,6 +58,35 @@ public class RoleDaoImpl implements RoleDao {
 	@Override
 	public int deleteById(long id) {
 		return mapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public Page<RcRole> listForPage(int pageCurrent, int pageSize, String date, String search) {
+		RcRoleExample example = new RcRoleExample();
+		example.setOrderByClause("id desc");
+		Criteria criteria = example.createCriteria();
+		if (StringUtils.hasText(date)) {
+			Date time = SqlUtil.formatterDate(date);
+			criteria.andCreateTimeBetween(time, SqlUtil.addDay(time, 1));
+		}
+		if (StringUtils.hasText(search)) {
+			criteria.andRoleNameLike(SqlUtil.like(search));
+		}
+		int totalCount = mapper.countByExample(example);
+		pageSize = SqlUtil.checkPageSize(pageSize);
+		pageCurrent = SqlUtil.checkPageCurrent(totalCount, pageSize, pageCurrent);
+		int totalPage = SqlUtil.countTotalPage(totalCount, pageSize);
+		example.setPageSize(pageSize);
+		example.setLimitStart(SqlUtil.countOffset(pageCurrent, pageSize));
+		List<RcRole> list = mapper.selectByExample(example);
+		return new Page<>(totalCount, totalPage, pageCurrent, pageSize, list);
+	}
+
+	@Override
+	public List<RcRole> list() {
+		RcRoleExample example = new RcRoleExample();
+		example.setOrderByClause("id desc");
+		return mapper.selectByExample(example);
 	}
 
 }

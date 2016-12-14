@@ -38,6 +38,7 @@
 			                <tr>
 			                  <td style="min-height:300px">备注:</td>
 			                  <td>${dictionary.remark}</td>
+			                </tr>
 			              </table>
 		             </div>
 				</div>

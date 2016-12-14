@@ -39,4 +39,7 @@ public interface UserRoleDao {
 	int delectByRcUserRole(RcUserRole rcUserRole);
 	
 	int deleteById(long id);
+	
+	int deleteByUserId(long userId);
+	
 }

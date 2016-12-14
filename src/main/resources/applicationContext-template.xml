@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd" >
 
 	<!-- freemarker的配置 -->  
-    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+    <bean id="freeMarkerConfigurer" class="com.roncoo.adminlte.util.ShiroTagFreeMarkerConfigurer">  
         <property name="preferFileSystemAccess" value="false" />  
         <property name="templateLoaderPath" value="/WEB-INF/view/" />
         <property name="defaultEncoding" value="UTF-8" />  

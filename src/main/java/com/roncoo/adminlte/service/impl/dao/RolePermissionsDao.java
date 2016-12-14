@@ -37,5 +37,7 @@ public interface RolePermissionsDao {
 	int delectByRolePermissions(RcRolePermissions rcRolePermissions);
 	
 	int deleteById(Long id);
+	
+	List<RcRolePermissions> list(List<Long> premise);
 
 }
