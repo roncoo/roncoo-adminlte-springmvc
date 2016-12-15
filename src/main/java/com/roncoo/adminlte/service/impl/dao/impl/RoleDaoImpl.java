@@ -101,4 +101,12 @@ public class RoleDaoImpl implements RoleDao {
 		return resultData.get(0);
 	}
 
+	@Override
+	public List<RcRole> listForId(List<Long> idList) {
+		RcRoleExample example = new RcRoleExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andIdIn(idList);
+		return mapper.selectByExample(example);
+	}
+
 }

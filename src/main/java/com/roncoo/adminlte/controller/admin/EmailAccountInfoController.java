@@ -83,7 +83,7 @@ public class EmailAccountInfoController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = SAVE)
-	public String insert(@ModelAttribute RcEmailAccountInfo rcEmailAccountInfo) {
+	public String save(@ModelAttribute RcEmailAccountInfo rcEmailAccountInfo) {
 		biz.save(rcEmailAccountInfo);
 		return redirect("/admin/emailAccountInfo/list");
 	}

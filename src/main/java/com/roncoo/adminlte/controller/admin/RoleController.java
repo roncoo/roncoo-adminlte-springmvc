@@ -69,13 +69,15 @@ public class RoleController extends BaseController {
 		String paramUrl = ParamUtil.getParamUrl(request, params, "pageCurrent");
 		modelMap.put("paramUrl", paramUrl);
 	}
-
-	@RequestMapping(value = VIEW, method = RequestMethod.GET)
-	public void view(ModelMap modelMap, long id) {
-		Result<RcRoleVo> result = biz.query(id);
+	
+	@RequestMapping(value = SAVE)
+	public String save(RcRole rcRole, String permission) {
+		List<Long> permissions = StringUtils.toLongList(permission, ",");
+		Result<Integer> result = biz.save(rcRole, permissions);
 		if (result.isStatus()) {
-			modelMap.put("bean", result.getResultData());
+			return redirect("/admin/role/list");
 		}
+		return null;
 	}
 
 	@RequestMapping(value = DELETE, method = RequestMethod.GET)
@@ -85,6 +87,14 @@ public class RoleController extends BaseController {
 			return redirect("/admin/role/list");
 		}
 		return null;
+	}
+
+	@RequestMapping(value = VIEW, method = RequestMethod.GET)
+	public void view(ModelMap modelMap, long id) {
+		Result<RcRoleVo> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("bean", result.getResultData());
+		}
 	}
 
 	@RequestMapping(value = EDIT, method = RequestMethod.GET)
@@ -98,16 +108,6 @@ public class RoleController extends BaseController {
 		if (resultPermission.isStatus()) {
 			modelMap.put("permissions", resultPermission.getResultData());
 		}
-	}
-
-	@RequestMapping(value = SAVE)
-	public String save(RcRole rcRole, String permission) {
-		List<Long> permissions = StringUtils.toLongList(permission, ",");
-		Result<Integer> result = biz.save(rcRole, permissions);
-		if (result.isStatus()) {
-			return redirect("/admin/role/list");
-		}
-		return null;
 	}
 
 	@RequestMapping(value = UPDATE)

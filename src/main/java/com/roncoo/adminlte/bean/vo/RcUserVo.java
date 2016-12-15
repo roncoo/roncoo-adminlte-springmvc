@@ -2,8 +2,9 @@ package com.roncoo.adminlte.bean.vo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
+import com.roncoo.adminlte.bean.entity.RcRole;
 import com.roncoo.adminlte.bean.entity.RcUser;
 
 /**
@@ -34,21 +35,9 @@ public class RcUserVo implements Serializable {
 
 	private Integer sex;
 
-	private String role;
-
 	private String permission;
-
-	private Set<String> roles;
-
-	private Set<String> permissions;
 	
-	private String roleName;
-
-	private String permissionName;
-	
-	private Set<String> roleNames;
-
-	private Set<String> permissionNames;
+	private List<RcRole> roleList;
 	
 	public RcUserVo(RcUser rcUser){
 		this.id = rcUser.getId();
@@ -125,14 +114,6 @@ public class RcUserVo implements Serializable {
 		this.sex = sex;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public String getPermission() {
 		return permission;
 	}
@@ -141,51 +122,11 @@ public class RcUserVo implements Serializable {
 		this.permission = permission;
 	}
 
-	public Set<String> getRoles() {
-		return roles;
+	public List<RcRole> getRoleList() {
+		return roleList;
 	}
 
-	public void setRoles(Set<String> roles) {
-		this.roles = roles;
-	}
-
-	public Set<String> getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(Set<String> permissions) {
-		this.permissions = permissions;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-
-	public String getPermissionName() {
-		return permissionName;
-	}
-
-	public void setPermissionName(String permissionName) {
-		this.permissionName = permissionName;
-	}
-
-	public Set<String> getRoleNames() {
-		return roleNames;
-	}
-
-	public void setRoleNames(Set<String> roleNames) {
-		this.roleNames = roleNames;
-	}
-
-	public Set<String> getPermissionNames() {
-		return permissionNames;
-	}
-
-	public void setPermissionNames(Set<String> permissionNames) {
-		this.permissionNames = permissionNames;
+	public void setRoleList(List<RcRole> roleList) {
+		this.roleList = roleList;
 	}
 }

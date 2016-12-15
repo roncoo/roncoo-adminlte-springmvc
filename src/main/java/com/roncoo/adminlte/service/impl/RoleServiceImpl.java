@@ -158,4 +158,19 @@ public class RoleServiceImpl implements RoleService {
 		result.setErrMsg("查询失败");
 		return result;
 	}
+
+	@Override
+	public Result<List<RcRole>> listForId(List<Long> idList) {
+		Result<List<RcRole>> result = new Result<List<RcRole>>();
+		if (idList.size() < 1) {
+			result.setErrMsg("没有id需要查询");
+			return result;
+		}
+		List<RcRole> resultData = dao.listForId(idList);
+		result.setErrCode(0);
+		result.setStatus(true);
+		result.setResultData(resultData);
+		result.setErrMsg("查询成功");
+		return result;
+	}
 }

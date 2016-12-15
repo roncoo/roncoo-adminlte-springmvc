@@ -40,4 +40,6 @@ public interface RolePermissionsDao {
 	int deleteByRoleId(long roleId);
 	
 	int countByRoleId(long roleId);
+	
+	List<RcRolePermissions> listForRoleId(List<Long> idList);
 }

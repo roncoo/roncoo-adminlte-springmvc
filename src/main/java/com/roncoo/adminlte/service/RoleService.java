@@ -40,6 +40,8 @@ public interface RoleService {
 	Result<Integer> delete(long id);
 
 	Result<Page<RcRole>> listForPage(int pageCurrent, int pageSize, String date, String search);
+	
+	Result<List<RcRole>> listForId(List<Long> idList);
 
 	Result<List<RcRole>> list();
 }

@@ -140,4 +140,19 @@ public class RolePermissionsServiceImpl implements RolePermissionsService {
 		}
 		return save(roleId, permissionList);
 	}
+
+	@Override
+	public Result<List<RcRolePermissions>> listForRoleId(List<Long> idList) {
+		Result<List<RcRolePermissions>> result = new Result<List<RcRolePermissions>>();
+		if (idList.size() < 1) {
+			result.setErrMsg("没有id需要查询");
+			return result;
+		}
+		List<RcRolePermissions> resultData = dao.listForRoleId(idList);
+		result.setErrCode(0);
+		result.setStatus(true);
+		result.setResultData(resultData);
+		result.setErrMsg("查询成功");
+		return result;
+	}
 }

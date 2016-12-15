@@ -32,12 +32,13 @@
 		                </tr>
 		                <tr>
 		                	<td>拥有角色：</td>
-		                	<td>${bean.roleName}</td>
+		                	<td>
+		                		<#list bean.roleList as role>
+									${role_index+1}.${role.roleName}
+								</#list>
+		                	</td>
 		                </tr>
-		                <tr>
-		                	<td>拥有权限：</td>
-		                	<td>${bean.permissionName}</td>
-		                </tr>
+		                
 		                <tr>
 		                	<td>创建时间：</td>
 		                	<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>

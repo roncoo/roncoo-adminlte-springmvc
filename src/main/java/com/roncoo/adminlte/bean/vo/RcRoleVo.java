@@ -2,8 +2,9 @@ package com.roncoo.adminlte.bean.vo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
+import com.roncoo.adminlte.bean.entity.RcPermission;
 import com.roncoo.adminlte.bean.entity.RcRole;
 
 public class RcRoleVo implements Serializable {
@@ -24,13 +25,7 @@ public class RcRoleVo implements Serializable {
 
 	private String roleValue;
 	
-	private String permission;
-
-	private Set<String> permissions;
-
-	private String permissionName;
-
-	private Set<String> permissionNames;
+	private List<RcPermission> permissionList;
 
 	public RcRoleVo(RcRole rcRole) {
 		this.id = rcRole.getId();
@@ -89,35 +84,11 @@ public class RcRoleVo implements Serializable {
 		this.roleValue = roleValue;
 	}
 
-	public String getPermission() {
-		return permission;
+	public List<RcPermission> getPermissionList() {
+		return permissionList;
 	}
 
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
-
-	public Set<String> getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(Set<String> permissions) {
-		this.permissions = permissions;
-	}
-
-	public String getPermissionName() {
-		return permissionName;
-	}
-
-	public void setPermissionName(String permissionName) {
-		this.permissionName = permissionName;
-	}
-
-	public Set<String> getPermissionNames() {
-		return permissionNames;
-	}
-
-	public void setPermissionNames(Set<String> permissionNames) {
-		this.permissionNames = permissionNames;
+	public void setPermissionList(List<RcPermission> permissionList) {
+		this.permissionList = permissionList;
 	}
 }

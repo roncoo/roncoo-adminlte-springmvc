@@ -25,7 +25,11 @@
 		                </tr>
 		                <tr>
 		                	<td>拥有权限：</td>
-		                	<td>${bean.permissionName!}</td>
+		                	<td>
+		                		<#list bean.permissionList as permission>
+		                			${permission_index+1}.${permission.permissionsName}
+		                		</#list>
+		                	</td>
 		                </tr>
 		                <tr>
 		                	<td>创建时间：</td>

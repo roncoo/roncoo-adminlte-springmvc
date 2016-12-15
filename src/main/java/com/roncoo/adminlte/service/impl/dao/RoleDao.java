@@ -39,6 +39,8 @@ public interface RoleDao {
 	int deleteById(long id);
 
 	Page<RcRole> listForPage(int pageCurrent, int pageSize, String date, String search);
+	
+	List<RcRole> listForId(List<Long> idList);
 
 	List<RcRole> list();
 }

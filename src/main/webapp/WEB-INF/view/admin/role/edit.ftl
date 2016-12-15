@@ -22,9 +22,9 @@
 						<div class="form-group">
 							<label>权限：</label>
 							<#list permissions as permission>
-								<#if bean.permissions??>
+								<#if bean.permissionList??>
 									<label>
-					                  <input type="checkbox" name="permission" class="flat-red" value="${permission.id}"<#list bean.permissions as beanPermission> <#if beanPermission == permission.permissionsValue>checked</#if></#list>> ${permission.permissionsName}
+					                  <input type="checkbox" name="permission" class="flat-red" value="${permission.id}"<#list bean.permissionList as beanPermission> <#if beanPermission.permissionsValue == permission.permissionsValue>checked</#if></#list>> ${permission.permissionsName}
 					                </label>
 								<#else>
 									<label>

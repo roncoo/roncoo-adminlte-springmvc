@@ -38,5 +38,7 @@ public interface RolePermissionsService {
 	Result<Integer> delete(long roleId);
 
 	Result<Integer> deleteByRolePermissions(RcRolePermissions rcRolePermissions);
+	
+	Result<List<RcRolePermissions>> listForRoleId(List<Long> idList);
 
 }

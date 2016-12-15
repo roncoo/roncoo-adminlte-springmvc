@@ -29,9 +29,9 @@
 						<div class="form-group">
 							<label>角色：</label>
 							<#list roles as role>
-								<#if bean.roles??>
+								<#if bean.roleList??>
 									<label>
-					                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"<#list bean.roles as beanRole> <#if beanRole == role.roleValue>checked</#if></#list>> ${role.roleName}
+					                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"<#list bean.roleList as beanRole> <#if beanRole.roleValue == role.roleValue>checked</#if></#list>> ${role.roleName}
 					                </label>
 								<#else>
 									<label>

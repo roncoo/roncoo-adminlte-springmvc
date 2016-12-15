@@ -61,13 +61,32 @@ public class SecurityController extends BaseController {
 			modelMap.put("page", result.getResultData());
 		}
 		// 获取角色列表
-		Result<List<RcRole>> resultRole = biz.getRolesList();
+		Result<List<RcRole>> resultRole = biz.queryRoleList();
 		if (resultRole.isStatus()) {
 			modelMap.put("roles", resultRole.getResultData());
 		}
 		// 动态拼接查询条件
 		String paramUrl = ParamUtil.getParamUrl(request, params, "pageCurrent");
 		modelMap.put("paramUrl", paramUrl);
+	}
+	
+	@RequestMapping(value = SAVE)
+	public String save(RcUser rcUser, @RequestParam(value = "role", required = false) String role) {
+		List<Long> roles = StringUtils.toLongList(role, ",");
+		Result<Integer> result = biz.save(rcUser, roles);
+		if (result.isStatus()) {
+			return redirect("/admin/security/list");
+		}
+		return null;
+	}
+
+	@RequestMapping(value = DELETE, method = RequestMethod.GET)
+	public String delete(long id) {
+		Result<Integer> result = biz.delete(id);
+		if (result.isStatus()) {
+			return redirect("/admin/security/list");
+		}
+		return null;
 	}
 
 	@RequestMapping(value = VIEW, method = RequestMethod.GET)
@@ -84,7 +103,7 @@ public class SecurityController extends BaseController {
 		if (result.isStatus()) {
 			modelMap.put("bean", result.getResultData());
 		}
-		Result<List<RcRole>> resultRole = biz.getRolesList();
+		Result<List<RcRole>> resultRole = biz.queryRoleList();
 		if (resultRole.isStatus()) {
 			modelMap.put("roles", resultRole.getResultData());
 		}
@@ -94,25 +113,6 @@ public class SecurityController extends BaseController {
 	public String update(RcUser rcUser, @RequestParam(value = "role", required = false) String role) {
 		List<Long> roles = StringUtils.toLongList(role, ",");
 		Result<Integer> result = biz.update(rcUser, roles);
-		if (result.isStatus()) {
-			return redirect("/admin/security/list");
-		}
-		return null;
-	}
-
-	@RequestMapping(value = SAVE)
-	public String save(RcUser rcUser, @RequestParam(value = "role", required = false) String role) {
-		List<Long> roles = StringUtils.toLongList(role, ",");
-		Result<Integer> result = biz.save(rcUser, roles);
-		if (result.isStatus()) {
-			return redirect("/admin/security/list");
-		}
-		return null;
-	}
-
-	@RequestMapping(value = DELETE, method = RequestMethod.GET)
-	public String delete(long id) {
-		Result<Integer> result = biz.delete(id);
 		if (result.isStatus()) {
 			return redirect("/admin/security/list");
 		}

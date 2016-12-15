@@ -1,5 +1,8 @@
 package com.roncoo.adminlte.util.realm;
 
+import java.util.HashSet;
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -13,8 +16,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.roncoo.adminlte.bean.Result;
+import com.roncoo.adminlte.bean.entity.RcPermission;
+import com.roncoo.adminlte.bean.entity.RcRole;
 import com.roncoo.adminlte.bean.entity.RcUser;
-import com.roncoo.adminlte.bean.vo.RcUserVo;
 import com.roncoo.adminlte.biz.UserBiz;
 import com.roncoo.adminlte.util.Constants;
 
@@ -28,39 +32,29 @@ public class UserRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		String userno = (String) principals.getPrimaryPrincipal();
 		Result<RcUser> result = biz.queryByUserNo(userno);
-//		HashSet<String> roleSet = new HashSet<String>();
-//		HashSet<String> permissionSet = new HashSet<String>();
-//		if (result.isStatus()) {
-//			long userId = result.getResultData().getId();
-//			Result<List<RcUserRole>> resultUR = biz.getUserRole(userId);
-//			if (resultUR.isStatus()) {
-//				// 获取角色
-//				List<RcUserRole> urList = resultUR.getResultData();
-//				for (RcUserRole rcUserRole : urList) {
-//					Result<RcRole> resultR = biz.getRole(rcUserRole.getRolesId());
-//					if (resultR.isStatus()) {
-//						roleSet.add(resultR.getResultData().getRoleValue());
-//					}
-//
-//					// 获取权限
-//					Result<List<RcRolePermissions>> resultRP = biz.getRolePermissions(rcUserRole.getRolesId());
-//					if (resultRP.isStatus()) {
-//						List<RcRolePermissions> rpList = resultRP.getResultData();
-//						for (RcRolePermissions rcRolePermissions : rpList) {
-//							Result<RcPermission> resultP = biz.getPermission(rcRolePermissions.getPermissionId());
-//							if (resultP.isStatus()) {
-//								permissionSet.add(resultP.getResultData().getPermissionsValue());
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
-		RcUserVo  vo = biz.getRoleAndPermission(result.getResultData());
-		System.out.println("角色"+vo.getRoles());
-		authorizationInfo.setRoles(vo.getRoles());
-		System.out.println("权限"+vo.getPermissions());
-		authorizationInfo.setStringPermissions(vo.getPermissions());
+		if(result.isStatus()){
+			Result<List<RcRole>> resultRole = biz.queryRoles(result.getResultData().getId());
+			if(resultRole.isStatus()){
+				//获取角色
+				HashSet<String> roles = new HashSet<String>();
+				for (RcRole rcRole : resultRole.getResultData()) {
+					roles.add(rcRole.getRoleValue());
+				}
+				System.out.println("角色："+roles);
+				authorizationInfo.setRoles(roles);
+				
+				//获取权限
+				Result<List<RcPermission>> resultPermission = biz.queryPermissions(resultRole.getResultData());
+				if(resultPermission.isStatus()){
+					HashSet<String> permissions = new HashSet<String>();
+					for (RcPermission rcPermission : resultPermission.getResultData()) {
+						permissions.add(rcPermission.getPermissionsValue());
+					}
+					System.out.println("权限："+permissions);
+					authorizationInfo.setStringPermissions(permissions);
+				}
+			}
+		}
 		return authorizationInfo;
 	}
 

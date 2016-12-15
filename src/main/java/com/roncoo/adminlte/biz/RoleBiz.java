@@ -16,7 +16,6 @@
 package com.roncoo.adminlte.biz;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,6 @@ import com.roncoo.adminlte.service.PermissionService;
 import com.roncoo.adminlte.service.RolePermissionsService;
 import com.roncoo.adminlte.service.RoleService;
 import com.roncoo.adminlte.util.base.Page;
-import com.roncoo.adminlte.util.base.StringUtils;
 
 @Component
 public class RoleBiz {
@@ -46,13 +44,15 @@ public class RoleBiz {
 	@Autowired
 	private PermissionService permissionService;
 
+	public Result<Page<RcRole>> listForPage(int pageCurrent, int pageSize, String date, String search) {
+		return service.listForPage(pageCurrent, pageSize, date, search);
+	}
+
 	public Result<RcRoleVo> query(long id) {
 		Result<RcRole> result = service.query(id);
 		Result<RcRoleVo> resultRoleVo = new Result<RcRoleVo>();
 		if (result.isStatus()) {
 			RcRoleVo rcRoleVo = new RcRoleVo(result.getResultData());
-			HashSet<String> permissionNameSet = new HashSet<String>();
-			HashSet<String> permissionSet = new HashSet<String>();
 			Result<List<RcRolePermissions>> resultRolePermissions = rolePermissionsService.queryByRoleId(id);
 			if (resultRolePermissions.isStatus()) {
 				ArrayList<Long> idList = new ArrayList<Long>();
@@ -60,15 +60,7 @@ public class RoleBiz {
 					idList.add(rcRolePermissions.getPermissionId());
 				}
 				Result<List<RcPermission>> resultPermission = permissionService.listForId(idList);
-				for (RcPermission rcPermission : resultPermission.getResultData()) {
-					permissionNameSet.add(rcPermission.getPermissionsName());
-					permissionSet.add(rcPermission.getPermissionsValue());
-				}
-				rcRoleVo.setPermission(StringUtils.toString(permissionSet));
-				rcRoleVo.setPermissionName(StringUtils.toString(permissionNameSet));
-				rcRoleVo.setPermissions(permissionSet);
-				rcRoleVo.setPermissionNames(permissionNameSet);
-
+				rcRoleVo.setPermissionList(resultPermission.getResultData());
 				resultRoleVo.setErrCode(0);
 				resultRoleVo.setStatus(true);
 				resultRoleVo.setResultData(rcRoleVo);
@@ -96,15 +88,6 @@ public class RoleBiz {
 	}
 
 	@Transactional
-	public Result<Integer> update(RcRole rcRole, List<Long> permissionList) {
-		Result<Integer> result = rolePermissionsService.update(rcRole.getId(), permissionList);
-		if (result.isStatus()) {
-			return service.update(rcRole);
-		}
-		return result;
-	}
-
-	@Transactional
 	public Result<Integer> delete(long id) {
 		Result<Integer> result = rolePermissionsService.delete(id);
 		if (result.isStatus()) {
@@ -113,7 +96,12 @@ public class RoleBiz {
 		return result;
 	}
 
-	public Result<Page<RcRole>> listForPage(int pageCurrent, int pageSize, String date, String search) {
-		return service.listForPage(pageCurrent, pageSize, date, search);
+	@Transactional
+	public Result<Integer> update(RcRole rcRole, List<Long> permissionList) {
+		Result<Integer> result = rolePermissionsService.update(rcRole.getId(), permissionList);
+		if (result.isStatus()) {
+			return service.update(rcRole);
+		}
+		return result;
 	}
 }

@@ -60,7 +60,11 @@
 									<td>${bean_index+1}</td>
 									<td>${bean.userNo}</td>
 									<td>${bean.nickName}</td>
-									<td>${bean.roleName!}</td>
+									<td>
+										<#list bean.roleList as role>
+											${role_index+1}.${role.roleName}
+										</#list>
+									</td>
 									<td>
 										<#if bean.statusId == '0'>不可用</#if>
 										<#if bean.statusId == '1'>可用</#if>

@@ -84,4 +84,12 @@ public class RolePermissionsDaoImpl implements RolePermissionsDao {
 		criteria.andRoleIdEqualTo(roleId);
 		return mapper.countByExample(example);
 	}
+
+	@Override
+	public List<RcRolePermissions> listForRoleId(List<Long> idList) {
+		RcRolePermissionsExample example = new RcRolePermissionsExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andRoleIdIn(idList);
+		return mapper.selectByExample(example);
+	}
 }

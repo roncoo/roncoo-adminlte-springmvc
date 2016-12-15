@@ -68,19 +68,21 @@ public class PermissionController extends BaseController {
 		String paramUrl = ParamUtil.getParamUrl(request, params, "pageCurrent");
 		modelMap.put("paramUrl", paramUrl);
 	}
+	
 
 	/**
-	 * 明细查询
+	 * 保存
 	 * 
-	 * @param modelMap
-	 * @param id
+	 * @param rcPermission
+	 * @return
 	 */
-	@RequestMapping(value = VIEW, method = RequestMethod.GET)
-	public void view(ModelMap modelMap, long id) {
-		Result<RcPermission> result = biz.query(id);
+	@RequestMapping(value = SAVE)
+	public String save(RcPermission rcPermission) {
+		Result<Integer> result = biz.save(rcPermission);
 		if (result.isStatus()) {
-			modelMap.put("bean", result.getResultData());
+			return redirect("/admin/permission/list");
 		}
+		return null;
 	}
 
 	/**
@@ -99,6 +101,20 @@ public class PermissionController extends BaseController {
 	}
 
 	/**
+	 * 明细查询
+	 * 
+	 * @param modelMap
+	 * @param id
+	 */
+	@RequestMapping(value = VIEW, method = RequestMethod.GET)
+	public void view(ModelMap modelMap, long id) {
+		Result<RcPermission> result = biz.query(id);
+		if (result.isStatus()) {
+			modelMap.put("bean", result.getResultData());
+		}
+	}
+
+	/**
 	 * 编辑权限
 	 * 
 	 * @param modelMap
@@ -110,21 +126,6 @@ public class PermissionController extends BaseController {
 		if (result.isStatus()) {
 			modelMap.put("bean", result.getResultData());
 		}
-	}
-
-	/**
-	 * 保存
-	 * 
-	 * @param rcPermission
-	 * @return
-	 */
-	@RequestMapping(value = SAVE)
-	public String save(RcPermission rcPermission) {
-		Result<Integer> result = biz.save(rcPermission);
-		if (result.isStatus()) {
-			return redirect("/admin/permission/list");
-		}
-		return null;
 	}
 
 	/**
