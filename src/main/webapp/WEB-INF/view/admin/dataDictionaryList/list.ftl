@@ -131,9 +131,6 @@
 					No = 0;
 				});
 
-		//点击删除确认时，删除后刷新
-		
-		
 		$("#list_add").click(function(){
 			list_ajax = dictionaryList_tab;
 		});
