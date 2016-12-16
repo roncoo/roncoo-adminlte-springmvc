@@ -32,22 +32,6 @@ public class UserRoleServiceImpl implements UserRoleService {
 	private UserRoleDao dao;
 
 	@Override
-	public Result<RcUserRole> query(long id) {
-		Result<RcUserRole> result = new Result<RcUserRole>();
-		if (id < 0) {
-			result.setErrMsg("此id无效");
-			return result;
-		}
-		RcUserRole rcUserRole = dao.selectById(id);
-		if (rcUserRole != null) {
-			result.setErrCode(0);
-			result.setStatus(true);
-			result.setResultData(rcUserRole);
-		}
-		return result;
-	}
-
-	@Override
 	public Result<List<RcUserRole>> queryByUserId(long id) {
 		Result<List<RcUserRole>> result = new Result<List<RcUserRole>>();
 		if (id < 0) {
@@ -114,21 +98,6 @@ public class UserRoleServiceImpl implements UserRoleService {
 			return result;
 		}
 		int resultNum = dao.update(rcUserRole);
-		if (resultNum > 0) {
-			result.setErrCode(0);
-			result.setStatus(true);
-		}
-		return result;
-	}
-
-	@Override
-	public Result<Integer> delete(long id) {
-		Result<Integer> result = new Result<Integer>();
-		if (id < 0) {
-			result.setErrMsg("此id无效");
-			return result;
-		}
-		int resultNum = dao.deleteById(id);
 		if (resultNum > 0) {
 			result.setErrCode(0);
 			result.setStatus(true);

@@ -28,8 +28,6 @@ import com.roncoo.adminlte.bean.entity.RcUserRole;
  */
 public interface UserRoleService {
 
-	Result<RcUserRole> query(long id);
-
 	Result<List<RcUserRole>> queryByUserId(long id);
 
 	Result<RcUserRole> queryByUserRole(RcUserRole rcUserRole);
@@ -40,7 +38,5 @@ public interface UserRoleService {
 
 	Result<Integer> updateByUserId(long userId, List<Long> roles);
 	
-	Result<Integer> delete(long id);
-
 	Result<Integer> deleteByUserRole(RcUserRole rcUserRole);
 }

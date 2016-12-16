@@ -17,8 +17,12 @@
 						<label id="roleValueLabel">角色值</label>
 						<input type="text" class="form-control" name="roleValue" id="roleValue" placeholder="输入角色值...">
 					</div>
-					<div class="form-group">
+					<div id="checkbox" class="form-group">
 						<label>角色：</label>
+						<label>
+							<input type="checkbox" id="allCheckbox" class="flat-red" onClick="onClickCheckbox('allCheckbox','permission')">全选
+						</label>
+						<br/>
 						<#list permissions as permission>
 							<label>
 			                  <input type="checkbox" name="permission" class="flat-red" value="${permission.id}"> ${permission.permissionsName}
@@ -27,7 +31,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">
+					<button type="button" class="btn btn-default" id="close" data-dismiss="modal">
 						<i class="fa fa-close"></i>关闭
 					</button>
 					<button type="submit" class="btn btn-primary" id="submit">
@@ -38,3 +42,31 @@
 		</form>
 	</div>
 </div>
+<@onClickChecked/>
+<script type="text/javascript">
+	$(function(){
+		$("#submit").on("click",function(){
+			var status = 1;
+			$("span").remove(".errorSpan");
+	 		$("br").remove(".errorBr");
+	 		
+			if($("#roleName").val()==""){
+				$("#roleNameLabel").prepend('<span class="errorSpan" style="color:red">*角色名不能为空</span><br class="errorBr"/>');
+	 			status=0;
+			}
+			if($("#roleValue").val()==""){
+				$("#roleValueLabel").prepend('<span class="errorSpan" style="color:red">*角色值不能为空</span><br class="errorBr"/>');
+	 			status=0;
+			}
+			if(status==0){
+		 		return false;
+		 	}
+			return true;
+		});
+		
+		$("#close").on("click",function(){
+			$("span").remove(".errorSpan");
+	 		$("br").remove(".errorBr");
+		});
+	});
+</script>

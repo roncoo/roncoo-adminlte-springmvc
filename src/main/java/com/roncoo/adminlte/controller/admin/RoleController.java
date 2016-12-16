@@ -35,7 +35,6 @@ import com.roncoo.adminlte.biz.RoleBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
 import com.roncoo.adminlte.util.base.ParamUtil;
-import com.roncoo.adminlte.util.base.StringUtils;
 
 /**
  * 角色Controller
@@ -72,7 +71,7 @@ public class RoleController extends BaseController {
 	
 	@RequestMapping(value = SAVE)
 	public String save(RcRole rcRole, String permission) {
-		List<Long> permissions = StringUtils.toLongList(permission, ",");
+		List<Long> permissions = ParamUtil.toLongList(permission, ",");
 		Result<Integer> result = biz.save(rcRole, permissions);
 		if (result.isStatus()) {
 			return redirect("/admin/role/list");
@@ -112,7 +111,7 @@ public class RoleController extends BaseController {
 
 	@RequestMapping(value = UPDATE)
 	public String update(RcRole rcRole, String permission) {
-		List<Long> permissions = StringUtils.toLongList(permission, ",");
+		List<Long> permissions = ParamUtil.toLongList(permission, ",");
 		Result<Integer> result = biz.update(rcRole, permissions);
 		if (result.isStatus()) {
 			return redirect("/admin/role/list");

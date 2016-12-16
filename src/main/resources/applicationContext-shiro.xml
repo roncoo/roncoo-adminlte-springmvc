@@ -31,8 +31,19 @@
 			<value>
 				/login = authc
 				/exit = anon
-				/admin/security/**=authcBasic,perms[manager:read]
-				/admin/** = authcBasic,user
+				/admin/security/list=authcBasic,perms[admin:read]
+				/admin/security/save=authcBasic,perms[admin:insert]
+				/admin/security/update=authcBasic,perms[admin:update]
+				/admin/security/delete=authcBasic,perms[admin:delete]
+				/admin/role/list=authcBasic,perms[admin:read]
+				/admin/role/save=authcBasic,perms[admin:insert]
+				/admin/role/update=authcBasic,perms[admin:update]
+				/admin/role/delete=authcBasic,perms[admin:delete]
+				/admin/permission/**=authcBasic,roles[superAdmin]
+				/admin/**/list = authcBasic,perms[user:read]
+				/admin/**/save = authcBasic,perms[user:save]
+				/admin/**/update = authcBasic,perms[user:update]
+				/admin/**/delete = authcBasic,perms[user:delete]
 			</value>
 		</property>
 	</bean>

@@ -30,10 +30,22 @@
 					</div>
 					<div class="form-group">
 						<label>角色：</label>
+						<label>
+							<input type="checkbox" id="allCheckbox" class="flat-red" onClick="onClickCheckbox('allCheckbox','role')">全选
+						</label>
+						<br/>
 						<#list roles as role>
-							<label>
-			                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"> ${role.roleName}
-			                </label>
+							<#if role.roleValue == 'superAdmin'>
+								<@shiro.hasPermission name="super:update">
+								<label>
+				                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"> ${role.roleName}
+				                </label>
+				                </@shiro.hasPermission>
+			                <#else>
+				                <label>
+				                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"> ${role.roleName}
+				                </label>
+			                </#if>
 						</#list>
 					</div>
 				</div>
@@ -49,3 +61,31 @@
 		</form>
 	</div>
 </div>
+<@onClickChecked/>
+<script type="text/javascript">
+	$(function(){
+		$("#submit").on("click",function(){
+			var status = 1;
+			$("span").remove(".errorSpan");
+	 		$("br").remove(".errorBr");
+	 		
+			if($("#userNo").val()==""){
+				$("#userNoLabel").prepend('<span class="errorSpan" style="color:red">*账号不能为空</span><br class="errorBr"/>');
+	 			status=0;
+			}
+			if($("#password").val()==""){
+				$("#passwordLabel").prepend('<span class="errorSpan" style="color:red">*密码不能为空</span><br class="errorBr"/>');
+	 			status=0;
+			}
+			if(status==0){
+		 		return false;
+		 	}
+			return true;
+		});
+		
+		$("#close").on("click",function(){
+			$("span").remove(".errorSpan");
+	 		$("br").remove(".errorBr");
+		});
+	});
+</script>

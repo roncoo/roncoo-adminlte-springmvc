@@ -30,7 +30,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+					<button type="button" class="btn btn-default" id="close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
 					<button id="submit"  type="submit" class="btn btn-primary"><i class="fa fa-save"></i>保存</button>
 				</div>
 			</div>
@@ -59,6 +59,11 @@ $(document).ready(function(){
 	 		return false;
 	 	}
 		return true;
+	});
+	
+	$("#close").on("click",function(){
+		$("span").remove(".errorSpan");
+ 		$("br").remove(".errorBr");
 	});
 });
 </script>

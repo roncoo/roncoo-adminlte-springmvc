@@ -39,7 +39,7 @@
 					</a>
 				</li>
 				
-				<@shiro.hasPermission name="manager:read">
+				<@shiro.hasPermission name="user:read">
 					<li class="<#if activeId=='security'>active</#if>">
 						<a href="javascript:void(0);">
 							<i class="fa fa-envelope"></i> 
@@ -301,10 +301,26 @@
 		    	$("#search-form").submit();
 		    });
 		  });
-		</script>
+		<script>
 	</div>
 </body>
 </html>
+</#macro>
+
+<#macro onClickChecked>
+	<script>
+	  <!--checkbox全选-->
+	  function onClickCheckbox(clickName, target){
+			var status = false;
+			if(document.getElementById(clickName).checked){
+				status = true;
+			}
+			var list = document.getElementsByName(target);
+			for(var i=0;i<list.length;i++){
+				list[i].checked=status;
+			}
+		}
+	</script>
 </#macro>
 
 <#macro validation>

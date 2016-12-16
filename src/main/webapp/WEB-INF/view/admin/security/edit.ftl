@@ -28,15 +28,35 @@
 						</div>
 						<div class="form-group">
 							<label>角色：</label>
+							<label>
+								<input type="checkbox" id="allCheckbox" class="flat-red" onClick="onClickCheckbox('allCheckbox','role')">全选
+							</label>
+							<br/>
 							<#list roles as role>
 								<#if bean.roleList??>
-									<label>
-					                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"<#list bean.roleList as beanRole> <#if beanRole.roleValue == role.roleValue>checked</#if></#list>> ${role.roleName}
-					                </label>
+									<#if role.roleValue == 'superAdmin'>
+										<@shiro.hasPermission name="super:update">
+											<label>
+							                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"<#list bean.roleList as beanRole> <#if beanRole.roleValue == role.roleValue>checked</#if></#list>> ${role.roleName}
+							                </label>
+						                </@shiro.hasPermission>
+					                <#else>
+					                	<label>
+						                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"<#list bean.roleList as beanRole> <#if beanRole.roleValue == role.roleValue>checked</#if></#list>> ${role.roleName}
+						                </label>
+					                </#if>
 								<#else>
-									<label>
-					                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"> ${role.roleName}
-					                </label>
+									<#if role.roleValue == 'superAdmin'>
+										<@shiro.hasPermission name="super:update">
+											<label>
+							                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"> ${role.roleName}
+							                </label>
+					                	 </@shiro.hasPermission>
+					                <#else>
+					                	<label>
+						                  <input type="checkbox" name="role" class="flat-red" value="${role.id}"> ${role.roleName}
+						                </label>
+					                </#if>
 								</#if>
 							</#list>
 						</div>
@@ -53,4 +73,5 @@
 	</div>
 </div>
 <@wrapper/>
+<@onClickChecked/>
 <@footer/>

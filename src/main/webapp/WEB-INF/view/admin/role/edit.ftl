@@ -21,6 +21,10 @@
 						</div>
 						<div class="form-group">
 							<label>权限：</label>
+							<label>
+								<input type="checkbox" id="allCheckbox" class="flat-red" onClick="onClickCheckbox('allCheckbox','permission')">全选
+							</label>
+							<br/>
 							<#list permissions as permission>
 								<#if bean.permissionList??>
 									<label>
@@ -46,4 +50,5 @@
 	</div>
 </div>
 <@wrapper/>
+<@onClickChecked/>
 <@footer/>

@@ -1,7 +1,9 @@
 package com.roncoo.adminlte.util.base;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -74,5 +76,24 @@ public final class ParamUtil {
 		}
 		System.out.println(url.toString());
 		return url.toString();
+	}
+
+	/**
+	 * string 转换成Long数组
+	 * 
+	 * @param str
+	 * @param splitStr
+	 * @return
+	 */
+	public final static List<Long> toLongList(String str, String splitStr) {
+		if (str != null) {
+			ArrayList<Long> longList = new ArrayList<Long>();
+			String[] strList = str.split(splitStr);
+			for (String string : strList) {
+				longList.add(Long.parseLong(string));
+			}
+			return longList;
+		}
+		return null;
 	}
 }

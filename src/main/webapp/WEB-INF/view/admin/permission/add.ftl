@@ -19,10 +19,37 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+					<button type="button" class="btn btn-default" id="close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
 					<button type="submit" class="btn btn-primary" id="submit"><i class="fa fa-save"></i>保存</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$("#submit").on("click",function(){
+			var status = 1;
+			$("span").remove(".errorSpan");
+	 		$("br").remove(".errorBr");
+	 		
+			if($("#permissionsName").val()==""){
+				$("#permissionNameLabel").prepend('<span class="errorSpan" style="color:red">*权限名不能为空</span><br class="errorBr"/>');
+	 			status=0;
+			}
+			if($("#permissionsValue").val()==""){
+				$("#permissionValueLabel").prepend('<span class="errorSpan" style="color:red">*权限值不能为空</span><br class="errorBr"/>');
+	 			status=0;
+			}
+			if(status==0){
+		 		return false;
+		 	}
+			return true;
+		});
+		
+		$("#close").on("click",function(){
+			$("span").remove(".errorSpan");
+	 		$("br").remove(".errorBr");
+		});
+	});
+</script>
