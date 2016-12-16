@@ -2,7 +2,6 @@
 <@header/> 
 <@menu activeId="dictionary"/>
 <div class="content-wrapper">
-	<section class="content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
@@ -15,16 +14,20 @@
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-							<label id="fieldKeyLabel">名称:</label> <input type="text" class="form-control" name="fieldKey" id="fieldKey" value=${dictionaryList.fieldKey!} placeholder="输入显示名称...">
+							<label id="fieldKeyLabel">名称:</label>
+							<input type="text" class="form-control" name="fieldKey" id="fieldKey" value=${dictionaryList.fieldKey!} placeholder="输入显示名称...">
 						</div>
 						<div class="form-group">
-							<label id="fieldValueLabel">默认值:</label> <input type="text" class="form-control" name="fieldValue" id="fieldValue" value=${dictionaryList.fieldValue!} placeholder="输入默认值...">
+							<label id="fieldValueLabel">默认值:</label>
+							<input type="text" class="form-control" name="fieldValue" id="fieldValue" value=${dictionaryList.fieldValue!} placeholder="输入默认值...">
 						</div>
 						<div class="form-group">
-							<label id="sortLabel">排序:</label> <input type="text" class="form-control" name="sort" id="sort" value=${dictionaryList.sort} placeholder="排序值...">
+							<label id="sortLabel">排序:</label>
+							<input type="text" class="form-control" name="sort" id="sort" value=${dictionaryList.sort} placeholder="排序值...">
 						</div>
 						<div class="form-group">
-							<label>备注:</label> <input type="text" class="form-control" name="remark" id="remark" value="${dictionaryList.remark}" placeholder="输入备注...">
+							<label>备注:</label>
+							<input type="text" class="form-control" name="remark" id="remark" value="${dictionaryList.remark}" placeholder="输入备注...">
 						</div>
 		             </div>
 					<div class="box-footer">
@@ -37,7 +40,6 @@
 			</div>
 		</div>
 	</div>
-	<section class="content">
 </div>
 <@wrapper/>
 <script type="text/javascript">

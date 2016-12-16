@@ -69,7 +69,6 @@
 						</tbody>
 					</table>
 				</div>
-				<!-- /.box-body -->
 				<@initPage url="${ctx}/admin/dataDictionary/list" paginationSize=5/>
 			</div>
 		</div>

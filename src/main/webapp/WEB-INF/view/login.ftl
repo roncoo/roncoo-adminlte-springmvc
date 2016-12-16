@@ -21,7 +21,6 @@
 	      	<img src="dist/img/logo.png" alt="">
 	      </div>
 	      <form action="${ctx}/login" class="login__form" method="post">
-	      	
 	        <div class="login__row">
 	          <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
 	            <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
@@ -38,10 +37,11 @@
 	        <p class="login__signup">还没有账号? &nbsp;<a href="#" target="_blank">立刻注册</a></p>
 	      </form>
 	    </div>
+	    
 	    <div class="app">
 	      <div class="app__bot">
 	        <div class="app__title">
-	        欢迎注册龙果管理系统
+	       		 欢迎注册龙果管理系统
 	        </div>
 	        <form class="app__meetings reg__form">
 	          <div class="app__meeting">

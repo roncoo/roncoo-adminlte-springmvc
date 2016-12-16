@@ -8,7 +8,6 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">发件箱</h3>
 				</div>
-				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="clearfix">
 	            		<form id="search-form" action="${ctx}/admin/emailInfo/list" method="post">
@@ -65,7 +64,6 @@
 						</tbody>
 					</table>
 				</div>
-				<!-- /.box-body -->
 				<@initPage url="${ctx}/admin/emailInfo/list" paginationSize=5/>
 			</div>
 		</div>
