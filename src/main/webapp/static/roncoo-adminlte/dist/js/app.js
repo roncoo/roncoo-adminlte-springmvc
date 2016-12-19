@@ -1342,7 +1342,7 @@ $("#smModal").on("click",".modal-footer>.btn-primary",function(){
 }(jQuery));
 
 var alertsetTime;
-alertMsg = function(text,type){
+function alertMsg(text,type){
   if (!$("#alertMsgBox").length) {
   var html =  '<div class="box box-danger box-solid" id="alertMsgBox">'
               +'  <div class="box-header with-border">'

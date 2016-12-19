@@ -21,11 +21,12 @@ import com.roncoo.adminlte.bean.entity.RcRolePermissions;
 
 /**
  * 角色-权限Dao
+ * 
  * @author LYQ
  *
  */
 public interface RolePermissionsDao {
-	
+
 	RcRolePermissions selectById(long id);
 
 	List<RcRolePermissions> selectByRoleId(long id);
@@ -35,7 +36,10 @@ public interface RolePermissionsDao {
 	int update(RcRolePermissions rcRolePermissions);
 
 	int delectByRolePermissions(RcRolePermissions rcRolePermissions);
-	
-	int deleteById(Long id);
 
+	int deleteByRoleId(long roleId);
+	
+	int countByRoleId(long roleId);
+	
+	List<RcRolePermissions> listForRoleId(List<Long> idList);
 }

@@ -58,7 +58,7 @@ $(function(){
 		if (status== 0) {
 			return false;
 		}
-			ajaxPost();
+		ajaxPost();
 	});
 	
 	function ajaxPost() {

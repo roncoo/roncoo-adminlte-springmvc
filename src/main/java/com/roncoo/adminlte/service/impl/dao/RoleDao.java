@@ -15,20 +15,32 @@
  */
 package com.roncoo.adminlte.service.impl.dao;
 
+import java.util.List;
+
 import com.roncoo.adminlte.bean.entity.RcRole;
+import com.roncoo.adminlte.util.base.Page;
 
 /**
  * 角色 Dao
+ * 
  * @author LYQ
  *
  */
 public interface RoleDao {
 
 	RcRole selectById(long id);
+	
+	RcRole selectByRoleName(String roleName);
 
 	int insert(RcRole role);
 
 	int update(RcRole role);
 
 	int deleteById(long id);
+
+	Page<RcRole> listForPage(int pageCurrent, int pageSize, String date, String search);
+	
+	List<RcRole> listForId(List<Long> idList);
+
+	List<RcRole> list();
 }

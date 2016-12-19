@@ -2,9 +2,9 @@
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">用户管理</h3>
+				<h3 class="box-title">角色管理</h3>
 				<div class="box-tools pull-right">
-					<a id="securityAdd" class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/security/add">添加</a>
+					<a id="roleAdd" class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/role/add">添加</a>
 				</div>
 			</div>
 			<div class="box-body">
@@ -14,27 +14,26 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
 							</div>
-							<input type="text" class="form-control pull-right" id="securityTime" placeholder="选择时间...">
+							<input type="text" class="form-control pull-right" id="roleTime" placeholder="选择时间...">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-search"></i></span>
-							<input type="text" class="form-control" id="securityPremise" placeholder="根据账号搜索...">
+							<input type="text" class="form-control" id="rolePremise" placeholder="根据账号搜索...">
 						</div>
 					</div>
 					<div class="col-md-4">
-						<button type="submit" id="securitySeek" class="btn btn-primary">搜索</button>
+						<button type="submit" id="roleSeek" class="btn btn-primary">搜索</button>
 					</div>
 				</div>
-				<table id="security_tab" class="table table-bordered table-striped">
+				<table id="role_tab" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<tr>
 								<th>序号</th>
-								<th>账号</th>
-								<th>昵称</th>
 								<th>角色</th>
+								<th>角色值</th>
 								<th>状态</th>
 								<th>创建时间</th>
 								<th>操作</th>
@@ -68,7 +67,7 @@
 <script type="text/javascript">
 $(function() {
 	//初始化时间选择器
-	$('#securityTime').datepicker({
+	$('#roleTime').datepicker({
 		language: 'zh-CN',
 		format: 'yyyy-mm-dd',
 		autoclose: true,
@@ -77,7 +76,7 @@ $(function() {
 	//初始化表格
 	
 	var No=0;
-	var security_tab = $('#security_tab').DataTable({
+	var role_tab = $('#role_tab').DataTable({
 		"dom" : 'itflp',
 		"processing" : true,
 		"searching" : false,
@@ -87,14 +86,13 @@ $(function() {
 			"url" : "plugins/datatables/language.json"
 		},
 		"ajax" : {
-			"url" : "${ctx}/admin/security/page",
+			"url" : "${ctx}/admin/role/page",
 			"type" : "post"
 		},
 		"columns" : [ 
 		    {"data" : null}, 
-			{"data" : "userNo"},
-			{"data" : "nickName"},
-			{"data" : null},
+			{"data" : "roleName"},
+			{"data" : "roleValue"},
 			{"data" : null},
 			{"data" : "createTime"},
 			{"data" : null} 
@@ -112,18 +110,6 @@ $(function() {
 						    targets: 3,
 						    data: null,
 						    render: function (data) {
-						    	var  listStr = "";
-						    	var list = data.roleList;
-						    	for(var i=0;i<list.length;i++){
-						    		listStr = listStr+(i+1)+"."+list[i].roleName;
-						    	}
-						    	return listStr;
-						    }
-						},
-						{
-						    targets: 4,
-						    data: null,
-						    render: function (data) {
 						    	if(data.statusId == "0"){
 						    		return "不可用";
 						    	}
@@ -137,11 +123,11 @@ $(function() {
 			"targets" : -1,
 			"data" : null,
 			"render" : function(data) {
-				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/security/view?id='
+				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/role/view?id='
 						+ data.id
-						+ '">查看</a> &nbsp;<a class="btn btn-xs btn-info securityEdit" target="modal" modal="lg" href="${ctx}/admin/security/edit?id='
+						+ '">查看</a> &nbsp;<a class="btn btn-xs btn-info roleEdit" target="modal" modal="lg" href="${ctx}/admin/role/edit?id='
 						+ data.id
-						+ '">修改</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/security/delete?id='
+						+ '">修改</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/role/delete?id='
 						+ data.id + '">删除</a>'
 			}
 		} ]
@@ -151,19 +137,19 @@ $(function() {
 	
 	//点击删除确认时，删除后刷新
     $(".btn-del").on('click',function(){
-		reloadTable(security_tab,"#securityTime","#securityPremise");
+		reloadTable(role_tab,"#roleTime","#rolePremise");
 	});
 	
 	//动态生成的元素需要这样做点击事件
-    $(document).on("click", ".securityEdit", function() {  
-    	list_ajax = security_tab;
+    $(document).on("click", ".roleEdit", function() {  
+    	list_ajax = role_tab;
     }); 
 	
-	$("#securityAdd").on('click',function(){
-		list_ajax = security_tab;
+	$("#roleAdd").on('click',function(){
+		list_ajax = role_tab;
 	});
-	$("#securitySeek").on("click",function(){
- 		reloadTable(security_tab,"#securityTime","#securityPremise");
+	$("#roleSeek").on("click",function(){
+ 		reloadTable(role_tab,"#roleTime","#rolePremise");
 	});
 });
 </script>

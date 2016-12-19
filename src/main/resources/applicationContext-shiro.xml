@@ -8,10 +8,10 @@
 	<description>Shiro安全配置</description>
 
 	<!-- 本地运行时使用 -->
-	<!--<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.UserRealm" 
-		/> -->
+	<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.UserRealm" />
 
-	<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.RoncooRealm" />
+	<!-- <bean id="userRealm" class="com.roncoo.adminlte.controller.realm.RoncooRealm" 
+		/> -->
 
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm" />
@@ -30,10 +30,20 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/login = authc
-				/exit= anon
-				/oauth= authcBasic,roles[user]
-				/admin/security/**=authcBasic,roles[admin]
-				/admin/** = authcBasic,roles[user]
+				/exit = anon
+				/admin/security/list=authcBasic,perms[admin:read]
+				/admin/security/save=authcBasic,perms[admin:insert]
+				/admin/security/update=authcBasic,perms[admin:update]
+				/admin/security/delete=authcBasic,perms[admin:delete]
+				/admin/role/list=authcBasic,perms[admin:read]
+				/admin/role/save=authcBasic,perms[admin:insert]
+				/admin/role/update=authcBasic,perms[admin:update]
+				/admin/role/delete=authcBasic,perms[admin:delete]
+				/admin/permission/**=authcBasic,roles[superAdmin]
+				/admin/**/list = authcBasic,perms[user:read]
+				/admin/**/save = authcBasic,perms[user:save]
+				/admin/**/update = authcBasic,perms[user:update]
+				/admin/**/delete = authcBasic,perms[user:delete]
 			</value>
 		</property>
 	</bean>

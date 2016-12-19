@@ -16,6 +16,7 @@
 package com.roncoo.adminlte.service.impl.dao;
 
 import com.roncoo.adminlte.bean.entity.RcUser;
+import com.roncoo.adminlte.util.base.Page;
 
 /**
  * 用户Dao
@@ -33,4 +34,8 @@ public interface UserDao {
 	int update(RcUser user);
 	
 	int deleteById(Long id);
+	
+	Page<RcUser> listForPage(int pageCurrent, int pageSize, String date, String search);
+	
+	RcUser select(long id);
 }

@@ -30,11 +30,35 @@
 					<i class="fa fa-folder"></i> <span>数据字典管理</span> </i>
 				</a>
 			</li>
-			<li>
-				<a target="navTab" href="${ctx}/admin/security/list">
-					<i class="fa fa-folder"></i> <span>权限管理</span> </i>
-				</a>
-			</li>
+			<@shiro.hasPermission name="user:read">
+				<li>
+					<a target="navTab" href="javascript:void(0);">
+						<i class="fa fa-envelope"></i> 
+						<span>权限管理</span> 
+						<span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i></span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a target="navTab" href="${ctx}/admin/security/list">
+								<i class="fa fa-inbox"></i> 
+								<span>用户管理</span> 
+							</a>
+						</li>
+						<li>
+							<a target="navTab" href="${ctx}/admin/role/list">
+								<i class="fa fa-inbox"></i> 
+								<span>角色管理</span> 
+							</a>
+						</li>
+						<li>
+							<a target="navTab" href="${ctx}/admin/permission/list">
+								<i class="fa fa-inbox"></i> 
+								<span>权限管理</span> 
+							</a>
+						</li>
+					</ul>
+				</li>
+			</@shiro.hasPermission>
 		</ul>
 	</section>
 </aside>
@@ -165,6 +189,17 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<script>
+		function onClickCheckbox(clickName, target){
+			var status = false;
+			if(document.getElementById(clickName).checked){
+				status = true;
+			}
+			var list = document.getElementsByName(target);
+			for(var i=0;i<list.length;i++){
+				list[i].checked=status;
+			}
+		}
+		
 		function iFrameHeight() { 
 			var ifm= document.getElementById("content"); 
 			var subWeb = document.frames ? document.frames["content"].document : ifm.contentDocument; 

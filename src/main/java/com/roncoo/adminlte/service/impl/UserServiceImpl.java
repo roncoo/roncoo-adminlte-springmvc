@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015-2016 RonCoo(http://www.roncoo.com) Group.
+ *  
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.roncoo.adminlte.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +23,7 @@ import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcUser;
 import com.roncoo.adminlte.service.UserService;
 import com.roncoo.adminlte.service.impl.dao.UserDao;
+import com.roncoo.adminlte.util.base.Page;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -52,7 +68,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Result<Integer> insert(RcUser rcUser) {
+	public Result<Integer> save(RcUser rcUser) {
 		Result<Integer> result = new Result<Integer>();
 		if (!StringUtils.hasText(rcUser.getUserNo())) {
 			result.setErrMsg("账号不能为空");
@@ -60,11 +76,17 @@ public class UserServiceImpl implements UserService {
 		if (!StringUtils.hasText(rcUser.getPassword())) {
 			result.setErrMsg("密码不能为空");
 		}
-		int resultNum = dao.insert(rcUser);
-		if (resultNum > 0) {
-			result.setErrCode(0);
-			result.setStatus(true);
+		RcUser user = dao.selectByUserNo(rcUser.getUserNo());
+		if (user == null) {
+			int resultNum = dao.insert(rcUser);
+			if (resultNum > 0) {
+				result.setErrCode(0);
+				result.setStatus(true);
+				result.setErrMsg("添加成功");
+				return result;
+			}
 		}
+		result.setErrMsg("添加失败");
 		return result;
 	}
 
@@ -91,6 +113,44 @@ public class UserServiceImpl implements UserService {
 			result.setErrCode(0);
 			result.setStatus(true);
 		}
+		return result;
+	}
+
+	@Override
+	public Result<Page<RcUser>> listForPage(int pageCurrent, int pageSize, String date, String search) {
+		Result<Page<RcUser>> result = new Result<Page<RcUser>>();
+		if (pageCurrent < 1) {
+			result.setErrMsg("pageCurrent有误");
+			return result;
+		}
+		if (pageSize < 1) {
+			result.setErrMsg("pageSize有误");
+			return result;
+		}
+		Page<RcUser> resultData = dao.listForPage(pageCurrent, pageSize, date, search);
+		result.setResultData(resultData);
+		result.setErrCode(0);
+		result.setStatus(true);
+		result.setErrMsg("查询成功");
+		return result;
+	}
+
+	@Override
+	public Result<RcUser> query(long id) {
+		Result<RcUser> result = new Result<RcUser>();
+		if (id < 1) {
+			result.setErrMsg("用户id不存在");
+			return result;
+		}
+		RcUser resultData = dao.select(id);
+		if (resultData != null) {
+			result.setErrCode(0);
+			result.setStatus(true);
+			result.setErrMsg("查询成功");
+			result.setResultData(resultData);
+			return result;
+		}
+		result.setErrMsg("查询失败");
 		return result;
 	}
 }

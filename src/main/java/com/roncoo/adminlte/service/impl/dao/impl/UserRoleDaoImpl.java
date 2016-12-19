@@ -27,6 +27,12 @@ import com.roncoo.adminlte.bean.entity.RcUserRoleExample.Criteria;
 import com.roncoo.adminlte.service.impl.dao.UserRoleDao;
 import com.roncoo.adminlte.service.impl.dao.impl.mybatis.RcUserRoleMapper;
 
+/**
+ * 用户-角色关系Dao层
+ * 
+ * @author LYQ
+ *
+ */
 @Repository
 public class UserRoleDaoImpl implements UserRoleDao {
 
@@ -60,7 +66,9 @@ public class UserRoleDaoImpl implements UserRoleDao {
 		RcUserRoleExample example = new RcUserRoleExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andUserIdEqualTo(rcUserRole.getUserId());
-		criteria.andRolesIdEqualTo(rcUserRole.getRolesId());
+		if (rcUserRole.getRolesId() != null && rcUserRole.getRolesId() > 0) {
+			criteria.andRolesIdEqualTo(rcUserRole.getRolesId());
+		}
 		return mapper.deleteByExample(example);
 	}
 
@@ -87,4 +95,11 @@ public class UserRoleDaoImpl implements UserRoleDao {
 		return null;
 	}
 
+	@Override
+	public int deleteByUserId(long userId) {
+		RcUserRoleExample example = new RcUserRoleExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUserIdEqualTo(userId);
+		return mapper.deleteByExample(example);
+	}
 }

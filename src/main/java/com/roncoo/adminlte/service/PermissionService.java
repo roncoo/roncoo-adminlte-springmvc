@@ -15,8 +15,11 @@
  */
 package com.roncoo.adminlte.service;
 
+import java.util.List;
+
 import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcPermission;
+import com.roncoo.adminlte.util.base.Page;
 
 /**
  * 权限Service
@@ -28,9 +31,15 @@ public interface PermissionService {
 
 	Result<RcPermission> query(long id);
 
-	Result<Integer> insert(RcPermission rcPermission);
+	Result<Integer> save(RcPermission rcPermission);
 
 	Result<Integer> update(RcPermission rcPermission);
 
 	Result<Integer> delete(long id);
+	
+	Result<Page<RcPermission>> listForPage(int pageCurrent, int pageSize, String date, String search);
+	
+	Result<List<RcPermission>> listForId(List<Long> idList);
+	
+	Result<List<RcPermission>> list();
 }
