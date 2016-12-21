@@ -83,7 +83,7 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 
 
 ###帮助文档
-1. 如何发布，请看视频！ 免费，免费，免费
+1. 教程视频[免费视频看这里](http://www.roncoo.com/course/view/d33d4b6f515e4ea9abec6454ef13c774)
 
 
 ###下步计划
