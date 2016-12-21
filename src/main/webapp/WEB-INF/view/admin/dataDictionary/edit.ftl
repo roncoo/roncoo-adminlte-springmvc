@@ -9,16 +9,20 @@
 				</div>
 				<div class="box-body">
 					<div class="form-group">
-						<label id="fnl">字段名:</label> <input type="text" class="form-control" name="fieldName" id="fn" value=${dictionary.fieldName!} placeholder="输入字段名称...">
+						<label id="fnl">字段名:</label>
+						<input type="text" class="form-control" name="fieldName" id="fn" value=${dictionary.fieldName!} placeholder="输入字段名称...">
 					</div>
 					<div class="form-group">
-						<label id="fcl">Code值:</label> <input type="text" class="form-control" name="fieldCode" id="fc" value=${dictionary.fieldCode!} placeholder="输入Code值...">
+						<label id="fcl">Code值:</label>
+						<input type="text" class="form-control" name="fieldCode" id="fc" value=${dictionary.fieldCode!} placeholder="输入Code值...">
 					</div>
 					<div class="form-group">
-						<label id="stl">排序:</label> <input type="text" class="form-control" name="sort" id="st" value=${dictionary.sort} placeholder="排序值...">
+						<label id="stl">排序:</label>
+						<input type="text" class="form-control" name="sort" id="st" value=${dictionary.sort} placeholder="排序值...">
 					</div>
 					<div class="form-group">
-						<label>备注:</label> <input type="text" class="form-control" name="remark" id="remark" value="${dictionary.remark}" placeholder="输入备注...">
+						<label>备注:</label>
+						<input type="text" class="form-control" name="remark" id="remark" value="${dictionary.remark}" placeholder="输入备注...">
 					</div>
 	             </div>
 	          	<div class="box-footer">

@@ -123,8 +123,6 @@
     	list_ajax = dictionary_tab;
     });
     
-	
-	 
 	 $("#dictionary-seek").on("click",function(){
 		 reloadTable(dictionary_tab,"#dictionary-time","#dictionary-premise");
 	});

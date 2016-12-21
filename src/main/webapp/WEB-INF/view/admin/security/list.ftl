@@ -8,7 +8,6 @@
 <title>龙果开源-后台管理系统</title>
 <@style/>
 </head>
-
 <body class="sidebar-mini ajax-template skin-blue fixed">
 	<div class="wrapper">
 		<@header/>
@@ -26,4 +25,3 @@
 	<@jsFile/>
 </body>
 </html>
-
