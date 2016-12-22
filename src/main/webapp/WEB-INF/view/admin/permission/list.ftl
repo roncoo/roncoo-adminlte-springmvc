@@ -8,7 +8,9 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">角色权限管理</h3>
 					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加</button>
+						<@shiro.hasPermission name="super:insert">
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加</button>
+						</@shiro.hasPermission>
 					</div>
 				</div>
 				<!-- /.box-header -->
@@ -60,8 +62,12 @@
 									<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 									<td>
 										<a class="btn btn-sm btn-primary" href="${ctx}/admin/permission/view?id=${bean.id}">查看</a>
-										<a class="btn btn-twitter btn-sm" href="${ctx}/admin/permission/edit?id=${bean.id}">修改</a>
-										<a class="btn btn-danger btn-sm" onClick="delcfm('${ctx}/admin/permission/delete?id=${bean.id}')">删除</a>
+										<@shiro.hasPermission name="super:update">
+											<a class="btn btn-twitter btn-sm" href="${ctx}/admin/permission/edit?id=${bean.id}">修改</a>
+										</@shiro.hasPermission>
+										<@shiro.hasPermission name="super:delete">
+											<a class="btn btn-danger btn-sm" onClick="delcfm('${ctx}/admin/permission/delete?id=${bean.id}')">删除</a>
+										</@shiro.hasPermission>
 									</td>
 								</tr>
 							</#list>

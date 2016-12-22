@@ -69,7 +69,7 @@
 									<td>
 										<a class="btn btn-sm btn-primary" href="${ctx}/admin/role/view?id=${bean.id}">查看</a>
 										
-										<#if bean.roleValue != 'superAdmin'>
+										<#if bean.roleValue != 'super'>
 											<@shiro.hasPermission name="super:update">
 												<a class="btn btn-twitter btn-sm" href="${ctx}/admin/role/edit?id=${bean.id}">修改</a>
 											</@shiro.hasPermission>
