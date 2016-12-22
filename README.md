@@ -43,42 +43,46 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 * 持久层框架：Mybatis
 * 数据库连接池：Alibaba Druid
 
+###更新日志
+####2016-10-22
+1. 添加邮件发送功能
+####2016-11-18
+1. 添加数据字典功能
+2. 添加邮件账号管理功能，并把邮件发送改为随机账号发送
+####2016-12-22
+1. 集成spring session和shiro权限管理
+2. 修改删除回调刷新方法
+3. 调整项目代码
+
 
 ###本地运行
 ```
-方法一、修改LoginController 下的certification()方法
-
-@RequestMapping(value = "/certification", method = RequestMethod.GET)
-	public String certification(){
-		Result<String> result = biz.login();
-		if (result.isStatus()) {
-			logger.info(result.getResultData());
-			// 本地发布修改这里，随便增加一个session值即可，
-			然后删除return redirect(result.getResultData());
-			//session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
-			return redirect(result.getResultData());
-		}
-		return redirect("/login");
-	}
-	
-	
-	
-方法二
-	第一步：修改login.ftl页面,删除下面两句
-	<!--账号密码-->
-	<input type="hidden" name="username" value="roncoo"/>
-	<input type="hidden" name="password" value="roncoo"/>
-
-	第二步：修改applicationContext-shiro.xml
-	//本地运行把UserRealm注释去掉，把RoncooRealm注销掉
-	<!-- 	
-	<bean id="userRealm"
-	class="com.roncoo.adminlte.controller.realm.UserRealm"/>
-	 -->
-	<bean id="userRealm" class="com.roncoo.adminlte.controller.realm.RoncooRealm" />
-
-	第三步：往数据库添加用户、角色、权限和相关关系
-	
+1.创建数据库，导入数据
+2.把
+<input type="hidden" name="username" value="admin"/>
+<input type="hidden" name="password" value="admin"/>删除，然后
+把username1和password1中的“1”去掉；
+<form action="${ctx}/login" class="login__form" method="post">
+	   <!--默认账号密码user、admin、super-->
+	   <input type="hidden" name="username" value="admin"/>
+	   <input type="hidden" name="password" value="admin"/>
+	   <div class="login__row">
+	   <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
+	       <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+	   </svg>
+	   <!--账号-->
+	  <input type="text" name="username1" class="login__input name" placeholder="Username"/>
+	  </div>
+	  <div class="login__row">
+	   <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
+	       <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+	   </svg>
+	   <!--密码-->
+	<input type="password1" name="password1" class="login__input pass" placeholder="Password"/>
+	</div>
+	   <button type="submit" class="login__submit">登 录</button>
+	  <p class="login__signup">还没有账号? &nbsp;<a href="#" target="_blank">立刻注册</a></p>
+</form>
 ```
 
 
