@@ -104,7 +104,7 @@ $(function() {
 				"data" : null,
 				"render" : function(data) {
 					var btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/role/view?id='+ data.id+ '">查看</a> &nbsp;';
-						if(data.roleValue != 'superAdmin'){
+						if(data.roleValue != 'super'){
 							btn = btn+'<@shiro.hasPermission name="super:update">'
 							+'<a class="btn btn-xs btn-info" onclick="roleToListAjax();" target="modal" modal="lg" href="${ctx}/admin/role/edit?id='+ data.id+'">修改</a> &nbsp;'
 							+'</@shiro.hasPermission>'
