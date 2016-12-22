@@ -55,26 +55,26 @@
              </div>
 			<div class="box-footer">
 				<div class="pull-right">
-					<button type="button" class="btn btn-default btn-sm" id="close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
-					<button id="securitySubmit" type="button"  data-dismiss="modal" class="btn btn-info btn-sm">更新</button>
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+					<button onclick="securityUpdate();" type="button" class="btn btn-primary btn-sm"><i class="fa fa-paste"></i>更新</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
 <script type="text/javascript">
-$(function(){
-	$("#securitySubmit").click(function(){
-		$.ajax({
-			url: '${ctx}/admin/security/update',
-	        type: 'post',
-	        dataType: 'text',
-	        data: $("#securityEditForm").serialize(),
-	        success: function (data) {
-	        	alertMsg("添加成功","success");
-	        	reloadTable(list_ajax,"#securityTime","#securityPremise");
-	        }
-		});
+function securityUpdate(){
+	$.ajax({
+		url: '${ctx}/admin/security/update',
+	    type: 'post',
+	    dataType: 'text',
+	    data: $("#securityEditForm").serialize(),
+	    success: function (data) {
+	    	$("#lgModal").modal('hide');
+	    	alertMsg("更新成功","success");
+	    	reloadTable(list_ajax,"#securityTime","#securityPremise");
+	    }
 	});
-});
+}
+
 </script>

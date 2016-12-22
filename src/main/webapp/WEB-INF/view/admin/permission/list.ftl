@@ -4,7 +4,9 @@
 			<div class="box-header">
 				<h3 class="box-title">角色管理</h3>
 				<div class="box-tools pull-right">
-					<a id="permission_add" class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/permission/add">添加</a>
+					<@shiro.hasPermission name="super:insert">
+						<a onclick="permissionToListAjax();" class="btn btn-sm btn-primary" target="modal" modal="lg" href="${ctx}/admin/permission/add">添加</a>
+					</@shiro.hasPermission>
 				</div>
 			</div>
 			<div class="box-body">
@@ -24,7 +26,7 @@
 						</div>
 					</div>
 					<div class="col-md-4">
-						<button type="submit" id="permission-seek" class="btn btn-primary">搜索</button>
+						<button type="button" onclick="permissionReload();" class="btn btn-primary">搜索</button>
 					</div>
 				</div>
 				<table id="permission_tab" class="table table-bordered table-striped">
@@ -45,7 +47,6 @@
 		</div>
 	</div>
 </div>
-
 <div class="modal fade" id="deleteUser">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
@@ -65,6 +66,7 @@
 </div>
 
 <script type="text/javascript">
+var permission_tab;
 $(function() {
 	//初始化时间选择器
 	$('#permissionTime').datepicker({
@@ -76,81 +78,69 @@ $(function() {
 	//初始化表格
 	
 	var No=0;
-	var permission_tab = $('#permission_tab').DataTable({
-		"dom" : 'itflp',
-		"processing" : true,
-		"searching" : false,
-		"serverSide" : true, //启用服务器端分页
-		"bInfo" : false,
-		"language" : {
-			"url" : "plugins/datatables/language.json"
-		},
-		"ajax" : {
-			"url" : "${ctx}/admin/permission/page",
-			"type" : "post"
-		},
-		"columns" : [ 
-		    {"data" : null}, 
-			{"data" : "permissionsName"},
-			{"data" : "permissionsValue"},
-			{"data" : null},
-			{"data" : "createTime"},
-			{"data" : null} 
+	permission_tab = $('#permission_tab').DataTable({
+		"dom":'itflp',
+		"processing":true,
+		"searching":false,
+		"serverSide":true, //启用服务器端分页
+		"bInfo":false,
+		"language":{"url":"plugins/datatables/language.json"},
+		"ajax":{"url":"${ctx}/admin/permission/page","type":"post"},
+		"columns":[ 
+		    {"data":null}, 
+			{"data":"permissionsName"},
+			{"data":"permissionsValue"},
+			{"data":null},
+			{"data":"createTime"},
+			{"data":null} 
 			],
-		"columnDefs" : [
-						{
-						    targets: 0,
-						    data: null,
-						    render: function (data) {
-						    	No=No+1;
-						        return No;
-						    }
-						},
-						{
-						    targets: 3,
-						    data: null,
-						    render: function (data) {
-						    	if(data.statusId == "0"){
-						    		return "不可用";
-						    	}
-						    	if(data.statusId == "1"){
-						    		return "可用";
-						    	}
-						    	return "未知状态";
-						    }
-						},
-		                {
-			"targets" : -1,
-			"data" : null,
-			"render" : function(data) {
-				return '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/permission/view?id='
-						+ data.id
-						+ '">查看</a> &nbsp;<a class="btn btn-xs btn-info permission_edit" target="modal" modal="lg" href="${ctx}/admin/permission/edit?id='
-						+ data.id
-						+ '">修改</a> &nbsp;<a class="btn btn-xs btn-default btn-del" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/permission/delete?id='
-						+ data.id + '">删除</a>'
-			}
+		"columnDefs":[
+			{
+			    targets: 0,
+			    data: null,
+			    render: function (data) {
+			    	No=No+1;
+			        return No;
+			    }
+			},
+			{
+			    targets: 3,
+			    data: null,
+			    render: function (data) {
+			    	if(data.statusId == "0"){
+			    		return "不可用";
+			    	}
+			    	if(data.statusId == "1"){
+			    		return "可用";
+			    	}
+			    	return "未知状态";
+			    }
+			},
+            {
+				"targets" : -1,
+				"data" : null,
+				"render" : function(data) {
+					var btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="${ctx}/admin/permission/view?id='+ data.id+'">查看</a>&nbsp;'
+					+'<@shiro.hasPermission name="super:update">'
+					+'<a class="btn btn-xs btn-info" onclick="permissionToListAjax();" target="modal" modal="lg" href="${ctx}/admin/permission/edit?id='+ data.id+'">修改</a>&nbsp;'
+					+'</@shiro.hasPermission>'
+					+'<@shiro.hasPermission name="super:delete">'
+					+'<a class="btn btn-xs btn-default " callback="permissionReload();" data-body="确认要删除吗？" target="ajaxTodo" href="${ctx}/admin/permission/delete?id='+ data.id +'">删除</a>';
+					+'</@shiro.hasPermission>'
+					return btn;
+				}
 		} ]
 	}).on('preXhr.dt', function ( e, settings, data ) {
 		No=0;
     } );
-	
-	//点击删除确认时，删除后刷新
-    $(".btn-del").on('click',function(){
-		reloadTable(permission_tab,"#permissionTime","#permissionPremise");
-	});
-	
-	//动态生成的元素需要这样做点击事件
-    $(document).on("click", "#permission_add", function() {  
-    	list_ajax = permission_tab;
-    }); 
-	
-	$("#permission_add").on('click',function(){
-		list_ajax = permission_tab;
-	});
-	
-	$("#permission-seek").on("click",function(){
- 		reloadTable(permission_tab,"#permissionTime","#permissionPremise");
-	});
 });
+
+function permissionReload(){
+	reloadTable(permission_tab,"#permissionTime","#permissionPremise");
+}
+
+function permissionToListAjax(){
+	list_ajax = permission_tab;
+	console.log(list_ajax);
+}
 </script>

@@ -43,49 +43,41 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
-					<i class="fa fa-close"></i>关闭
-				</button>
-				<button type="button" class="btn btn-primary btn-sm" id="securitySubmit"  data-dismiss="modal">
-					<i class="fa fa-save"></i>保存
-				</button>
+				<div class="pull-right">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+					<button type="button" class="btn btn-primary btn-sm" onclick="securitySave();"><i class="fa fa-save"></i>保存</button>
+				</div>
 			</div>
 		</form>
 	</div>
 </div>
 <script type="text/javascript">
-$(function(){
-	$("#securitySubmit").click(function(){
-		$("span").remove(".errorClass");
-		$("br").remove(".errorClass");
-		var status = 1;
-		if($("#userNo").val()==""){
-			$("#userNoLabel").prepend('<span class="errorClass" style="color:red">*角色名不能为空</span><br class="errorClass"/>');
-			status = 0;
-		}
-		if($("#password").val()==""){
-			$("#passwordLabel").prepend('<span class="errorClass" style="color:red">*角色值不能为空</span><br class="errorClass"/>');
-			status = 0;
-		}
-		if(status == 0){
-			return false;
-		}else{
-			ajaxPost();
-		}
-	});
-	
-	function ajaxPost() {
-		var options = {
-	        url: '${ctx}/admin/security/save',
+function securitySave(){
+	$("span").remove(".errorClass");
+	$("br").remove(".errorClass");
+	var status = 1;
+	if($("#userNo").val()==""){
+		$("#userNoLabel").prepend('<span class="errorClass" style="color:red">*角色名不能为空</span><br class="errorClass"/>');
+		status = 0;
+	}
+	if($("#password").val()==""){
+		$("#passwordLabel").prepend('<span class="errorClass" style="color:red">*角色值不能为空</span><br class="errorClass"/>');
+		status = 0;
+	}
+	if(status == 0){
+		return false;
+	}else{
+		$.ajax({
+			url: '${ctx}/admin/security/save',
 	        type: 'post',
 	        dataType: 'text',
 	        data: $("#securityAddForm").serialize(),
 	        success: function (data) {
+	        	$("#lgModal").modal('hide');
 	        	alertMsg("添加成功","success");
 	        	reloadTable(list_ajax,"#securityTime","#securityPremise");
 	        }
-   		};
-    $.ajax(options);
+		});
 	}
-});
+}
 </script>

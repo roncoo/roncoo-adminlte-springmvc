@@ -27,7 +27,7 @@
 		</table>
 		<div class="box-footer">
 			<div class="pull-right">
-			<button type="button" class="btn btn-default btn-sm" id="close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+				<button type="button" class="btn btn-default btn-sm" id="close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
 			</div>
 		</div>
 	</div>

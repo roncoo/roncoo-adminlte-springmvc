@@ -79,7 +79,9 @@ public class DataDictionaryListServiceImpl implements DataDictionaryListService 
 			result.setStatus(true);
 			result.setErrCode(0);
 			result.setResultData(dList);
+			return result;
 		}
+		result.setErrMsg("添加失败");
 		return result;
 	}
 

@@ -37,7 +37,7 @@ import com.roncoo.adminlte.util.base.PageBean;
  * @author LYQ
  */
 @Controller
-@RequestMapping(value = "/admin/dataDictionary", method = RequestMethod.POST)
+@RequestMapping(value = "/admin/dataDictionary/", method = RequestMethod.POST)
 public class DataDictionaryController extends BaseController {
 
 	@Autowired

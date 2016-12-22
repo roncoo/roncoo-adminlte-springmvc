@@ -89,7 +89,9 @@ public class EmailAccountInfoServiceImpl implements EmailAccountInfoService {
 		if (dao.insert(info) > 0) {
 			result.setStatus(true);
 			result.setErrCode(0);
+			return result;
 		}
+		result.setErrMsg("添加失败");
 		return result;
 	}
 

@@ -40,10 +40,10 @@
 				/admin/role/update=authcBasic,perms[admin:update]
 				/admin/role/delete=authcBasic,perms[admin:delete]
 				/admin/permission/**=authcBasic,roles[superAdmin]
-				/admin/**/list = authcBasic,perms[user:read]
-				/admin/**/save = authcBasic,perms[user:save]
-				/admin/**/update = authcBasic,perms[user:update]
-				/admin/**/delete = authcBasic,perms[user:delete]
+				/admin/*/list = authcBasic,perms[user:read]
+				/admin/*/save = authcBasic,perms[user:insert]
+				/admin/*/update = authcBasic,perms[user:update]
+				/admin/*/delete = authcBasic,perms[user:delete]
 			</value>
 		</property>
 	</bean>

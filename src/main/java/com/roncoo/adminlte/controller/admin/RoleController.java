@@ -88,12 +88,22 @@ public class RoleController extends BaseController {
 		}
 	}
 
-	@ResponseBody
 	@RequestMapping(value = UPDATE)
+	@ResponseBody
 	public String update(RcRole rcRole, String permission) {
 		List<Long> permissions = ParamUtil.toLongList(permission, ",");
 		Result<Integer> result = biz.update(rcRole, permissions);
 		if (result.isStatus()) {
+			return redirect("/admin/role/list");
+		}
+		return null;
+	}
+	
+	@RequestMapping(value = DELETE, method = RequestMethod.GET)
+	@ResponseBody
+	public String delete(long id) {
+		Result<Integer> result = biz.delete(id);
+		if(result.isStatus()){
 			return redirect("/admin/role/list");
 		}
 		return null;

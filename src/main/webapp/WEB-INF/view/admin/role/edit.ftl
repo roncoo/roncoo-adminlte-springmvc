@@ -32,16 +32,15 @@
              </div>
 			<div class="box-footer">
 				<div class="pull-right">
-					<button type="button" class="btn btn-default btn-sm" id="close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
-               		<button id="roleSubmit" type="button" class="btn btn-primary btn-sm" data-dismiss="modal">更新</button>
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+               		<button onclick="roleUpdate();" type="button" class="btn btn-primary btn-sm"><i class="fa fa-paste"></i>更新</button>
 				</div>
           	</div>
 		</form>
 	</div>
 </div>
 <script type="text/javascript">
-$(function(){
-	$("#roleSubmit").click(function(){
+	function roleUpdate(){
 		$("span").remove(".errorClass");
 		$("br").remove(".errorClass");
 		var status = 1;
@@ -58,8 +57,8 @@ $(function(){
 		}else{
 			ajaxPost();
 		}
-	});
-	
+	}
+		
 	function ajaxPost() {
 		var options = {
 	        url: '${ctx}/admin/role/update',
@@ -67,11 +66,11 @@ $(function(){
 	        dataType: 'text',
 	        data: $("#roleEditForm").serialize(),
 	        success: function (data) {
-	        	alertMsg("添加成功","success");
+	        	$("#lgModal").modal('hide');
+	        	alertMsg("更新成功","success");
 	        	reloadTable(list_ajax,"#roleTime","#rolePremise");
 	        }
-   		};
-    $.ajax(options);
+		};
+	$.ajax(options);
 	}
-});
 </script>

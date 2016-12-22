@@ -8,3 +8,4 @@
 .springBeans
 /bin/
 /src/main/resources/conf/prod/base.properties
+/README.md

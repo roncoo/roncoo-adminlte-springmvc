@@ -40,7 +40,7 @@ import com.roncoo.adminlte.util.base.PageBean;
  * @author LYQ
  */
 @Controller
-@RequestMapping(value = "/admin/emailAccountInfo", method = RequestMethod.POST)
+@RequestMapping(value = "/admin/emailAccountInfo/", method = RequestMethod.POST)
 public class EmailAccountInfoController extends BaseController {
 
 	private static final String FIELDCODE = "host_code";
@@ -90,12 +90,12 @@ public class EmailAccountInfoController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = SAVE)
-	public String insert(@ModelAttribute RcEmailAccountInfo info) {
+	public String save(RcEmailAccountInfo info) {
 		Result<RcEmailAccountInfo> result = biz.save(info);
 		if (result.isStatus()) {
-			return redirect("/admin/emailAccountInfo/list");
+			return "/admin/emailAccountInfo/list";
 		}
-		return "admin/emailAccountInfo/list";
+		return null;
 	}
 
 	/**

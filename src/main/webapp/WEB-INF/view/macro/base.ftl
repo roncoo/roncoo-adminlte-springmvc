@@ -3,8 +3,8 @@
 	<section class="sidebar">
 		<ul class="sidebar-menu">
 			<li class="header">主导航</li>
-			<li>
-				<a href="javascript:void(0);">
+			<li class="treeview">
+				<a href="#">
 					<i class="fa fa-envelope"></i> <span>邮箱</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
@@ -31,8 +31,8 @@
 				</a>
 			</li>
 			<@shiro.hasPermission name="user:read">
-				<li>
-					<a target="navTab" href="javascript:void(0);">
+				<li class="treeview">
+					<a href="#">
 						<i class="fa fa-envelope"></i> 
 						<span>权限管理</span> 
 						<span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i></span>
@@ -279,6 +279,8 @@
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript">
 		var list_ajax;
+		var date_ajax;
+		var search_ajax;
 		//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
 		window.reloadTable = function(oTable,datePremise,premise) {
 			var date = $(datePremise).val();
@@ -290,6 +292,8 @@
 			oTable.settings()[0].ajax.data = param;
 			oTable.ajax.reload();
 		}
+		
+		
 	</script>
 </#macro>
 
@@ -460,8 +464,8 @@
 					<p>确认删除？</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary btn-del">确认</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">确认</button>
 				</div>
 			</div>
 		</div>
