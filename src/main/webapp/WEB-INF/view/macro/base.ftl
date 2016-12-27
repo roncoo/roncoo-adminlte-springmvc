@@ -277,24 +277,22 @@
 <!-- DataTables -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-	<script type="text/javascript">
-		var list_ajax;
-		var date_ajax;
-		var search_ajax;
-		//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
-		window.reloadTable = function(oTable,datePremise,premise) {
-			var date = $(datePremise).val();
-			var search = $(premise).val();
-			var param = {
-				"date" : date,
-				"search" : search
-			};
-			oTable.settings()[0].ajax.data = param;
-			oTable.ajax.reload();
-		}
-		
-		
-	</script>
+<script type="text/javascript">
+	var list_ajax;
+	var date_ajax;
+	var search_ajax;
+	//当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
+	window.reloadTable = function(oTable,datePremise,premise) {
+		var date = $(datePremise).val();
+		var search = $(premise).val();
+		var param = {
+			"date" : date,
+			"search" : search
+		};
+		oTable.settings()[0].ajax.data = param;
+		oTable.ajax.reload();
+	}
+</script>
 </#macro>
 
 <#macro setting>
