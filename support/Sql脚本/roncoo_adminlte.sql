@@ -1,9 +1,3 @@
-﻿# Host: 192.168.1.215  (Version 5.6.26-log)
-# Date: 2016-12-29 09:51:08
-# Generator: MySQL-Front 5.4  (Build 4.41) - http://www.mysqlfront.de/
-
-/*!40101 SET NAMES utf8 */;
-
 #
 # Structure for table "rc_data_dictionary"
 #
