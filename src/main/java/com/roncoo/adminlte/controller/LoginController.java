@@ -69,15 +69,15 @@ public class LoginController extends BaseController {
 	public void postLogin(HttpSession session) {
 
 	}
-	
+
 	@RequestMapping(value = "/certification", method = RequestMethod.GET)
-	public String certification(HttpSession session){
+	public String certification(HttpSession session) {
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
 			logger.info(result.getResultData());
-			
+
 			session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
-			
+
 			// 下面的跳转到龙果授权登录平台
 			// return redirect(result.getResultData());
 		}
@@ -94,7 +94,7 @@ public class LoginController extends BaseController {
 			// 成功之后，传入session
 			session.setAttribute(Constants.Token.RONCOO, result.getResultData());
 		}
-		
+
 		// 重定向到登录页面，由它来判断session进行登录
 		return redirect("/login");
 	}
@@ -108,6 +108,14 @@ public class LoginController extends BaseController {
 		SecurityUtils.getSubject().logout();
 		redirectAttributes.addFlashAttribute("msg", "您已经安全退出");
 		return redirect("/login");
+	}
+
+	/**
+	 * 权限不足
+	 */
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public void error() {
+
 	}
 
 }
