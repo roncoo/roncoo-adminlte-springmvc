@@ -1,5 +1,4 @@
-龙果开源-后台管理系统
-
+#龙果开源-后台管理系统
 
 ###项目介绍
 1. 框架完全是基于Spring IO platform，绝对拥抱Spring，版本的依赖关系再不用担心。
@@ -36,7 +35,6 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 
 ```
 
-
 ###技术框架
 * 核心框架：Spring Framework
 * 视图框架：Spring MVC
@@ -60,41 +58,11 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 
 ###帮助文档
 1. 教程视频 [免费视频看这里](http://www.roncoo.com/course/view/d33d4b6f515e4ea9abec6454ef13c774)
-2. 快速部署
-```
-1.创建数据库，导入数据
-2.把
-<input type="hidden" name="username" value="admin"/>
-<input type="hidden" name="password" value="admin"/>删除，然后
-把username1和password1中的“1”去掉；
-<form action="${ctx}/login" class="login__form" method="post">
-	   <!--默认账号密码user、admin、super-->
-	   <input type="hidden" name="username" value="admin"/>
-	   <input type="hidden" name="password" value="admin"/>
-	   <div class="login__row">
-	   <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
-	       <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
-	   </svg>
-	   <!--账号-->
-	  <input type="text" name="username1" class="login__input name" placeholder="Username"/>
-	  </div>
-	  <div class="login__row">
-	   <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
-	       <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
-	   </svg>
-	   <!--密码-->
-	<input type="password1" name="password1" class="login__input pass" placeholder="Password"/>
-	</div>
-	   <button type="submit" class="login__submit">登 录</button>
-	  <p class="login__signup">还没有账号? &nbsp;<a href="#" target="_blank">立刻注册</a></p>
-</form>
-```
 
 ###下步计划
 1. 继续优化，持续更新，增加各种demo实例
 2. 创建maven原型，实现快捷搭建项目架构
 3. 进行项目的拆分，实现多模块开发
-
 
 ###技术交流
 技术交流群：546588570
