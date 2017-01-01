@@ -15,10 +15,10 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcPermission;
 import com.roncoo.adminlte.bean.entity.RcRole;
 import com.roncoo.adminlte.bean.entity.RcUser;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.biz.UserBiz;
 import com.roncoo.adminlte.util.Constants;
 

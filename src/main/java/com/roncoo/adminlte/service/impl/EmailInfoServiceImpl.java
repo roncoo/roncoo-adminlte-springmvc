@@ -30,9 +30,9 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.service.impl.dao.EmailInfoDao;
 import com.roncoo.adminlte.util.Base64Util;

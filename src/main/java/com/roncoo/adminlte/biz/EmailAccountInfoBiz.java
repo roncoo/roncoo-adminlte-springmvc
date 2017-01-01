@@ -20,9 +20,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionaryList;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.util.base.Page;

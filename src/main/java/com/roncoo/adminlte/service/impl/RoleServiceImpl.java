@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcRole;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.RoleService;
 import com.roncoo.adminlte.service.impl.dao.RoleDao;
 import com.roncoo.adminlte.util.base.Page;

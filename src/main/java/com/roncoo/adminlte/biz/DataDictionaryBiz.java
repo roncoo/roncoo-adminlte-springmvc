@@ -19,8 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcDataDictionary;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.DataDictionaryListService;
 import com.roncoo.adminlte.service.DataDictionaryService;
 import com.roncoo.adminlte.util.base.Page;

@@ -15,8 +15,8 @@
  */
 package com.roncoo.adminlte.service;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcUser;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.util.base.Page;
 
 /**

@@ -22,13 +22,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcPermission;
 import com.roncoo.adminlte.bean.entity.RcRole;
 import com.roncoo.adminlte.bean.entity.RcRolePermissions;
 import com.roncoo.adminlte.bean.entity.RcUser;
 import com.roncoo.adminlte.bean.entity.RcUserRole;
 import com.roncoo.adminlte.bean.vo.RcUserVo;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.PermissionService;
 import com.roncoo.adminlte.service.RolePermissionsService;
 import com.roncoo.adminlte.service.RoleService;

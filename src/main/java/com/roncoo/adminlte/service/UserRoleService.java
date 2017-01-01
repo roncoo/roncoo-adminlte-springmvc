@@ -17,8 +17,8 @@ package com.roncoo.adminlte.service;
 
 import java.util.List;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcUserRole;
+import com.roncoo.adminlte.bean.vo.Result;
 
 /**
  * 用户-角色Service
