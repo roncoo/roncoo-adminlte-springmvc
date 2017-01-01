@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.EmailAccountInfoService;
 import com.roncoo.adminlte.service.impl.dao.EmailAccountInfoDao;
 import com.roncoo.adminlte.util.Base64Util;

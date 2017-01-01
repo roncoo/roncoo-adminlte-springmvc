@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.roncoo.adminlte.bean.Result;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.util.ConfUtil;
 import com.roncoo.adminlte.util.RestTemplateUtil;
 

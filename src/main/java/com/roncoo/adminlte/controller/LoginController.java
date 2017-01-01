@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.roncoo.adminlte.bean.Result;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.biz.LoginBiz;
 import com.roncoo.adminlte.util.Constants;
 import com.roncoo.adminlte.util.base.BaseController;
@@ -71,14 +71,15 @@ public class LoginController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/certification", method = RequestMethod.GET)
-	public String certification(){
+	public String certification(HttpSession session){
 		Result<String> result = biz.login();
 		if (result.isStatus()) {
 			logger.info(result.getResultData());
 			
-			// 本地发布修改这里，随便增加一个session值即可，请删除下面的：return redirect(result.getResultData());
-			//session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
-			return redirect(result.getResultData());
+			session.setAttribute(Constants.Token.RONCOO, "www.roncoo.com");
+			
+			// 下面的跳转到龙果授权登录平台
+			// return redirect(result.getResultData());
 		}
 		return redirect("/login");
 	}

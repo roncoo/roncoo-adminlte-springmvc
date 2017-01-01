@@ -20,8 +20,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcRolePermissions;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.RolePermissionsService;
 import com.roncoo.adminlte.service.impl.dao.RolePermissionsDao;
 

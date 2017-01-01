@@ -22,9 +22,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.cache.EmailAccountInfoCache;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;

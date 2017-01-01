@@ -19,8 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcUser;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.service.UserService;
 import com.roncoo.adminlte.service.impl.dao.UserDao;
 import com.roncoo.adminlte.util.base.Page;

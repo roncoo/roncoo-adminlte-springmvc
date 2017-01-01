@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.roncoo.adminlte.bean.Result;
 import com.roncoo.adminlte.bean.entity.RcPermission;
 import com.roncoo.adminlte.bean.entity.RcRole;
 import com.roncoo.adminlte.bean.vo.RcRoleVo;
+import com.roncoo.adminlte.bean.vo.Result;
 import com.roncoo.adminlte.biz.RoleBiz;
 import com.roncoo.adminlte.util.base.BaseController;
 import com.roncoo.adminlte.util.base.Page;
