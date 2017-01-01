@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.roncoo.adminlte.util.cache;
+package com.roncoo.adminlte.cache;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;

@@ -26,9 +26,9 @@ import com.roncoo.adminlte.bean.entity.RcEmailAccountInfo;
 import com.roncoo.adminlte.bean.entity.RcEmailInfo;
 import com.roncoo.adminlte.bean.vo.RcEmailInfoVo;
 import com.roncoo.adminlte.bean.vo.Result;
+import com.roncoo.adminlte.cache.EmailAccountInfoCache;
 import com.roncoo.adminlte.service.EmailInfoService;
 import com.roncoo.adminlte.util.base.Page;
-import com.roncoo.adminlte.util.cache.EmailAccountInfoCache;
 
 /**
  * @author wujing
