@@ -8,8 +8,8 @@
 5. 集成Spring Session和Shiro
 
 ###分支说明
-master 是基于tags来实现
-synchronous 是基于页面跳转来实现
+* master 是基于tags来实现
+* synchronous 是基于页面跳转来实现
 
 
 ###项目愿景
