@@ -142,7 +142,7 @@ public class DataDictionaryController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = UPDATE)
+	@RequestMapping(value = UPDATE, method = RequestMethod.GET)
 	public String update(@ModelAttribute RcDataDictionary dictionary, @RequestParam(value = "oldFieldCode") String oldFieldCode) {
 		Result<RcDataDictionary> result = biz.update(dictionary, oldFieldCode);
 		if (result.isStatus()) {
