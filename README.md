@@ -3,7 +3,7 @@
 ### 项目介绍
 1. 框架完全是基于Spring IO platform，绝对拥抱Spring，版本的依赖关系再不用担心。
 2. 前端基于 **[龙果开源-后台管理UI Roncoo AdminLTE](https://github.com/roncoo/roncoo-adminLTE/)**，高端大气上档次。
-3. 代码自动生成工具使用了**[龙果开源-Mybatis代码自动生成工具](https://github.com/roncoo/roncoo-mybatis-generator)**
+3. 代码自动生成工具使用了 **[龙果开源-Mybatis代码自动生成工具](https://github.com/roncoo/roncoo-mybatis-generator)**
 4. 实现了邮件发送功能，邮件增删改查功能
 5. 集成Spring Session和Shiro
 
@@ -70,7 +70,6 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 3. 进行项目的拆分，实现多模块开发
 
 ### 技术交流
-技术交流群：
 1群：546588570 (满)
 2群：469508330
 
