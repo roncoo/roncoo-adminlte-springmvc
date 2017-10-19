@@ -62,7 +62,7 @@ roncoo-adminlte-springmvc/ 龙果开源-后台管理系统
 1. 添加邮件发送功能
 
 ### 帮助文档
-1. 教程视频 [免费视频看这里](http://www.roncoo.com/course/view/d33d4b6f515e4ea9abec6454ef13c774)
+1. 教程视频 [免费视频看这里-【龙果学院】](http://www.roncoo.com/course/view/d33d4b6f515e4ea9abec6454ef13c774)
 
 ### 下步计划
 1. 继续优化，持续更新，增加各种demo实例
